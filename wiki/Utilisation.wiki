@@ -1,4 +1,4 @@
-# Conseil d'utilisation.
+#summary Conseil d'utilisation.
 
 = Matériel =
 
