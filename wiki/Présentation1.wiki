@@ -1,0 +1,76 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns:oa="urn:schemas-microsoft-com:office:activation"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 12">
+<link rel=File-List href="Présentation1_fichiers/filelist.xml">
+<link rel=Preview href="Présentation1_fichiers/preview.wmf">
+<link rel=Edit-Time-Data href="Présentation1_fichiers/editdata.mso">
+<title>Diapositive 1</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>FL05577a</o:Author>
+  <o:LastAuthor>FL05577a</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>21</o:TotalTime>
+  <o:Created>2011-11-29T14:29:33Z</o:Created>
+  <o:LastSaved>2011-12-08T14:38:39Z</o:LastSaved>
+  <o:PresentationFormat>Affichage à l'écran (4:3)</o:PresentationFormat>
+  <o:Company>EDF-DIT</o:Company>
+  <o:Bytes>83285</o:Bytes>
+  <o:Slides>1</o:Slides>
+  <o:Version>12.00</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:PixelsPerInch>80</o:PixelsPerInch>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<link rel=Presentation-XML href="Présentation1_fichiers/pres.xml">
+<meta name=Description content="08/12/2011">
+<meta http-equiv=expires content=0>
+<![if !ppt]><script>
+<!--
+	var ver = 0, appVer = navigator.appVersion, msie = appVer.indexOf( "MSIE " )
+	var msieWin31 = (appVer.indexOf( "Windows 3.1" ) >= 0), isMac = (appVer.indexOf("Macintosh") >= 0)
+	if( msie >= 0 )
+		ver = parseFloat( appVer.substring( msie+5, appVer.indexOf ( ";", msie ) ) )
+	else
+		ver = parseInt( appVer )
+	browserSupported=0
+	if( !isMac && ver >= 4 && msie >= 0 ) {
+		browserSupported=1
+		window.location.replace( 'Présentation1_fichiers/slide0001.htm'+document.location.hash )
+	}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body>
+<script><!--
+
+if( browserSupported )
+	document.writeln('<div style="visibility:hidden">');
+
+//--></script><font face=Arial size=2><b>
+
+<p>Cette présentation contient des éléments susceptibles de ne pas être
+affichés dans votre navigateur.</p>
+
+<p>Si vous voulez quand même continuer, cliquez <a
+href="Présentation1_fichiers/slide0001.htm">ici</a>.</p>
+
+</b></font><script><!--
+
+if( browserSupported )
+	document.writeln('</div>');
+
+//--></script>
+</body>
+
+</html>
