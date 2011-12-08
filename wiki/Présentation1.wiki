@@ -1,16 +1,16 @@
-<html xmlns:v="urn:schemas-microsoft-com:vml"
+'<html xmlns:v="urn:schemas-microsoft-com:vml"
 xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
 xmlns:oa="urn:schemas-microsoft-com:office:activation"
-xmlns="http://www.w3.org/TR/REC-html40">
+xmlns="http://www.w3.org/TR/REC-html40">'
 
 <head>
 <meta http-equiv=Content-Type content="text/html; charset=windows-1252">
 <meta name=ProgId content=PowerPoint.Slide>
 <meta name=Generator content="Microsoft PowerPoint 12">
-<link rel=File-List href="Présentation1_fichiers/filelist.xml">
-<link rel=Preview href="Présentation1_fichiers/preview.wmf">
-<link rel=Edit-Time-Data href="Présentation1_fichiers/editdata.mso">
+<link rel=File-List href="PrÃ©sentation1_fichiers/filelist.xml">
+<link rel=Preview href="PrÃ©sentation1_fichiers/preview.wmf">
+<link rel=Edit-Time-Data href="PrÃ©sentation1_fichiers/editdata.mso">
 <title>Diapositive 1</title>
 <!--[if gte mso 9]><xml>
  <o:DocumentProperties>
@@ -20,7 +20,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
   <o:TotalTime>21</o:TotalTime>
   <o:Created>2011-11-29T14:29:33Z</o:Created>
   <o:LastSaved>2011-12-08T14:38:39Z</o:LastSaved>
-  <o:PresentationFormat>Affichage à l'écran (4:3)</o:PresentationFormat>
+  <o:PresentationFormat>Affichage Ã  l'Ã©cran (4:3)</o:PresentationFormat>
   <o:Company>EDF-DIT</o:Company>
   <o:Bytes>83285</o:Bytes>
   <o:Slides>1</o:Slides>
@@ -30,7 +30,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
   <o:PixelsPerInch>80</o:PixelsPerInch>
  </o:OfficeDocumentSettings>
 </xml><![endif]-->
-<link rel=Presentation-XML href="Présentation1_fichiers/pres.xml">
+<link rel=Presentation-XML href="PrÃ©sentation1_fichiers/pres.xml">
 <meta name=Description content="08/12/2011">
 <meta http-equiv=expires content=0>
 <![if !ppt]><script>
@@ -44,7 +44,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	browserSupported=0
 	if( !isMac && ver >= 4 && msie >= 0 ) {
 		browserSupported=1
-		window.location.replace( 'Présentation1_fichiers/slide0001.htm'+document.location.hash )
+		window.location.replace( 'PrÃ©sentation1_fichiers/slide0001.htm'+document.location.hash )
 	}
 //-->
 </script>
@@ -59,11 +59,11 @@ if( browserSupported )
 
 //--></script><font face=Arial size=2><b>
 
-<p>Cette présentation contient des éléments susceptibles de ne pas être
-affichés dans votre navigateur.</p>
+<p>Cette prÃ©sentation contient des Ã©lÃ©ments susceptibles de ne pas Ãªtre
+affichÃ©s dans votre navigateur.</p>
 
-<p>Si vous voulez quand même continuer, cliquez <a
-href="Présentation1_fichiers/slide0001.htm">ici</a>.</p>
+<p>Si vous voulez quand mÃªme continuer, cliquez <a
+href="PrÃ©sentation1_fichiers/slide0001.htm">ici</a>.</p>
 
 </b></font><script><!--
 
