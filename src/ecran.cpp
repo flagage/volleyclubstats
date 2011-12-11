@@ -227,7 +227,7 @@ void Ecran::Initialisation()
     _listActionPlus<<tr("Service")<<tr("Attaque")<<tr("Contre");
 
 
-    this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Attaque");
+    this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Passe")<<tr("Attaque");
     ui->PBModif->setVisible(false);
 
 }
@@ -258,7 +258,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->groupBox_4->setVisible(true);
     //ui->groupBox_3->setVisible (true);
     //ui->groupBox_6->setVisible(true);
-   // ui->groupBox_7->setVisible(true);
+    // ui->groupBox_7->setVisible(true);
     LineEdit2->setVisible(true);
     ui->comboBox->setVisible(true);
 
@@ -387,10 +387,7 @@ void Ecran::slot_score()
 void Ecran::InitialisationAction(QStringList Action)
 {
     this->_listActionMatch=Action;
-    if(_listActionMatch.contains("Passe"))
-    {
-        this->_listAction.insert(this->_listAction.count()-1,"Passe");
-    }
+
 }
 void Ecran::InitialisationValeur(QStringList ValeurSelection)
 {
@@ -1131,27 +1128,27 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
     //Algo de suivi des actions
     //Service;Defence;Passe;Attaque;Defence;Passe;Attaque
     IAction=_listActionMatch.size()-1;
-for(int k=0;k<_listActionMatch.size();k++)
-{
-    if(Action==_listActionMatch.at(k))
+    for(int k=0;k<_listActionMatch.size();k++)
     {
-        IAction=k;
-        break;
-    }
+        if(Action==_listActionMatch.at(k))
+        {
+            IAction=k;
+            break;
+        }
 
-}
+    }
     if(IAction==0)
     {
 
-       // ui->comboBox->setCurrentIndex(2);
-       // this->LineEdit2->ChangeBackColor(2);
+        // ui->comboBox->setCurrentIndex(2);
+        // this->LineEdit2->ChangeBackColor(2);
         for(int i=0;i<ui->comboBox->count();i++)
         {
             if(ui->comboBox->itemText(i)==this->_listActionMatch.at(2))
             {
                 ui->comboBox->setCurrentIndex (i);
-            this->LineEdit2->ChangeBackColor(i);
-            break;
+                this->LineEdit2->ChangeBackColor(i);
+                break;
             }
         }
     }
@@ -1166,8 +1163,8 @@ for(int k=0;k<_listActionMatch.size();k++)
                 if(ui->comboBox->itemText(i)==this->_listActionMatch.at(this->_listActionMatch.size()-2))
                 {
                     ui->comboBox->setCurrentIndex (i);
-                this->LineEdit2->ChangeBackColor(i);
-                break;
+                    this->LineEdit2->ChangeBackColor(i);
+                    break;
                 }
             }
         }
@@ -1179,26 +1176,26 @@ for(int k=0;k<_listActionMatch.size();k++)
                 if(ui->comboBox->itemText(i)==this->_listActionMatch.at(_listActionMatch.size()-1))
                 {
                     ui->comboBox->setCurrentIndex (i);
-                this->LineEdit2->ChangeBackColor(i);
-                break;
+                    this->LineEdit2->ChangeBackColor(i);
+                    break;
                 }
             }
 
 
 
-    }
+        }
     }
     else if(IAction==this->_listActionMatch.size()-1)
     {
-       // ui->comboBox->setCurrentIndex(2);
-       // this->LineEdit2->ChangeBackColor(2);
+        // ui->comboBox->setCurrentIndex(2);
+        // this->LineEdit2->ChangeBackColor(2);
         for(int i=0;i<ui->comboBox->count();i++)
         {
             if(ui->comboBox->itemText(i)==this->_listActionMatch.at(2))
             {
                 ui->comboBox->setCurrentIndex (i);
-            this->LineEdit2->ChangeBackColor(i);
-            break;
+                this->LineEdit2->ChangeBackColor(i);
+                break;
             }
         }
     }
@@ -1209,8 +1206,8 @@ for(int k=0;k<_listActionMatch.size();k++)
             if(ui->comboBox->itemText(i)==this->_listActionMatch.at(IAction+1))
             {
                 ui->comboBox->setCurrentIndex (i);
-            this->LineEdit2->ChangeBackColor(i);
-            break;
+                this->LineEdit2->ChangeBackColor(i);
+                break;
             }
         }
         //ui->comboBox->setCurrentIndex(IAction+1);
@@ -1535,24 +1532,24 @@ void Ecran::JoueurAPlacer()
     ui->pushButton_7->setVisible(false);
     ui->pushButton_8->setVisible(false);
     QList <Joueur*> listJoueur=Match::donneInstance()->getTeam()->GetListeJoueur();
-  for(int i=0;i<listJoueur.size();i++)
+    for(int i=0;i<listJoueur.size();i++)
     {
-      QString strAffiche;
-      strAffiche.setNum(listJoueur.at(i)->get_NumMaillot());
-      strAffiche=strAffiche+" ("+listJoueur.at(i)->get_Prenom()+")";
-      if( listJoueur.at(i)->get_poste().toUpper ()=="PASSEUR")
-      {
-          strAffiche=strAffiche+ "*";
-      }
-      else if(listJoueur.at(i)->get_poste().toUpper ()=="LIBERO")
-      {
-          strAffiche=strAffiche+ "$";
-      }
-   BouttonJoueur* pushButton = new BouttonJoueur(strAffiche,ui->groupBox_4);
-   // pushButton->setObjectName(strAffiche);
-    pushButton->setGeometry(QRect(10, 60, 75, 23));
-   ui->gridLayout_18->addWidget(pushButton, i, 0, 1, 1);
-  connect(pushButton,SIGNAL(lclicked()),this,SLOT(bouttonLClicked()));
+        QString strAffiche;
+        strAffiche.setNum(listJoueur.at(i)->get_NumMaillot());
+        strAffiche=strAffiche+" ("+listJoueur.at(i)->get_Prenom()+")";
+        if( listJoueur.at(i)->get_poste().toUpper ()=="PASSEUR")
+        {
+            strAffiche=strAffiche+ "*";
+        }
+        else if(listJoueur.at(i)->get_poste().toUpper ()=="LIBERO")
+        {
+            strAffiche=strAffiche+ "$";
+        }
+        BouttonJoueur* pushButton = new BouttonJoueur(strAffiche,ui->groupBox_4);
+        // pushButton->setObjectName(strAffiche);
+        pushButton->setGeometry(QRect(10, 60, 75, 23));
+        ui->gridLayout_18->addWidget(pushButton, i, 0, 1, 1);
+        connect(pushButton,SIGNAL(lclicked()),this,SLOT(bouttonLClicked()));
     }
     ui-> gridLayout_19->addWidget(ui->groupBox_4, 0,listJoueur.size() , 1, 1);
 }
@@ -1561,4 +1558,17 @@ void Ecran::bouttonLClicked()
 {
     QPushButton *button=(QPushButton*) sender();
     emit Changement (button);
+}
+void Ecran::closeEvent(QCloseEvent * event )
+{
+   // this->FinMatch();
+
+    if(Match::GetInstance ()!=0)
+    {
+         _trace->SetTrace(tr("Fin Match"));
+        QString  file=Match::donneInstance ()->GetFichierXml();
+        Match::donneInstance ()->FinSet ();
+        Match::donneInstance ()->Enregistrer ();
+        Match::donneInstance ()->EnregistrerXMl ();
+    }
 }

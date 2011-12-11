@@ -150,7 +150,7 @@ void Fenetreequipe::Modifier()
 {
 
     //QLabel * qlab=(QLabel*)(ui->tableWidget(ui->tableWidget->currentRow(),1));
-    QTableWidgetItem *item=ui->tableWidget->item(ui->tableWidget->currentRow(),1);
+    QTableWidgetItem *item=ui->tableWidget->item(ui->tableWidget->currentRow(),0);
     if(item!=0)
     {
         QString text=item->text();
@@ -176,7 +176,7 @@ void Fenetreequipe::Modifier()
 void Fenetreequipe::Supprimer()
 {
     //QLabel * qlab=(QLabel*)(ui->tableWidget->cellWidget(ui->tableWidget->currentRow(),1));
-    QTableWidgetItem *item=ui->tableWidget->item(ui->tableWidget->currentRow(),1);
+    QTableWidgetItem *item=ui->tableWidget->item(ui->tableWidget->currentRow(),0);
     if(item!=0)
     {
         QString text=item->text();

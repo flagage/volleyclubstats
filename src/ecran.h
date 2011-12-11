@@ -129,7 +129,8 @@ private:
     QStringList _listValeurStat;
     QStringList _listAction;
      KeyJoueur *_PlacementJoueur;
-
+protected:
+     void closeEvent(QCloseEvent * event );
 
 
 public slots:
