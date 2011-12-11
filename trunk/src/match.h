@@ -65,6 +65,7 @@ protected:
 public:
     static Match* donneInstance();
     static void libereInstance();
+    static Match * GetInstance();
     bool lancer();
     void setCurrentEquipe(Equipe* Team);
     void setAdvers(QString advers);

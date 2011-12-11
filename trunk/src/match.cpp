@@ -49,6 +49,10 @@ Match::Match()
 
 
 }
+Match* Match::GetInstance()
+{
+    return instanceMatch;
+}
 
 Match* Match::donneInstance()
 {
