@@ -129,21 +129,10 @@ Ecran::Ecran(QWidget *parent) :
 
 
     setAcceptDrops(true);
-    QDate curentDate=QDate::currentDate();
+
     Initialisation();
 
-    if(curentDate.year() == 2012)
-    {
-        if(curentDate.month() > 2)
-        {
-            InitialisationError();
-        }
 
-    }
-    else if(curentDate.year() > 2012)
-    {
-        InitialisationError();
-    }
 
     myWidget=new StatWidget(ui->groupBox_3,this);
     _WtabEff=new WidgetTabEff(ui->groupBox_6);
