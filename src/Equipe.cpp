@@ -32,11 +32,14 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 **/
 
 #include "Equipe.h"
+#include "QFileDialog"
+#include "QTextStream"
 #include <QFile>
 
 Equipe::Equipe()
 {
     _Nom="";
+
 
 }
 Equipe::Equipe(QString nom)
@@ -221,7 +224,6 @@ double Equipe::getStatMatch(int action,int pos)
 {
    return this->statMatch.GetValeur(action,pos);
 }
-//void Equipe::setStatMatch ()
 
 void Equipe::addStatSet(int action,int pos)
 {
@@ -251,5 +253,86 @@ void Equipe::supStatMatch(int action,int pos)
 void Equipe::supStatSet(int action,int pos)
 {
     this->statSet.SupValeur (action,pos);
+}
+
+void Equipe::ExportCVS(QString fichier)
+{
+
+    QFile file(fichier);
+
+    if (file.open(QFile::WriteOnly))
+    {
+        QTextStream out(&file);
+        out<<"Nom_Equipe;Nom;Prenom;Maillot;Poste;Licence;Adresse;Telephone;Email;Age\n";
+        out<<this->GetNom()<<"\n";
+
+        for(int i=0;i<this->GetListeJoueur().size();i++)
+        {
+            Joueur * player=this->GetListeJoueur().at(i);
+            out<<";"<<player->get_Nom()+";"<<player->get_Prenom()+";";
+            QString strint;
+            strint.setNum(player->get_NumMaillot());
+            out<<strint+";"<<player->get_poste()+";";
+            strint="";
+            strint.setNum(player->get_NLisence());
+            out<<strint+";"<<player->get_Addresse()+";";
+            strint.setNum(player->get_Tel());
+            out<<strint+";"<<player->get_Email()+";";
+            strint.setNum(player->get_Age());
+            out<<strint+";"<<"\n";
+        }
+        file.close();
+}
+
+}
+void Equipe::ImportCVS(QString fichier)
+{
+    QFile file(fichier);
+    QString line;
+    QStringList  joueur;
+
+
+    if (file.open(QFile::ReadOnly))
+    {
+        QTextStream stream( &file );
+        bool first=false;
+        while ( !stream.atEnd() )
+        {
+            line=stream.readLine();
+            joueur=line.split(";");
+            if (first==false)
+            {
+               // this->SetNom(joueur.at(3));
+                stream.readLine();
+                first=true;
+            }
+            else
+            {
+                if(joueur.at(0)!="")
+                {
+                Joueur * play=new Joueur();
+                play->set_Nom(joueur.at(0));
+                play->set_Prenom(joueur.at(1));
+                play->set_NumMaillot(joueur.at(2).toInt());
+                play->set_poste(joueur.at(3));
+                if(joueur.size()>=5)
+                play->set_NLisence(joueur.at(4).toInt());
+                if(joueur.size()>=6)
+                play->set_Addresse(joueur.at(5));
+                if(joueur.size()>=7)
+                play->set_Tel(joueur.at(6).toInt());
+                if(joueur.size()>=8)
+                play->set_Email(joueur.at(7));
+                if(joueur.size()>=9)
+                play->set_Age(joueur.at(8).toInt());
+
+                this->AddJoueur(play);
+                }
+
+
+            }
+        }
+        file.close();
+    }
 }
 

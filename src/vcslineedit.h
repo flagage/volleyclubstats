@@ -18,6 +18,7 @@ signals:
     void Defense();
     void Contre();
     void Passe();
+    void ComplementAction();
 
 public slots:
 

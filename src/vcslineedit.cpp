@@ -36,6 +36,7 @@ VCSLineEdit::VCSLineEdit(QWidget *parent) :
         QLineEdit(parent)
 {
     this->setAutoFillBackground(true);
+    this->setToolTip("Joueur Valeur");
 }
 
 
@@ -70,6 +71,12 @@ void VCSLineEdit::keyPressEvent ( QKeyEvent * event )
         break;
     case Qt::Key_C:
         emit Contre();
+        break;
+    case Qt::Key_N:
+        emit ComplementAction();
+        break;
+    case Qt::Key_Space:
+        emit ComplementAction();
         break;
     default:
         QLineEdit::keyPressEvent (event);

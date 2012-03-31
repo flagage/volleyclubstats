@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>323</width>
-    <height>182</height>
+    <width>367</width>
+    <height>246</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,10 +34,47 @@
        <item row="0" column="1">
         <widget class="QLineEdit" name="lineEdit"/>
        </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="pushAjouter">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Ajouter</string>
+          <string>Club</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>N° de club</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Division </string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="comboBox_Div"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Categorie</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_nomClub"/>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="lineEdit_cat"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSpinBox" name="spinBox_Num">
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
          </property>
         </widget>
        </item>
@@ -63,6 +100,13 @@
     </widget>
    </item>
    <item row="1" column="0">
+    <widget class="QPushButton" name="pushAjouter">
+     <property name="text">
+      <string>Ajouter L'equipe</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
     <widget class="QPushButton" name="pushButton_Annuler">
      <property name="text">
       <string>OK</string>

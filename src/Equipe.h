@@ -36,17 +36,20 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QList>
 #include <QDomDocument>
 #include "Joueur.h"
+#include "club.h"
 
 
 class Equipe
 {
 private:    //attribut
     QString _Nom;
+
     QList <Joueur*>_ListeJoueur;
     statFinal statMatch;
     statFinal statSet;
     QStringList _listAction;
     QStringList _listValeur;
+    Club _club;
 public: //fonction
 
     /// acceseur
@@ -88,7 +91,8 @@ public: //fonction
     QString GetStringAction();
     void SetStringAction(QString action);
     void setStatMatch(int action,int pos,double valeur);
-
+    void ExportCVS(QString Fichier);
+    void ImportCVS(QString);
 
 
 

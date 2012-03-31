@@ -11,16 +11,16 @@ TRANSLATIONS = VolleyClub_en.ts VolleyClub_es.ts
  #LIBS += -L/usr/local/lib \
   #-lfontconfig
 
+QT+= xml webkit
+QT+= phonon
+
 RC_FILE = VolleyClubStat.rc
-SOURCES += \
-    src/tracelog.cpp \
+SOURCES += src/tracelog.cpp \
     src/statwidget.cpp \
     src/stat.cpp \
     src/set.cpp \
     src/Score.cpp \
-    src/MdiChild.cpp \
     src/match.cpp \
-    src/MainWindow.cpp \
     src/main.cpp \
     src/Joueur.cpp \
     src/fenetrevisualisation.cpp \
@@ -43,19 +43,21 @@ SOURCES += \
     src/fenetrechoixmatch.cpp \
     src/fenetreinternet.cpp \
     src/widgettabeff.cpp \
-    src/vcslineedit.cpp
+    src/vcslineedit.cpp \
+    src/club.cpp \
+    src/listactionxml.cpp \
+    src/lecteurvideo.cpp \
+    src/statwriter.cpp \
+    src/volleyInit.cpp
 
 
-HEADERS  += \
-    src/tracelog.h \
+HEADERS  += src/tracelog.h \
     src/statwidget.h \
     src/stat.h \
     src/set.h \
     src/Score.h \
     src/parametre.h \
-    src/MdiChild.h \
     src/match.h \
-    src/MainWindow.h \
     src/Joueur.h \
     src/fenetrevisualisation.h \
     src/fenetrestat.h \
@@ -77,11 +79,15 @@ HEADERS  += \
     src/fenetrechoixmatch.h \
     src/fenetreinternet.h \
     src/widgettabeff.h \
-    src/vcslineedit.h
+    src/vcslineedit.h \
+    src/club.h \
+    src/listactionxml.h \
+    src/lecteurvideo.h \
+    src/statwriter.h \
+    src/volleyInit.h
 
 
-FORMS    += \
-    ui/statwidget.ui \
+FORMS    +=  ui/statwidget.ui \
     ui/fenetrevisualisation.ui \
     ui/fenetrestat.ui \
     ui/fenetreservice.ui \
@@ -97,9 +103,10 @@ FORMS    += \
     ui/fenetremodifaction.ui \
     ui/fenetrechoixmatch.ui \
     ui/widgettabeff.ui \
-    ui/fenetreinternet.ui
+    ui/fenetreinternet.ui \
+    ui/lecteurvideo.ui
 
-QT+= xml webkit
+
 
 OTHER_FILES += \
-    VolleyClubStat.rc
+    VolleyClubStat.rc \

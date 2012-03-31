@@ -63,9 +63,9 @@ void InitListJoueur(QList <Joueur*> joueur);
 void Initialisation();
 void Stat();
 void Start();
-void Rotation();
-void RotationM();
-QString ChercherJoueur();
+void Rotation(int &joueur);
+void RotationM(int &joueur);
+QString ChercherJoueur(int &currentposition);
 QString ChercherPasseur();
 QString GetServeur();
 Joueur *RechercheJoueur(int numero);
@@ -73,10 +73,12 @@ bool SetLineEdit(QDropEvent * e);
 void InitLineEditSize();
 void SetAdv(QString nom);
 void SetListJoueur(QStringList list);
+QString UpdateJoueur(Joueur* player);
 
 
 signals:
     void Changement(QPushButton *button);
+    void ModifPoste(QPushButton *button);
 public slots:
 void bouttonLClicked();
 void bouttonRClicked();

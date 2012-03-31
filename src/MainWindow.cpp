@@ -32,7 +32,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 **/
 #include <QtGui>
 #include "MainWindow.h"
-#include "MdiChild.h"
+
 
  MainWindow::MainWindow()
  {

@@ -43,9 +43,9 @@ class fbjoueur : public QDialog
 {
     Q_OBJECT
 public:
-     fbjoueur(Equipe* Team,QDialog *parent = 0);
+     fbjoueur(Equipe* Team,QWidget *parent = 0);
      void Init();
-     void Modif(Joueur* player);
+     void Modif(Joueur* player,bool isMathEncours=false);
 
 signals:
 

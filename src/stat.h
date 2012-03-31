@@ -35,6 +35,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 
 #include "QMap"
 #include "QStringList"
+#include "volleyInit.h"
 class statValeur
 {
 private:

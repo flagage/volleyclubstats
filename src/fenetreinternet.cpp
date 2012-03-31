@@ -89,6 +89,7 @@ FenetreInternet::FenetreInternet(QWidget *parent) :
      connect(ui->pushButton_reload,SIGNAL(clicked()),this,SLOT(slot_reload()));
      connect(ui->pushButton_stop,SIGNAL(clicked()),this,SLOT(slot_stop()));
      connect(ui->pushButton_goo,SIGNAL(clicked()),this,SLOT(slot_google()));
+     connect(ui->FFVB,SIGNAL(clicked()),this,SLOT(slot_ffvb()));
 }
 
 FenetreInternet::~FenetreInternet()
@@ -117,4 +118,9 @@ void FenetreInternet::slot_google()
 void FenetreInternet::slot_stop()
 {
     ui->webView->page()->triggerAction(QWebPage::Stop);
+}
+
+void FenetreInternet::slot_ffvb()
+{
+    ui->webView->load(QUrl("http://www.ffvbbeach.org/ffvbapp/resu/"));
 }

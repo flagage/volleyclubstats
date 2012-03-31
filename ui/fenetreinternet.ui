@@ -34,7 +34,7 @@ background-color:#010101
        </property>
       </widget>
      </item>
-     <item row="1" column="4">
+     <item row="1" column="5">
       <widget class="QPushButton" name="pushButton_suiv">
        <property name="autoFillBackground">
         <bool>false</bool>
@@ -103,6 +103,13 @@ background-color:#010101
        </property>
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="6">
+      <widget class="QPushButton" name="FFVB">
+       <property name="text">
+        <string>FFVB</string>
        </property>
       </widget>
      </item>
