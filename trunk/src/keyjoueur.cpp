@@ -32,6 +32,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 **/
 
 #include "keyjoueur.h"
+#include "fbjoueur.h"
 #include <QGridLayout>
 #include <QLineEdit>
 #include <QMessageBox>
@@ -83,7 +84,8 @@ void KeyJoueur::bouttonLClicked()
 
 void KeyJoueur::bouttonRClicked()
 {
-
+    QPushButton *button=(QPushButton*) sender();
+    emit ModifPoste (button);
 }
 
 void KeyJoueur::createLayout(int pos)
@@ -301,9 +303,10 @@ QString KeyJoueur::ChercherPasseur()
     return "";
 }
 
-QString KeyJoueur::ChercherJoueur()
+QString KeyJoueur::ChercherJoueur(int &currentposition)
 {
-    int positionpasseur=-1;
+
+     currentposition=0;
     /// Initialisation
     for(int i=0;i<6;i++)
     {
@@ -317,7 +320,12 @@ QString KeyJoueur::ChercherJoueur()
         {
             buttons[i]->setStyleSheet("color: black; background-color: magenta;  border-style: outset;border-width: 2px; border-color: beige;");
             buttons[i]->adjustSize();
-            positionpasseur=i;
+            currentposition=i;
+        }
+        if(buttons[i]->text ().contains ("$"))
+        {
+            buttons[i]->setStyleSheet("color: black; background-color: cyan;  border-style: outset;border-width: 2px; border-color: beige;");
+            buttons[i]->adjustSize();
         }
         if(_Islibero==true)
         {
@@ -327,7 +335,7 @@ QString KeyJoueur::ChercherJoueur()
         }
 
     }
-    switch(positionpasseur)
+    switch(currentposition)
     {
     case 0:
         _labelPosition->setText("P1");
@@ -357,10 +365,12 @@ QString KeyJoueur::ChercherJoueur()
         return "Pas de Passeur";
         break;
     }
+    currentposition++;
+
 
 }
 
-void KeyJoueur::Rotation()
+void KeyJoueur::Rotation(int &joueur)
 {
     QString post1=buttons[0]->text();
     buttons[0]->setText(buttons[1]->text());
@@ -370,10 +380,11 @@ void KeyJoueur::Rotation()
     buttons[4]->setText(buttons[5]->text());
     buttons[5]->setText(post1);
 
-    this->ChercherJoueur();
+    this->ChercherJoueur(joueur);
 }
-void KeyJoueur::RotationM()
+void KeyJoueur::RotationM(int &joueur)
 {
+
     QString post1=buttons[0]->text();
     buttons[0]->setText(buttons[5]->text());
     buttons[5]->setText(buttons[4]->text());
@@ -381,7 +392,7 @@ void KeyJoueur::RotationM()
     buttons[3]->setText(buttons[2]->text());
     buttons[2]->setText(buttons[1]->text());
     buttons[1]->setText(post1);
-    this->ChercherJoueur();
+    this->ChercherJoueur(joueur);
 }
 
 Joueur* KeyJoueur::RechercheJoueur(int numero)
@@ -489,7 +500,27 @@ void KeyJoueur::Stat()
 this->createLayout(this->_pos);
 }
 
+QString KeyJoueur::UpdateJoueur(Joueur* player)
+{
+    QString text="";
 
+        QString strposte=player->get_poste();
+        if(strposte==tr("Passeur"))
+        {
+           text=text.setNum(player->get_NumMaillot());
+           text=text+" ("+player->get_Prenom()+")*";
+        }
+        else if(strposte==tr("Libero"))
+        {
+
+            text=text.setNum(player->get_NumMaillot());
+            text=text+" ("+player->get_Prenom()+")$";
+        }
+
+
+    return text;
+
+}
 
 bool KeyJoueur::SetLineEdit (QDropEvent *e)
 {

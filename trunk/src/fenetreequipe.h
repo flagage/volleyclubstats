@@ -55,6 +55,7 @@ private:
     Ecran* _ecran;
     QStringList _listColumn;
     Equipe* _currentTeam;
+    void Connexion();
 
 public slots:
     void Enregistrer();
@@ -64,6 +65,8 @@ public slots:
     void Modifier();
     void Supprimer();
     void GestionEquipe();
+    void slot_Export();
+    void slot_Import();
 };
 
 #endif // FENETREEQUIPE_H

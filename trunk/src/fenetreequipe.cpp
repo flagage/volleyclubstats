@@ -42,17 +42,23 @@ Fenetreequipe::Fenetreequipe(Ecran* ecran,QWidget *parent,bool supp) :
 {
     ui->setupUi(this);
     _ecran=ecran;
+     Connexion();
+    _listColumn<<tr("Numero")<<tr("Nom")<<tr("Prenom")<<tr("Poste")<<tr("License");
+    this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
+
+    InitListEquipe();
+
+}
+void Fenetreequipe::Connexion()
+{
     connect(ui->ButtonAjouter,SIGNAL(clicked()),this,SLOT(Ajouter()));
     connect(ui->ButtonAnnuler,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->SuppresionBox,SIGNAL(currentIndexChanged(int)),this,SLOT(ListChange()));
     connect(ui->ButtonModifier,SIGNAL(clicked()),this,SLOT(Modifier()));
     connect(ui->ButtonSupprimer,SIGNAL(clicked()),this,SLOT(Supprimer()));
     connect(ui->ButtonEquipe,SIGNAL(clicked()),this,SLOT(GestionEquipe()));
-    _listColumn<<tr("Numero")<<tr("Nom")<<tr("Prenom")<<tr("Poste")<<tr("License");
-    this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
-
-    InitListEquipe();
-
+    connect(ui->pushButton_Export,SIGNAL(clicked()),this,SLOT(slot_Export()));
+    connect(ui->pushButton_Import,SIGNAL(clicked()),this,SLOT(slot_Import()));
 }
 
 Fenetreequipe::~Fenetreequipe()
@@ -225,6 +231,32 @@ void Fenetreequipe::GestionEquipe()
     QDialog* visualisation=new FenetreVisualisation(_ecran,this);
     visualisation->exec();
     ui->SuppresionBox->clear();
+    InitListEquipe();
+}
+
+void Fenetreequipe::slot_Export()
+{
+    QString fichier = QFileDialog::getSaveFileName(this, tr("Enregistrer un fichier"), QString(), "*.csv");
+
+    QList<Equipe*> LEquipe=_ecran->GetListeEquipe();
+    for(int i=0;i<LEquipe.count();i++)
+    {
+        Equipe* Team=LEquipe.at(i);
+        Team->ExportCVS(fichier);
+    }
+    QMessageBox::information(this,tr("Information"),tr("L'export c'est effectué correctement"));
+    this->close();
+
+}
+
+void Fenetreequipe::slot_Import()
+{
+    QString fichier = QFileDialog::getOpenFileName(this, tr("fichier d'import"), QString(), "*.csv");
+    Equipe *Team=new Equipe();
+    Team->ImportCVS(fichier);
+    this->_ecran->AddEquipe(Team);
+    QMessageBox::information(this,tr("Information"),tr("Importation terminer"));
+
     InitListEquipe();
 }
 

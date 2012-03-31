@@ -46,10 +46,14 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "keyjoueur.h"
 #include "widgettabeff.h"
 #include "vcslineedit.h"
+#include "listactionxml.h"
+//#include "volleyInit.h"
 
 namespace Ui {
     class Ecran;
 }
+
+//using namespace VolleyStats;
 
 class Ecran : public QMainWindow
 {
@@ -109,11 +113,11 @@ private:
     bool _PointForUs;
     bool _Istactile;
     TraceLog* _trace;
+    ListActionXml * _TraceListAction;
     int _position;
     int _positionEcran;
     FenetreStat* _FenetreStat;
     FenetreChoixMatch* _FenetreChoix;
-    QMap <Joueur*,int> Mapjoueur;
     bool _ischangement;
     void IsService();
     QString ChangeJoueur;
@@ -129,6 +133,8 @@ private:
     QStringList _listValeurStat;
     QStringList _listAction;
      KeyJoueur *_PlacementJoueur;
+     int _currentSet;
+     int _currentposition;
 protected:
      void closeEvent(QCloseEvent * event );
 
@@ -148,6 +154,7 @@ public slots:
     void score();
     void scoreadv();
     void slot_changement(QPushButton*);
+    void slot_modifpost(QPushButton*);
     void slot_initChangement();
     void slot_score();
     void Slot_Scoreplus(int position);
@@ -172,6 +179,7 @@ public slots:
     void Slot_posPasse();
     void Slot_posContre();
     void Slot_posDefense();
+    void Slot_ComplAction();
 
     void bouttonLClicked();
 

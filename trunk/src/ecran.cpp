@@ -42,7 +42,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QKeyEvent>
 #include "QRadioButton"
 #include "fenetreinternet.h"
-
+#include "lecteurvideo.h"
 
 
 
@@ -52,6 +52,7 @@ Ecran::Ecran(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::Ecran)
 {
+
     ui->setupUi(this);
 
     _position=0;
@@ -59,10 +60,12 @@ Ecran::Ecran(QWidget *parent) :
     _ischangement=false;
     _finSet=false;
     ui->lineEdit->setVisible(false);
+
+    ui->lineEdit_PBP->setVisible(false);
     LineEdit2 =  new VCSLineEdit(ui->centralWidget);
     LineEdit2->setObjectName(QString::fromUtf8("lineEdit"));
 
-    ui->gridLayout_11->addWidget(LineEdit2, 0, 0, 1, 1);
+    ui->gridLayout_11->addWidget(LineEdit2,2, 3, 1, 1);
 
     QDesktopWidget *desktop=QApplication::desktop ();
     QRect size=desktop->screenGeometry ();
@@ -73,6 +76,7 @@ Ecran::Ecran(QWidget *parent) :
     QHBoxLayout *layout=new QHBoxLayout();
     layout->addWidget (_PlacementJoueur);
     connect(this->_PlacementJoueur,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
+    connect(this->_PlacementJoueur,SIGNAL(ModifPoste(QPushButton*)),this,SLOT(slot_modifpost(QPushButton*)));
     connect(this,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
     connect(this->LineEdit2,SIGNAL(ChangeAction()),this,SLOT(SlotCombobox()));
     connect(this->LineEdit2,SIGNAL(Attaque()),this,SLOT(Slot_posAction()));
@@ -81,6 +85,7 @@ Ecran::Ecran(QWidget *parent) :
     connect(this->LineEdit2,SIGNAL(Defense()),this,SLOT(Slot_posDefense()));
     connect(this->LineEdit2,SIGNAL(Contre()),this,SLOT(Slot_posContre()));
     connect(this->LineEdit2,SIGNAL(Passe()),this,SLOT(Slot_posPasse()));
+    connect(this->LineEdit2,SIGNAL(ComplementAction()),this,SLOT(Slot_ComplAction()));
 
 
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Slot_PplusL()));
@@ -93,8 +98,10 @@ Ecran::Ecran(QWidget *parent) :
 
 
     connect(ui->menuFichier, SIGNAL(triggered(QAction *)), this, SLOT(AffSession(QAction *)));
+    connect(ui->menuMatch,SIGNAL(triggered(QAction*)),this,SLOT(AffSession(QAction*)));
     connect(ui->menuFenetre, SIGNAL(triggered(QAction *)), this, SLOT(Slot_Fenetre(QAction *)));
     _trace=new TraceLog(this);
+    _TraceListAction= new ListActionXml();
     connect(this->_trace,SIGNAL(EnvoieTrace(QString)),this,SLOT(AfficherTrace(QString)));
 
 
@@ -129,10 +136,21 @@ Ecran::Ecran(QWidget *parent) :
 
 
     setAcceptDrops(true);
-
+    QDate curentDate=QDate::currentDate();
     Initialisation();
 
+    if(curentDate.year() == 2013)
+    {
+        if(curentDate.month() > 2)
+        {
+            InitialisationError();
+        }
 
+    }
+    else if(curentDate.year() > 2013)
+    {
+        InitialisationError();
+    }
 
     myWidget=new StatWidget(ui->groupBox_3,this);
     _WtabEff=new WidgetTabEff(ui->groupBox_6);
@@ -216,7 +234,7 @@ void Ecran::Initialisation()
     _listActionPlus<<tr("Service")<<tr("Attaque")<<tr("Contre");
 
 
-    this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Passe")<<tr("Attaque");
+   // this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Passe")<<tr("Attaque");
     ui->PBModif->setVisible(false);
 
 }
@@ -237,6 +255,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
 {
     QPalette palette;
     _flagsup=false;
+    _currentSet=1;
 
     palette.setColor(QPalette::Window ,QColor(167,167,167));
     ui->centralWidget->setPalette(palette);
@@ -284,7 +303,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->groupBox_5->setVisible (false);
 
     _isMatchEnCour=false;
-    ui->comboBox->addItems(this->_listAction);
+    //ui->comboBox->addItems(VolleyStats::GetListAction());
     //ui->textEdit_2->setVisible (false);
 
 
@@ -292,7 +311,9 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     Match* MatchEncour=Match::donneInstance();
     QString strTrace="Match_"+MatchEncour->GetDate ();
     _trace->SetFile (strTrace);
+    this->_TraceListAction->SetFile(strTrace);
     _trace->SetTrace("Debut du match");
+    this->_TraceListAction->Debut();
     MatchEncour ->setAdvers(advs);
     //Match::donneInstance(this)->setCurrentEquipe(team);
     MatchEncour->getTeam()->SetListAction(this->_listAction,this->_listValeurStat);
@@ -446,13 +467,40 @@ void Ecran::Slot_start()
 }
 void Ecran::ChercherPasseur()
 {
-    this->_PlacementJoueur->ChercherJoueur();
+    this->_PlacementJoueur->ChercherJoueur(this->_currentposition);
+
 
 }
 void Ecran::slot_changement(QPushButton *boutton)
 {
     changement(boutton->text(),boutton);
 }
+
+void Ecran::slot_modifpost(QPushButton* boutton)
+{
+    fbjoueur* joueur=new fbjoueur(Match::donneInstance()->getTeam(),this);
+
+    QStringList strlist=boutton->text().split("(");
+    strlist=strlist[1].split(")");
+    QList <Joueur*> listJoueur=Match::donneInstance()->getTeam()->GetListeJoueur();
+    for(int i=0;i<listJoueur.size();i++)
+    {
+
+        if (listJoueur.at(i)->get_Prenom()==strlist[0])
+        {
+
+
+            joueur->Modif(listJoueur.at(i),true);
+            if(joueur->exec()==1)
+            {
+            QString text=this->_PlacementJoueur->UpdateJoueur(listJoueur.at(i));
+            boutton->setText(text);
+            break;
+        }
+    }
+}
+}
+
 
 void Ecran::changement(QString joueur,QPushButton *bouton)
 {
@@ -653,6 +701,11 @@ void Ecran::Slot_Fenetre(QAction *action)
         FenetreInternet* Fenetre=new FenetreInternet(this);
         Fenetre->show();
     }
+    else if(action->text()=="Lecteur")
+    {
+        lecteurVideo * fenetrelect=new lecteurVideo(this);
+        fenetrelect->show();
+    }
 }
 
 void Ecran::AffSession(QAction *action)
@@ -783,10 +836,10 @@ void Ecran::slot_rotationP()
 void Ecran::slot_rotationM()
 {
 
-    _PlacementJoueur->RotationM();
+    _PlacementJoueur->RotationM(this->_currentposition);
 
-
-    _PlacementJoueur->ChercherJoueur();
+    int joueur;
+    _PlacementJoueur->ChercherJoueur(joueur);
 }
 
 void Ecran::score()
@@ -804,9 +857,9 @@ void Ecran::scoreadv()
 
 void Ecran::Rotation()
 {
-    this->_PlacementJoueur->Rotation();
-
-    _PlacementJoueur->ChercherJoueur();
+    this->_PlacementJoueur->Rotation(this->_currentposition);
+    //int joueur;
+    //_PlacementJoueur->ChercherJoueur(this->_currentposition);
 
     ActionService(0);
 
@@ -871,6 +924,7 @@ void Ecran::TempsMort()
 void Ecran::FinSet()
 {
 
+    this->_currentSet=this->_currentSet+1;
     ui->pushButton_6->setVisible(false);
     this->_TimerScore->start(100);
     Match::donneInstance()->FinSet();
@@ -905,6 +959,7 @@ void Ecran::FinMatch()
 
         ui->textEdit->clear();
         _trace->SetTrace(tr("Fin Match"));
+        _TraceListAction->Fin();
         QString  file=Match::donneInstance ()->GetFichierXml();
         Match::donneInstance ()->FinSet ();
         Match::donneInstance ()->Enregistrer ();
@@ -1106,9 +1161,16 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
     else
     {
         QString msgTrace=numjoueur+" "+_listAction.at(IAction)+" "+ValeurAction+" "+strPosition;
-        QString MsgAction=numjoueur+"_"+_listAction.at(IAction)+"_"+ValeurAction;
+
+        QString MsgAction;
+        QString MsgSet;
+        QString MsgPos;
+        MsgSet=MsgSet.setNum(_currentSet);
+        MsgPos=MsgPos.setNum(_currentposition);
+        MsgAction=MsgSet+"_"+MsgPos+"_"+numjoueur+"_"+_listAction.at(IAction)+"_"+ValeurAction;
 
         _trace->SetTrace(msgTrace);
+        this->_TraceListAction->SetTrace(MsgAction);
         ui->listAction->addItem (MsgAction);
         this->_WtabEff->SlotMiseAJour();
         this->_PlacementJoueur->Stat();
@@ -1219,7 +1281,13 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
         this->PointPlus(numjoueur);
     }
 
+    /// Apparition de la deuxieme bar de saisi sur reception + ou ++
+    if(StatAction==VP || StatAction==VPP &&
+       ui->comboBox->currentText()==tr("Attaque"))
 
+    {
+        ui->lineEdit_PBP->setVisible(true);
+    }
     int num=numjoueur.toInt();
     SignalAction(num);
 }
@@ -1448,7 +1516,8 @@ void Ecran::Slot_RotTerrain()
         break;
     }
     this->_PlacementJoueur->createLayout(_positionEcran);
-    this->_PlacementJoueur->ChercherJoueur();
+
+    this->_PlacementJoueur->ChercherJoueur(this->_currentposition);
     this->ActionService(0);
 
     // ui->label_4
@@ -1501,6 +1570,14 @@ void Ecran::Slot_posDefense()
 {
     SautAction(tr("Défense"));
 }
+void Ecran::Slot_ComplAction()
+{
+    if(ui->lineEdit_PBP->isVisible())
+    {
+        ui->lineEdit_PBP->setFocus();
+    }
+}
+
 void Ecran::SautAction(QString str)
 {
     QString text=this->LineEdit2->text ();
@@ -1540,7 +1617,7 @@ void Ecran::JoueurAPlacer()
         ui->gridLayout_18->addWidget(pushButton, i, 0, 1, 1);
         connect(pushButton,SIGNAL(lclicked()),this,SLOT(bouttonLClicked()));
     }
-    ui-> gridLayout_19->addWidget(ui->groupBox_4, 0,listJoueur.size() , 1, 1);
+   // ui-> gridLayout_19->addWidget(ui->groupBox_4, 0,listJoueur.size() , 1, 1);
 }
 
 void Ecran::bouttonLClicked()

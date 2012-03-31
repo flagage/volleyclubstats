@@ -32,7 +32,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 **/
 #include <QtGui/QApplication>
 #include "ecran.h"
-#include "MainWindow.h"
+
 #include "QFile"
 #include "QTextCodec"
 #include "QTranslator"

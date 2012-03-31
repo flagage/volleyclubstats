@@ -56,6 +56,7 @@ public slots:
     void slot_reload();
     void slot_google();
     void slot_stop();
+    void slot_ffvb();
 };
 
 #endif // FENETREINTERNET_H

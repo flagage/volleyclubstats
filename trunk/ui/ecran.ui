@@ -30,241 +30,12 @@
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
-   <layout class="QGridLayout" name="gridLayout_19">
+   <layout class="QGridLayout" name="gridLayout_17">
     <item row="0" column="0">
-     <widget class="QGroupBox" name="groupBox_6">
-      <property name="title">
-       <string>Efficacité</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_13"/>
-     </widget>
-    </item>
-    <item row="0" column="1">
      <layout class="QGridLayout" name="gridLayout_12">
-      <item row="0" column="0">
-       <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0">
-         <widget class="QGroupBox" name="groupBox_2">
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-          <property name="title">
-           <string>Score</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="1">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Points</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>Set</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="pBScore">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QPushButton" name="pBSet">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="3">
-            <widget class="QPushButton" name="pushButton">
-             <property name="autoFillBackground">
-              <bool>true</bool>
-             </property>
-             <property name="text">
-              <string>+1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="4">
-            <widget class="QPushButton" name="pushButton_3">
-             <property name="text">
-              <string>-1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="5">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="6">
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QPushButton" name="pBScore_2">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2">
-            <widget class="QPushButton" name="pBSet_2">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="3">
-            <widget class="QPushButton" name="pushButton_2">
-             <property name="text">
-              <string>+1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="4">
-            <widget class="QPushButton" name="pushButton_4">
-             <property name="text">
-              <string>-1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="5">
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="6">
-            <widget class="QLabel" name="label_9">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="label_10">
-             <property name="text">
-              <string>Vs</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="Start">
-          <property name="minimumSize">
-           <size>
-            <width>83</width>
-            <height>91</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Demarrer Saisie</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QPushButton" name="pushButton_TM">
-            <property name="text">
-             <string>Temps Mort</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QPushButton" name="pushButton_FM">
-            <property name="text">
-             <string>Fin Match</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="pushButton_6">
-            <property name="text">
-             <string>Fin Set</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="0" column="3">
-         <widget class="QGroupBox" name="groupBox">
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-          <property name="title">
-           <string>Rotation</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_6">
-           <item row="0" column="0">
-            <widget class="QPushButton" name="pBRotationPlus">
-             <property name="text">
-              <string>+</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="pBRotationMoins">
-             <property name="text">
-              <string>-</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QPushButton" name="pushButton_5">
-             <property name="text">
-              <string>Rotation terrain</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </item>
       <item row="1" column="0">
        <layout class="QGridLayout" name="gridLayout_9">
-        <item row="2" column="0">
+        <item row="7" column="0">
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0">
            <widget class="QPushButton" name="Button_PP">
@@ -304,37 +75,319 @@
          </layout>
         </item>
         <item row="0" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-         </widget>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="autoFillBackground">
+             <bool>true</bool>
+            </property>
+            <property name="title">
+             <string>Score</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Points</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Set</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QPushButton" name="pBScore">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QPushButton" name="pBSet">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QPushButton" name="pushButton">
+               <property name="autoFillBackground">
+                <bool>true</bool>
+               </property>
+               <property name="text">
+                <string>+1</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QPushButton" name="pushButton_3">
+               <property name="text">
+                <string>-1</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="5">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="6">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QPushButton" name="pBScore_2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QPushButton" name="pBSet_2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <widget class="QPushButton" name="pushButton_2">
+               <property name="text">
+                <string>+1</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="4">
+              <widget class="QPushButton" name="pushButton_4">
+               <property name="text">
+                <string>-1</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="5">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="6">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Vs</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="Start">
+            <property name="minimumSize">
+             <size>
+              <width>83</width>
+              <height>91</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Demarrer Saisie</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QPushButton" name="pushButton_TM">
+              <property name="text">
+               <string>Temps Mort</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="pushButton_FM">
+              <property name="text">
+               <string>Fin Match</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="text">
+               <string>Fin Set</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="3">
+           <widget class="QGroupBox" name="groupBox">
+            <property name="autoFillBackground">
+             <bool>true</bool>
+            </property>
+            <property name="title">
+             <string>Rotation</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="0">
+              <widget class="QPushButton" name="pBRotationPlus">
+               <property name="text">
+                <string>+</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="pBRotationMoins">
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QPushButton" name="pushButton_5">
+               <property name="text">
+                <string>Rotation terrain</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item row="1" column="0">
          <layout class="QGridLayout" name="gridLayout_11">
-          <item row="0" column="0">
+          <item row="2" column="1">
+           <widget class="QComboBox" name="comboBox">
+            <property name="toolTip">
+             <string>Action</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
            <widget class="QLineEdit" name="lineEdit">
+            <property name="toolTip">
+             <string>Joueur Valeur</string>
+            </property>
             <property name="autoFillBackground">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="comboBox"/>
+          <item row="2" column="5">
+           <widget class="QLineEdit" name="lineEdit_PBP">
+            <property name="toolTip">
+             <string>Position Base Passe(A+R)</string>
+            </property>
+           </widget>
           </item>
          </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="tab">
+           <attribute name="title">
+            <string>Terrain</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_19">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="autoFillBackground">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>Efficacité</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_21">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="groupBox_6">
+              <property name="title">
+               <string>Efficacité</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_13"/>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>Statistiques completes</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_20">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="autoFillBackground">
+               <bool>true</bool>
+              </property>
+              <property name="title">
+               <string>Statistiques completes</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_10"/>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
         </item>
        </layout>
       </item>
      </layout>
     </item>
-    <item row="0" column="2">
+    <item row="0" column="1">
      <widget class="QGroupBox" name="groupBox_4">
       <property name="title">
        <string>Joueurs à placer</string>
@@ -357,7 +410,7 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="3">
+    <item row="0" column="2">
      <widget class="QGroupBox" name="groupBox_7">
       <property name="title">
        <string/>
@@ -438,17 +491,6 @@
       <zorder></zorder>
      </widget>
     </item>
-    <item row="1" column="0" colspan="4">
-     <widget class="QGroupBox" name="groupBox_3">
-      <property name="autoFillBackground">
-       <bool>true</bool>
-      </property>
-      <property name="title">
-       <string>Statistiques completes</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_10"/>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -471,16 +513,34 @@
     <addaction name="actionRevoir_un_match"/>
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
+    <addaction name="actionGestion_Club"/>
    </widget>
    <widget class="QMenu" name="menuFenetre">
     <property name="title">
-     <string>Fenetre</string>
+     <string>Parametre</string>
     </property>
     <addaction name="actionScore"/>
     <addaction name="actionResultat_ffvb"/>
+    <addaction name="actionLecteur"/>
+   </widget>
+   <widget class="QMenu" name="menuMatch">
+    <property name="title">
+     <string>Match</string>
+    </property>
+    <addaction name="actionLancer_le_match"/>
+    <addaction name="actionRevoir_un_match_2"/>
+   </widget>
+   <widget class="QMenu" name="menuAide">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="actionR_sultat_ffvb"/>
+    <addaction name="actionManuel"/>
    </widget>
    <addaction name="menuFichier"/>
+   <addaction name="menuMatch"/>
    <addaction name="menuFenetre"/>
+   <addaction name="menuAide"/>
   </widget>
   <action name="actionAjouterEquipe">
    <property name="text">
@@ -552,8 +612,70 @@
     <string>Resultat(ffvb)</string>
    </property>
   </action>
+  <action name="actionLecteur">
+   <property name="text">
+    <string>Lecteur</string>
+   </property>
+  </action>
+  <action name="actionLancer_le_match">
+   <property name="text">
+    <string>Lancer le Match</string>
+   </property>
+  </action>
+  <action name="actionRevoir_un_match_2">
+   <property name="text">
+    <string>Revoir un match</string>
+   </property>
+  </action>
+  <action name="actionR_sultat_ffvb">
+   <property name="text">
+    <string>Résultat ffvb</string>
+   </property>
+  </action>
+  <action name="actionManuel">
+   <property name="text">
+    <string>Manuel Utilisateur</string>
+   </property>
+  </action>
+  <action name="actionGestion_Club">
+   <property name="text">
+    <string>Gestion Club</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>lineEdit_PBP</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pBScore_2</tabstop>
+  <tabstop>pBSet_2</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>Start</tabstop>
+  <tabstop>pushButton_TM</tabstop>
+  <tabstop>pushButton_FM</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pBRotationPlus</tabstop>
+  <tabstop>pBRotationMoins</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pBScore</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pBSup</tabstop>
+  <tabstop>PBModif</tabstop>
+  <tabstop>listAction</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>listJoueur</tabstop>
+  <tabstop>pBSet</tabstop>
+  <tabstop>Button_PP</tabstop>
+  <tabstop>Button_P</tabstop>
+  <tabstop>Button_0</tabstop>
+  <tabstop>Button_M</tabstop>
+  <tabstop>Button_MM</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

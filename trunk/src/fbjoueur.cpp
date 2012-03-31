@@ -33,7 +33,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "fbjoueur.h"
 
 
-fbjoueur::fbjoueur(Equipe* Team,QDialog *parent) :
+fbjoueur::fbjoueur(Equipe* Team,QWidget *parent) :
         QDialog(parent)
 
 {
@@ -63,8 +63,9 @@ void fbjoueur::Init()
     _modif=false;
 
 }
-void fbjoueur::Modif(Joueur* player)
+void fbjoueur::Modif(Joueur* player,bool isMathEncours)
 {
+
     ui.lineEdit_Nom->setText(player->get_Nom());
     ui.lineEdit_prenom->setText(player->get_Prenom());
     ui.lineEdit_add->setText(player->get_Addresse());
@@ -84,7 +85,34 @@ void fbjoueur::Modif(Joueur* player)
     ui.spinBox->setValue (player->get_NumMaillot());
     _curentJoueur=player;
     _modif=true;
-    this->exec();
+    if(isMathEncours==true)
+    {
+        ui.lineEdit_add->setEnabled(false);
+        ui.lineEdit_age->setEnabled(false);
+        ui.lineEdit_Email->setEnabled(false);
+        ui.lineEdit_lis->setEnabled(false);
+        ui.lineEdit_Nom->setEnabled(false);
+        ui.lineEdit_prenom->setEnabled(false);
+        ui.lineEdit_tel->setEnabled(false);
+        ui.comboBox->setEnabled(false);
+        ui.spinBox->setEnabled(false);
+
+    }
+    else
+    {
+
+        ui.lineEdit_add->setEnabled(true);
+        ui.lineEdit_age->setEnabled(true);
+        ui.lineEdit_Email->setEnabled(true);
+        ui.lineEdit_lis->setEnabled(true);
+        ui.lineEdit_Nom->setEnabled(true);
+        ui.lineEdit_prenom->setEnabled(true);
+        ui.lineEdit_tel->setEnabled(true);
+        ui.comboBox->setEnabled(true);
+        ui.spinBox->setEnabled(true);
+        this->exec();
+    }
+
 }
 
 
