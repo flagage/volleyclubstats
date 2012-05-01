@@ -36,7 +36,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QString>
 #include <QDomDocument>
 
-#include "parametre.h"
+
 #include "stat.h"
 
 

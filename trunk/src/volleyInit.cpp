@@ -1,58 +1,88 @@
 #include "volleyInit.h"
 
-namespace VolleyStats
+
+InitValeur* InitValeur::_InstanceValeur = NULL;
+
+InitValeur::InitValeur()
 {
-    Valeur::Valeur()
-    {
-        _ListValeur<<"++"<<"+"<<"0"<<"-"<<"--"<<"tot"<<"eff1"<<"eff2"<<"eff3"<<"eff4";
-    }
-    Valeur::~Valeur()
-    {
-        _ListValeur.clear();
-    }
+    _ListValeur<<"++"<<"+"<<"0"<<"-"<<"--"<<"tot"<<"eff1"<<"eff2"<<"eff3"<<"eff4";
+    //_InstanceValeur=NULL;
+}
 
-    int Valeur::GetSizeValeur()
-    {
-        return _ListValeur.size();
-    }
-    QString Valeur::GetElementValeur(int valu)
-    {
-        switch (valu)
+InitValeur::~InitValeur()
+{
+    _ListValeur.clear();
+}
+
+QStringList InitValeur::GetListValeur()
+{
+    return _ListValeur;
+}
+InitValeur* InitValeur::GetInstance()
+{
+    return _InstanceValeur;
+}
+
+InitValeur* InitValeur::donneInstance()
+{
+     if(_InstanceValeur == NULL)
         {
-        case VPP:
-            return "++";
-            break;
-        case VP:
-            return "+";
-            break;
-        case V0:
-            return "0";
-            break;
-        case VM:
-            return "-";
-            break;
-        case VMM:
-            return "--";
-            break;
-        case TOT:
-            return "tot";
-            break;
-        case EFF1:
-            return "eff1";
-            break;
-        case EFF2:
-            return "eff2";
-            break;
-        case EFF3:
-            return "eff3";
-            break;
-        case EFF4:
-            return "eff4";
-            break;
+            _InstanceValeur=new InitValeur();
         }
-    }
+        return _InstanceValeur;
+}
 
-    /*Action::Action()
+void InitValeur::libereInstance()
+{
+     if(_InstanceValeur!=NULL)
+        {
+            delete _InstanceValeur;
+            _InstanceValeur=NULL;
+        }
+}
+int InitValeur::GetSizeValeur()
+{
+    return _ListValeur.size();
+}
+QString InitValeur::GetElementValeur(int valu)
+{
+    switch (valu)
+    {
+    case VPP:
+        return "++";
+        break;
+    case VP:
+        return "+";
+        break;
+    case V0:
+        return "0";
+        break;
+    case VM:
+        return "-";
+        break;
+    case VMM:
+        return "--";
+        break;
+    case TOT:
+        return "tot";
+        break;
+    case EFF1:
+        return "eff1";
+        break;
+    case EFF2:
+        return "eff2";
+        break;
+    case EFF3:
+        return "eff3";
+        break;
+    case EFF4:
+        return "eff4";
+        break;
+    }
+}
+
+
+/*Action::Action()
     {
         _ListAction<<"Service"<<"Récéption"<<"Contre"<<"Défense"<<"Passe"<<"Attaque";
     }
@@ -89,8 +119,8 @@ namespace VolleyStats
             break;
         }
     }*/
-    /*QStringList GetMAction()
+/*QStringList GetMAction()
     {
         return m_ListAction;
     }*/
-}
+

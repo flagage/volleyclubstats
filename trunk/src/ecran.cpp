@@ -48,13 +48,14 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 
 
 
+
 Ecran::Ecran(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::Ecran)
 {
 
     ui->setupUi(this);
-
+    _ValeurInitial=InitValeur::donneInstance();
     _position=0;
     _Istactile=false;
     _ischangement=false;

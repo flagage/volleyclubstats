@@ -37,7 +37,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QListWidget>
 #include "QTimer"
 #include "tracelog.h"
-#include "parametre.h"
+//#include "parametre.h"
 #include "Equipe.h"
 #include "fenetrestat.h"
 #include "fenetrescore.h"
@@ -47,7 +47,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "widgettabeff.h"
 #include "vcslineedit.h"
 #include "listactionxml.h"
-//#include "volleyInit.h"
+#include "volleyInit.h"
 
 namespace Ui {
     class Ecran;
@@ -135,6 +135,8 @@ private:
      KeyJoueur *_PlacementJoueur;
      int _currentSet;
      int _currentposition;
+     InitValeur * _ValeurInitial;
+
 protected:
      void closeEvent(QCloseEvent * event );
 
