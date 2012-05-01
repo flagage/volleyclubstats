@@ -34,6 +34,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "Equipe.h"
 #include "QFileDialog"
 #include "QTextStream"
+#include "volleyInit.h"
 #include <QFile>
 
 Equipe::Equipe()
@@ -160,12 +161,11 @@ void Equipe::RestaurerXML(QDomNode noeud)
 
 }
 
-void Equipe::SetListAction(QStringList list,QStringList listvaleur)
+void Equipe::SetListAction(QStringList list)
 {
     _listAction=list;
-    _listValeur=listvaleur;
-    this->statMatch.SetListAction(list,listvaleur);
-    this->statSet.SetListAction(list,listvaleur);
+    this->statMatch.SetListAction(list);
+    this->statSet.SetListAction(list);
 }
 QStringList Equipe::GetListAction()
 {
@@ -241,7 +241,7 @@ double Equipe::getStatSet(int action,int pos)
 
 void Equipe::initSet()
 {
-    this->statSet.SetListAction(_listAction,_listValeur);
+    this->statSet.SetListAction(_listAction);
     this->statSet.init();
 
 }

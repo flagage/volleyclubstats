@@ -5,7 +5,7 @@ InitValeur* InitValeur::_InstanceValeur = NULL;
 
 InitValeur::InitValeur()
 {
-    _ListValeur<<"++"<<"+"<<"0"<<"-"<<"--"<<"tot"<<"eff1"<<"eff2"<<"eff3"<<"eff4";
+    _ListValeur<<"++"<<"+"<<"0"<<"-"<<"--"<<"tot";
     //_InstanceValeur=NULL;
 }
 
@@ -80,7 +80,14 @@ QString InitValeur::GetElementValeur(int valu)
         break;
     }
 }
+void InitValeur::SetSelection(QStringList list)
+{
+    for(int i=0;i<list.size();i++)
+    {
+        this->_ListValeur.append(list.at(i));
+    }
 
+}
 
 /*Action::Action()
     {

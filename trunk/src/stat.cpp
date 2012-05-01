@@ -31,6 +31,7 @@ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL et que vous en avez accepté les
 **/
 #include "stat.h"
+#include "volleyInit.h"
 
 statValeur::statValeur(QStringList valeur)
 {
@@ -325,12 +326,12 @@ QStringList statFinal::GetListValeurStat()
     return statMap[0]->GetListValeurStat();
 }
 
-void statFinal::SetListAction(QStringList list,QStringList valeur)
+void statFinal::SetListAction(QStringList list)
 {
     _listAction=list;
     for(int i=0;i<_listAction.size();i++)
     {
-        statMap[i]=new statValeur(valeur);
+        statMap[i]=new statValeur(InitValeur::donneInstance()->GetListValeur());
     }
 }
 

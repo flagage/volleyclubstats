@@ -71,7 +71,7 @@ public:
     void InitialisationError();
     void InitialisationMatch(QString team,QString adv);
     void InitialisationAction(QStringList Action);
-    void InitialisationValeur(QStringList Valeur);
+   // void InitialisationValeur(QStringList Valeur);
     void ChercherPasseur();
     void Actionpasse();
     /// Sauvegarde

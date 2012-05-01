@@ -317,13 +317,13 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     this->_TraceListAction->Debut();
     MatchEncour ->setAdvers(advs);
     //Match::donneInstance(this)->setCurrentEquipe(team);
-    MatchEncour->getTeam()->SetListAction(this->_listAction,this->_listValeurStat);
+    MatchEncour->getTeam()->SetListAction(this->_listAction);
     this->_PlacementJoueur->InitListJoueur(MatchEncour->getTeam()->GetListeJoueur());
     JoueurAPlacer();
     for(int i=0;i<MatchEncour->getTeam()->GetListeJoueur().size();i++)
     {
         Joueur*joue= MatchEncour->getTeam()->GetListeJoueur().at(i);
-        joue->SetListAction(this->_listAction,_listValeurStat);
+        joue->SetListAction(this->_listAction);
         QString strjoueur="";
         strjoueur=((QString("%1 ").arg(joue->get_NumMaillot())));
         if(strjoueur.size()==2)
@@ -400,10 +400,10 @@ void Ecran::InitialisationAction(QStringList Action)
     this->_listActionMatch=Action;
 
 }
-void Ecran::InitialisationValeur(QStringList ValeurSelection)
+/*void Ecran::InitialisationValeur(QStringList ValeurSelection)
 {
     this->_listValeurStat=ValeurSelection;
-}
+}*/
 
 void Ecran::slot_initChangement()
 {

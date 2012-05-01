@@ -41,6 +41,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "QFileDialog"
 #include "QTextStream"
 #include "match.h"
+#include "volleyInit.h"
 
 
 
@@ -86,11 +87,11 @@ void StatWidget::Initialisation()
         QVBoxLayout *layout = new QVBoxLayout;
         QWidget *tabAjout=ui->tabWidget->widget (i+1);
         tabAjout->setLayout (layout);
-        tabelem=new TableElementsState(ui->tabWidget->widget (i+1),_team->GetListAction(),_team->GetListValeurStat());
+        tabelem=new TableElementsState(ui->tabWidget->widget (i+1),_team->GetListAction());
         StatJoueur.insert (player->get_NumMaillot (),tabelem);
 
     }
-    _tabElts=new TableElementsState(ui->tab,_team->GetListAction(),_team->GetListValeurStat());
+    _tabElts=new TableElementsState(ui->tab,_team->GetListAction());
 
 }
 
@@ -643,9 +644,10 @@ void StatWidget::SetColor(int Action,QTableWidgetItem *item)
     item->setBackground (color);
 }
 
-TableElementsState::TableElementsState(QWidget * parent,QStringList Listaction,QStringList ListValeur)
+TableElementsState::TableElementsState(QWidget * parent,QStringList Listaction)
 {
-    this->setColumnCount (Listaction.size()*ListValeur.size()+1);
+    int sizeValeur=InitValeur::donneInstance()->GetSizeValeur();
+    this->setColumnCount (Listaction.size()*sizeValeur+1);
     this->setRowCount (8);
     //this->setSpan (0,1,0,5);
 
@@ -689,16 +691,16 @@ TableElementsState::TableElementsState(QWidget * parent,QStringList Listaction,Q
             break;
         }
 
-        int col=ListValeur.size()/2;
-        this->setItem (0,(i*ListValeur.size())+col,new QTableWidgetItem(Listaction.at(i)));
-        for(int k=0;k<ListValeur.size();k++)
+        int col=sizeValeur/2;
+        this->setItem (0,(i*sizeValeur)+col,new QTableWidgetItem(Listaction.at(i)));
+        for(int k=0;k<sizeValeur;k++)
         {
-            this->setItem (1,(i*ListValeur.size())+k+1,new QTableWidgetItem(ListValeur.at(k) ));
+            this->setItem (1,(i*sizeValeur)+k+1,new QTableWidgetItem(InitValeur::donneInstance()->GetElementValeur((k))));
             QTableWidgetItem * Item;
-            Item=this->item (1,(i*ListValeur.size())+k+1);
+            Item=this->item (1,(i*sizeValeur)+k+1);
             Item->setBackground (color);
             Item->setToolTip("(Vpp-Vmm)/tot");
-            Item=this->item (0,(i*ListValeur.size())+k+1);
+            Item=this->item (0,(i*sizeValeur)+k+1);
             if(Item!=0)
                 Item->setBackground (color);
         }

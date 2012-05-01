@@ -105,7 +105,7 @@ public:
     void initSet();
     void supStatMatch(int action,int pos);
     void supStatSet(int action,int pos);
-    void SetListAction(QStringList list,QStringList valeur);
+    void SetListAction(QStringList list);
 
 };
 
