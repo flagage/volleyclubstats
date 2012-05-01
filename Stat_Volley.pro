@@ -56,7 +56,6 @@ HEADERS  += src/tracelog.h \
     src/stat.h \
     src/set.h \
     src/Score.h \
-    src/parametre.h \
     src/match.h \
     src/Joueur.h \
     src/fenetrevisualisation.h \

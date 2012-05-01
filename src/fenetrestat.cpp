@@ -64,7 +64,7 @@ void FenetreStat::Initialisation(QString chemin)
     Equipe *team=new Equipe(lect.GetNomEquipe());
     team->SetStringAction(lect.GetListAction());
     team->SetStringValeur(lect.GetListValeur());
-    team->SetListAction(lect.GetListAction().split("_"),lect.GetListValeur().split("_"));
+    team->SetListAction(lect.GetListAction().split("_"));
 
     for(int i=0;i<lect.GetListJoueur().size();i++)
     {
@@ -74,7 +74,7 @@ void FenetreStat::Initialisation(QString chemin)
         joue->set_Prenom(list[0]);
         joue->set_NumMaillot(list[1].toInt());
         joue->set_poste(list[2]);
-        joue->SetListAction(lect.GetListAction().split("_"),lect.GetListValeur().split("_"));
+        joue->SetListAction(lect.GetListAction().split("_"));
         team->AddJoueur(joue);
     }
     newMatch=Match::donneInstance();

@@ -34,6 +34,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "ui_fenetrelancement.h"
 #include "QMessageBox"
 #include "match.h"
+#include "volleyInit.h"
 
 FenetreLancement::FenetreLancement(Ecran* ecran,QWidget *parent) :
     QDialog(parent),
@@ -135,8 +136,8 @@ void FenetreLancement::ok()
     }
 
 
-
-    this->_ecran->InitialisationValeur(ValeurSelection);
+    InitValeur::donneInstance()->SetSelection(ValeurSelection);
+    //this->_ecran->InitialisationValeur(ValeurSelection);
 
     if(ui->radioButton_2->isChecked ())
     {

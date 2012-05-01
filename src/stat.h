@@ -89,7 +89,7 @@ public:
     void SetValeur(int action,int pos,double valeur);
     int GetNbValeur();
     void init();
-    void SetListAction(QStringList list,QStringList valeur);
+    void SetListAction(QStringList list);
     QStringList GetListValeurStat();
 };
 

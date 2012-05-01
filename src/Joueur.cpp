@@ -365,8 +365,8 @@ void Joueur::initSet()
     this->statSet.init();
 }
 
-void Joueur::SetListAction(QStringList list,QStringList valeur)
+void Joueur::SetListAction(QStringList list)
 {
-    this->statMatch.SetListAction(list,valeur);
-    this->statSet.SetListAction(list,valeur);
+    this->statMatch.SetListAction(list);
+    this->statSet.SetListAction(list);
 }

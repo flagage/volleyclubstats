@@ -2,7 +2,7 @@
 #define LECTEURVIDEO_H
 
 #include <QDialog>
-#include <Phonon>
+#include <phonon>
 #include <QTimer>
 #include <QKeyEvent>
 

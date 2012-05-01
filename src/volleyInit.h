@@ -58,6 +58,7 @@ public:
     int GetSizeValeur();
     QString GetElementValeur(int valu);
     QStringList GetListValeur();
+    void SetSelection(QStringList list);
 
 
 };
