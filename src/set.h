@@ -37,7 +37,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QList>
 #include "Equipe.h"
 #include "QDateTime"
-
+#include "volleyInit.h"
 
 class Set
 {
