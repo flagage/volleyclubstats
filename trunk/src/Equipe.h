@@ -82,10 +82,7 @@ public: //fonction
     void initSet();
     void supStatMatch(int action,int pos);
     void supStatSet(int action,int pos);
-    void SetListAction(QStringList list);
     int GetnbValeurStat();
-    QStringList GetListValeurStat();
-    QStringList GetListAction();
     void SetStringValeur(QString valeur);
     QString GetStringValeur();
     QString GetStringAction();

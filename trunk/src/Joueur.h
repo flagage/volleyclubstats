@@ -35,7 +35,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 
 #include <QString>
 #include <QDomDocument>
-
+#include <QVector>
 
 #include "stat.h"
 
@@ -56,10 +56,9 @@ private:
     QString _Addresse;
     QString _poste;
     int _num;
-    //statJoueur tabAction[3];
     statFinal statMatch;
     statFinal statSet;
-
+    QVector<statFinal*> _listStat;
 
 public:
     /// constructeur
@@ -105,7 +104,7 @@ public:
     void initSet();
     void supStatMatch(int action,int pos);
     void supStatSet(int action,int pos);
-    void SetListAction(QStringList list);
+    //void SetListAction(QStringList list);
 
 };
 

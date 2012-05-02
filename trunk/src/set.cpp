@@ -169,11 +169,11 @@ void Set::Restaurer ()
    QString old=this->_SetSave["team"];
         QStringList listold=old.split ("_");
 int count=0;
-         for(int Action=0;Action<this->_team->GetListAction().size();Action++)
+         for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
     {
-        for(int valeur=0;valeur<_team->GetnbValeurStat();valeur++)
+        for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
-            int k=(Action*_team->GetnbValeurStat())+valeur;
+            int k=(Action*InitValeur::donneInstance()->GetSizeValeur())+valeur;
             QString strvalu=listold.at (count);
             _team->setStatSet (Action,valeur,strvalu.toDouble ());
             count++;
@@ -191,9 +191,9 @@ int count=0;
              old=this->_SetSave[id];
              listold=old.split ("_");
              count=0;
-             for(int Action=0;Action<this->_team->GetListAction().size();Action++)
+             for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
              {
-                 for(int valeur=0;valeur<_team->GetnbValeurStat();valeur++)
+                 for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
                  {
                      QString strvalu=listold.at (count);
                      player->setStatSet (Action,valeur,strvalu.toDouble ());
@@ -215,9 +215,9 @@ void Set::Enregistrer()
         player=_team->GetListeJoueur ().at (i);
         value=player->get_NumMaillot ();
         id.setNum (value);
-        for(int Action=0;Action<_team->GetListAction().size();Action++)
+        for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
         {
-            for(int valeur=0;valeur<_team->GetnbValeurStat();valeur++)
+            for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
             {
                 value=player->getStatSet (Action,valeur);
                 str=str.setNum (value,'g',4);
@@ -230,9 +230,9 @@ void Set::Enregistrer()
     }
 
     Msg="";
-    for(int Action=0;Action<_team->GetListAction().size();Action++)
+    for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
     {
-        for(int valeur=0;valeur<_team->GetnbValeurStat();valeur++)
+        for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
             value=_team->getStatSet (Action,valeur);
             str=str.setNum (value,'g',4);

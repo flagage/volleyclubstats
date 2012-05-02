@@ -55,8 +55,9 @@ statValeur::statValeur(QStringList valeur)
     this->_coef4=0;
     this->_coef5=0;
 
-    _ListEntre=valeur;
-    Initialisation();
+    _ListEntre=InitValeur::donneInstance()->GetListValeur();
+
+ //   Initialisation();
 
 }
 
@@ -74,7 +75,7 @@ void statValeur::Initialisation()
             this->AddCoef(listCoeff[0].toInt(),listCoeff[1].toInt(),listCoeff[2].toInt(),listCoeff[3].toInt(),listCoeff[4].toInt());
             break;
         }
-        _AfficheValeur=_AfficheValeur+1;
+        _AfficheValeur=_AfficheValeur;
         _ListValeur<<_ListEntre.at(k);
     }
 }
@@ -268,6 +269,7 @@ void  statValeur::SetValeurEff(int pos,double valeur)
 double statValeur::ValeurEff(int pos)
 {
     int value=pos-6;
+    this->_ListEntre=InitValeur::donneInstance()->GetListValeur();
     if(this->_ListEntre.at(value)=="eff1")
     {
         return this->eff1;
@@ -314,6 +316,11 @@ QStringList statValeur::GetListValeurStat()
 statFinal::statFinal()
 {
 
+    _listAction=InitAction::donneInstance()->GetListAction();
+    for(int i=0;i<_listAction.size();i++)
+    {
+        statMap[i]=new statValeur(InitValeur::donneInstance()->GetListValeur());
+    }
 
 }
 int statFinal::GetNbValeur()
@@ -325,7 +332,7 @@ QStringList statFinal::GetListValeurStat()
 {
     return statMap[0]->GetListValeurStat();
 }
-
+/*
 void statFinal::SetListAction(QStringList list)
 {
     _listAction=list;
@@ -334,7 +341,7 @@ void statFinal::SetListAction(QStringList list)
         statMap[i]=new statValeur(InitValeur::donneInstance()->GetListValeur());
     }
 }
-
+*/
 void statFinal::AjoutValeur(int action, int pos)
 {
     statMap[action]->addValeur(pos);
