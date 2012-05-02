@@ -40,8 +40,8 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 Equipe::Equipe()
 {
     _Nom="";
-
-
+    this->_listAction=InitAction::donneInstance()->GetListAction();
+    this->_listValeur=InitValeur::donneInstance()->GetListValeur();
 }
 Equipe::Equipe(QString nom)
 {
@@ -161,17 +161,7 @@ void Equipe::RestaurerXML(QDomNode noeud)
 
 }
 
-void Equipe::SetListAction(QStringList list)
-{
-    _listAction=list;
-    this->statMatch.SetListAction(list);
-    this->statSet.SetListAction(list);
-}
-QStringList Equipe::GetListAction()
-{
 
-    return _listAction;
-}
 QString Equipe::GetStringValeur()
 {
     QString str;
@@ -182,6 +172,7 @@ QString Equipe::GetStringValeur()
     str=str+_listValeur.at(_listValeur.size()-1);
     return str;
 }
+
 void Equipe::SetStringValeur(QString action)
 {
     this->_listValeur=action.split("_");
@@ -198,6 +189,7 @@ QString Equipe::GetStringAction()
     str=str+_listAction.at(_listAction.size()-1);
     return str;
 }
+
 void Equipe::SetStringAction(QString action)
 {
     this->_listAction=action.split("_");
@@ -207,10 +199,7 @@ int Equipe::GetnbValeurStat()
 {
     return this->statMatch.GetNbValeur();
 }
-QStringList Equipe::GetListValeurStat()
-{
-    return this->statMatch.GetListValeurStat();
-}
+
 
 void Equipe::addStatMatch(int action,int pos)
 {
@@ -241,7 +230,7 @@ double Equipe::getStatSet(int action,int pos)
 
 void Equipe::initSet()
 {
-    this->statSet.SetListAction(_listAction);
+
     this->statSet.init();
 
 }

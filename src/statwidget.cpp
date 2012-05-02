@@ -87,11 +87,11 @@ void StatWidget::Initialisation()
         QVBoxLayout *layout = new QVBoxLayout;
         QWidget *tabAjout=ui->tabWidget->widget (i+1);
         tabAjout->setLayout (layout);
-        tabelem=new TableElementsState(ui->tabWidget->widget (i+1),_team->GetListAction());
+        tabelem=new TableElementsState(ui->tabWidget->widget (i+1));
         StatJoueur.insert (player->get_NumMaillot (),tabelem);
 
     }
-    _tabElts=new TableElementsState(ui->tab,_team->GetListAction());
+    _tabElts=new TableElementsState(ui->tab);
 
 }
 
@@ -217,7 +217,7 @@ void StatWidget::SetStatEquipeSet(Equipe *team,int numSet)
     QString strAffiche;
     for(int Action=0;Action<_listAction.size();Action++)
     {
-        for(int valeur=0;valeur<_team->GetnbValeurStat();valeur++)
+        for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
             stat=team->getStatSet (Action,valeur);
             strAffiche.setNum (stat,'g',4);
@@ -261,7 +261,7 @@ void StatWidget::SetStatEquipeMatch(Equipe *team)
     QString strAffiche;
     for(int Action=0;Action<_listAction.size();Action++)
     {
-        for(int valeur=0;valeur<_team->GetnbValeurStat();valeur++)
+        for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
             stat=team ->getStatMatch(Action,valeur);
             strAffiche.setNum (stat,'g',4);
@@ -569,10 +569,10 @@ QString StatWidget::ColonneHtml(QString html)
     html=html+"<td></td>";
     for(int i=0;i<_listAction.size();i++)
     {
-        for(int k=0;k<this->_team->GetListValeurStat ().size ();k++)
+        for(int k=0;k<InitValeur::donneInstance()->GetSizeValeur();k++)
         {
 
-            html=html+"<td>"+_team->GetListValeurStat ().at (k)+"</td>";
+            html=html+"<td>"+InitValeur::donneInstance()->GetElementValeur(k)+"</td>";
 
         }
 
@@ -644,10 +644,11 @@ void StatWidget::SetColor(int Action,QTableWidgetItem *item)
     item->setBackground (color);
 }
 
-TableElementsState::TableElementsState(QWidget * parent,QStringList Listaction)
+TableElementsState::TableElementsState(QWidget * parent)
 {
     int sizeValeur=InitValeur::donneInstance()->GetSizeValeur();
-    this->setColumnCount (Listaction.size()*sizeValeur+1);
+    int sizeAction=InitAction::donneInstance()->GetSizeAction();
+    this->setColumnCount (sizeAction*sizeValeur+1);
     this->setRowCount (8);
     //this->setSpan (0,1,0,5);
 
@@ -667,7 +668,7 @@ TableElementsState::TableElementsState(QWidget * parent,QStringList Listaction)
     this->setItem (7,0,new QTableWidgetItem(QString( "Set5")));
 
     QColor color;
-    for(int i=0;i<Listaction.size();i++)
+    for(int i=0;i<sizeAction;i++)
     {
         switch(i)
         {
@@ -692,7 +693,8 @@ TableElementsState::TableElementsState(QWidget * parent,QStringList Listaction)
         }
 
         int col=sizeValeur/2;
-        this->setItem (0,(i*sizeValeur)+col,new QTableWidgetItem(Listaction.at(i)));
+        QString valeurAction=InitAction::donneInstance()->GetElementAction(i);
+        this->setItem (0,(i*sizeValeur)+col,new QTableWidgetItem(valeurAction));
         for(int k=0;k<sizeValeur;k++)
         {
             this->setItem (1,(i*sizeValeur)+k+1,new QTableWidgetItem(InitValeur::donneInstance()->GetElementValeur((k))));

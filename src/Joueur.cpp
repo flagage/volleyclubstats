@@ -44,6 +44,11 @@ Joueur::Joueur()
     _Addresse="";
     _poste="";
     _num=0;
+    for(int i=0;i<6;i++)
+    {
+        this->_listStat.append(new statFinal());
+    }
+
 
 }
 
@@ -322,51 +327,51 @@ void Joueur::Service(int position, StatValeur valeur)
 
 void Joueur::addStatMatch(int action,int pos)
 {
-    this->statMatch.AjoutValeur(action,pos);
+    this->_listStat[0]->AjoutValeur(action,pos);
 }
 void Joueur::setStatMatch(int action,int pos,double valeur)
 {
-    this->statMatch.SetValeur (action,pos,valeur);
+    this->_listStat[0]->SetValeur (action,pos,valeur);
 }
 
 void Joueur::supStatMatch(int action,int pos)
 {
-    this->statMatch.SupValeur (action,pos);
+    this->_listStat[0]->SupValeur (action,pos);
 }
 
 void Joueur::supStatSet(int action,int pos)
 {
-    this->statSet.SupValeur (action,pos);
+    this->_listStat[1]->SupValeur (action,pos);
 }
 
 
 double Joueur::getStatMatch(int action,int pos)
 {
-    return this->statMatch.GetValeur(action,pos);
+    return this->_listStat[0]->GetValeur(action,pos);
 }
 
 void Joueur::setStatSet(int action,int pos,double valeur)
 {
-    this->statSet.SetValeur (action,pos,valeur);
+    this->_listStat[1]->SetValeur (action,pos,valeur);
 }
 
 void Joueur::addStatSet(int action,int pos)
 {
-    this->statSet.AjoutValeur(action,pos);
+    this->_listStat[1]->AjoutValeur(action,pos);
 }
 
 double Joueur::getStatSet(int action,int pos)
 {
-   return  this->statSet.GetValeur(action,pos);
+   return  this->_listStat[1]->GetValeur(action,pos);
 }
 
 void Joueur::initSet()
 {
-    this->statSet.init();
+    this->_listStat[1]->init();
 }
-
+/*
 void Joueur::SetListAction(QStringList list)
 {
     this->statMatch.SetListAction(list);
     this->statSet.SetListAction(list);
-}
+}*/

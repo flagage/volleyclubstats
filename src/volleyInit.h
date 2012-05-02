@@ -63,6 +63,36 @@ public:
 
 };
 
+
+/**
+* \class InitAction
+* \brief classe decrivant tous les paramétres essentiel à l'initialisation du projet
+* cette classe est un singleton on ne peut l'initialiser qu'une seul fois
+*/
+
+class InitAction
+{
+private:
+   static InitAction* _InstanceAction;
+    QStringList _ListAction;
+protected:
+    InitAction();
+    ~InitAction();
+
+public:
+    static InitAction* donneInstance();
+    static void libereInstance();
+    static InitAction * GetInstance();
+
+    int GetSizeAction();
+    QString GetElementAction(int valu);
+    QStringList GetListAction();
+    void SetSelection(QStringList list);
+
+
+};
+
+
   enum ACTION
     {
         SERV,

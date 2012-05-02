@@ -335,9 +335,9 @@ void Match::Enregistrer()
         player=_currrentEquipe->GetListeJoueur ().at (i);
         value=player->get_NumMaillot ();
         id.setNum (value);
-        for(int Action=0;Action<_currrentEquipe->GetListAction().size();Action++)
+        for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
         {
-            for(int valeur=0;valeur<_currrentEquipe->GetnbValeurStat();valeur++)
+            for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
             {
                 value=player->getStatMatch (Action,valeur);
                 str=str.setNum(value,'g',4);
@@ -350,9 +350,9 @@ void Match::Enregistrer()
     }
 
     Msg="";
-    for(int Action=0;Action<this->_currrentEquipe->GetListAction().size();Action++)
+    for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
     {
-        for(int valeur=0;valeur<_currrentEquipe->GetnbValeurStat();valeur++)
+        for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
             value=_currrentEquipe->getStatMatch (Action,valeur);
             str=str.setNum (value,'g',4);
@@ -392,9 +392,9 @@ void Match::Restaurer()
         QStringList listold=old.split ("_");
         int count=0;
 
-         for(int Action=0;Action<this->_currrentEquipe->GetListAction().size();Action++)
+         for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
     {
-        for(int valeur=0;valeur<_currrentEquipe->GetnbValeurStat();valeur++)
+        for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
             QString strvalu=listold.at (count);
             _currrentEquipe->setStatMatch (Action,valeur,strvalu.toDouble ());
@@ -413,9 +413,9 @@ void Match::Restaurer()
              old=this->_MatchSave[id];
              listold=old.split ("_");
              int count=0;
-             for(int Action=0;Action<this->_currrentEquipe->GetListAction().size();Action++)
+             for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
              {
-                 for(int valeur=0;valeur<_currrentEquipe->GetnbValeurStat();valeur++)
+                 for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
                  {
                      QString strvalu=listold.at (count);
                      player->setStatMatch (Action,valeur,strvalu.toDouble ());

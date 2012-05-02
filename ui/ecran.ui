@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1045</width>
+    <width>1131</width>
     <height>788</height>
    </rect>
   </property>
@@ -379,6 +379,13 @@
               <layout class="QGridLayout" name="gridLayout_10"/>
              </widget>
             </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="pushButton_8">
+              <property name="text">
+               <string>PushButton</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </widget>
@@ -395,13 +402,6 @@
       <layout class="QGridLayout" name="gridLayout_18">
        <item row="0" column="0">
         <widget class="QPushButton" name="pushButton_7">
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_8">
          <property name="text">
           <string>PushButton</string>
          </property>
@@ -498,8 +498,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1045</width>
-     <height>22</height>
+     <width>1131</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -663,7 +663,6 @@
   <tabstop>pBScore</tabstop>
   <tabstop>comboBox</tabstop>
   <tabstop>pushButton_7</tabstop>
-  <tabstop>pushButton_8</tabstop>
   <tabstop>pBSup</tabstop>
   <tabstop>PBModif</tabstop>
   <tabstop>listAction</tabstop>

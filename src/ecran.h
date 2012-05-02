@@ -37,7 +37,6 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QListWidget>
 #include "QTimer"
 #include "tracelog.h"
-//#include "parametre.h"
 #include "Equipe.h"
 #include "fenetrestat.h"
 #include "fenetrescore.h"
@@ -136,6 +135,7 @@ private:
      int _currentSet;
      int _currentposition;
      InitValeur * _ValeurInitial;
+     InitAction * _ListActionInit;
 
 protected:
      void closeEvent(QCloseEvent * event );

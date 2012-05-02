@@ -42,7 +42,7 @@ class TableElementsState: public QTableWidget
 
 public:
 
-   TableElementsState(QWidget * parent,QStringList Listaction);
+   TableElementsState(QWidget * parent);
    void Resize();
 };
 

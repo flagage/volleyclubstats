@@ -56,6 +56,7 @@ Ecran::Ecran(QWidget *parent) :
 
     ui->setupUi(this);
     _ValeurInitial=InitValeur::donneInstance();
+    _ListActionInit=InitAction::donneInstance();
     _position=0;
     _Istactile=false;
     _ischangement=false;
@@ -236,6 +237,7 @@ void Ecran::Initialisation()
 
 
    // this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Passe")<<tr("Attaque");
+    this->_listAction=InitAction::donneInstance()->GetListAction();
     ui->PBModif->setVisible(false);
 
 }
@@ -304,7 +306,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->groupBox_5->setVisible (false);
 
     _isMatchEnCour=false;
-    //ui->comboBox->addItems(VolleyStats::GetListAction());
+    ui->comboBox->addItems(InitAction::donneInstance()->GetListAction());
     //ui->textEdit_2->setVisible (false);
 
 
@@ -317,13 +319,13 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     this->_TraceListAction->Debut();
     MatchEncour ->setAdvers(advs);
     //Match::donneInstance(this)->setCurrentEquipe(team);
-    MatchEncour->getTeam()->SetListAction(this->_listAction);
+    //MatchEncour->getTeam()->SetListAction(this->_listAction);
     this->_PlacementJoueur->InitListJoueur(MatchEncour->getTeam()->GetListeJoueur());
     JoueurAPlacer();
     for(int i=0;i<MatchEncour->getTeam()->GetListeJoueur().size();i++)
     {
         Joueur*joue= MatchEncour->getTeam()->GetListeJoueur().at(i);
-        joue->SetListAction(this->_listAction);
+        //joue->SetListAction(this->_listAction);
         QString strjoueur="";
         strjoueur=((QString("%1 ").arg(joue->get_NumMaillot())));
         if(strjoueur.size()==2)
