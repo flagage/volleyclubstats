@@ -45,6 +45,7 @@ private:    //attribut
     QString _Nom;
 
     QList <Joueur*>_ListeJoueur;
+    QVector<statFinal*> _VectorStat;
     statFinal statMatch;
     statFinal statSet;
     QStringList _listAction;

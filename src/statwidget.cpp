@@ -121,12 +121,12 @@ void StatWidget::slot_recu(int pos)
     switch (ui->tabWidget->currentIndex())
     {
     case 0:
-        SetStatEquipeSet(_team,Match::donneInstance()->Getnbset ());
+        SetStatEquipeSet(_team,Match::donneInstance()->GetCurentSet());
         SetStatEquipeMatch(_team);
         break;
     default:
 
-        SetStatJoueurSet(player,Match::donneInstance()->Getnbset ());
+        SetStatJoueurSet(player,Match::donneInstance()->GetCurentSet ());
         SetStatJoueurMatch(player);
         break;
 
@@ -315,24 +315,24 @@ void StatWidget::slot_changement (int i)
         }
 
         /// ancien set
-        for(int k=1;k<Match::donneInstance ()->Getnbset ();k++)
+        for(int k=1;k<Match::donneInstance ()->GetCurentSet ();k++)
         {
             SetOldStatJoueurSet(player,k);
         }
         /// set en cours
-        SetStatJoueurSet(player,Match::donneInstance()->Getnbset ());
+        SetStatJoueurSet(player,Match::donneInstance()->GetCurentSet ());
         /// match
         SetStatJoueurMatch(player);
     }
     else
     {
         /// ancien set
-        for(int k=1;k<Match::donneInstance ()->Getnbset ();k++)
+        for(int k=1;k<Match::donneInstance ()->GetCurentSet ();k++)
         {
             SetOldStatEquipeSet(k);
         }
         /// set en cours
-        SetStatEquipeSet(_team,Match::donneInstance()->Getnbset ());
+        SetStatEquipeSet(_team,Match::donneInstance()->GetCurentSet ());
         /// match
         SetStatEquipeMatch(_team);
     }
@@ -364,18 +364,18 @@ void StatWidget::ExportCVS ()
         saveMatch.replace ("_",";");
         out<<"Equipe\n";
         out<<"Match;"<<saveMatch<<"\n";
-        for(int k=1;k<Match::donneInstance ()->Getnbset ();k++)
+        for(int k=1;k<Match::donneInstance ()->GetCurentSet ();k++)
         {
             Set* oldSet=Match::donneInstance ()->GetOldSet (k);
             QString save=oldSet->Restaurer (QString("team"));
             save.replace ("_",";");
             out<<"Set"<<k<<";"<<save<<"\n";
         }
-        if(Match::donneInstance ()->Getnbset ()<=5)
+        if(Match::donneInstance ()->GetCurentSet ()<=5)
         {
             QString save=Match::donneInstance ()->GetCurrentSet()->Restaurer (QString("team"));
             save.replace ("_",";");
-            out<<"Set"<<Match::donneInstance ()->Getnbset ()<<";"<<save<<"\n";
+            out<<"Set"<<Match::donneInstance ()->GetCurentSet ()<<";"<<save<<"\n";
         }
         out<<"\n";
 
@@ -388,7 +388,7 @@ void StatWidget::ExportCVS ()
             QString saveMatch=Match::donneInstance ()->StatString (id);
             saveMatch.replace ("_",";");
             out<<"Match;"<<saveMatch<<"\n";
-            for(int k=1;k<Match::donneInstance ()->Getnbset ();k++)
+            for(int k=1;k<Match::donneInstance ()->GetCurentSet ();k++)
             {
                 Set* oldSet=Match::donneInstance ()->GetOldSet (k);
 
@@ -396,11 +396,11 @@ void StatWidget::ExportCVS ()
                 save.replace ("_",";");
                 out<<"Set"<<k<<";"<<save<<"\n";
             }
-            if(Match::donneInstance ()->Getnbset ()<=5)
+            if(Match::donneInstance ()->GetCurentSet ()<=5)
             {
                 QString save=Match::donneInstance ()->GetCurrentSet()->Restaurer (id);
                 save.replace ("_",";");
-                out<<"Set"<<Match::donneInstance ()->Getnbset ()<<";"<<save<<"\n";
+                out<<"Set"<<Match::donneInstance ()->GetCurentSet ()<<";"<<save<<"\n";
             }
 
             out<<"\n";
@@ -440,7 +440,7 @@ void StatWidget::Imprimer ()
     }
     html=html+"</TR>";
     html=html+"<TR>";
-    for(int k=0;k<Match::donneInstance ()->Getnbset ();k++)
+    for(int k=0;k<Match::donneInstance ()->GetCurentSet ();k++)
     {
         Set* oldSet=Match::donneInstance ()->GetOldSet (k+1);
         QString save=oldSet->Restaurer (QString("team"));
@@ -479,7 +479,7 @@ void StatWidget::Imprimer ()
         }
         html=html+"</TR>";
         html=html+"<TR>";
-        for(int k=0;k<Match::donneInstance ()->Getnbset ();k++)
+        for(int k=0;k<Match::donneInstance ()->GetCurentSet ();k++)
         {
             Set* oldSet=Match::donneInstance ()->GetOldSet (k+1);
             QString save=oldSet->Restaurer (id);

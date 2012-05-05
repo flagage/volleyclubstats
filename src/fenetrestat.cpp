@@ -107,7 +107,7 @@ void FenetreStat::Ouvrir()//Match * match)
     //score
     QString score;
     QString num;
-    for(int k=0;k<newMatch->Getnbset ();k++)
+    for(int k=0;k<newMatch->GetCurentSet ();k++)
     {
         num=num.setNum (k+1);
         score="Set"+num+" "+newMatch->GetOldSet (k+1)->ScoreSave ()+"\n";
@@ -123,7 +123,7 @@ void FenetreStat::Ouvrir()//Match * match)
     myWidget->SetStatEquipeMatch (newMatch->getTeam ());
 
     //myWidget->SetStatoldEquipeMatch();
-    for(int k=1;k<newMatch->Getnbset ()-1;k++)
+    for(int k=1;k<newMatch->GetCurentSet ()-1;k++)
     {
         myWidget->SetOldStatEquipeSet(k);
         for(int j=0;j<newMatch->getTeam()->GetListeJoueur().size();j++)
@@ -131,10 +131,10 @@ void FenetreStat::Ouvrir()//Match * match)
             myWidget->SetStatJoueurSet(newMatch->getTeam()->GetListeJoueur().at(j),k);
         }
     }
-    myWidget->SetStatEquipeSet (newMatch->getTeam (),newMatch->Getnbset ());
+    myWidget->SetStatEquipeSet (newMatch->getTeam (),newMatch->GetCurentSet ());
     for(int j=0;j<newMatch->getTeam()->GetListeJoueur().size();j++)
     {
-        myWidget->SetStatJoueurSet (newMatch->getTeam ()->GetListeJoueur().at(j),newMatch->Getnbset ());
+        myWidget->SetStatJoueurSet (newMatch->getTeam ()->GetListeJoueur().at(j),newMatch->GetCurentSet ());
     }
     myWidget->Resize();
     exec();
