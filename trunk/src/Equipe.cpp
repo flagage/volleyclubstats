@@ -35,6 +35,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "QFileDialog"
 #include "QTextStream"
 #include "volleyInit.h"
+#include "match.h"
 #include <QFile>
 
 Equipe::Equipe()
@@ -42,6 +43,10 @@ Equipe::Equipe()
     _Nom="";
     this->_listAction=InitAction::donneInstance()->GetListAction();
     this->_listValeur=InitValeur::donneInstance()->GetListValeur();
+    for(int i=0;i<6;i++)
+    {
+        this->_VectorStat.append(new statFinal());
+    }
 }
 Equipe::Equipe(QString nom)
 {
@@ -197,51 +202,51 @@ void Equipe::SetStringAction(QString action)
 
 int Equipe::GetnbValeurStat()
 {
-    return this->statMatch.GetNbValeur();
+    return this->_VectorStat[0]->GetNbValeur();
 }
 
 
 void Equipe::addStatMatch(int action,int pos)
 {
-    this->statMatch.AjoutValeur(action,pos);
+    _VectorStat[0]->AjoutValeur(action,pos);
 }
 void Equipe::setStatMatch(int action,int pos,double valeur)
 {
-    this->statMatch.SetValeur (action,pos,valeur);
+    this->_VectorStat[0]->SetValeur (action,pos,valeur);
 }
 double Equipe::getStatMatch(int action,int pos)
 {
-   return this->statMatch.GetValeur(action,pos);
+   return this->_VectorStat[0]->GetValeur(action,pos);
 }
 
 void Equipe::addStatSet(int action,int pos)
 {
-    this->statSet.AjoutValeur(action,pos);
+    this->_VectorStat[Match::donneInstance()->GetCurentSet()]->AjoutValeur(action,pos);
 }
 void Equipe::setStatSet(int action,int pos,double valeur)
 {
-    this->statSet.SetValeur (action,pos,valeur);
+    this->_VectorStat[Match::donneInstance()->GetCurentSet()]->SetValeur (action,pos,valeur);
 }
 double Equipe::getStatSet(int action,int pos)
 {
-    double Dvalue=this->statSet.GetValeur(action,pos);
+    double Dvalue=this->_VectorStat[Match::donneInstance()->GetCurentSet()]->GetValeur(action,pos);
    return  Dvalue;
 }
 
 void Equipe::initSet()
 {
 
-    this->statSet.init();
+    this->_VectorStat[Match::donneInstance()->GetCurentSet()]->init();
 
 }
 
 void Equipe::supStatMatch(int action,int pos)
 {
-    this->statMatch.SupValeur (action,pos);
+    this->_VectorStat[0]->SupValeur (action,pos);
 }
 void Equipe::supStatSet(int action,int pos)
 {
-    this->statSet.SupValeur (action,pos);
+    this->_VectorStat[Match::donneInstance()->GetCurentSet()]->SupValeur (action,pos);
 }
 
 void Equipe::ExportCVS(QString fichier)

@@ -43,7 +43,7 @@ Match::Match()
 {
 
     _nomFichier="";
-    _nbSet=1;
+    _numCurentSet=1;
     _lancementok=false;
     _score=new Score();
 
@@ -87,8 +87,8 @@ bool Match::lancer()
     Adversaire->set_NumMaillot(0);
     Adversaire->set_Prenom(_advers);
     _currrentEquipe->AddJoueur(Adversaire);
-    this->_curentset=new Set(this->_currrentEquipe,_nbSet);
-    this->_ListeSet.append(_curentset);
+    //this->_curentset=new Set(this->_currrentEquipe,_numCurentSet);
+    //this->_ListeSet.append(_curentset);
     _lancementok=true;
     //}
     //}
@@ -131,7 +131,7 @@ void Match::SetDate(QString str)
 
 Set* Match::GetCurrentSet()
 {
-    return this->_curentset;
+    //return this->_curentset;
 }
 Score* Match::GetScore()
 {
@@ -160,7 +160,7 @@ void Match::EnregistrerXMl()
     Info.setAttribute("Contre",_advers);
     Info.setAttribute ("Arbitre",this->_Arbitre);
     Info.setAttribute ("Duree","temps");
-    Info.setAttribute("NbDeSet",_nbSet-1);
+    Info.setAttribute("NbDeSet",_numCurentSet-1);
     root.appendChild(Info);
 
 
@@ -205,13 +205,13 @@ void Match::EnregistrerXMl()
         statMatch.appendChild (joueur);
     }
 
-    for(int i=1;i<_nbSet;i++)
+    for(int i=1;i<_numCurentSet;i++)
     {
         QString numset;
         numset.setNum (i);
         numset="Set"+numset;
         QDomElement Set=doc.createElement (numset);
-        Set.setAttribute("score",this->_ListeSet.at (i-1)->ScoreSave());
+        //Set.setAttribute("score",this->_ListeSet.at (i-1)->ScoreSave());
 
 
         //  Set.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer ("team"));
@@ -222,7 +222,7 @@ void Match::EnregistrerXMl()
         clef="Team";
         QDomElement equipe=doc.createElement (clef);
 
-        equipe.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer ("team"));
+        //equipe.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer ("team"));
         Set.appendChild (equipe);
         for(int k=0;k<this->_currrentEquipe->GetListeJoueur ().size ();k++)
         {
@@ -231,7 +231,7 @@ void Match::EnregistrerXMl()
             clef="Num_"+Joueur;
             QDomElement joueur=doc.createElement (clef);
 
-            joueur.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer (Joueur));
+         //   joueur.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer (Joueur));
             Set.appendChild (joueur);
         }
     }
@@ -248,7 +248,7 @@ void Match::EnregistrerXMl()
         Stat.appendChild (joueur);
         joueur.setAttribute ("Match",this->Restaurer (Joueur));
 
-        for(int i=1;i<_nbSet;i++)
+        for(int i=1;i<_numCurentSet;i++)
         {
             QString numset;
             numset.setNum (i);
@@ -274,23 +274,23 @@ void Match::EnregistrerXMl()
 
 void Match::CreerSet(QString score,QStringList list)
 {
-    this->_curentset=new Set(this->_currrentEquipe,_nbSet);
-    this->_curentset->SetScore(score);
-    this->_curentset->Enregistrer(list);
-    this->_ListeSet.append(_curentset);
+    //this->_curentset=new Set(this->_currrentEquipe,_numCurentSet);
+    //this->_curentset->SetScore(score);
+    //this->_curentset->Enregistrer(list);
+   // this->_ListeSet.append(_curentset);
     //this->_curentset->Enregistrer ();
-    //_nbSet++;
+    //_numCurentSet++;
 }
 
 void Match::FinSet()
 {
-    _nbSet++;
-    this->_curentset->setAdv(this->GetScore()->get_Score_E2());
-    this->_curentset->setEquipe(this->GetScore()->get_Score_E1());
-    this->_curentset->Enregistrer();
-    this->_curentset=new Set(this->_currrentEquipe,_nbSet);
-    this->_curentset->Initialise();
-    this->_ListeSet.append(_curentset);
+    _numCurentSet++;
+    //this->_curentset->setAdv(this->GetScore()->get_Score_E2());
+    //this->_curentset->setEquipe(this->GetScore()->get_Score_E1());
+    //this->_curentset->Enregistrer();
+    //this->_curentset=new Set(this->_currrentEquipe,_numCurentSet);
+    //this->_curentset->Initialise();
+    //this->_ListeSet.append(_curentset);
     if(this->_score->get_Score_E1()>this->_score->get_Score_E2())
     {
         this->_score->set_Set_E1(this->_score->get_Set_E1()+1);
@@ -301,26 +301,30 @@ void Match::FinSet()
     }
     this->_score->set_Score_E1(0);
     this->_score->set_Score_E2(0);
-    for(int i=0;i<_currrentEquipe->GetListeJoueur ().size ();i++)
+    if(_numCurentSet<MAXSET+1)
     {
-        _currrentEquipe->GetListeJoueur ().at (i)->initSet ();
+        this->_currrentEquipe->initSet();
+        for(int i=0;i<_currrentEquipe->GetListeJoueur().size();i++)
+        {
+            _currrentEquipe->GetListeJoueur().at(i)->initSet();
+        }
+
     }
 
-    _currrentEquipe->initSet ();
 
 }
 
 
 
-int Match::Getnbset ()
+int Match::GetCurentSet ()
 {
-    return this->_nbSet;
+    return this->_numCurentSet;
 }
 
 
 Set* Match::GetOldSet (int i)
 {
-    return this->_ListeSet.at (i-1);
+   // return this->_ListeSet.at (i-1);
 }
 
 void Match::Enregistrer()

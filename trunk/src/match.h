@@ -50,10 +50,10 @@ private:
     QString _nomFichier;
     QString _Arbitre;
     QString _Type;
-    QList <Set*> _ListeSet;
+  //  QList <Set*> _ListeSet;
     QMap<QString,QString> _MatchSave;
-    Set* _curentset;
-    int _nbSet;
+    //Set* _curentset;
+    int _numCurentSet;
     QDateTime _date;
     bool _lancementok;
     QTime _TempsSet;
@@ -76,7 +76,7 @@ public:
     QString GetTemps();
 
     Set* GetOldSet(int i);
-    int Getnbset();
+    int GetCurentSet();
     void SetNbSet(int i);
 
     void SetType(QString str);

@@ -31,7 +31,7 @@ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL et que vous en avez accepté les
 **/
 #include "Joueur.h"
-
+#include "match.h"
 
 Joueur::Joueur()
 {
@@ -341,7 +341,7 @@ void Joueur::supStatMatch(int action,int pos)
 
 void Joueur::supStatSet(int action,int pos)
 {
-    this->_listStat[1]->SupValeur (action,pos);
+    this->_listStat[Match::donneInstance()->GetCurentSet()]->SupValeur (action,pos);
 }
 
 
@@ -352,22 +352,22 @@ double Joueur::getStatMatch(int action,int pos)
 
 void Joueur::setStatSet(int action,int pos,double valeur)
 {
-    this->_listStat[1]->SetValeur (action,pos,valeur);
+    this->_listStat[Match::donneInstance()->GetCurentSet()]->SetValeur (action,pos,valeur);
 }
 
 void Joueur::addStatSet(int action,int pos)
 {
-    this->_listStat[1]->AjoutValeur(action,pos);
+    this->_listStat[Match::donneInstance()->GetCurentSet()]->AjoutValeur(action,pos);
 }
 
 double Joueur::getStatSet(int action,int pos)
 {
-   return  this->_listStat[1]->GetValeur(action,pos);
+   return  this->_listStat[Match::donneInstance()->GetCurentSet()]->GetValeur(action,pos);
 }
 
 void Joueur::initSet()
 {
-    this->_listStat[1]->init();
+    this->_listStat[Match::donneInstance()->GetCurentSet()]->init();
 }
 /*
 void Joueur::SetListAction(QStringList list)

@@ -35,6 +35,8 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QStringList>
 #include <QString>
 
+#define int MAXSET=5;
+
 /**
 * \class InitValeur
 * \brief classe decrivant tous les paramétres essentiel à l'initialisation du projet
