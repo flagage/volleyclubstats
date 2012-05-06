@@ -301,7 +301,8 @@ void Match::FinSet()
     }
     this->_score->set_Score_E1(0);
     this->_score->set_Score_E2(0);
-    if(_numCurentSet<MAXSET+1)
+    int nbmax=MAXSET+1;
+    if(_numCurentSet<nbmax)
     {
         this->_currrentEquipe->initSet();
         for(int i=0;i<_currrentEquipe->GetListeJoueur().size();i++)
