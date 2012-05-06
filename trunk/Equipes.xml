@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!DOCTYPE Equipes>
+<root>
+ <Equipe Nom="Villebon Senior F">
+  <joueur Maillot="17" Adresse="" Tel="0" Prenom="Rosemary" Nom="" License="0" Email="" Age="0" poste="Central"/>
+  <joueur Maillot="10" Adresse="" Tel="0" Prenom="Alexia" Nom="" License="0" Email="" Age="0" poste="Complet"/>
+  <joueur Maillot="6" Adresse="" Tel="0" Prenom="Alix" Nom="" License="0" Email="" Age="0" poste=""/>
+  <joueur Maillot="13" Adresse="" Tel="0" Prenom="Valerie" Nom="" License="0" Email="" Age="0" poste="Pointu"/>
+  <joueur Maillot="1" Adresse="" Tel="0" Prenom="Maryline" Nom="" License="0" Email="" Age="0" poste="Libero"/>
+  <joueur Maillot="4" Adresse="" Tel="0" Prenom="Veronique" Nom="" License="0" Email="" Age="0" poste="Libero"/>
+  <joueur Maillot="9" Adresse="" Tel="0" Prenom="Virginie" Nom="" License="0" Email="" Age="0" poste=""/>
+  <joueur Maillot="18" Adresse="" Tel="0" Prenom="Margaux" Nom="" License="0" Email="" Age="0" poste=""/>
+  <joueur Maillot="7" Adresse="" Tel="0" Prenom="solenn" Nom="" License="0" Email="" Age="0" poste=""/>
+  <joueur Maillot="16" Adresse="" Tel="0" Prenom="Alexandra" Nom="" License="0" Email="" Age="0" poste=""/>
+  <joueur Maillot="12" Adresse="" Tel="0" Prenom="Virginia" Nom="" License="0" Email="" Age="0" poste=""/>
+ </Equipe>
+ <Equipe Nom=""/>
+ <Equipe Nom="Villebon 2 Senior F">
+  <joueur Maillot="17" Adresse="" Tel="0" Prenom="Rosemary" Nom="fr" License="0" Email="" Age="0" poste="Central"/>
+  <joueur Maillot="10" Adresse="" Tel="0" Prenom="Alexia" Nom="fr" License="0" Email="" Age="0" poste="Complet"/>
+  <joueur Maillot="6" Adresse="" Tel="0" Prenom="Alix" Nom="fr" License="0" Email="" Age="0" poste="Central"/>
+  <joueur Maillot="13" Adresse="" Tel="0" Prenom="Valerie" Nom="fr" License="0" Email="" Age="0" poste="Pointu"/>
+  <joueur Maillot="1" Adresse="" Tel="0" Prenom="Maryline" Nom="fr" License="0" Email="" Age="0" poste="Libero"/>
+  <joueur Maillot="4" Adresse="" Tel="0" Prenom="Veronique" Nom="fr" License="0" Email="" Age="0" poste="Libero"/>
+  <joueur Maillot="9" Adresse="" Tel="0" Prenom="Virginie" Nom="fr" License="0" Email="" Age="0" poste="Complet"/>
+  <joueur Maillot="18" Adresse="" Tel="0" Prenom="Margaux" Nom="fr" License="0" Email="" Age="0" poste="Complet"/>
+  <joueur Maillot="7" Adresse="" Tel="0" Prenom="solenn" Nom="fr" License="0" Email="" Age="0" poste="Complet"/>
+  <joueur Maillot="16" Adresse="" Tel="0" Prenom="Alexandra" Nom="fr" License="0" Email="" Age="0" poste="Complet"/>
+  <joueur Maillot="12" Adresse="" Tel="0" Prenom="Virginia" Nom="fr" License="0" Email="" Age="0" poste="Complet"/>
+ </Equipe>
+</root>
