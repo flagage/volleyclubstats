@@ -6,6 +6,7 @@ InitValeur* InitValeur::_InstanceValeur = NULL;
 InitValeur::InitValeur()
 {
     _ListValeur<<"++"<<"+"<<"0"<<"-"<<"--"<<"tot";
+    _nbSet=5;
     //_InstanceValeur=NULL;
 }
 
@@ -89,6 +90,10 @@ void InitValeur::SetSelection(QStringList list)
 
 }
 
+int InitValeur::GetNbSet()
+{
+    return this->_nbSet;
+}
 
 InitAction* InitAction::_InstanceAction = NULL;
 

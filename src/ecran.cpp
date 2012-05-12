@@ -1156,7 +1156,7 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
     }
 
     //Ajout des Stats
-    bool error=Match::donneInstance()->GetCurrentSet()->AddAction(numjoueur,position,StatAction,IAction);
+    bool error=Match::donneInstance()->AddAction(numjoueur,position,StatAction,IAction);
     if(error==true)
     {
         QMessageBox::warning(this,tr("Erreur"),tr("Probleme joueur"));

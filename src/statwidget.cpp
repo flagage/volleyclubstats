@@ -161,7 +161,7 @@ void StatWidget::SetOldStatEquipeSet(int numSet)
     int col=1;
     int stat=0;
     QString strAffiche;
-    Set* oldSet=Match::donneInstance ()->GetOldSet (numSet);
+    /*Set* oldSet=Match::donneInstance ()->GetOldSet (numSet);
     QString save=oldSet->Restaurer (QString("team"));
     QStringList listsave=save.split ("_");
     for(int Action=0;Action<_listAction.size();Action++)
@@ -176,7 +176,7 @@ void StatWidget::SetOldStatEquipeSet(int numSet)
 
         }
 
-    }
+    }*/
 }
 void StatWidget::InitListAction(QStringList action)
 {
@@ -186,7 +186,7 @@ void StatWidget::InitListAction(QStringList action)
 void StatWidget::SetOldStatJoueurSet(Joueur *player,int numSet)
 {
 
-    int col=1;
+    /* int col=1;
     int stat=0;
     QString strAffiche;
     Set* oldSet=Match::donneInstance ()->GetOldSet (numSet);
@@ -207,7 +207,7 @@ void StatWidget::SetOldStatJoueurSet(Joueur *player,int numSet)
         }
 
     }
-
+*/
 }
 
 void StatWidget::SetStatEquipeSet(Equipe *team,int numSet)
@@ -340,7 +340,7 @@ void StatWidget::slot_changement (int i)
 
 void StatWidget::ExportCVS ()
 {
-    Match::donneInstance ()->Enregistrer ();
+   /* Match::donneInstance ()->Enregistrer ();
     Match::donneInstance()->GetCurrentSet()->Enregistrer();
     QString fichier = QFileDialog::getSaveFileName(this, "Enregistrer un fichier", QString(), "*.csv");
 
@@ -406,12 +406,12 @@ void StatWidget::ExportCVS ()
             out<<"\n";
 
         }
-    }
+    }*/
 }
 
 void StatWidget::Imprimer ()
 {
-    QPrinter printer;
+  /*  QPrinter printer;
     QPrintDialog dialog(&printer);
     QTextDocument *_fichier_doc;
     _fichier_doc=new QTextDocument();
@@ -546,7 +546,7 @@ void StatWidget::Imprimer ()
         painter.restore();
         painter.end();
 
-    }
+    }*/
 }
 
 void StatWidget::Resize ()
