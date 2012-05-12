@@ -51,6 +51,7 @@ private:
 protected:
     InitValeur();
     ~InitValeur();
+    int _nbSet;
 
 public:
     static InitValeur* donneInstance();
@@ -58,6 +59,7 @@ public:
     static InitValeur * GetInstance();
 
     int GetSizeValeur();
+    int GetNbSet();
     QString GetElementValeur(int valu);
     QStringList GetListValeur();
     void SetSelection(QStringList list);

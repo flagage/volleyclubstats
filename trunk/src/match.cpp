@@ -99,6 +99,7 @@ void Match::setCurrentEquipe(Equipe *Team)
 {
     _currrentEquipe=Team;
     _score->set_Equipe_1(Team->GetNom());
+    _ListJoueur=_currrentEquipe->GetListeJoueur();
 }
 
 void Match::setAdvers(QString nom)
@@ -129,10 +130,10 @@ void Match::SetDate(QString str)
 
 
 
-Set* Match::GetCurrentSet()
+/*Set* Match::GetCurrentSet()
 {
     //return this->_curentset;
-}
+}*/
 Score* Match::GetScore()
 {
     return this->_score;
@@ -301,7 +302,7 @@ void Match::FinSet()
     }
     this->_score->set_Score_E1(0);
     this->_score->set_Score_E2(0);
-    int nbmax=MAXSET+1;
+    int nbmax=InitValeur::donneInstance()->GetNbSet()+1;
     if(_numCurentSet<nbmax)
     {
         this->_currrentEquipe->initSet();
@@ -323,10 +324,10 @@ int Match::GetCurentSet ()
 }
 
 
-Set* Match::GetOldSet (int i)
+/*Set* Match::GetOldSet (int i)
 {
    // return this->_ListeSet.at (i-1);
-}
+}*/
 
 void Match::Enregistrer()
 {
@@ -460,4 +461,38 @@ void Match::SetType(QString str)
 QString Match::GetType()
 {
     return this->_Type;
+}
+bool Match::AddAction(QString joueurname,int position, StatValeur valu,int action)
+{
+    Joueur* player=NULL;
+     int currentjoueur;
+     int numjoueur;
+     bool error=true;
+
+    for(int i=0;i<_ListJoueur.count();i++)
+    {
+        currentjoueur=_ListJoueur.at(i)->get_NumMaillot();
+        if(currentjoueur==joueurname.toInt())
+        {
+            numjoueur=i;
+            player=_ListJoueur.at(i);
+
+            break;
+        }
+    }
+    if(player!=NULL)
+    {
+        //player->Service(position,valu);
+        player->addStatMatch(action,valu);
+        player->addStatSet(action,valu);
+         if(player->get_NumMaillot ()!=0)
+        {
+            _currrentEquipe->addStatMatch (action,valu);
+            _currrentEquipe->addStatSet (action,valu);
+        }
+        error=false;
+    }
+
+return error;
+
 }

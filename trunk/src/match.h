@@ -57,6 +57,7 @@ private:
     QDateTime _date;
     bool _lancementok;
     QTime _TempsSet;
+    QList <Joueur*> _ListJoueur;
 protected:
     Match();
     Match(const Match&);
@@ -71,11 +72,11 @@ public:
     void setAdvers(QString advers);
     Equipe* getTeam();
     QString getadvs();
-    Set* GetCurrentSet();
+    //Set* GetCurrentSet();
     Score * GetScore();
     QString GetTemps();
 
-    Set* GetOldSet(int i);
+   // Set* GetOldSet(int i);
     int GetCurentSet();
     void SetNbSet(int i);
 
@@ -101,6 +102,8 @@ public:
     void Restaurer();
 
     QString StatString(QString id);
+
+    bool AddAction(QString joueurname,int position, StatValeur valu,int action);
 
 };
 
