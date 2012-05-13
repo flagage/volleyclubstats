@@ -57,7 +57,7 @@ class WidgetTabEff : public QWidget
 public:
     explicit WidgetTabEff(QWidget *parent = 0);
     ~WidgetTabEff();
-    void Init(Equipe* team);
+    void Init();
     void Ouvrir();
     void clean();
 public slots:

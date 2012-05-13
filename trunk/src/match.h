@@ -34,7 +34,8 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #define MATCH_H
 
 
-#include "set.h"
+//#include "set.h"
+#include "Equipe.h"
 #include "Score.h"
 #include <QDomDocument>
 #include <QFile>
@@ -50,14 +51,13 @@ private:
     QString _nomFichier;
     QString _Arbitre;
     QString _Type;
-  //  QList <Set*> _ListeSet;
     QMap<QString,QString> _MatchSave;
-    //Set* _curentset;
     int _numCurentSet;
     QDateTime _date;
     bool _lancementok;
     QTime _TempsSet;
     QList <Joueur*> _ListJoueur;
+    Joueur * _JouerAdvers;
 protected:
     Match();
     Match(const Match&);
@@ -72,11 +72,10 @@ public:
     void setAdvers(QString advers);
     Equipe* getTeam();
     QString getadvs();
-    //Set* GetCurrentSet();
     Score * GetScore();
     QString GetTemps();
 
-   // Set* GetOldSet(int i);
+
     int GetCurentSet();
     void SetNbSet(int i);
 
@@ -104,6 +103,7 @@ public:
     QString StatString(QString id);
 
     bool AddAction(QString joueurname,int position, StatValeur valu,int action);
+    QList <Joueur*> GetListJoueur();
 
 };
 

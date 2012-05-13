@@ -232,7 +232,7 @@ void Match::EnregistrerXMl()
             clef="Num_"+Joueur;
             QDomElement joueur=doc.createElement (clef);
 
-         //   joueur.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer (Joueur));
+            //   joueur.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer (Joueur));
             Set.appendChild (joueur);
         }
     }
@@ -278,7 +278,7 @@ void Match::CreerSet(QString score,QStringList list)
     //this->_curentset=new Set(this->_currrentEquipe,_numCurentSet);
     //this->_curentset->SetScore(score);
     //this->_curentset->Enregistrer(list);
-   // this->_ListeSet.append(_curentset);
+    // this->_ListeSet.append(_curentset);
     //this->_curentset->Enregistrer ();
     //_numCurentSet++;
 }
@@ -302,7 +302,7 @@ void Match::FinSet()
     }
     this->_score->set_Score_E1(0);
     this->_score->set_Score_E2(0);
-    int nbmax=InitValeur::donneInstance()->GetNbSet()+1;
+    int nbmax=InitGlobal::donneInstance()->GetNbSet()+1;
     if(_numCurentSet<nbmax)
     {
         this->_currrentEquipe->initSet();
@@ -387,18 +387,18 @@ void Match::Enregistrer(QStringList list)
 
 QString Match::StatString(QString id)
 {
-return _MatchSave[id];
+    return _MatchSave[id];
 }
 
 void Match::Restaurer()
 {
 
-// pour l'equipe
-        QString old=this->_MatchSave["team"];
-        QStringList listold=old.split ("_");
-        int count=0;
+    // pour l'equipe
+    QString old=this->_MatchSave["team"];
+    QStringList listold=old.split ("_");
+    int count=0;
 
-         for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
+    for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
     {
         for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
@@ -406,35 +406,36 @@ void Match::Restaurer()
             _currrentEquipe->setStatMatch (Action,valeur,strvalu.toDouble ());
             count++;
         }
-   }
-// pour les joueurs
-         QString id;
-         Joueur *player;
-         for (int i=0;i<this->_currrentEquipe->GetListeJoueur ().size ();i++)
-         {
-             player=this->_currrentEquipe->GetListeJoueur ().at (i);
-             int value=player->get_NumMaillot ();
+    }
+    // pour les joueurs
+    QString id;
+    Joueur *player;
+    for (int i=0;i<this->_currrentEquipe->GetListeJoueur ().size ();i++)
+    {
+        player=this->_currrentEquipe->GetListeJoueur ().at (i);
+        int value=player->get_NumMaillot ();
 
-             id.setNum (value);
-             old=this->_MatchSave[id];
-             listold=old.split ("_");
-             int count=0;
-             for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
-             {
-                 for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
-                 {
-                     QString strvalu=listold.at (count);
-                     player->setStatMatch (Action,valeur,strvalu.toDouble ());
-                     count++;
-                 }
-             }
-         }
+        id.setNum (value);
+        old=this->_MatchSave[id];
+        listold=old.split ("_");
+        int count=0;
+        for(int Action=0;Action<InitAction::donneInstance()->GetSizeAction();Action++)
+        {
+            for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
+            {
+                QString strvalu=listold.at (count);
+                player->setStatMatch (Action,valeur,strvalu.toDouble ());
+                count++;
+            }
+        }
+    }
 
 }
 QString Match::GetTemps()
 {
     QString str;
     str=this->_TempsSet.toString("hh:mm::ss");
+    return str;
 }
 
 /*QString Match::Restaurer(QString id)
@@ -465,19 +466,25 @@ QString Match::GetType()
 bool Match::AddAction(QString joueurname,int position, StatValeur valu,int action)
 {
     Joueur* player=NULL;
-     int currentjoueur;
-     int numjoueur;
-     bool error=true;
-
-    for(int i=0;i<_ListJoueur.count();i++)
+    int currentjoueur;
+    int numjoueur;
+    bool error=true;
+    if(joueurname.toInt()==0)
     {
-        currentjoueur=_ListJoueur.at(i)->get_NumMaillot();
-        if(currentjoueur==joueurname.toInt())
+        player=_currrentEquipe->seachjoueur(0);
+    }
+    else
+    {
+        for(int i=0;i<_ListJoueur.count();i++)
         {
-            numjoueur=i;
-            player=_ListJoueur.at(i);
+            currentjoueur=_ListJoueur.at(i)->get_NumMaillot();
+            if(currentjoueur==joueurname.toInt())
+            {
+                numjoueur=i;
+                player=_ListJoueur.at(i);
 
-            break;
+                break;
+            }
         }
     }
     if(player!=NULL)
@@ -485,7 +492,7 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
         //player->Service(position,valu);
         player->addStatMatch(action,valu);
         player->addStatSet(action,valu);
-         if(player->get_NumMaillot ()!=0)
+        if(player->get_NumMaillot ()!=0)
         {
             _currrentEquipe->addStatMatch (action,valu);
             _currrentEquipe->addStatSet (action,valu);
@@ -493,6 +500,11 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
         error=false;
     }
 
-return error;
+    return error;
 
+}
+
+QList <Joueur*> Match::GetListJoueur()
+{
+    return _ListJoueur;
 }

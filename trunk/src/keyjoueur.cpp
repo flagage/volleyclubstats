@@ -424,12 +424,14 @@ void KeyJoueur::Stat()
 
     player=RechercheJoueur(numero);
 
-
+    if(player!=0)
+    {
     valeur.setNum(player->getStatMatch(0,6),'g',4);
     strtext=strtext+"\n S("+valeur+"%)";
     valeur.setNum(player->getStatMatch(1,6),'g',4);
     strtext=strtext+"\n R("+valeur+"%)";
     buttons[0]->setText(strtext);
+    }
 
     /// position 2
     strtext =buttons[1]->text();
@@ -438,9 +440,12 @@ void KeyJoueur::Stat()
     listStr=strtext.split("(");
     numero=listStr.at(0).toInt();
     player=RechercheJoueur(numero);
+    if(player!=0)
+    {
     valeur.setNum(player->getStatMatch(2,6),'g',4);
     strtext=strtext+"\n A("+valeur+"%)";
     buttons[1]->setText(strtext);
+    }
 
     /// position 3
     strtext =buttons[2]->text();
@@ -448,10 +453,13 @@ void KeyJoueur::Stat()
     strtext=listtext.at(0);
     listStr=strtext.split("(");
     numero=listStr.at(0).toInt();
+    if(player!=0)
+    {
     player=RechercheJoueur(numero);
     valeur.setNum(player->getStatMatch(2,6),'g',4);
     strtext=strtext+"\n A("+valeur+"%)";
     buttons[2]->setText(strtext);
+    }
 
     /// position 4
     strtext =buttons[3]->text();
@@ -460,9 +468,12 @@ void KeyJoueur::Stat()
     listStr=strtext.split("(");
     numero=listStr.at(0).toInt();
     player=RechercheJoueur(numero);
+    if(player!=0)
+    {
     valeur.setNum(player->getStatMatch(2,6),'g',4);
     strtext=strtext+"\n A("+valeur+"%)";
     buttons[3]->setText(strtext);
+    }
 
     /// position 5
     strtext =buttons[4]->text();
@@ -471,9 +482,12 @@ void KeyJoueur::Stat()
     listStr=strtext.split("(");
     numero=listStr.at(0).toInt();
     player=RechercheJoueur(numero);
+    if(player!=0)
+    {
     valeur.setNum(player->getStatMatch(1,6),'g',4);
     strtext=strtext+"\n R("+valeur+"%)";
     buttons[4]->setText(strtext);
+    }
 
     /// position 6
     strtext =buttons[5]->text();
@@ -482,9 +496,12 @@ void KeyJoueur::Stat()
     listStr=strtext.split("(");
     numero=listStr.at(0).toInt();
     player=RechercheJoueur(numero);
+    if(player!=0)
+    {
     valeur.setNum(player->getStatMatch(1,6),'g',4);
     strtext=strtext+"\n R("+valeur+"%)";
     buttons[5]->setText(strtext);
+    }
 
     /// libero
     strtext =buttons[6]->text();
@@ -493,9 +510,12 @@ void KeyJoueur::Stat()
     listStr=strtext.split("(");
     numero=listStr.at(0).toInt();
     player=RechercheJoueur(numero);
+    if(player!=0)
+    {
     valeur.setNum(player->getStatMatch(1,6),'g',4);
     strtext=strtext+"\n R("+valeur+"%)";
     buttons[6]->setText(strtext);
+    }
 
 this->createLayout(this->_pos);
 }

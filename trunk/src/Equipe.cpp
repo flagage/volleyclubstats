@@ -123,8 +123,7 @@ Joueur* Equipe::seachjoueur(QString nomJoueur)
 Joueur* Equipe::seachjoueur(int numjoueur)
 {
     Joueur* player=0;
-    if(numjoueur!=0)
-    {
+
         for(int i=0;i<_ListeJoueur.size();i++)
         {
             if(_ListeJoueur.at(i)->get_NumMaillot()==numjoueur)
@@ -133,8 +132,7 @@ Joueur* Equipe::seachjoueur(int numjoueur)
                 break;
             }
         }
-    }
-    return player;
+      return player;
 }
 
 void Equipe::EnregistrerXML( QDomDocument doc,QDomElement root)

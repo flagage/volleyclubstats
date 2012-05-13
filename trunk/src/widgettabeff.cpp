@@ -59,10 +59,10 @@ void WidgetTabEff::clean()
     delete _tabElts;
 }
 
-void WidgetTabEff::Init(Equipe* team)
+void WidgetTabEff::Init()
 {
 
-    _listJoueur=team->GetListeJoueur ();
+    _listJoueur=Match::donneInstance()->GetListJoueur();
     _listaction=InitAction::donneInstance()->GetListAction();
     _tabElts=new TableEff(ui->groupBox,_listJoueur,_listaction);
 }

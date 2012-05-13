@@ -54,7 +54,7 @@ private:
   Score *_score;
 
 public slots:
-  void Slot_Scoreplus(int);
+  void Slot_Scoreplus();
   void slot_changeScore(int score);
 };
 
