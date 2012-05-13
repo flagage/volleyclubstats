@@ -107,12 +107,12 @@ void FenetreStat::Ouvrir()//Match * match)
     //score
     QString score;
     QString num;
-    for(int k=0;k<newMatch->GetCurentSet ();k++)
+    /*for(int k=0;k<newMatch->GetCurentSet ();k++)
     {
         num=num.setNum (k+1);
-        score="Set"+num+" "+newMatch->GetOldSet (k+1)->ScoreSave ()+"\n";
+        score="Set"+num+" "+newMatch->GetCurentSet (k+1)->ScoreSave ()+"\n";
         score=score+"Temps"+newMatch->GetOldSet (k+1)->GetTempsSet();
-    }
+    }*/
     ui->label_5->setText (score);
     myWidget->SetEquipe (newMatch->getTeam ());
     myWidget->InitListAction(InitAction::donneInstance()->GetListAction());
