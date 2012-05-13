@@ -6,8 +6,7 @@ InitValeur* InitValeur::_InstanceValeur = NULL;
 InitValeur::InitValeur()
 {
     _ListValeur<<"++"<<"+"<<"0"<<"-"<<"--"<<"tot";
-    _nbSet=5;
-    _nbJoueur=6;
+
     //_InstanceValeur=NULL;
 }
 
@@ -91,20 +90,7 @@ void InitValeur::SetSelection(QStringList list)
 
 }
 
-int InitValeur::GetNbSet()
-{
-    return this->_nbSet;
-}
 
-int InitValeur::GetNbJoueur()
-{
-    return this->_nbJoueur;
-}
-
-void InitValeur::SetNbJoueur(int nbJoueur)
-{
-    this->_nbJoueur=nbJoueur;
-}
 
 InitAction* InitAction::_InstanceAction = NULL;
 
@@ -183,3 +169,56 @@ void InitAction::SetSelection(QStringList list)
 
 }
 
+InitGlobal* InitGlobal::_InstanceGlobal = NULL;
+
+InitGlobal::InitGlobal()
+{
+    _nbSet=5;
+    _nbJoueur=6;
+}
+InitGlobal::~InitGlobal()
+{
+
+}
+
+InitGlobal* InitGlobal::GetInstance()
+{
+    return _InstanceGlobal;
+}
+
+InitGlobal* InitGlobal::donneInstance()
+{
+     if(_InstanceGlobal == NULL)
+        {
+            _InstanceGlobal=new InitGlobal();
+        }
+        return _InstanceGlobal;
+}
+
+void InitGlobal::libereInstance()
+{
+     if(_InstanceGlobal!=NULL)
+        {
+            delete _InstanceGlobal;
+            _InstanceGlobal=NULL;
+        }
+}
+
+int InitGlobal::GetNbSet()
+{
+    return this->_nbSet;
+}
+void InitGlobal::SetNbSet(int nbSet)
+{
+    this->_nbSet=nbSet;
+}
+
+int InitGlobal::GetNbJoueur()
+{
+    return this->_nbJoueur;
+}
+
+void InitGlobal::SetNbJoueur(int nbJoueur)
+{
+    this->_nbJoueur=nbJoueur;
+}

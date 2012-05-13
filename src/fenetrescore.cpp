@@ -43,10 +43,10 @@ FenetreScore::FenetreScore(QWidget *parent, Score *score) :
     ui->setupUi(this);
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(close()));
-    connect(parent,SIGNAL(ScorePlus(int)),this,SLOT(Slot_Scoreplus(int)));
+    connect(parent,SIGNAL(ScorePlus(int)),this,SLOT(Slot_Scoreplus()));
     connect(ui->spinBox,SIGNAL(valueChanged(int)),this,SLOT(slot_changeScore(int)));
     connect(ui->spinBox_2,SIGNAL(valueChanged(int)),this,SLOT(slot_changeScore(int)));
-   // QPalette palette;
+    // QPalette palette;
     //palette.setColor(QPalette::Window ,QColor(0, 0, 255));
     //ui->widgetScore->setPalette(palette);
     ui->widgetScore->setStyleSheet ("background-color: blue");
@@ -65,13 +65,13 @@ void FenetreScore::InitialiseIHMFromData()
     if(_score!=0)
     {
         ui->label_2->setText(_score->get_Equipe_1());
-    ui->label_3->setText(this->_score->get_Equipe_2());
-    ui->spinBox->setValue(this->_score->get_Score_E1());
-    ui->spinBox_2->setValue(this->_score->get_Score_E2());
-    ui->spinBox_4->setValue(this->_score->get_Set_E1());
-    ui->spinBox_3->setValue(this->_score->get_Set_E2());
+        ui->label_3->setText(this->_score->get_Equipe_2());
+        ui->spinBox->setValue(this->_score->get_Score_E1());
+        ui->spinBox_2->setValue(this->_score->get_Score_E2());
+        ui->spinBox_4->setValue(this->_score->get_Set_E1());
+        ui->spinBox_3->setValue(this->_score->get_Set_E2());
 
-}
+    }
 
 }
 void FenetreScore::InitialiseDataFromIHM()
@@ -82,19 +82,10 @@ void FenetreScore::InitialiseDataFromIHM()
     _score->set_Set_E2(ui->spinBox_3->value());
 }
 
-void FenetreScore::Slot_Scoreplus(int position)
+void FenetreScore::Slot_Scoreplus()
 {
     this->InitialiseIHMFromData();
-    /* if(position!=0)
-    {
-        ui->spinBox->setValue(ui->spinBox->value()+1);
-        InitialiseDataFromIHM();
-    }
-    else
-    {
-        ui->spinBox_2->setValue(ui->spinBox_2->value()+1);
-        InitialiseDataFromIHM();
-    }*/
+
 }
 
 FenetreScore::~FenetreScore()

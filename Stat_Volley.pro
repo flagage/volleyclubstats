@@ -18,7 +18,6 @@ RC_FILE = VolleyClubStat.rc
 SOURCES += src/tracelog.cpp \
     src/statwidget.cpp \
     src/stat.cpp \
-    src/set.cpp \
     src/Score.cpp \
     src/match.cpp \
     src/main.cpp \
@@ -54,7 +53,6 @@ SOURCES += src/tracelog.cpp \
 HEADERS  += src/tracelog.h \
     src/statwidget.h \
     src/stat.h \
-    src/set.h \
     src/Score.h \
     src/match.h \
     src/Joueur.h \

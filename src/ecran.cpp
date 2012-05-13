@@ -320,11 +320,11 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     MatchEncour ->setAdvers(advs);
     //Match::donneInstance(this)->setCurrentEquipe(team);
     //MatchEncour->getTeam()->SetListAction(this->_listAction);
-    this->_PlacementJoueur->InitListJoueur(MatchEncour->getTeam()->GetListeJoueur());
+    this->_PlacementJoueur->InitListJoueur(MatchEncour->GetListJoueur());
     JoueurAPlacer();
-    for(int i=0;i<MatchEncour->getTeam()->GetListeJoueur().size();i++)
+    for(int i=0;i<MatchEncour->GetListJoueur().size();i++)
     {
-        Joueur*joue= MatchEncour->getTeam()->GetListeJoueur().at(i);
+        Joueur*joue= MatchEncour->GetListJoueur().at(i);
         //joue->SetListAction(this->_listAction);
         QString strjoueur="";
         strjoueur=((QString("%1 ").arg(joue->get_NumMaillot())));
@@ -353,7 +353,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ChangeBouton=new QPushButton(this);
     // Initialisation de la fentre de stat
     this->myWidget->SetEquipe (MatchEncour->getTeam());
-    this->_WtabEff->Init(MatchEncour->getTeam());
+    this->_WtabEff->Init();
     this->myWidget->Initialisation ();
     this->myWidget->InitListAction(_listAction);
     this->_PlacementJoueur->InitLineEditSize ();
@@ -378,8 +378,9 @@ void Ecran::slot_score()
     this->_TimerScore->start(50);
     int diff=abs(score->get_Score_E1()-score->get_Score_E2());
     if((score->get_Score_E1()>=25 && diff>=2)
-        ||(score->get_Score_E2()>=25 && diff>=2)
-        &&_finSet==false)
+        ||((score->get_Score_E2()>=25)
+        && (diff>=2))
+        &&(_finSet==false))
         {
         this->_TimerScore->stop();
 
@@ -485,7 +486,7 @@ void Ecran::slot_modifpost(QPushButton* boutton)
 
     QStringList strlist=boutton->text().split("(");
     strlist=strlist[1].split(")");
-    QList <Joueur*> listJoueur=Match::donneInstance()->getTeam()->GetListeJoueur();
+    QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
     for(int i=0;i<listJoueur.size();i++)
     {
 
@@ -528,15 +529,16 @@ void Ecran::changement(QString joueur,QPushButton *bouton)
         bouton->setText(ChangeJoueur);
         ChangeJoueur="";
 
+        this->ChercherPasseur();
+        if(ui->comboBox->currentText()==tr("Service"))
+        {
+            ActionService(0);
+        }
+        this->_PlacementJoueur->Stat();
 
     }
 
-    this->ChercherPasseur();
-    if(ui->comboBox->currentText()==tr("Service"))
-    {
-        ActionService(0);
-    }
-    this->_PlacementJoueur->Stat();
+
 }
 void Ecran::Slot_ModifAction()
 {
@@ -581,12 +583,12 @@ void Ecran::Slot_ModifAction()
             }
         }
 
-        for (int k=0;k<Match::donneInstance ()->getTeam ()->GetListeJoueur ().size ();k++)
+        for (int k=0;k<Match::donneInstance ()->GetListJoueur().size ();k++)
         {
-            if(num==Match::donneInstance ()->getTeam ()->GetListeJoueur ().at(k)->get_NumMaillot ())
+            if(num==Match::donneInstance ()->GetListJoueur ().at(k)->get_NumMaillot ())
             {
-                Match::donneInstance ()->getTeam ()->GetListeJoueur ().at(k)->supStatMatch (action,valeur);
-                Match::donneInstance ()->getTeam ()->GetListeJoueur ().at(k)->supStatSet (action,valeur);
+                Match::donneInstance ()->GetListJoueur ().at(k)->supStatMatch (action,valeur);
+                Match::donneInstance ()->GetListJoueur ().at(k)->supStatSet (action,valeur);
                 Match::donneInstance ()->getTeam ()->supStatMatch (action,valeur);
                 Match::donneInstance ()->getTeam ()->supStatSet (action,valeur);
             }
@@ -648,12 +650,12 @@ void Ecran::Slot_SuppAction()
             RetirerPoint(this->_PointForUs);
         }
 
-        for (int k=0;k<Match::donneInstance ()->getTeam ()->GetListeJoueur ().size ();k++)
+        for (int k=0;k<Match::donneInstance ()->GetListJoueur ().size ();k++)
         {
-            if(num==Match::donneInstance ()->getTeam ()->GetListeJoueur ().at(k)->get_NumMaillot ())
+            if(num==Match::donneInstance ()->GetListJoueur ().at(k)->get_NumMaillot ())
             {
-                Match::donneInstance ()->getTeam ()->GetListeJoueur ().at(k)->supStatMatch (action,valeur);
-                Match::donneInstance ()->getTeam ()->GetListeJoueur ().at(k)->supStatSet (action,valeur);
+                Match::donneInstance ()->GetListJoueur ().at(k)->supStatMatch (action,valeur);
+                Match::donneInstance ()->GetListJoueur ().at(k)->supStatSet (action,valeur);
                 Match::donneInstance ()->getTeam ()->supStatMatch (action,valeur);
                 Match::donneInstance ()->getTeam ()->supStatSet (action,valeur);
             }
@@ -996,7 +998,7 @@ void Ecran::keyPressEvent(QKeyEvent * event)
 
     if((event->key()==Qt::Key_Enter) ||
        (event->key()==Qt::Key_Return) &&
-       _isMatchEnCour == true)
+       (_isMatchEnCour == true))
     {
 
         QString strValue=LineEdit2->text();
@@ -1096,14 +1098,21 @@ void Ecran::keyPressEvent(QKeyEvent * event)
             }
             LineEdit2->clear();
             QString strNumPlayer=strValue.left(2);
-            for(int i=0;i<Match::donneInstance ()->getTeam ()->GetListeJoueur ().size ();i++)
+            if(strNumPlayer.toInt()!=0)
+            {
+            for(int i=0;i<Match::donneInstance ()->GetListJoueur ().size ();i++)
             {
                 int num=strNumPlayer.toInt ();
-                if(num==Match::donneInstance ()->getTeam ()->GetListeJoueur ().at (i)->get_NumMaillot ())
+                if(num==Match::donneInstance ()->GetListJoueur ().at (i)->get_NumMaillot ())
                 {
                     isValide=true;
                     break;
                 }
+            }
+            }
+            else
+            {
+                isValide=true;
             }
 
             if(isValide==true)
@@ -1317,7 +1326,7 @@ void Ecran::PointPlus(QString numjoueur)
         _PointForUs=true;
     }
     // this->_WtabEff->SlotMiseAJour();
-    this->myWidget->Resize();
+    //this->myWidget->Resize();
 
 }
 
@@ -1377,7 +1386,7 @@ void Ecran::SlotDrag(QListWidgetItem* item)
 
     mimeData->setText(item->text());
     drag->setMimeData(mimeData);
-    Qt::DropAction dropAction = drag->start();
+    drag->start();
 }
 
 void Ecran::dragEnterEvent(QDragEnterEvent* event)
@@ -1600,7 +1609,7 @@ void Ecran::JoueurAPlacer()
 {
     ui->pushButton_7->setVisible(false);
     ui->pushButton_8->setVisible(false);
-    QList <Joueur*> listJoueur=Match::donneInstance()->getTeam()->GetListeJoueur();
+    QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
     for(int i=0;i<listJoueur.size();i++)
     {
         QString strAffiche;

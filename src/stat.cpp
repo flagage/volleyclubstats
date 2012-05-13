@@ -266,9 +266,9 @@ void  statValeur::SetValeurEff(int pos,double valeur)
         this->eff4=valeur;
     }
 }
-double statValeur::ValeurEff(int pos)
+double statValeur::ValeurEff(int value)
 {
-    int value=pos-6;
+
     this->_ListEntre=InitValeur::donneInstance()->GetListValeur();
     if(this->_ListEntre.at(value)=="eff1")
     {

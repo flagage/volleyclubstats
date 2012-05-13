@@ -51,8 +51,7 @@ private:
 protected:
     InitValeur();
     ~InitValeur();
-    int _nbSet;
-    int _nbJoueur;
+
 
 public:
     static InitValeur* donneInstance();
@@ -60,12 +59,11 @@ public:
     static InitValeur * GetInstance();
 
     int GetSizeValeur();
-    int GetNbSet();
+
     QString GetElementValeur(int valu);
     QStringList GetListValeur();
     void SetSelection(QStringList list);
-    int GetNbJoueur();
-    void SetNbJoueur(int nbJoueur);
+
 
 };
 
@@ -98,6 +96,26 @@ public:
 
 };
 
+class InitGlobal
+{
+private:
+   static InitGlobal* _InstanceGlobal;
+   int _nbSet;
+   int _nbJoueur;
+
+protected:
+    InitGlobal();
+    ~InitGlobal();
+
+public:
+    static InitGlobal* donneInstance();
+    static void libereInstance();
+    static InitGlobal * GetInstance();
+    int GetNbJoueur();
+    void SetNbJoueur(int nbJoueur);
+    int GetNbSet();
+    void SetNbSet(int nbSet);
+};
 
   enum ACTION
     {
