@@ -142,7 +142,7 @@ void StatWidget::SetStatJoueurSet(Joueur *player,int numSet)
     QString strAffiche;
     for(int Action=0;Action<_listAction.size();Action++)
     {
-        for(int valeur=0;valeur<_team->GetnbValeurStat();valeur++)
+        for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
             stat=player->getStatSet (Action,valeur);
             strAffiche.setNum (stat,'g',4);
@@ -238,7 +238,7 @@ void StatWidget::SetStatJoueurMatch(Joueur *player)
     QString strAffiche;
     for(int Action=0;Action<_listAction.size();Action++)
     {
-        for(int valeur=0;valeur<_team->GetnbValeurStat();valeur++)
+        for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
             stat=player->getStatMatch (Action,valeur);
             strAffiche.setNum (stat,'g',4);

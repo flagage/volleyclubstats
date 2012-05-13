@@ -35,7 +35,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QStringList>
 #include <QString>
 
-#define MAXSET 5;
+
 
 /**
 * \class InitValeur
@@ -52,6 +52,7 @@ protected:
     InitValeur();
     ~InitValeur();
     int _nbSet;
+    int _nbJoueur;
 
 public:
     static InitValeur* donneInstance();
@@ -63,7 +64,8 @@ public:
     QString GetElementValeur(int valu);
     QStringList GetListValeur();
     void SetSelection(QStringList list);
-
+    int GetNbJoueur();
+    void SetNbJoueur(int nbJoueur);
 
 };
 

@@ -7,6 +7,7 @@ InitValeur::InitValeur()
 {
     _ListValeur<<"++"<<"+"<<"0"<<"-"<<"--"<<"tot";
     _nbSet=5;
+    _nbJoueur=6;
     //_InstanceValeur=NULL;
 }
 
@@ -95,6 +96,16 @@ int InitValeur::GetNbSet()
     return this->_nbSet;
 }
 
+int InitValeur::GetNbJoueur()
+{
+    return this->_nbJoueur;
+}
+
+void InitValeur::SetNbJoueur(int nbJoueur)
+{
+    this->_nbJoueur=nbJoueur;
+}
+
 InitAction* InitAction::_InstanceAction = NULL;
 
 InitAction::InitAction()
@@ -171,3 +182,4 @@ void InitAction::SetSelection(QStringList list)
     }
 
 }
+
