@@ -37,6 +37,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 //#include "set.h"
 #include "Equipe.h"
 #include "Score.h"
+#include "matchxml.h"
 #include <QDomDocument>
 #include <QFile>
 #include <QDate>
@@ -58,6 +59,7 @@ private:
     QTime _TempsSet;
     QList <Joueur*> _ListJoueur;
     Joueur * _JouerAdvers;
+    MatchXml *_Fichierxml;
 protected:
     Match();
     Match(const Match&);
@@ -104,6 +106,9 @@ public:
 
     bool AddAction(QString joueurname,int position, StatValeur valu,int action);
     QList <Joueur*> GetListJoueur();
+
+    /// traitement de la sauvegarde
+    void InitFichierXml();
 
 };
 
