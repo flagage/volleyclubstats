@@ -466,6 +466,7 @@ void Ecran::Slot_start()
         ChercherPasseur();
 
         _isMatchEnCour=true;
+        Match::donneInstance()->InitFichierXml();
     }
 
 }

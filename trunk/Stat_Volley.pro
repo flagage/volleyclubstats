@@ -47,7 +47,9 @@ SOURCES += src/tracelog.cpp \
     src/listactionxml.cpp \
     src/lecteurvideo.cpp \
     src/statwriter.cpp \
-    src/volleyInit.cpp
+    src/volleyInit.cpp \
+    src/tracematch.cpp \
+    src/matchxml.cpp
 
 
 HEADERS  += src/tracelog.h \
@@ -81,7 +83,9 @@ HEADERS  += src/tracelog.h \
     src/listactionxml.h \
     src/lecteurvideo.h \
     src/statwriter.h \
-    src/volleyInit.h
+    src/volleyInit.h \
+    src/tracematch.h \
+    src/matchxml.h
 
 
 FORMS    +=  ui/statwidget.ui \

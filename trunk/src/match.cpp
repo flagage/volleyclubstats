@@ -508,3 +508,8 @@ QList <Joueur*> Match::GetListJoueur()
 {
     return _ListJoueur;
 }
+
+void Match::InitFichierXml()
+{
+    this->_Fichierxml=new MatchXml();
+}
