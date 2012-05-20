@@ -369,6 +369,15 @@ void Joueur::initSet()
 {
     this->_listStat[Match::donneInstance()->GetCurentSet()]->init();
 }
+void Joueur::SetPosition(int numpos)
+{
+    this->_Position=numpos;
+}
+int Joueur::GetPosition()
+{
+    return _Position;
+}
+
 /*
 void Joueur::SetListAction(QStringList list)
 {

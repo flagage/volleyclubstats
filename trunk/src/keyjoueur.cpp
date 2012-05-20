@@ -272,8 +272,6 @@ void KeyJoueur::InitListJoueur(QList <Joueur*> joueur)
 {
     this->_listjoueur=joueur;
 
-
-
     createLayout(this->_pos);
 
 }
@@ -453,9 +451,9 @@ void KeyJoueur::Stat()
     strtext=listtext.at(0);
     listStr=strtext.split("(");
     numero=listStr.at(0).toInt();
+    player=RechercheJoueur(numero);
     if(player!=0)
     {
-    player=RechercheJoueur(numero);
     valeur.setNum(player->getStatMatch(2,6),'g',4);
     strtext=strtext+"\n A("+valeur+"%)";
     buttons[2]->setText(strtext);
@@ -584,7 +582,7 @@ void KeyJoueur::SetAdv(QString nom)
 QList<Joueur *> KeyJoueur::GetJoueurTerrain()
 {
     QList<Joueur *> list;
-    int tot=InitGlobal::donneInstance()->GetNbJoueur();
+    int tot=InitGlobal::donneInstance()->GetNbJoueur()+1;
     for(int i=0;i<tot;i++)
     {
         QString strtext =buttons[i]->text();
@@ -596,6 +594,7 @@ QList<Joueur *> KeyJoueur::GetJoueurTerrain()
         Joueur* player=RechercheJoueur(numero);
         if(player!=0)
         {
+            player->SetPosition(i+1);
             list.append(player);
         }
     }

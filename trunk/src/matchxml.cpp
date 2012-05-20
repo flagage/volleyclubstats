@@ -18,50 +18,50 @@ void MatchXml::Initialisation()
     doc.appendChild(root);
 
     QDomElement Info = doc.createElement("Match");
-    Info.setAttribute("Date","0");
-    Info.setAttribute ("Heure","0");
-    Info.setAttribute("Equipe","0");
-    Info.setAttribute ("Type","0");
-    Info.setAttribute("Contre","0");
-    Info.setAttribute ("Arbitre","0");
-    Info.setAttribute ("Duree","temps");
+    Info.setAttribute("Date",_ListInfo.at(0));
+    Info.setAttribute ("Heure",_ListInfo.at(1));
+    Info.setAttribute("Equipe",_ListInfo.at(2));
+    Info.setAttribute ("Type",_ListInfo.at(3));
+    Info.setAttribute("Contre",_ListInfo.at(4));
+    Info.setAttribute ("Arbitre",_ListInfo.at(5));
+    Info.setAttribute ("Duree",_ListInfo.at(6));
     Info.setAttribute("NbDeSet",0);
     root.appendChild(Info);
     /// position des joueurs
     QDomElement position=doc.createElement("Position");
     root.appendChild(position);
     QDomElement poste1=doc.createElement ("Poste1");
-    QDomText text=doc.createTextNode("0");
+    QDomText text=doc.createTextNode(Rechercheposte(1));
     poste1.appendChild(text);
     position.appendChild(poste1);
 
     QDomElement poste2=doc.createElement ("Poste2");
-    text=doc.createTextNode("0");
+    text=doc.createTextNode(Rechercheposte(2));
     poste2.appendChild(text);
     position.appendChild(poste2);
 
     QDomElement poste3=doc.createElement ("Poste3");
-    text=doc.createTextNode("0");
+    text=doc.createTextNode(Rechercheposte(3));
     poste3.appendChild(text);
     position.appendChild(poste3);
 
     QDomElement poste4=doc.createElement ("Poste4");
-    text=doc.createTextNode("0");
+    text=doc.createTextNode(Rechercheposte(4));
     poste4.appendChild(text);
     position.appendChild(poste4);
 
     QDomElement poste5=doc.createElement ("Poste5");
-    text=doc.createTextNode("0");
+    text=doc.createTextNode(Rechercheposte(5));
     poste5.appendChild(text);
     position.appendChild(poste5);
 
     QDomElement poste6=doc.createElement ("Poste6");
-    text=doc.createTextNode("0");
+    text=doc.createTextNode(Rechercheposte(6));
     poste6.appendChild(text);
     position.appendChild(poste6);
 
     QDomElement poste7=doc.createElement ("Libero");
-    text=doc.createTextNode("0");
+    text=doc.createTextNode(Rechercheposte(7));
     poste7.appendChild(text);
     position.appendChild(poste7);
 
@@ -79,9 +79,18 @@ void MatchXml::Initialisation()
     root.appendChild(stat);
     for(int i=0;i<this->_ListJoueurTer.size();i++)
     {
-        QString label=_ListJoueurTer.at(i)->get_Prenom()+"_"+_ListJoueurTer.at(i)->get_NumMaillot();
+        QString label=_ListJoueurTer.at(i)->get_Prenom()+"_"+QString::number(_ListJoueurTer.at(i)->get_NumMaillot());
         QDomElement player=doc.createElement(label);
         stat.appendChild(player);
+          QDomElement set=doc.createElement("S1");
+          player.appendChild(set);
+          QDomElement attaque=doc.createElement("Attaque");
+          attaque.setAttribute("V++",0);
+          attaque.setAttribute("V+",0);
+          attaque.setAttribute("V0",0);
+          attaque.setAttribute("V-",0);
+          attaque.setAttribute("V--",0);
+          set.appendChild(attaque);
     }
 
     QFile file(QString("Current/Match.xml"));
@@ -92,8 +101,72 @@ void MatchXml::Initialisation()
     file.close();
 }
 
+QString MatchXml::Rechercheposte(int post)
+{
+    QString label="";
+    for(int i=0;i<this->_ListJoueurTer.size();i++)
+    {
+        if(_ListJoueurTer.at(i)->GetPosition()==post)
+         {
+          label=_ListJoueurTer.at(i)->get_Prenom()+"_"+QString::number(_ListJoueurTer.at(i)->get_NumMaillot());
+          break;
+        }
+    }
+    return label;
+}
 
-    /*
+void MatchXml::SauvegardeAction(Joueur* player,int Action,int valu)
+{
+
+    QString nom=player->get_Prenom()+"_"+QString::number(player->get_NumMaillot());
+        QDomDocument dom("mon_xml");
+         QFile file("Current/Match.xml");
+         if (!file.open(QIODevice::ReadWrite))
+             return;
+         if (!dom.setContent(&file))
+         {
+             file.close();
+             return;
+         }
+         file.close();
+         QDomElement docElem = dom.documentElement();
+         QDomNode n = docElem.firstChild();
+         while(!n.isNull())
+         {
+             QDomElement e = n.toElement();
+             if(e.tagName()==nom)
+             {
+                 QDomElement child=e.childNodes();
+                 while(!child.isNull())
+                 {
+                     QDomElement f=child.toElement();
+                     if(f.tagName()=="S"+QString::number(1))
+                     {
+                         QDomElement Gchild=f.childNodes();
+                                          while(!Gchild.isNull())
+                                          {
+                                              QDomElement g=child.toElement();
+                                              if(g.tagName()=="Action")
+                                              {
+                                                  g.setAttribute("V++",player->getStatSet(Action,valu));
+                                              }
+                                              Gchild=Gchild.nextSibling();
+                                          }
+
+                     }
+                     child=child.nextSibling();
+                 }
+             }
+             // C'est ici que l'on va marquer le code
+             n = n.nextSibling();
+         }
+         if (!file.open(QIODevice::WriteOnly))
+             return;
+         QTextStream ts( &file );
+         ts << doc.toString();
+         file.close();
+    }
+        /*
     QDomElement Equipe= doc.createElement("Equipe");
     Equipe.setAttribute("Nom",this->_currrentEquipe->GetNom());
     Equipe.setAttribute("listAction",this->_currrentEquipe->GetStringAction());
