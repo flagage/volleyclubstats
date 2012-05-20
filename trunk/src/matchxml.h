@@ -41,11 +41,12 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 class MatchXml
 {
 public:
-    MatchXml();
+    MatchXml(QStringList listInfo,QList <Joueur*> listJoueur);
     void Initialisation();
 private:
     /// liste des joueurs sur le terrain
     QList <Joueur*> _ListJoueurTer;
+    QStringList _ListInfo;
     QString _nomFichier;
 };
 

@@ -58,6 +58,7 @@ private:
     bool _lancementok;
     QTime _TempsSet;
     QList <Joueur*> _ListJoueur;
+    QList <Joueur*> _ListTerrain;
     Joueur * _JouerAdvers;
     MatchXml *_Fichierxml;
 protected:
@@ -109,6 +110,8 @@ public:
 
     /// traitement de la sauvegarde
     void InitFichierXml();
+
+    void SetJoueurTerr(QList<Joueur *> list);
 
 };
 

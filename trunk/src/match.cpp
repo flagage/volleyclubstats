@@ -511,5 +511,12 @@ QList <Joueur*> Match::GetListJoueur()
 
 void Match::InitFichierXml()
 {
-    this->_Fichierxml=new MatchXml();
+    QStringList Info;
+    this->_Fichierxml=new MatchXml(Info,_ListTerrain);
 }
+
+void Match::SetJoueurTerr(QList<Joueur *> list)
+{
+    _ListTerrain=list;
+}
+

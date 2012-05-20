@@ -74,6 +74,7 @@ void InitLineEditSize();
 void SetAdv(QString nom);
 void SetListJoueur(QStringList list);
 QString UpdateJoueur(Joueur* player);
+QList<Joueur *> GetJoueurTerrain();
 
 
 signals:

@@ -168,6 +168,7 @@ Ecran::Ecran(QWidget *parent) :
     ui->Button_MM->setVisible(false);
     ui->Button_P->setVisible(false);
     ui->Button_PP->setVisible(false);
+    ui->tabWidget->setVisible(false);
     ui->label_4->setPixmap (QPixmap("Image/terrain.png"));
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
 
@@ -239,6 +240,7 @@ void Ecran::Initialisation()
    // this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Passe")<<tr("Attaque");
     this->_listAction=InitAction::donneInstance()->GetListAction();
     ui->PBModif->setVisible(false);
+    ui->tabWidget->setVisible(true);
 
 }
 
@@ -357,6 +359,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     this->myWidget->Initialisation ();
     this->myWidget->InitListAction(_listAction);
     this->_PlacementJoueur->InitLineEditSize ();
+     ui->tabWidget->setVisible(true);
 
 
 
@@ -466,6 +469,7 @@ void Ecran::Slot_start()
         ChercherPasseur();
 
         _isMatchEnCour=true;
+        Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
         Match::donneInstance()->InitFichierXml();
     }
 
@@ -1299,7 +1303,7 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
        ui->comboBox->currentText()==tr("Attaque"))
 
     {
-        ui->lineEdit_PBP->setVisible(true);
+        ui->lineEdit_PBP->setVisible(false);
     }
     int num=numjoueur.toInt();
     SignalAction(num);

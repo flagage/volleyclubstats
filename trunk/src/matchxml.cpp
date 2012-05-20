@@ -1,7 +1,9 @@
 #include "matchxml.h"
 
-MatchXml::MatchXml()
+MatchXml::MatchXml(QStringList listInfo, QList<Joueur *> listJoueur)
 {
+    _ListInfo=listInfo;
+    _ListJoueurTer=listJoueur;
     Initialisation();
 }
 
@@ -29,38 +31,38 @@ void MatchXml::Initialisation()
     QDomElement position=doc.createElement("Position");
     root.appendChild(position);
     QDomElement poste1=doc.createElement ("Poste1");
-    QString text=doc.createTextNode("0");
-    poste1.setNodeValue(text);
+    QDomText text=doc.createTextNode("0");
+    poste1.appendChild(text);
     position.appendChild(poste1);
 
     QDomElement poste2=doc.createElement ("Poste2");
     text=doc.createTextNode("0");
-    poste2.setNodeValue(text);
+    poste2.appendChild(text);
     position.appendChild(poste2);
 
     QDomElement poste3=doc.createElement ("Poste3");
     text=doc.createTextNode("0");
-    poste3.setNodeValue(text);
+    poste3.appendChild(text);
     position.appendChild(poste3);
 
     QDomElement poste4=doc.createElement ("Poste4");
     text=doc.createTextNode("0");
-    poste4.setNodeValue(text);
+    poste4.appendChild(text);
     position.appendChild(poste4);
 
     QDomElement poste5=doc.createElement ("Poste5");
     text=doc.createTextNode("0");
-    poste5.setNodeValue(text);
+    poste5.appendChild(text);
     position.appendChild(poste5);
 
     QDomElement poste6=doc.createElement ("Poste6");
     text=doc.createTextNode("0");
-    poste6.setNodeValue(text);
+    poste6.appendChild(text);
     position.appendChild(poste6);
 
     QDomElement poste7=doc.createElement ("Libero");
     text=doc.createTextNode("0");
-    poste7.setNodeValue(text);
+    poste7.appendChild(text);
     position.appendChild(poste7);
 
 
@@ -69,7 +71,7 @@ void MatchXml::Initialisation()
     root.appendChild(score);
     QDomElement set1=doc.createElement("S1");
     text=doc.createTextNode("0:0");
-    set1.setNodeValue(text);
+    set1.appendChild(text);
     score.appendChild(set1);
 
     /// stat liste des joueurs sur le terrain le reste ne sert pas
@@ -82,7 +84,7 @@ void MatchXml::Initialisation()
         stat.appendChild(player);
     }
 
-    QFile file(QString("Sauvegarde/"+_nomFichier));
+    QFile file(QString("Current/Match.xml"));
     if (!file.open(QIODevice::WriteOnly))
         return;
     QTextStream ts( &file );
@@ -164,7 +166,7 @@ void MatchXml::Initialisation()
         }
     }
 
-    /*  for(int k=0;k<this->_currrentEquipe->GetListeJoueur ().size ();k++)
+      for(int k=0;k<this->_currrentEquipe->GetListeJoueur ().size ();k++)
     {
 
         QString Joueur;

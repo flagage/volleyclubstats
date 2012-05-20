@@ -579,3 +579,25 @@ void KeyJoueur::SetAdv(QString nom)
 {
     this->buttons[this->_nbJoueur]->setText(nom);
 }
+
+
+QList<Joueur *> KeyJoueur::GetJoueurTerrain()
+{
+    QList<Joueur *> list;
+    int tot=InitGlobal::donneInstance()->GetNbJoueur();
+    for(int i=0;i<tot;i++)
+    {
+        QString strtext =buttons[i]->text();
+        QStringList listtext=strtext.split("\n");
+        strtext=listtext.at(0);
+        QStringList listStr=strtext.split("(");
+        int numero=listStr.at(0).toInt();
+
+        Joueur* player=RechercheJoueur(numero);
+        if(player!=0)
+        {
+            list.append(player);
+        }
+    }
+    return list;
+}
