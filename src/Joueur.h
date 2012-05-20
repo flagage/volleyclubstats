@@ -52,6 +52,7 @@ private:
     int _NLisence;
     int _Tel;
     int _NumMaillot;
+    int _Position;
     QString _Email;
     QString _Addresse;
     QString _poste;
@@ -104,6 +105,9 @@ public:
     void initSet();
     void supStatMatch(int action,int pos);
     void supStatSet(int action,int pos);
+
+    void SetPosition(int numpos);
+    int GetPosition();
     //void SetListAction(QStringList list);
 
 };

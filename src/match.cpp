@@ -498,6 +498,8 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
             _currrentEquipe->addStatSet (action,valu);
         }
         error=false;
+        //QString nomjoueur=player->get_Nom()+"_"+QString::number(player->get_NumMaillot());
+        this->_Fichierxml->SauvegardeAction(player,1,2);
     }
 
     return error;
@@ -512,6 +514,14 @@ QList <Joueur*> Match::GetListJoueur()
 void Match::InitFichierXml()
 {
     QStringList Info;
+    Info.append(GetDate());
+    Info.append(GetTemps());
+    Info.append(_currrentEquipe->GetNom());
+    Info.append(GetType());
+    Info.append(getadvs());
+    Info.append(GetArbitre());
+    Info.append("temps");
+
     this->_Fichierxml=new MatchXml(Info,_ListTerrain);
 }
 

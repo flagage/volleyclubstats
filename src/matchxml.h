@@ -43,6 +43,8 @@ class MatchXml
 public:
     MatchXml(QStringList listInfo,QList <Joueur*> listJoueur);
     void Initialisation();
+    QString Rechercheposte(int post);
+    void SauvegardeAction(Joueur* player,int Action);
 private:
     /// liste des joueurs sur le terrain
     QList <Joueur*> _ListJoueurTer;
