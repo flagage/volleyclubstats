@@ -499,7 +499,7 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
         }
         error=false;
         //QString nomjoueur=player->get_Nom()+"_"+QString::number(player->get_NumMaillot());
-        this->_Fichierxml->SauvegardeAction(player,1,2);
+        //this->_Fichierxml->SauvegardeAction(player,1,2);
     }
 
     return error;
