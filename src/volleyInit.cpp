@@ -5,7 +5,7 @@ InitValeur* InitValeur::_InstanceValeur = NULL;
 
 InitValeur::InitValeur()
 {
-    _ListValeur<<"++"<<"+"<<"0"<<"-"<<"--"<<"tot";
+    _ListValeur<<"PP"<<"P"<<"0"<<"M"<<"MM"<<"tot";
 
     //_InstanceValeur=NULL;
 }
@@ -50,19 +50,19 @@ QString InitValeur::GetElementValeur(int valu)
     switch (valu)
     {
     case VPP:
-        return "++";
+        return "PP";
         break;
     case VP:
-        return "+";
+        return "P";
         break;
     case V0:
         return "0";
         break;
     case VM:
-        return "-";
+        return "M";
         break;
     case VMM:
-        return "--";
+        return "MM";
         break;
     case TOT:
         return "tot";
