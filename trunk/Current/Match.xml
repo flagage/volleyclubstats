@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<!DOCTYPE Info>
 <Info>
- <Match Contre="test" Equipe="Villebon Senior F" NbDeSet="0" Heure="" Arbitre="moi" Type="Championnat" Date="20_05_2012_21_16_48" Duree="temps"/>
- <Position>
-  <Poste1>Rosemary_17</Poste1>
-  <Poste2>Veronique_4</Poste2>
-  <Poste3>Maryline_1</Poste3>
-  <Poste4>Valerie_13</Poste4>
-  <Poste5>Alix_6</Poste5>
-  <Poste6>Alexia_10</Poste6>
-  <Libero>Virginie_9</Libero>
- </Position>
- <Score>
-  <S1>0:0</S1>
- </Score>
- <Stat>
-  <Rosemary_17/>
-  <Veronique_4/>
-  <Maryline_1/>
-  <Valerie_13/>
-  <Alix_6/>
-  <Alexia_10/>
-  <Virginie_9/>
- </Stat>
+ <Match Contre="" Equipe="Villebon Senior F" NbDeSet="0" Heure="" Arbitre="" Type="Championnat" Date="28_05_2012_20_04_15" Duree="temps"/>
+ <S1>
+  <Position>
+   <Poste1>Rosemary_17</Poste1>
+   <Poste2></Poste2>
+   <Poste3></Poste3>
+   <Poste4></Poste4>
+   <Poste5></Poste5>
+   <Poste6></Poste6>
+   <Libero></Libero>
+  </Position>
+  <Score>0:0</Score>
+  <Stat>
+   <Rosemary_17>
+    <Service PP="0" MM="0" tot="1" M="0" P="1" 0="0" eff1="0"/>
+    <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+    <Contre PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+    <Defense PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+    <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+    <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+   </Rosemary_17>
+  </Stat>
+ </S1>
 </Info>

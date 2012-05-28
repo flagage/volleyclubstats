@@ -46,6 +46,7 @@ Match::Match()
     _numCurentSet=1;
     _lancementok=false;
     _score=new Score();
+    _Fichierxml=0;
 
 
 }
@@ -136,6 +137,8 @@ void Match::SetDate(QString str)
 }*/
 Score* Match::GetScore()
 {
+    if(_Fichierxml!=0)
+    this->_Fichierxml->SauvegardeScore(_score->get_Score_E1(),_score->get_Score_E2());
     return this->_score;
 }
 QString Match::GetFichierXml()
@@ -499,7 +502,7 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
         }
         error=false;
         //QString nomjoueur=player->get_Nom()+"_"+QString::number(player->get_NumMaillot());
-        //this->_Fichierxml->SauvegardeAction(player,1,2);
+        this->_Fichierxml->SauvegardeAction(player,action,2);
     }
 
     return error;
