@@ -74,11 +74,12 @@ Ecran::Ecran(QWidget *parent) :
     this->resize(size.width(),size.height()-100);
     this->move(0,0);
 
-    _PlacementJoueur=new KeyJoueur(ui->label_4,12,true);
+    _PlacementJoueur=new KeyJoueur(ui->label_4,13,true);
     QHBoxLayout *layout=new QHBoxLayout();
     layout->addWidget (_PlacementJoueur);
     connect(this->_PlacementJoueur,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
     connect(this->_PlacementJoueur,SIGNAL(ModifPoste(QPushButton*)),this,SLOT(slot_modifpost(QPushButton*)));
+    connect(this->_PlacementJoueur,SIGNAL(Tlm_en_place()),this,SLOT(Slot_start()));
     connect(this,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
     connect(this->LineEdit2,SIGNAL(ChangeAction()),this,SLOT(SlotCombobox()));
     connect(this->LineEdit2,SIGNAL(Attaque()),this,SLOT(Slot_posAction()));
@@ -471,6 +472,17 @@ void Ecran::Slot_start()
         _isMatchEnCour=true;
         Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
         Match::donneInstance()->InitFichierXml();
+    }
+    else
+    {
+        ui->groupBox_2->setVisible(true);
+        ui->groupBox_3->setVisible(true);
+        ui->groupBox_6->setVisible(true);
+        ui->groupBox_7->setVisible(true);
+        ui->groupBox_9->setVisible(true);
+        ui->groupBox_4->setVisible(false);
+        ui->groupBox_5->setVisible (true);
+        ui->groupBox_8->setVisible(false);
     }
 
 }
@@ -956,7 +968,12 @@ void Ecran::FinSet()
         Match::donneInstance()->GetScore()->set_bool_adv(true);
     }
 
+    this->_PlacementJoueur->Reinitialisation();
 
+    JoueurAPlacer();
+    ui->groupBox_4->setVisible(true);
+    ui->groupBox_7->setVisible(false);
+    ui->groupBox_2->setVisible(false);
     // _finSet=false;
     //TempsMort();
 

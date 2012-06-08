@@ -54,7 +54,7 @@ bool _Islibero;
 int _pos;
 QWidget * _parent;
 QList <Joueur*> _listjoueur;
-
+int _nbjoueurEnPlace;
 
 public:
 explicit KeyJoueur(QWidget *parent = 0,int nbjoueur=0,bool libero=true);
@@ -75,11 +75,12 @@ void SetAdv(QString nom);
 void SetListJoueur(QStringList list);
 QString UpdateJoueur(Joueur* player);
 QList<Joueur *> GetJoueurTerrain();
-
+void Reinitialisation();
 
 signals:
     void Changement(QPushButton *button);
     void ModifPoste(QPushButton *button);
+    void Tlm_en_place();
 public slots:
 void bouttonLClicked();
 void bouttonRClicked();

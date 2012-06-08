@@ -44,6 +44,7 @@ KeyJoueur::KeyJoueur(QWidget *parent,int nbjoueur,bool libero) :
     _Islibero=libero;
     _parent=parent;
     _pos=0;
+    _nbjoueurEnPlace=0;
     int compte=0;
     for(int i=0;i<_nbJoueur;i++)
     {
@@ -80,6 +81,37 @@ void KeyJoueur::bouttonLClicked()
 {
     QPushButton *button=(QPushButton*) sender();
     emit Changement (button);
+    _nbjoueurEnPlace++;
+    bool isenplace=false;
+    int posbanc=InitGlobal::donneInstance()->GetNbJoueur();
+    if(_nbjoueurEnPlace>InitGlobal::donneInstance()->GetNbJoueur())
+    {
+        QList<Joueur *> list_terrain=this->GetJoueurTerrain();
+        for(int i=0;i<this->_listjoueur.size();i++)
+        {
+             QString text=_listjoueur.at(i)->get_Prenom()+"_"+QString::number(_listjoueur.at(i)->get_NumMaillot());
+            isenplace=false;
+            for(int k=0;k<list_terrain.size();k++)
+            {
+                 QString text2=list_terrain.at(k)->get_Prenom()+"_"+QString::number(list_terrain.at(k)->get_NumMaillot());
+                 if(text==text2)
+                 {
+                     isenplace=true;
+                     break;
+                 }
+            }
+
+            if(isenplace==false)
+            {
+
+
+                buttons[posbanc]->setText(text);
+                posbanc++;
+            }
+
+        }
+        emit Tlm_en_place();
+    }
 }
 
 void KeyJoueur::bouttonRClicked()
@@ -599,4 +631,17 @@ QList<Joueur *> KeyJoueur::GetJoueurTerrain()
         }
     }
     return list;
+}
+
+
+void KeyJoueur::Reinitialisation()
+{
+
+    for(int i=0;i<_nbJoueur;i++)
+    {
+        QString strPosition="Position"+QString::number (i+1);
+        buttons[i]->setText(strPosition);
+    }
+    _nbjoueurEnPlace=0;
+
 }

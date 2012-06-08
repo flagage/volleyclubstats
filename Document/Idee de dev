@@ -33,3 +33,11 @@ Le choix 1 a ete selectionner.
 le fichier match xml est inclu dans le match et s'occupe de la sauvegarde en temps reel des scores et des position.
 
 il me faut une nouvelle list de joueur present sur le terrain seul ce si seron afficher .
+
+
+
+IDEE 2:
+
+Gestion de la fin de set: Reinitialiser la liste des joueur sur le terrain et refaire apparaitre le positionnement comme au debut
+une fois tous les joueurs sur le terrain on ecrit dans le xml les joueurs sur le banc se mette automatiquement et on supprime 
+l'affichage de positionnement.
