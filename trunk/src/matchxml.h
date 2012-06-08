@@ -46,13 +46,16 @@ public:
     QString Rechercheposte(int post);
     void SauvegardeAction(Joueur* player,int Action,int valeur);
     void SauvegardeScore(int Slocal,int Svisiteur);
+    void ChangementDeSet(int numero);
 private:
     /// liste des joueurs sur le terrain
     QList <Joueur*> _ListJoueurTer;
     QStringList _ListInfo;
     QString _nomFichier;
+    QString _CurrentSet;
     QDomDocument _doc;
     QFile _file;
+    QDomElement _root;
 };
 
 #endif // MATCHXML_H

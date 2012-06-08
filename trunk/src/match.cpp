@@ -295,6 +295,7 @@ void Match::FinSet()
     //this->_curentset=new Set(this->_currrentEquipe,_numCurentSet);
     //this->_curentset->Initialise();
     //this->_ListeSet.append(_curentset);
+    this->_Fichierxml->ChangementDeSet(_numCurentSet);
     if(this->_score->get_Score_E1()>this->_score->get_Score_E2())
     {
         this->_score->set_Set_E1(this->_score->get_Set_E1()+1);

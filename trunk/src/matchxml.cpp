@@ -4,6 +4,7 @@ MatchXml::MatchXml(QStringList listInfo, QList<Joueur *> listJoueur)
 {
     _ListInfo=listInfo;
     _ListJoueurTer=listJoueur;
+    _CurrentSet="S1";
     Initialisation();
 }
 
@@ -14,8 +15,8 @@ void MatchXml::Initialisation()
     _doc.setNodeValue("Info");
     QDomNode noeud=_doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"");
    _doc.insertBefore (noeud,_doc.firstChild ());
-    QDomElement root = _doc.createElement("Info");
-    _doc.appendChild(root);
+    _root = _doc.createElement("Info");
+    _doc.appendChild(_root);
 
     QDomElement Info = _doc.createElement("Match");
     Info.setAttribute("Date",_ListInfo.at(0));
@@ -26,9 +27,9 @@ void MatchXml::Initialisation()
     Info.setAttribute ("Arbitre",_ListInfo.at(5));
     Info.setAttribute ("Duree",_ListInfo.at(6));
     Info.setAttribute("NbDeSet",0);
-    root.appendChild(Info);
-    QDomElement set1=_doc.createElement("S1");
-    root.appendChild(set1);
+    _root.appendChild(Info);
+    QDomElement set1=_doc.createElement(this->_CurrentSet);
+    _root.appendChild(set1);
     /// position des joueurs
     QDomElement position=_doc.createElement("Position");
     set1.appendChild(position);
@@ -128,7 +129,7 @@ void MatchXml::SauvegardeAction(Joueur* player,int Action,int valu)
          {
              QDomElement e = n.toElement();
              QString test=e.tagName();
-             if(e.tagName()=="S1")
+             if(e.tagName()==this->_CurrentSet)
              {
                  QDomNode child=e.firstChild();
                  while(!child.isNull())
@@ -186,7 +187,7 @@ void MatchXml::SauvegardeScore(int Slocal,int Svisiteur)
     {
         QDomElement e = n.toElement();
         //QString test=e.tagName();
-        if(e.tagName()=="S1")
+        if(e.tagName()==this->_CurrentSet)
         {
             QDomNode child=e.firstChild();
             while(!child.isNull())
@@ -211,6 +212,31 @@ void MatchXml::SauvegardeScore(int Slocal,int Svisiteur)
     ts << _doc.toString();
     _file.close();
 
+
+}
+void MatchXml::ChangementDeSet(int numero)
+{
+    this->_CurrentSet="S"+QString::number(numero);
+    QDomElement set=_doc.createElement(this->_CurrentSet);
+    _root.appendChild(set);
+    /// position des joueurs
+    QDomElement position=_doc.createElement("Position");
+    set.appendChild(position);
+    /// score
+    QDomElement score=_doc.createElement("Score");
+    set.appendChild(score);
+    QDomText text=_doc.createTextNode("0:0");
+    score.appendChild(text);
+
+    /// stat
+    QDomElement stat=_doc.createElement("Stat");
+    set.appendChild(stat);
+
+    if (!_file.open(QIODevice::WriteOnly))
+        return;
+    QTextStream ts( &_file );
+    ts << _doc.toString();
+    _file.close();
 
 }
         /*
