@@ -50,17 +50,19 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 
 
 Ecran::Ecran(QWidget *parent) :
-        QMainWindow(parent),
-        ui(new Ui::Ecran)
+    QMainWindow(parent),
+    ui(new Ui::Ecran)
 {
 
     ui->setupUi(this);
     _ValeurInitial=InitValeur::donneInstance();
     _ListActionInit=InitAction::donneInstance();
     _position=0;
+    _joueurBanc=0;
     _Istactile=false;
     _ischangement=false;
     _finSet=false;
+
     ui->lineEdit->setVisible(false);
 
     ui->lineEdit_PBP->setVisible(false);
@@ -69,16 +71,16 @@ Ecran::Ecran(QWidget *parent) :
 
     ui->gridLayout_11->addWidget(LineEdit2,2, 3, 1, 1);
 
-    QDesktopWidget *desktop=QApplication::desktop ();
-    QRect size=desktop->screenGeometry ();
-    this->resize(size.width(),size.height()-100);
+    /*QDesktopWidget *desktop=QApplication::desktop ();
+    QRect size=desktop->screenGeometry ();*/
+    this->resize(1000,500);
     this->move(0,0);
 
-    _PlacementJoueur=new KeyJoueur(ui->label_4,13,true);
+    _PlacementJoueur=new KeyJoueur(ui->label_4,7,true);
     QHBoxLayout *layout=new QHBoxLayout();
     layout->addWidget (_PlacementJoueur);
     connect(this->_PlacementJoueur,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
-    connect(this->_PlacementJoueur,SIGNAL(ModifPoste(QPushButton*)),this,SLOT(slot_modifpost(QPushButton*)));
+    // connect(this->_PlacementJoueur,SIGNAL(ModifPoste(QPushButton*)),this,SLOT(slot_modifpost(QPushButton*)));
     connect(this->_PlacementJoueur,SIGNAL(Tlm_en_place()),this,SLOT(Slot_start()));
     connect(this,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
     connect(this->LineEdit2,SIGNAL(ChangeAction()),this,SLOT(SlotCombobox()));
@@ -170,7 +172,7 @@ Ecran::Ecran(QWidget *parent) :
     ui->Button_P->setVisible(false);
     ui->Button_PP->setVisible(false);
     ui->tabWidget->setVisible(false);
-    ui->label_4->setPixmap (QPixmap("Image/terrain.png"));
+    ui->label_4->setPixmap (QPixmap("Image/new_terrain.png"));
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
 
 
@@ -184,6 +186,9 @@ Ecran::Ecran(QWidget *parent) :
 
     /// font d'ecran
     _positionEcran=0;
+
+    /// modification du tableau de vue
+    connect(ui->tabWidget,SIGNAL(currentChanged(int)),this,SLOT(UpdateTabVue(int)));
 
 
     //icon.addPixmap(QPixmap::fromImage(image), mode, state)
@@ -238,7 +243,7 @@ void Ecran::Initialisation()
     _listActionPlus<<tr("Service")<<tr("Attaque")<<tr("Contre");
 
 
-   // this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Passe")<<tr("Attaque");
+    // this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Passe")<<tr("Attaque");
     this->_listAction=InitAction::donneInstance()->GetListAction();
     ui->PBModif->setVisible(false);
     ui->tabWidget->setVisible(true);
@@ -277,7 +282,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->comboBox->setVisible(true);
 
     ui->Start->setVisible(true);
-    ui->label_4->setPixmap(QPixmap("Image/terrain.png"));
+    ui->label_4->setPixmap(QPixmap("Image/new_terrain.png"));
     this->_positionEcran=0;
     this->_PlacementJoueur->createLayout(0);
     _TimerScore->start(10);
@@ -360,7 +365,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     this->myWidget->Initialisation ();
     this->myWidget->InitListAction(_listAction);
     this->_PlacementJoueur->InitLineEditSize ();
-     ui->tabWidget->setVisible(true);
+    ui->tabWidget->setVisible(true);
 
 
 
@@ -382,10 +387,10 @@ void Ecran::slot_score()
     this->_TimerScore->start(50);
     int diff=abs(score->get_Score_E1()-score->get_Score_E2());
     if((score->get_Score_E1()>=25 && diff>=2)
-        ||((score->get_Score_E2()>=25)
-        && (diff>=2))
-        &&(_finSet==false))
-        {
+            ||((score->get_Score_E2()>=25)
+               && (diff>=2))
+            &&(_finSet==false))
+    {
         this->_TimerScore->stop();
 
         int reponse=QMessageBox::question(this,tr("Information"),tr("Fin de set"),QMessageBox::Yes,QMessageBox::No);
@@ -407,10 +412,7 @@ void Ecran::InitialisationAction(QStringList Action)
     this->_listActionMatch=Action;
 
 }
-/*void Ecran::InitialisationValeur(QStringList ValeurSelection)
-{
-    this->_listValeurStat=ValeurSelection;
-}*/
+
 
 void Ecran::slot_initChangement()
 {
@@ -425,8 +427,10 @@ void Ecran::Slot_start()
 {
     if(  _isMatchEnCour==false)
     {
+
         this->_PlacementJoueur->Initialisation();
-        ui->label_4-> setPixmap (QPixmap("Image/terrain5.png"));
+        this->JoueurBanc();
+        ui->label_4-> setPixmap (QPixmap("Image/new_terrain.png"));
         ui->groupBox_3->setVisible(true);
         ui->groupBox_6->setVisible(true);
         ui->groupBox_7->setVisible(true);
@@ -497,9 +501,32 @@ void Ecran::slot_changement(QPushButton *boutton)
     changement(boutton->text(),boutton);
 }
 
-void Ecran::slot_modifpost(QPushButton* boutton)
+void Ecran::SlotAddJoueur()
 {
-    fbjoueur* joueur=new fbjoueur(Match::donneInstance()->getTeam(),this);
+    if(Match::donneInstance()->getTeam()!=0)
+    {
+        fbjoueur* Diajoueur=new fbjoueur(Match::donneInstance()->getTeam(),this);
+        Joueur* play=Diajoueur->Ajouter(Match::donneInstance()->getTeam());
+        if(play!=0)
+        {
+            // RaffraichirList();
+            // Match::donneInstance()->getTeam()->AddJoueur(joueur);
+
+            this->AddJoueurBanc(play);
+            this->EnregistrerXML();
+
+        }
+        else
+        {
+            QMessageBox::warning (this,tr("erreur"),tr("Verifier que l'?quipe est bien selectionn?"));
+        }
+
+    }
+}
+void Ecran::SlotSupJoueur()
+{
+    QPushButton *boutton=(QPushButton*) sender();
+
 
     QStringList strlist=boutton->text().split("(");
     strlist=strlist[1].split(")");
@@ -509,19 +536,50 @@ void Ecran::slot_modifpost(QPushButton* boutton)
 
         if (listJoueur.at(i)->get_Prenom()==strlist[0])
         {
+            Match::donneInstance()->getTeam()->supJoueur(listJoueur.at(i));
+            this->EnregistrerXML();
+            boutton->deleteLater();
+        }
+    }
 
 
+}
+
+void Ecran::SlotModifJoueur()
+{
+    QPushButton *boutton=(QPushButton*) sender();
+    fbjoueur* joueur=new fbjoueur(Match::donneInstance()->getTeam(),this);
+    QStringList strlist=boutton->text().split("(");
+    strlist=strlist[1].split(")");
+    QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
+    for(int i=0;i<listJoueur.size();i++)
+    {
+
+        if (listJoueur.at(i)->get_Prenom()==strlist[0])
+        {
+
+            int num=listJoueur.at(i)->get_NumMaillot();
+            QString prenom=listJoueur.at(i)->get_Prenom();
             joueur->Modif(listJoueur.at(i),true);
             if(joueur->exec()==1)
             {
-            QString text=this->_PlacementJoueur->UpdateJoueur(listJoueur.at(i));
-            boutton->setText(text);
-            break;
+                /*if(num!=listJoueur.at(i)->get_NumMaillot() ||
+                  prenom!=listJoueur.at(i)->get_Prenom()   )
+                {
+
+                }
+                else
+                {*/
+                    QString text=this->_PlacementJoueur->UpdateJoueur(listJoueur.at(i));
+                    boutton->setText(text);
+                //}
+
+                break;
+            }
         }
     }
-}
-}
 
+}
 
 void Ecran::changement(QString joueur,QPushButton *bouton)
 {
@@ -737,7 +795,7 @@ void Ecran::AffSession(QAction *action)
     {
         QDialog* equipe=new Fenetreequipe(this);
 
-        equipe->exec();    
+        equipe->exec();
         this->EnregistrerXML();
     }
     else if(action->text() == "Lancer le Match")
@@ -1019,8 +1077,8 @@ void Ecran::keyPressEvent(QKeyEvent * event)
     bool isValide=false;
 
     if((event->key()==Qt::Key_Enter) ||
-       (event->key()==Qt::Key_Return) &&
-       (_isMatchEnCour == true))
+            (event->key()==Qt::Key_Return) &&
+            (_isMatchEnCour == true))
     {
 
         QString strValue=LineEdit2->text();
@@ -1030,7 +1088,7 @@ void Ecran::keyPressEvent(QKeyEvent * event)
         int index=0;
         int max=0;
         if( (strValue.size() < 5) &&
-            (strValue.size() > 0))
+                (strValue.size() > 0))
         {
             switch (strValue.size())
             {
@@ -1122,15 +1180,15 @@ void Ecran::keyPressEvent(QKeyEvent * event)
             QString strNumPlayer=strValue.left(2);
             if(strNumPlayer.toInt()!=0)
             {
-            for(int i=0;i<Match::donneInstance ()->GetListJoueur ().size ();i++)
-            {
-                int num=strNumPlayer.toInt ();
-                if(num==Match::donneInstance ()->GetListJoueur ().at (i)->get_NumMaillot ())
+                for(int i=0;i<Match::donneInstance ()->GetListJoueur ().size ();i++)
                 {
-                    isValide=true;
-                    break;
+                    int num=strNumPlayer.toInt ();
+                    if(num==Match::donneInstance ()->GetListJoueur ().at (i)->get_NumMaillot ())
+                    {
+                        isValide=true;
+                        break;
+                    }
                 }
-            }
             }
             else
             {
@@ -1310,14 +1368,14 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
     }
 
     if(_listActionPlus.contains(_listActionMatch.at(IAction))
-        && StatAction== VPP)
-        {
+            && StatAction== VPP)
+    {
         this->PointPlus(numjoueur);
     }
 
     /// Apparition de la deuxieme bar de saisi sur reception + ou ++
     if(StatAction==VP || StatAction==VPP &&
-       ui->comboBox->currentText()==tr("Attaque"))
+            ui->comboBox->currentText()==tr("Attaque"))
 
     {
         ui->lineEdit_PBP->setVisible(false);
@@ -1651,7 +1709,27 @@ void Ecran::JoueurAPlacer()
         ui->gridLayout_18->addWidget(pushButton, i, 0, 1, 1);
         connect(pushButton,SIGNAL(lclicked()),this,SLOT(bouttonLClicked()));
     }
-   // ui-> gridLayout_19->addWidget(ui->groupBox_4, 0,listJoueur.size() , 1, 1);
+    // ui-> gridLayout_19->addWidget(ui->groupBox_4, 0,listJoueur.size() , 1, 1);
+}
+
+
+void Ecran::JoueurBanc()
+{
+
+    QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
+    QList <Joueur*> listJoueurTerrain=_PlacementJoueur->GetJoueurTerrain();
+    for(int i=0;i<listJoueur.size();i++)
+    {
+        if(listJoueurTerrain.contains(listJoueur.at(i)))
+        {
+
+        }
+        else
+        {
+            AddJoueurBanc(listJoueur.at(i));
+        }
+    }
+    // ui-> gridLayout_19->addWidget(ui->groupBox_4, 0,listJoueur.size() , 1, 1);
 }
 
 void Ecran::bouttonLClicked()
@@ -1661,14 +1739,65 @@ void Ecran::bouttonLClicked()
 }
 void Ecran::closeEvent(QCloseEvent * event )
 {
-   // this->FinMatch();
+    // this->FinMatch();
 
     if(Match::GetInstance ()!=0)
     {
-         _trace->SetTrace(tr("Fin Match"));
+        _trace->SetTrace(tr("Fin Match"));
         QString  file=Match::donneInstance ()->GetFichierXml();
         Match::donneInstance ()->FinSet ();
         Match::donneInstance ()->Enregistrer ();
         Match::donneInstance ()->EnregistrerXMl ();
     }
 }
+
+void Ecran::SlotButonRclicked()
+{
+    QPushButton *boutton=(QPushButton*) sender();
+
+    boutton->showMenu();
+
+}
+
+void Ecran::AddJoueurBanc(Joueur* joueur)
+{
+    QString strAffiche;
+    strAffiche.setNum(joueur->get_NumMaillot());
+    strAffiche=strAffiche+" ("+joueur->get_Prenom()+")";
+    if( joueur->get_poste().toUpper ()=="PASSEUR")
+    {
+        strAffiche=strAffiche+ "*";
+    }
+    else if(joueur->get_poste().toUpper ()=="LIBERO")
+    {
+        strAffiche=strAffiche+ "$";
+    }
+    BouttonJoueur* pushButton = new BouttonJoueur(strAffiche,ui->groupBox_10);
+    pushButton->AjouterMenuBanc();
+    pushButton->setGeometry(QRect(10, 60, 75, 23));
+    ui->gridLayout_22->addWidget(pushButton, 0, _joueurBanc, 1, 1);
+    connect(pushButton,SIGNAL(lclicked()),this,SLOT(bouttonLClicked()));
+    connect(pushButton,SIGNAL(rclicked()),this,SLOT(SlotButonRclicked()));
+    connect(pushButton,SIGNAL(ModifJoueur()),this,SLOT(SlotModifJoueur()));
+    connect(pushButton,SIGNAL(AddJoueur()),this,SLOT(SlotAddJoueur()));
+    connect(pushButton,SIGNAL(SupJoueur()),this,SLOT(SlotSupJoueur()));
+    _joueurBanc++;
+}
+
+void Ecran::UpdateTabVue(int tab)
+{
+    switch(tab)
+    {
+    case 1:
+        _WtabEff->clean();
+        _WtabEff->Init();
+        break;
+    case 2:
+        myWidget->clean();
+        this->myWidget->SetEquipe (Match::donneInstance()->getTeam());
+        this->myWidget->Initialisation ();
+        this->myWidget->InitListAction(_listAction);
+        break;
+    }
+}
+

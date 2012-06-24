@@ -52,7 +52,7 @@ KeyJoueur::KeyJoueur(QWidget *parent,int nbjoueur,bool libero) :
         buttons[i]=new BouttonJoueur(strPosition,this);
 
         connect(buttons[i],SIGNAL(lclicked()),this,SLOT(bouttonLClicked()));
-        connect(buttons[i],SIGNAL(rclicked()),this,SLOT(bouttonRClicked()));
+
 
 
     }
@@ -101,28 +101,28 @@ void KeyJoueur::bouttonLClicked()
                  }
             }
 
-            if(isenplace==false)
+           /* if(isenplace==false)
             {
 
 
                 buttons[posbanc]->setText(text);
                 posbanc++;
-            }
+            }*/
 
         }
         emit Tlm_en_place();
     }
 }
 
-void KeyJoueur::bouttonRClicked()
+/*void KeyJoueur::bouttonRClicked()
 {
-    QPushButton *button=(QPushButton*) sender();
+   QPushButton *button=(QPushButton*) sender();
     emit ModifPoste (button);
-}
+}*/
 
 void KeyJoueur::createLayout(int pos)
 {
-    _pos=pos;
+  /*  _pos=pos;
    int colonne=pos+1;
     if(colonne==3)
     {
@@ -282,8 +282,141 @@ _layout->addLayout(gridLayout, 1, colonne,1,3);
         gridLayout2->addWidget(buttons[i],0,i-nbJoueutTerrain,1,1);
     }
 _layout->addLayout(gridLayout2, 3, colonne,1,3);
+*/
+    QLayout* layout=_parent->layout ();
+    if(layout!=0)
+    {
+        delete layout;
+    }
+    _layout=new QGridLayout(this);
 
-    _parent->setLayout(_layout);
+   QGridLayout* gridLayout_7 = _layout;
+   gridLayout_7->setSpacing(6);
+   gridLayout_7->setContentsMargins(11, 11, 11, 11);
+   gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+  QGridLayout* gridLayout_6 = new QGridLayout();
+   gridLayout_6->setSpacing(6);
+   gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+  QGridLayout* gridLayout_4 = new QGridLayout();
+   gridLayout_4->setSpacing(6);
+   gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+  QSpacerItem *  verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+   gridLayout_4->addItem(verticalSpacer_8, 0, 0, 1, 1);
+
+   buttons[6]->setObjectName(QString::fromUtf8("pushButton_7"));
+
+   gridLayout_4->addWidget(buttons[6], 3, 0, 1, 1);
+
+  QSpacerItem *  verticalSpacer_7 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+   gridLayout_4->addItem(verticalSpacer_7, 2, 0, 1, 1);
+
+ QGridLayout*  gridLayout_3 = new QGridLayout();
+   gridLayout_3->setSpacing(6);
+   gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+ QGridLayout*  gridLayout_2 = new QGridLayout();
+   gridLayout_2->setSpacing(6);
+   gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+
+   buttons[4] ->setObjectName(QString::fromUtf8("pushButton_5"));
+
+   gridLayout_2->addWidget(buttons[4] , 3, 0, 1, 1);
+
+  QSpacerItem* verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+   gridLayout_2->addItem(verticalSpacer_3, 4, 0, 1, 1);
+
+
+    buttons[5]->setObjectName(QString::fromUtf8("pushButton_6"));
+
+   gridLayout_2->addWidget( buttons[5], 5, 0, 1, 1);
+
+  QSpacerItem *  verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+   gridLayout_2->addItem(verticalSpacer_4, 2, 0, 1, 1);
+
+
+    buttons[3]->setObjectName(QString::fromUtf8("pushButton_4"));
+
+   gridLayout_2->addWidget( buttons[3], 1, 0, 1, 1);
+
+  QSpacerItem *  verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+   gridLayout_2->addItem(verticalSpacer_6, 0, 0, 1, 1);
+
+
+   gridLayout_3->addLayout(gridLayout_2, 0, 2, 1, 1);
+
+  QGridLayout* gridLayout = new QGridLayout();
+   gridLayout->setSpacing(6);
+   gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+  QSpacerItem *  verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+   gridLayout->addItem(verticalSpacer_5, 0, 0, 1, 1);
+
+    buttons[2]->setObjectName(QString::fromUtf8("pushButton_3"));
+
+   gridLayout->addWidget( buttons[2], 6, 0, 1, 1);
+
+
+    buttons[0]->setObjectName(QString::fromUtf8("pushButton"));
+
+   gridLayout->addWidget( buttons[0], 1, 0, 1, 1);
+
+
+    buttons[1]->setObjectName(QString::fromUtf8("pushButton_2"));
+
+   gridLayout->addWidget( buttons[1], 4, 0, 1, 1);
+
+  QSpacerItem *  verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+   gridLayout->addItem(verticalSpacer_2, 5, 0, 1, 1);
+
+  QSpacerItem *  verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+   gridLayout->addItem(verticalSpacer, 3, 0, 1, 1);
+
+
+   gridLayout_3->addLayout(gridLayout, 0, 0, 1, 1);
+
+ QSpacerItem *   horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+   gridLayout_3->addItem(horizontalSpacer_2, 0, 1, 1, 1);
+
+ QSpacerItem *  horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+   gridLayout_3->addItem(horizontalSpacer_3, 0, 3, 1, 1);
+
+
+   gridLayout_4->addLayout(gridLayout_3, 1, 0, 1, 1);
+
+
+   gridLayout_6->addLayout(gridLayout_4, 0, 1, 1, 1);
+
+  QGridLayout* gridLayout_5 = new QGridLayout();
+   gridLayout_5->setSpacing(6);
+   gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+  QSpacerItem *  horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+   gridLayout_5->addItem(horizontalSpacer_4, 0, 0, 1, 1);
+
+    buttons[7]->setObjectName(QString::fromUtf8("pushButton_8"));
+
+   gridLayout_5->addWidget( buttons[7], 0, 1, 1, 1);
+
+   QSpacerItem *horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+   gridLayout_5->addItem(horizontalSpacer, 0, 2, 1, 1);
+
+
+   gridLayout_6->addLayout(gridLayout_5, 0, 0, 1, 1);
+
+
+   gridLayout_7->addLayout(gridLayout_6, 0, 0, 1, 1);
+
+
+    _parent->setLayout(gridLayout_7);
 
 
 }
@@ -319,7 +452,7 @@ void KeyJoueur::Initialisation()
 
 QString KeyJoueur::GetServeur()
 {
-    return buttons[0]->text();
+    return buttons[3]->text();
 }
 QString KeyJoueur::ChercherPasseur()
 {
@@ -402,24 +535,23 @@ QString KeyJoueur::ChercherJoueur(int &currentposition)
 
 void KeyJoueur::Rotation(int &joueur)
 {
-    QString post1=buttons[0]->text();
+    QString post1=buttons[3]->text();
+    buttons[3]->setText(buttons[0]->text());
     buttons[0]->setText(buttons[1]->text());
     buttons[1]->setText(buttons[2]->text());
-    buttons[2]->setText(buttons[3]->text());
-    buttons[3]->setText(buttons[4]->text());
-    buttons[4]->setText(buttons[5]->text());
-    buttons[5]->setText(post1);
-
+    buttons[2]->setText(buttons[5]->text());
+    buttons[5]->setText(buttons[4]->text());
+    buttons[4]->setText(post1);
     this->ChercherJoueur(joueur);
 }
 void KeyJoueur::RotationM(int &joueur)
 {
 
     QString post1=buttons[0]->text();
-    buttons[0]->setText(buttons[5]->text());
-    buttons[5]->setText(buttons[4]->text());
-    buttons[4]->setText(buttons[3]->text());
-    buttons[3]->setText(buttons[2]->text());
+    buttons[0]->setText(buttons[3]->text());
+    buttons[3]->setText(buttons[4]->text());
+    buttons[4]->setText(buttons[5]->text());
+    buttons[5]->setText(buttons[2]->text());
     buttons[2]->setText(buttons[1]->text());
     buttons[1]->setText(post1);
     this->ChercherJoueur(joueur);
@@ -565,6 +697,11 @@ QString KeyJoueur::UpdateJoueur(Joueur* player)
 
             text=text.setNum(player->get_NumMaillot());
             text=text+" ("+player->get_Prenom()+")$";
+        }
+        else
+        {
+            text=text.setNum(player->get_NumMaillot());
+            text=text+" ("+player->get_Prenom()+")";
         }
 
 

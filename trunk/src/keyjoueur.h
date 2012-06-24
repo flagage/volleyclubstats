@@ -79,11 +79,11 @@ void Reinitialisation();
 
 signals:
     void Changement(QPushButton *button);
-    void ModifPoste(QPushButton *button);
+    //void ModifPoste(QPushButton *button);
     void Tlm_en_place();
 public slots:
 void bouttonLClicked();
-void bouttonRClicked();
+//void bouttonRClicked();
 
 
 };

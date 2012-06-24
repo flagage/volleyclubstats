@@ -44,13 +44,17 @@ class BouttonJoueur : public QPushButton
     //void mousePressEvent (QMouseEvent Qt::RightButton);
 public:
     explicit BouttonJoueur( QString text, QWidget *parent=0);
+    void AjouterMenuBanc();
 
 signals:
     void lclicked();
     void rclicked();
+    void ModifJoueur();
+    void AddJoueur();
+    void SupJoueur();
 
 public slots:
-
+    void SlotMenuJoueur(QAction *);
 };
 
 #endif // BOUTTONJOUEUR_H

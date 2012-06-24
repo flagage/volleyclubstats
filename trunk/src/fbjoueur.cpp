@@ -63,6 +63,31 @@ void fbjoueur::Init()
     _modif=false;
 
 }
+Joueur* fbjoueur::Ajouter(Equipe *Team)
+{
+    ui.comboBox->setEnabled(false);
+    Joueur* play=0;
+    if(this->exec())
+    {
+        play=new Joueur();
+        play->set_Nom(ui.lineEdit_Nom->text());
+        play->set_Prenom(ui.lineEdit_prenom->text());
+        play->set_Addresse(ui.lineEdit_add->text());
+        play->set_Email(ui.lineEdit_Email->text());
+        play->set_Tel(ui.lineEdit_tel->text().toInt());
+        play->set_poste(ui.comboBox_2->currentText ());
+        play->set_NLisence(ui.lineEdit_lis->text().toInt());
+        play->set_Age(ui.lineEdit_age->text().toInt());
+        play->set_NumMaillot(ui.spinBox->value ());
+        if(Team!=0)
+        {
+            Team->AddJoueur(play);
+        }
+
+    }
+    return play;
+}
+
 void fbjoueur::Modif(Joueur* player,bool isMathEncours)
 {
 
@@ -87,29 +112,17 @@ void fbjoueur::Modif(Joueur* player,bool isMathEncours)
     _modif=true;
     if(isMathEncours==true)
     {
-        ui.lineEdit_add->setEnabled(false);
-        ui.lineEdit_age->setEnabled(false);
-        ui.lineEdit_Email->setEnabled(false);
-        ui.lineEdit_lis->setEnabled(false);
-        ui.lineEdit_Nom->setEnabled(false);
-        ui.lineEdit_prenom->setEnabled(false);
-        ui.lineEdit_tel->setEnabled(false);
+
         ui.comboBox->setEnabled(false);
-        ui.spinBox->setEnabled(false);
+
 
     }
     else
     {
 
-        ui.lineEdit_add->setEnabled(true);
-        ui.lineEdit_age->setEnabled(true);
-        ui.lineEdit_Email->setEnabled(true);
-        ui.lineEdit_lis->setEnabled(true);
-        ui.lineEdit_Nom->setEnabled(true);
-        ui.lineEdit_prenom->setEnabled(true);
-        ui.lineEdit_tel->setEnabled(true);
+
         ui.comboBox->setEnabled(true);
-        ui.spinBox->setEnabled(true);
+
         this->exec();
     }
 
