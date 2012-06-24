@@ -32,20 +32,54 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 **/
 
 #include "bouttonjoueur.h"
+#include "QAction"
+#include "QMenu"
 
 BouttonJoueur::BouttonJoueur(QString text, QWidget *parent):
     QPushButton(text,parent)
 {
+
 }
 
 void BouttonJoueur::mousePressEvent (QMouseEvent * event)
 {
 
-if(event->button ()==Qt::LeftButton)
-emit lclicked();
-else
-emit rclicked();
-};
+    if(event->button ()==Qt::LeftButton)
+    {
+        emit lclicked();
+    }
+    else
+    {
+
+        emit rclicked();
+    }
+
+}
+void BouttonJoueur::SlotMenuJoueur(QAction * action)
+{
+    if(action->text()=="Modifier Joueur")
+    {
+        emit ModifJoueur();
+    }
+    else if(action->text()=="Ajouter Joueur")
+    {
+        emit AddJoueur();
+    }
+    else if(action->text()=="Supprimer Joueur")
+    {
+        emit SupJoueur();
+    }
+}
+
+void BouttonJoueur::AjouterMenuBanc()
+{
+    QMenu * menu=new QMenu(this);
+    menu->addAction("Ajouter Joueur");
+    menu->addAction("Modifier Joueur");
+    menu->addAction("Supprimer Joueur");
+    this->setMenu(menu);
+    connect(menu,SIGNAL(triggered(QAction *)), this, SLOT(SlotMenuJoueur(QAction *)));
+}
 
 /*void BouttonJoueur::mousePressEvent (QMouseEvent Qt::RightButton)
 {};*/

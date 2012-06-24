@@ -46,6 +46,7 @@ public:
      fbjoueur(Equipe* Team,QWidget *parent = 0);
      void Init();
      void Modif(Joueur* player,bool isMathEncours=false);
+     Joueur* Ajouter(Equipe* Team);
 
 signals:
 

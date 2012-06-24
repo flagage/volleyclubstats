@@ -100,7 +100,7 @@ void Match::setCurrentEquipe(Equipe *Team)
 {
     _currrentEquipe=Team;
     _score->set_Equipe_1(Team->GetNom());
-    _ListJoueur=_currrentEquipe->GetListeJoueur();
+
 }
 
 void Match::setAdvers(QString nom)
@@ -473,19 +473,20 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
     int currentjoueur;
     int numjoueur;
     bool error=true;
+    QList <Joueur*> listJoueur=_currrentEquipe->GetListeJoueur();
     if(joueurname.toInt()==0)
     {
         player=_currrentEquipe->seachjoueur(0);
     }
     else
     {
-        for(int i=0;i<_ListJoueur.count();i++)
+        for(int i=0;i<listJoueur.count();i++)
         {
-            currentjoueur=_ListJoueur.at(i)->get_NumMaillot();
+            currentjoueur=listJoueur.at(i)->get_NumMaillot();
             if(currentjoueur==joueurname.toInt())
             {
                 numjoueur=i;
-                player=_ListJoueur.at(i);
+                player=listJoueur.at(i);
 
                 break;
             }
@@ -512,7 +513,7 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
 
 QList <Joueur*> Match::GetListJoueur()
 {
-    return _ListJoueur;
+    return _currrentEquipe->GetListeJoueur();
 }
 
 void Match::InitFichierXml()

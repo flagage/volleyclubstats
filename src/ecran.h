@@ -99,6 +99,8 @@ public:
     void SetTactile(bool);
     void SautAction(QString str);
     void JoueurAPlacer();
+    void JoueurBanc();
+    void AddJoueurBanc(Joueur* joueur);
 
 
 
@@ -136,6 +138,8 @@ private:
      int _currentposition;
      InitValeur * _ValeurInitial;
      InitAction * _ListActionInit;
+     int _joueurBanc;
+
 
 protected:
      void closeEvent(QCloseEvent * event );
@@ -156,7 +160,7 @@ public slots:
     void score();
     void scoreadv();
     void slot_changement(QPushButton*);
-    void slot_modifpost(QPushButton*);
+    void SlotModifJoueur();
     void slot_initChangement();
     void slot_score();
     void Slot_Scoreplus(int position);
@@ -184,6 +188,10 @@ public slots:
     void Slot_ComplAction();
 
     void bouttonLClicked();
+    void SlotButonRclicked();
+    void SlotAddJoueur();
+    void SlotSupJoueur();
+    void UpdateTabVue(int tab);
 
 signals:
     void ScorePlus(int);
