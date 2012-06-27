@@ -43,6 +43,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "QRadioButton"
 #include "fenetreinternet.h"
 #include "lecteurvideo.h"
+#include "twstatjoueur.h"
 
 
 
@@ -79,7 +80,9 @@ Ecran::Ecran(QWidget *parent) :
     _PlacementJoueur=new KeyJoueur(ui->label_4,7,true);
     QHBoxLayout *layout=new QHBoxLayout();
     layout->addWidget (_PlacementJoueur);
+
     connect(this->_PlacementJoueur,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
+    connect(this->_PlacementJoueur,SIGNAL(JoueurStat(QPushButton*)),this,SLOT(slot_AfficheStat(QPushButton*)));
     // connect(this->_PlacementJoueur,SIGNAL(ModifPoste(QPushButton*)),this,SLOT(slot_modifpost(QPushButton*)));
     connect(this->_PlacementJoueur,SIGNAL(Tlm_en_place()),this,SLOT(Slot_start()));
     connect(this,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
@@ -1801,3 +1804,24 @@ void Ecran::UpdateTabVue(int tab)
     }
 }
 
+void Ecran::slot_AfficheStat(QPushButton * boutton)
+{
+    QStringList strlist=boutton->text().split("(");
+    strlist=strlist[1].split(")");
+    QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
+    for(int i=0;i<listJoueur.size();i++)
+    {
+
+        if (listJoueur.at(i)->get_Prenom()==strlist[0])
+        {
+
+
+
+            TwStatJoueur *widgetstat=new TwStatJoueur(listJoueur.at(i),this);
+            widgetstat->Initialisation();
+
+
+        }
+    }
+
+}

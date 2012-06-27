@@ -160,6 +160,7 @@ public slots:
     void score();
     void scoreadv();
     void slot_changement(QPushButton*);
+    void slot_AfficheStat(QPushButton*);
     void SlotModifJoueur();
     void slot_initChangement();
     void slot_score();

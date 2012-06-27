@@ -52,6 +52,7 @@ signals:
     void ModifJoueur();
     void AddJoueur();
     void SupJoueur();
+    void AfficheStat();
 
 public slots:
     void SlotMenuJoueur(QAction *);

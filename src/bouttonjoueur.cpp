@@ -69,6 +69,10 @@ void BouttonJoueur::SlotMenuJoueur(QAction * action)
     {
         emit SupJoueur();
     }
+    else if(action->text()=="Statistiques")
+    {
+        emit AfficheStat();
+    }
 }
 
 void BouttonJoueur::AjouterMenuBanc()
@@ -77,6 +81,8 @@ void BouttonJoueur::AjouterMenuBanc()
     menu->addAction("Ajouter Joueur");
     menu->addAction("Modifier Joueur");
     menu->addAction("Supprimer Joueur");
+    menu->addSeparator();
+    menu->addAction("Statistiques");
     this->setMenu(menu);
     connect(menu,SIGNAL(triggered(QAction *)), this, SLOT(SlotMenuJoueur(QAction *)));
 }
