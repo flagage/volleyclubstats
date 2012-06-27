@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
 <Info>
- <Match Contre="test" Equipe="Villebon Senior F" NbDeSet="0" Heure="" Arbitre="" Type="Championnat" Date="24_06_2012_19_14_54" Duree="temps"/>
+ <Match Contre="" Equipe="Villebon Senior F" NbDeSet="0" Heure="" Arbitre="" Type="Championnat" Date="27_06_2012_08_29_55" Duree="temps"/>
  <S1>
   <Position>
-   <Poste1>Alexandra_16</Poste1>
-   <Poste2>solenn_7</Poste2>
+   <Poste1>solenn_7</Poste1>
+   <Poste2>Virginie_9</Poste2>
    <Poste3>Valerie_13</Poste3>
    <Poste4>Rosemary_17</Poste4>
    <Poste5>Alexia_10</Poste5>
    <Poste6>Alix_6</Poste6>
    <Libero>Maryline_1</Libero>
   </Position>
-  <Score>1:0</Score>
+  <Score>0:0</Score>
   <Stat>
-   <Alexandra_16>
-    <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-    <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-    <Contre PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-    <Defense PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-    <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-    <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-   </Alexandra_16>
    <solenn_7>
     <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
@@ -29,6 +21,14 @@
     <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
    </solenn_7>
+   <Virginie_9>
+    <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+    <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+    <Contre PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+    <Defense PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+    <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+    <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
+   </Virginie_9>
    <Valerie_13>
     <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
@@ -71,9 +71,4 @@
    </Maryline_1>
   </Stat>
  </S1>
- <S2>
-  <Position/>
-  <Score>0:0</Score>
-  <Stat/>
- </S2>
 </Info>

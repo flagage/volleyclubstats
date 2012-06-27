@@ -49,7 +49,8 @@ SOURCES += src/tracelog.cpp \
     src/statwriter.cpp \
     src/volleyInit.cpp \
     src/tracematch.cpp \
-    src/matchxml.cpp
+    src/matchxml.cpp \
+    src/twstatjoueur.cpp
 
 
 HEADERS  += src/tracelog.h \
@@ -85,7 +86,8 @@ HEADERS  += src/tracelog.h \
     src/statwriter.h \
     src/volleyInit.h \
     src/tracematch.h \
-    src/matchxml.h
+    src/matchxml.h \
+    src/twstatjoueur.h
 
 
 FORMS    +=  ui/statwidget.ui \
@@ -105,7 +107,8 @@ FORMS    +=  ui/statwidget.ui \
     ui/fenetrechoixmatch.ui \
     ui/widgettabeff.ui \
     ui/fenetreinternet.ui \
-    ui/lecteurvideo.ui
+    ui/lecteurvideo.ui \
+    ui/twstatjoueur.ui
 
 
 

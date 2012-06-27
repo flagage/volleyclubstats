@@ -52,6 +52,7 @@ KeyJoueur::KeyJoueur(QWidget *parent,int nbjoueur,bool libero) :
         buttons[i]=new BouttonJoueur(strPosition,this);
 
         connect(buttons[i],SIGNAL(lclicked()),this,SLOT(bouttonLClicked()));
+        connect(buttons[i],SIGNAL(rclicked()),this,SLOT(bouttonRClicked()));
 
 
 
@@ -76,6 +77,11 @@ _labelPosition->setStyleSheet("color:gray; font-size: 30px;");
 
 }
 
+void KeyJoueur::bouttonRClicked()
+{
+    QPushButton *button=(QPushButton*)sender();
+    emit JoueurStat(button);
+}
 
 void KeyJoueur::bouttonLClicked()
 {
