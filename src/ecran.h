@@ -160,7 +160,8 @@ public slots:
     void score();
     void scoreadv();
     void slot_changement(QPushButton*);
-    void slot_AfficheStat(QPushButton*);
+    void slot_AfficheStat(QPushButton* bu=0);
+    void slot_Stat();
     void SlotModifJoueur();
     void slot_initChangement();
     void slot_score();
@@ -193,6 +194,10 @@ public slots:
     void SlotAddJoueur();
     void SlotSupJoueur();
     void UpdateTabVue(int tab);
+
+    void SlotMenupoint1(QAction*);
+    void SlotMenupoint2(QAction*);
+
 
 signals:
     void ScorePlus(int);

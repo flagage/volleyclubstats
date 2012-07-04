@@ -43,7 +43,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "QRadioButton"
 #include "fenetreinternet.h"
 #include "lecteurvideo.h"
-#include "twstatjoueur.h"
+#include "fenetrejoueurstat.h"
 
 
 
@@ -96,10 +96,10 @@ Ecran::Ecran(QWidget *parent) :
     connect(this->LineEdit2,SIGNAL(ComplementAction()),this,SLOT(Slot_ComplAction()));
 
 
-    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Slot_PplusL()));
-    connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(Slot_PplusA()));
-    connect(ui->pushButton_3,SIGNAL(clicked()),this,SLOT(Slot_PmoinsL()));
-    connect(ui->pushButton_4,SIGNAL(clicked()),this,SLOT(Slot_PmoinsA()));
+    //connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Slot_PplusL()));
+    //connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(Slot_PplusA()));
+    //connect(ui->pushButton_3,SIGNAL(clicked()),this,SLOT(Slot_PmoinsL()));
+    //connect(ui->pushButton_4,SIGNAL(clicked()),this,SLOT(Slot_PmoinsA()));
 
     //QMenu * menuservice=new QMenu();
     _isMatchEnCour=false;
@@ -114,23 +114,23 @@ Ecran::Ecran(QWidget *parent) :
 
 
     connect(ui->pushButton_TM,SIGNAL(clicked()),this,SLOT(TempsMort()));
-    connect(ui->pushButton_FM,SIGNAL(clicked()),this,SLOT(FinMatch()));
-    connect(ui->pushButton_6,SIGNAL(clicked()),this,SLOT(FinSet()));
-    connect(ui->pBSup,SIGNAL(clicked()),this,SLOT(Slot_SuppAction()));
-    connect(ui->PBModif,SIGNAL(clicked()),this,SLOT(Slot_ModifAction()));
+    //connect(ui->pushButton_FM,SIGNAL(clicked()),this,SLOT(FinMatch()));
+    //connect(ui->pushButton_6,SIGNAL(clicked()),this,SLOT(FinSet()));
+    //connect(ui->pBSup,SIGNAL(clicked()),this,SLOT(Slot_SuppAction()));
+    //connect(ui->PBModif,SIGNAL(clicked()),this,SLOT(Slot_ModifAction()));
 
     connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(ActionService(int)));
-    connect(ui->listJoueur,SIGNAL(itemPressed(QListWidgetItem*)),this,SLOT(SlotDrag(QListWidgetItem*)));
+    //connect(ui->listJoueur,SIGNAL(itemPressed(QListWidgetItem*)),this,SLOT(SlotDrag(QListWidgetItem*)));
 
-    connect(ui->pushButton_5,SIGNAL(clicked()),this,SLOT(Slot_RotTerrain()));
+    //connect(ui->pushButton_5,SIGNAL(clicked()),this,SLOT(Slot_RotTerrain()));
     //bouton de rotation
 
     connect (ui->pBRotationPlus,SIGNAL(clicked()),this,SLOT(slot_rotationP()));
     connect (ui->pBRotationMoins,SIGNAL(clicked()),this,SLOT(slot_rotationM()));
 
     ui->groupBox->setVisible(false);
-    connect(ui->Start,SIGNAL(clicked()),this,SLOT(Slot_start()));
-    ui->Start->setStyleSheet("color: white; background-color:orange; border-width: 1px; border-color: #339; border-style: solid;border-radius: 7;   padding: 3px; font-size: 14px;padding-left: 5px; padding-right: 5px;");
+   // connect(ui->Start,SIGNAL(clicked()),this,SLOT(Slot_start()));
+    //ui->Start->setStyleSheet("color: white; background-color:orange; border-width: 1px; border-color: #339; border-style: solid;border-radius: 7;   padding: 3px; font-size: 14px;padding-left: 5px; padding-right: 5px;");
 
 
     _TimerChange = new QTimer (this);
@@ -163,7 +163,7 @@ Ecran::Ecran(QWidget *parent) :
     myWidget=new StatWidget(ui->groupBox_3,this);
     _WtabEff=new WidgetTabEff(ui->groupBox_6);
     /// version tactile
-    connect(ui->Button_PP,SIGNAL(clicked()),this,SLOT(Slot_ActionPP()));
+    /*connect(ui->Button_PP,SIGNAL(clicked()),this,SLOT(Slot_ActionPP()));
     connect(ui->Button_P,SIGNAL(clicked()),this,SLOT(Slot_ActionP()));
     connect(ui->Button_0,SIGNAL(clicked()),this,SLOT(Slot_Action0()));
     connect(ui->Button_M,SIGNAL(clicked()),this,SLOT(Slot_ActionM()));
@@ -174,7 +174,7 @@ Ecran::Ecran(QWidget *parent) :
     ui->Button_MM->setVisible(false);
     ui->Button_P->setVisible(false);
     ui->Button_PP->setVisible(false);
-    ui->tabWidget->setVisible(false);
+    ui->tabWidget->setVisible(false);*/
     ui->label_4->setPixmap (QPixmap("Image/new_terrain.png"));
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
 
@@ -223,10 +223,10 @@ void Ecran::Initialisation()
     ui->groupBox_7->setVisible(false);
     LineEdit2->setVisible(false);
     ui->comboBox->setVisible(false);
-    ui->pushButton_FM->setVisible(false);
+    //ui->pushButton_FM->setVisible(false);
     ui->pushButton_TM->setVisible(false);
-    ui->pushButton_6->setVisible(false);
-    ui->Start->setVisible(false);
+    //ui->pushButton_6->setVisible(false);
+    //ui->Start->setVisible(false);
     //ui->groupBox_8->setVisible(true);
     // ui->groupBox_4->setVisible(false);
     //ui->groupBox_4->setVisible (false);
@@ -248,7 +248,7 @@ void Ecran::Initialisation()
 
     // this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Passe")<<tr("Attaque");
     this->_listAction=InitAction::donneInstance()->GetListAction();
-    ui->PBModif->setVisible(false);
+    //ui->PBModif->setVisible(false);
     ui->tabWidget->setVisible(true);
 
 }
@@ -284,7 +284,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     LineEdit2->setVisible(true);
     ui->comboBox->setVisible(true);
 
-    ui->Start->setVisible(true);
+    //ui->Start->setVisible(true);
     ui->label_4->setPixmap(QPixmap("Image/new_terrain.png"));
     this->_positionEcran=0;
     this->_PlacementJoueur->createLayout(0);
@@ -307,14 +307,26 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->label_2->setText(advs);
     ui->label->setText(team);
     ui->pBScore->setText("0");
+    QMenu * menupoint=new QMenu(this);
+    menupoint->addAction("+1");
+    menupoint->addAction("-1");
+    ui->pBScore->setMenu(menupoint);
+    connect(menupoint,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint1(QAction*)));
+    //ui->pBScore->showMenu();
     ui->pBScore_2->setText("0");
+    QMenu * menupoint2=new QMenu(this);
+    menupoint2->addAction("+1");
+    menupoint2->addAction("-1");
+    ui->pBScore_2->setMenu(menupoint2);
+    connect(menupoint2,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint2(QAction*)));
+    //ui->pBScore_2->showMenu();
     ui->pBSet->setText("0");
     ui->pBSet_2->setText("0");
     //ui->groupBoxAction->setVisible(true);
     ui->groupBox_2->setVisible(true);
     //ui->groupBox_3->setVisible (true);
     //ui->groupBox_4->setVisible (true);
-    ui->groupBox_5->setVisible (false);
+    //ui->groupBox_5->setVisible (false);
 
     _isMatchEnCour=false;
     ui->comboBox->addItems(InitAction::donneInstance()->GetListAction());
@@ -352,9 +364,9 @@ void Ecran::InitialisationMatch(QString team,QString advs)
         }
         joueurname.append(strjoueur);
     }
-    ui->listJoueur->addItems(joueurname);
+    /*ui->listJoueur->addItems(joueurname);
     ui->listJoueur->sortItems(Qt::AscendingOrder);
-    delete ui->listJoueur->item(0);
+    delete ui->listJoueur->item(0);*/
 
 
 
@@ -405,7 +417,9 @@ void Ecran::slot_score()
 
         }
         else
-            ui->pushButton_6->setVisible(true);
+        {
+        }
+            //ui->pushButton_6->setVisible(true);
     }
 
 }
@@ -440,24 +454,24 @@ void Ecran::Slot_start()
         ui->groupBox_9->setVisible(true);
         ui->groupBox_4->setVisible(false);
 
-        ui->groupBox_8->setVisible(false);
-        ui->listAction->setVisible (true);
-        ui->listAction->setSelectionMode (QAbstractItemView::MultiSelection);
+        //ui->groupBox_8->setVisible(false);
+        //ui->listAction->setVisible (true);
+        //ui->listAction->setSelectionMode (QAbstractItemView::MultiSelection);
 
         LineEdit2->setFocus();
         this->LineEdit2->setCursorPosition(LineEdit2->text().size());
         ui->comboBox->setEnabled(true);
         LineEdit2->setEnabled(true);
-        ui->groupBox_5->setVisible (true);
+        //ui->groupBox_5->setVisible (true);
         ui->label_6->setVisible(false);
         ui->label_7->setVisible(false);
         ui->label_8->setVisible(false);
         ui->label_9->setVisible(false);
 
-        ui->pushButton_FM->setVisible(true);
+        //ui->pushButton_FM->setVisible(true);
         ui->pushButton_TM->setVisible(true);
 
-        ui->Start->setVisible (false);
+        //ui->Start->setVisible (false);
 
         FenetreService * fenetre=new FenetreService(Match::donneInstance()->getTeam()->GetNom(),Match::donneInstance()->getadvs());
         fenetre->exec();
@@ -488,8 +502,8 @@ void Ecran::Slot_start()
         ui->groupBox_7->setVisible(true);
         ui->groupBox_9->setVisible(true);
         ui->groupBox_4->setVisible(false);
-        ui->groupBox_5->setVisible (true);
-        ui->groupBox_8->setVisible(false);
+        //ui->groupBox_5->setVisible (true);
+        //ui->groupBox_8->setVisible(false);
     }
 
 }
@@ -620,7 +634,7 @@ void Ecran::changement(QString joueur,QPushButton *bouton)
 }
 void Ecran::Slot_ModifAction()
 {
-    QList<QListWidgetItem *> list=ui->listAction->selectedItems ();
+    /*QList<QListWidgetItem *> list=ui->listAction->selectedItems ();
 
     if(list.size()>1)
     {
@@ -684,12 +698,12 @@ void Ecran::Slot_ModifAction()
         //   delete item;
 
         emit SignalAction(num);
-    }
+    }*/
 }
 
 void Ecran::Slot_SuppAction()
 {
-    QList<QListWidgetItem *> list=ui->listAction->selectedItems ();
+    /*QList<QListWidgetItem *> list=ui->listAction->selectedItems ();
 
     for (int i=0;i<list.size();i++)
     {
@@ -746,7 +760,7 @@ void Ecran::Slot_SuppAction()
         emit SignalAction(num);
 
     }
-
+*/
 
 }
 void Ecran::RetirerPoint(bool qui)
@@ -1008,7 +1022,7 @@ void Ecran::FinSet()
 {
 
     this->_currentSet=this->_currentSet+1;
-    ui->pushButton_6->setVisible(false);
+    //ui->pushButton_6->setVisible(false);
     this->_TimerScore->start(100);
     Match::donneInstance()->FinSet();
     ui->pBScore->setText("0");
@@ -1059,7 +1073,7 @@ void Ecran::FinMatch()
         this->_listActionMatch.clear();
         this->_listBanc->clear();
         this->_ListeEquipe.clear();
-        ui->listJoueur->clear ();
+        //ui->listJoueur->clear ();
         this->myWidget->clean();
         ui->groupBox->setVisible(false);
         Initialisation();
@@ -1172,12 +1186,12 @@ void Ecran::keyPressEvent(QKeyEvent * event)
             isValide=false;
             if(this->_flagsup==true)
             {
-                for(int i=ui->listAction->count ();i>=0;i--)
+                /*for(int i=ui->listAction->count ();i>=0;i--)
                 {
                     QListWidgetItem* item=ui->listAction->takeItem (i);
                     delete item;
                 }
-                this->_flagsup=false;
+                this->_flagsup=false;*/
             }
             LineEdit2->clear();
             QString strNumPlayer=strValue.left(2);
@@ -1266,7 +1280,7 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
 
         _trace->SetTrace(msgTrace);
         this->_TraceListAction->SetTrace(MsgAction);
-        ui->listAction->addItem (MsgAction);
+        //ui->listAction->addItem (MsgAction);
         this->_WtabEff->SlotMiseAJour();
         this->_PlacementJoueur->Stat();
     }
@@ -1492,7 +1506,7 @@ void Ecran::dropEvent(QDropEvent* event)
     if(this->_PlacementJoueur->SetLineEdit(event)==true)
     {
 
-        for(int i=0;i<ui->listJoueur->count();i++)
+        /*for(int i=0;i<ui->listJoueur->count();i++)
         {
             if(ui->listJoueur->item(i)->text()==text)
             {
@@ -1500,7 +1514,7 @@ void Ecran::dropEvent(QDropEvent* event)
             }
         }
         ui->listJoueur->sortItems(Qt::AscendingOrder);
-
+    */
     }
     event->acceptProposedAction();
 
@@ -1784,6 +1798,7 @@ void Ecran::AddJoueurBanc(Joueur* joueur)
     connect(pushButton,SIGNAL(ModifJoueur()),this,SLOT(SlotModifJoueur()));
     connect(pushButton,SIGNAL(AddJoueur()),this,SLOT(SlotAddJoueur()));
     connect(pushButton,SIGNAL(SupJoueur()),this,SLOT(SlotSupJoueur()));
+    connect(pushButton,SIGNAL(AfficheStat()),this,SLOT(slot_Stat()));
     _joueurBanc++;
 }
 
@@ -1804,8 +1819,18 @@ void Ecran::UpdateTabVue(int tab)
     }
 }
 
+void Ecran::slot_Stat()
+{
+    QPushButton* boutton=(QPushButton*) sender();
+    this->slot_AfficheStat(boutton);
+}
+
 void Ecran::slot_AfficheStat(QPushButton * boutton)
 {
+    if(boutton==0)
+    {
+       boutton=(QPushButton*) sender();
+    }
     QStringList strlist=boutton->text().split("(");
     strlist=strlist[1].split(")");
     QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
@@ -1817,11 +1842,39 @@ void Ecran::slot_AfficheStat(QPushButton * boutton)
 
 
 
-            TwStatJoueur *widgetstat=new TwStatJoueur(listJoueur.at(i),this);
-            widgetstat->Initialisation();
+           // TwStatJoueur *widgetstat=new TwStatJoueur(listJoueur.at(i),this);
+            //widgetstat->Initialisation();
+            FenetreJoueurStat* fstat=new FenetreJoueurStat(listJoueur.at(i),this);
+            fstat->show();
 
 
         }
     }
 
+}
+
+void Ecran::SlotMenupoint1(QAction * action)
+{
+    if(action->text()=="+1")
+    {
+        this->Slot_PplusL();
+    }
+    else if (action->text()=="-1")
+    {
+        this->Slot_PmoinsL();
+    }
+}
+
+
+
+void Ecran::SlotMenupoint2(QAction * action)
+{
+    if(action->text()=="+1")
+    {
+        this->Slot_PplusA();
+    }
+    else if (action->text()=="-1")
+    {
+        this->Slot_PmoinsA();
+    }
 }
