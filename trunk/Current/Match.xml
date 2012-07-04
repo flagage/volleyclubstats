@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
 <Info>
- <Match Contre="" Equipe="Villebon Senior F" NbDeSet="0" Heure="" Arbitre="" Type="Championnat" Date="27_06_2012_08_29_55" Duree="temps"/>
+ <Match Contre="rr" Equipe="Villebon Senior F" NbDeSet="0" Heure="" Arbitre="" Type="Championnat" Date="03_07_2012_08_44_47" Duree="temps"/>
  <S1>
   <Position>
    <Poste1>solenn_7</Poste1>
@@ -9,7 +9,7 @@
    <Poste4>Rosemary_17</Poste4>
    <Poste5>Alexia_10</Poste5>
    <Poste6>Alix_6</Poste6>
-   <Libero>Maryline_1</Libero>
+   <Libero>Veronique_4</Libero>
   </Position>
   <Score>0:0</Score>
   <Stat>
@@ -61,14 +61,19 @@
     <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
    </Alix_6>
-   <Maryline_1>
+   <Veronique_4>
     <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Contre PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Defense PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-   </Maryline_1>
+   </Veronique_4>
   </Stat>
  </S1>
+ <S2>
+  <Position/>
+  <Score>0:0</Score>
+  <Stat/>
+ </S2>
 </Info>
