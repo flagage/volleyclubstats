@@ -66,11 +66,11 @@ Ecran::Ecran(QWidget *parent) :
 
     ui->lineEdit->setVisible(false);
 
-    ui->lineEdit_PBP->setVisible(false);
+    //ui->lineEdit_PBP->setVisible(false);
     LineEdit2 =  new VCSLineEdit(ui->centralWidget);
     LineEdit2->setObjectName(QString::fromUtf8("lineEdit"));
 
-    ui->gridLayout_11->addWidget(LineEdit2,2, 3, 1, 1);
+    ui->gridLayout->addWidget(LineEdit2,0, 0, 1, 1);
 
     /*QDesktopWidget *desktop=QApplication::desktop ();
     QRect size=desktop->screenGeometry ();*/
@@ -381,7 +381,10 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     this->myWidget->InitListAction(_listAction);
     this->_PlacementJoueur->InitLineEditSize ();
     ui->tabWidget->setVisible(true);
-
+    ui->label_5->setText(MatchEncour->getadvs().toUpper());
+    ui->label_3->setText(MatchEncour->getTeam()->GetNom().toUpper());
+    ui->label_11->setText("");
+    ui->label_12->setText("");
 
 
 }
@@ -1395,7 +1398,7 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
             ui->comboBox->currentText()==tr("Attaque"))
 
     {
-        ui->lineEdit_PBP->setVisible(false);
+        //ui->lineEdit_PBP->setVisible(false);
     }
     int num=numjoueur.toInt();
     SignalAction(num);
@@ -1412,6 +1415,7 @@ void Ecran::PointPlus(QString numjoueur)
         emit ScorePlus(0);
         _PointForUs=false;
         _flagsup=true;
+        Match::donneInstance()->addPoint(true);
     }
     else
     {
@@ -1421,10 +1425,11 @@ void Ecran::PointPlus(QString numjoueur)
         emit ScorePlus(1);
         _flagsup=true;
         _PointForUs=true;
+        Match::donneInstance()->addPoint();
     }
     // this->_WtabEff->SlotMiseAJour();
     //this->myWidget->Resize();
-
+    this->AfficherStat();
 }
 
 void Ecran::PointMoins(QString numjoueur)
@@ -1436,6 +1441,8 @@ void Ecran::PointMoins(QString numjoueur)
         this->LineEdit2->ChangeBackColor(0);
         emit ScorePlus(1);
         _PointForUs=true;
+        Match::donneInstance()->addFaute(true);
+        Match::donneInstance()->addPoint();
     }
     else
     {
@@ -1443,8 +1450,11 @@ void Ecran::PointMoins(QString numjoueur)
         this->LineEdit2->ChangeBackColor(1);
         emit ScorePlus(0);
         _PointForUs=false;
+        Match::donneInstance()->addFaute();
+        Match::donneInstance()->addPoint(true);
     }
     this->myWidget->Resize();
+    this->AfficherStat();
 }
 
 void Ecran::ActionService(int position)
@@ -1566,23 +1576,6 @@ void Ecran::SetTactile (bool valeur)
 }
 
 
-void Ecran::Slot_ActionMM()
-{
-}
-
-void Ecran::Slot_ActionM()
-{
-}
-void Ecran::Slot_Action0()
-{
-}
-void Ecran::Slot_ActionP()
-{
-}
-void Ecran::Slot_ActionPP()
-{
-}
-
 void Ecran::Slot_PplusL()
 {
     Match::donneInstance()->GetScore()->set_Score_E1(Match::donneInstance()->GetScore()->get_Score_E1()+1);
@@ -1681,10 +1674,10 @@ void Ecran::Slot_posDefense()
 }
 void Ecran::Slot_ComplAction()
 {
-    if(ui->lineEdit_PBP->isVisible())
+    /*if(ui->lineEdit_PBP->isVisible())
     {
         ui->lineEdit_PBP->setFocus();
-    }
+    }*/
 }
 
 void Ecran::SautAction(QString str)
@@ -1876,5 +1869,42 @@ void Ecran::SlotMenupoint2(QAction * action)
     else if (action->text()=="-1")
     {
         this->Slot_PmoinsA();
+    }
+}
+
+void Ecran::AfficherStat()
+{
+    QString equipe=0;
+    QString adv=0;
+    Match * currentM=Match::donneInstance();
+    Equipe * currentT=currentM->getTeam();
+    for(int i=0;i<InitAction::donneInstance()->GetSizeAction();i++)
+    {
+        QString element=InitAction::donneInstance()->GetElementAction(i);
+        element.truncate(1);
+        equipe=equipe+element+" "+QString::number(currentT->getStatMatch(i,0))+" | ";
+
+    }
+    equipe=equipe+"Point "+QString::number(currentM->GetPoint())+" | ";
+     equipe=equipe+"Faute_Adv "+QString::number(currentM->GetFaute(true));
+    ui->label_11->setText(equipe);
+
+    for(int k=0;k<currentT->GetListeJoueur().size();k++)
+    {
+        if(currentT->GetListeJoueur().at(k)->get_NumMaillot()==0)
+        {
+            Joueur* adversaire=currentT->GetListeJoueur().at(k);
+            for(int i=0;i<InitAction::donneInstance()->GetSizeAction();i++)
+            {
+                QString element=InitAction::donneInstance()->GetElementAction(i);
+                element.truncate(1);
+                adv=adv+element+" "+QString::number(adversaire->getStatMatch(i,0))+" | ";
+
+            }
+            adv=adv+"Point "+QString::number(currentM->GetPoint(true))+" | ";
+            adv=adv+"Faut_Adv "+QString::number(currentM->GetFaute());
+
+            ui->label_12->setText(adv);
+        }
     }
 }

@@ -88,6 +88,7 @@ public:
     double GetValeur(int action,int pos);
     void SetValeur(int action,int pos,double valeur);
     int GetNbValeur();
+    int GetTotal();
     void init();
     //void SetListAction(QStringList list);
     QStringList GetListValeurStat();

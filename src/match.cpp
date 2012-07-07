@@ -47,6 +47,11 @@ Match::Match()
     _lancementok=false;
     _score=new Score();
     _Fichierxml=0;
+    _faute=0;
+    _fauteAdv=0;
+    _point=0;
+    _pointAdv=0;
+
 
 
 }
@@ -535,3 +540,62 @@ void Match::SetJoueurTerr(QList<Joueur *> list)
     _ListTerrain=list;
 }
 
+int Match::GetPoint(bool adv)
+{
+    if(adv==false)
+    {
+        return this->_point;
+    }
+    else
+    {
+        return this->_pointAdv;
+    }
+}
+
+void Match::addPoint(bool adv)
+{
+    if(adv==false)
+    {
+        _point++;
+    }
+    else
+    {
+        _pointAdv++;
+    }
+}
+
+int Match::GetFaute(bool adv)
+{
+    if(adv==false)
+    {
+        return this->_faute;
+    }
+    else
+    {
+        return this->_fauteAdv;
+    }
+}
+
+void Match::addFaute(bool adv)
+{
+    if(adv==false)
+    {
+        this->_faute++;
+    }
+    else
+    {
+       this->_fauteAdv++;
+    }
+}
+
+void Match::supFaute(bool adv)
+{
+    if(adv==false)
+    {
+        this->_faute--;
+    }
+    else
+    {
+       this->_fauteAdv--;
+    }
+}

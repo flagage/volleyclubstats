@@ -584,7 +584,7 @@ void KeyJoueur::Stat()
     Joueur* player;
     QString valeur;
     /// position 1
-    strtext =buttons[1]->text();
+    strtext =buttons[3]->text();
     listtext=strtext.split("\n");
     strtext=listtext.at(0);
     listStr=strtext.split("(");
@@ -598,11 +598,11 @@ void KeyJoueur::Stat()
     strtext=strtext+"\n S("+valeur+"%)";
     valeur.setNum(player->getStatMatch(1,6),'g',4);
     strtext=strtext+"\n R("+valeur+"%)";
-    buttons[1]->setText(strtext);
+    buttons[3]->setText(strtext);
     }
 
     /// position 2
-    strtext =buttons[2]->text();
+    strtext =buttons[1]->text();
     listtext=strtext.split("\n");
     strtext=listtext.at(0);
     listStr=strtext.split("(");
@@ -630,7 +630,7 @@ void KeyJoueur::Stat()
     }
 
     /// position 4
-    strtext =buttons[3]->text();
+    strtext =buttons[0]->text();
     listtext=strtext.split("\n");
     strtext=listtext.at(0);
     listStr=strtext.split("(");
@@ -640,7 +640,7 @@ void KeyJoueur::Stat()
     {
     valeur.setNum(player->getStatMatch(2,6),'g',4);
     strtext=strtext+"\n A("+valeur+"%)";
-    buttons[3]->setText(strtext);
+    buttons[0]->setText(strtext);
     }
 
     /// position 5

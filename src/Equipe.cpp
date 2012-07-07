@@ -216,6 +216,10 @@ double Equipe::getStatMatch(int action,int pos)
 {
    return this->_VectorStat[0]->GetValeur(action,pos);
 }
+int Equipe::GetTotalPoint()
+{
+    return this->_VectorStat[0]->GetTotal();
+}
 
 void Equipe::addStatSet(int action,int pos)
 {

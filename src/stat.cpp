@@ -327,6 +327,10 @@ int statFinal::GetNbValeur()
 {
     return statMap[0]->GetAfficheValeur();
 }
+int statFinal::GetTotal()
+{
+    return 0;
+}
 
 QStringList statFinal::GetListValeurStat()
 {

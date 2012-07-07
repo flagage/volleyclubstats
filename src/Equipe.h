@@ -88,6 +88,7 @@ public: //fonction
     QString GetStringValeur();
     QString GetStringAction();
     void SetStringAction(QString action);
+    int GetTotalPoint();
     void setStatMatch(int action,int pos,double valeur);
     void ExportCVS(QString Fichier);
     void ImportCVS(QString);

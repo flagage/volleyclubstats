@@ -61,6 +61,10 @@ private:
     QList <Joueur*> _ListTerrain;
     Joueur * _JouerAdvers;
     MatchXml *_Fichierxml;
+    int _point;
+    int _pointAdv;
+    int _faute;
+    int _fauteAdv;
 protected:
     Match();
     Match(const Match&);
@@ -112,6 +116,14 @@ public:
     void InitFichierXml();
 
     void SetJoueurTerr(QList<Joueur *> list);
+
+    int GetPoint(bool adv=false);
+    int GetFaute(bool adv=false);
+    void addPoint(bool adv=false);
+    void addFaute(bool adv=false);
+    void supPoint(bool adv=false);
+    void supFaute(bool adv=false);
+
 
 };
 
