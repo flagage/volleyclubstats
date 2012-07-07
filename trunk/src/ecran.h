@@ -101,6 +101,7 @@ public:
     void JoueurAPlacer();
     void JoueurBanc();
     void AddJoueurBanc(Joueur* joueur);
+     void AfficherStat();
 
 
 
@@ -141,6 +142,7 @@ private:
      int _joueurBanc;
 
 
+
 protected:
      void closeEvent(QCloseEvent * event );
 
@@ -168,11 +170,11 @@ public slots:
     void Slot_Scoreplus(int position);
     void Slot_SuppAction();
     void Slot_ModifAction();
-    void Slot_ActionMM();
-    void Slot_ActionM();
-    void Slot_Action0();
-    void Slot_ActionP();
-    void Slot_ActionPP();
+    //void Slot_ActionMM();
+    //void Slot_ActionM();
+    //void Slot_Action0();
+    //void Slot_ActionP();
+    //void Slot_ActionPP();
 
     void Slot_PplusL();
     void Slot_PplusA();

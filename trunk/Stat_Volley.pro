@@ -89,6 +89,7 @@ HEADERS  += src/tracelog.h \
     src/tracematch.h \
     src/matchxml.h \
     src/twstatjoueur.h \
+    src/fenetrejoueurstat.h \
     src/fenetrejoueurstat.h
 
 
@@ -111,7 +112,7 @@ FORMS    +=  ui/statwidget.ui \
     ui/fenetreinternet.ui \
     ui/lecteurvideo.ui \
     ui/twstatjoueur.ui \
-    src/fenetrejoueurstat.ui
+    ui/fenetrejoueurstat.ui
 
 
 
