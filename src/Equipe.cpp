@@ -298,7 +298,6 @@ void Equipe::ImportCVS(QString fichier)
             joueur=line.split(";");
             if (first==false)
             {
-               // this->SetNom(joueur.at(3));
                 stream.readLine();
                 first=true;
             }

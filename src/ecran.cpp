@@ -96,13 +96,9 @@ Ecran::Ecran(QWidget *parent) :
     connect(this->LineEdit2,SIGNAL(ComplementAction()),this,SLOT(Slot_ComplAction()));
 
 
-    //connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Slot_PplusL()));
-    //connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(Slot_PplusA()));
-    //connect(ui->pushButton_3,SIGNAL(clicked()),this,SLOT(Slot_PmoinsL()));
-    //connect(ui->pushButton_4,SIGNAL(clicked()),this,SLOT(Slot_PmoinsA()));
 
-    //QMenu * menuservice=new QMenu();
-    _isMatchEnCour=false;
+
+   _isMatchEnCour=false;
 
 
     connect(ui->menuFichier, SIGNAL(triggered(QAction *)), this, SLOT(AffSession(QAction *)));
@@ -114,23 +110,15 @@ Ecran::Ecran(QWidget *parent) :
 
 
     connect(ui->pushButton_TM,SIGNAL(clicked()),this,SLOT(TempsMort()));
-    //connect(ui->pushButton_FM,SIGNAL(clicked()),this,SLOT(FinMatch()));
-    //connect(ui->pushButton_6,SIGNAL(clicked()),this,SLOT(FinSet()));
-    //connect(ui->pBSup,SIGNAL(clicked()),this,SLOT(Slot_SuppAction()));
-    //connect(ui->PBModif,SIGNAL(clicked()),this,SLOT(Slot_ModifAction()));
+
 
     connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(ActionService(int)));
-    //connect(ui->listJoueur,SIGNAL(itemPressed(QListWidgetItem*)),this,SLOT(SlotDrag(QListWidgetItem*)));
 
-    //connect(ui->pushButton_5,SIGNAL(clicked()),this,SLOT(Slot_RotTerrain()));
     //bouton de rotation
 
     connect (ui->pBRotationPlus,SIGNAL(clicked()),this,SLOT(slot_rotationP()));
     connect (ui->pBRotationMoins,SIGNAL(clicked()),this,SLOT(slot_rotationM()));
 
-    ui->groupBox->setVisible(false);
-   // connect(ui->Start,SIGNAL(clicked()),this,SLOT(Slot_start()));
-    //ui->Start->setStyleSheet("color: white; background-color:orange; border-width: 1px; border-color: #339; border-style: solid;border-radius: 7;   padding: 3px; font-size: 14px;padding-left: 5px; padding-right: 5px;");
 
 
     _TimerChange = new QTimer (this);
@@ -211,44 +199,28 @@ void Ecran::Initialisation()
     _listBanc=new QStringList();
     _listPosition=new QStringList();
     RestaurerXML();
-    //ui->widget->setVisible(false);
-    //ui->widget_control->setVisible(false);
-    ui->textEdit->setVisible(false);
-    //ui->positionAdvers->setVisible(false);
-    //ui->groupBoxAction->setVisible(false);
 
-    ui->groupBox_2->setVisible(false);
-    ui->groupBox_3->setVisible (false);
-    ui->groupBox_6->setVisible(false);
-    ui->groupBox_7->setVisible(false);
-    LineEdit2->setVisible(false);
-    ui->comboBox->setVisible(false);
-    //ui->pushButton_FM->setVisible(false);
-    ui->pushButton_TM->setVisible(false);
-    //ui->pushButton_6->setVisible(false);
-    //ui->Start->setVisible(false);
-    //ui->groupBox_8->setVisible(true);
-    // ui->groupBox_4->setVisible(false);
-    //ui->groupBox_4->setVisible (false);
-    ui->label_4->setVisible(false);
+
+
+    ui->frame->setVisible(false);
+    ui->frame_2->setVisible(false);
+    ui->frame_3->setVisible(false);
+
 
     QPalette    palette( ui->centralWidget->palette());
     QPixmap        bg("Icone/Volleyclubstats_gris.png");
 
     palette.setBrush(QPalette::Background, bg);
     ui->centralWidget->setPalette(palette);
-    /*
-    //ui->centralWidget->setStyleSheet ("background-image: url(Icone/Volleyclubstats_gris.png);");
-    ui->centralWidget->setAutoFillBackground(true);*/
+
 
     _FenetreStat=new FenetreStat();
     _listActionMoins<<tr("Attaque")<<tr("Contre");
     _listActionPlus<<tr("Service")<<tr("Attaque")<<tr("Contre");
 
 
-    // this->_listAction<<tr("Service")<<tr("Récéption")<<tr("Contre")<<tr("Défense")<<tr("Passe")<<tr("Attaque");
+
     this->_listAction=InitAction::donneInstance()->GetListAction();
-    //ui->PBModif->setVisible(false);
     ui->tabWidget->setVisible(true);
 
 }
@@ -273,18 +245,11 @@ void Ecran::InitialisationMatch(QString team,QString advs)
 
     palette.setColor(QPalette::Window ,QColor(167,167,167));
     ui->centralWidget->setPalette(palette);
-    ui->textEdit->setVisible(true);
-    ui->groupBox->setVisible(true);
-    ui->label_4->setVisible(true);
-    ui->groupBox_2->setVisible(true);
-    ui->groupBox_4->setVisible(true);
-    //ui->groupBox_3->setVisible (true);
-    //ui->groupBox_6->setVisible(true);
-    // ui->groupBox_7->setVisible(true);
-    LineEdit2->setVisible(true);
-    ui->comboBox->setVisible(true);
+    ui->frame->setVisible(true);
+    ui->frame_2->setVisible(true);
+   ui->groupBox_4->setVisible(true);
 
-    //ui->Start->setVisible(true);
+
     ui->label_4->setPixmap(QPixmap("Image/new_terrain.png"));
     this->_positionEcran=0;
     this->_PlacementJoueur->createLayout(0);
@@ -294,14 +259,12 @@ void Ecran::InitialisationMatch(QString team,QString advs)
 
     palette.setColor(QPalette::Window ,QColor(34, 139, 34));
 
-    //ui->groupBoxAction->setPalette(palette);
+
     ui->groupBox->setPalette(palette);
     ui->groupBox_2->setPalette(palette);
     ui->groupBox_3->setPalette (palette);
-    //ui->groupBox_4->setPalette(palette);
 
-    //ui->positionAdvers->setVisible(true);
-    //ui->positionAdvers->setText(advs);
+
     this->_PlacementJoueur->SetAdv(advs);
 
     ui->label_2->setText(advs);
@@ -312,25 +275,21 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     menupoint->addAction("-1");
     ui->pBScore->setMenu(menupoint);
     connect(menupoint,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint1(QAction*)));
-    //ui->pBScore->showMenu();
+
     ui->pBScore_2->setText("0");
     QMenu * menupoint2=new QMenu(this);
     menupoint2->addAction("+1");
     menupoint2->addAction("-1");
     ui->pBScore_2->setMenu(menupoint2);
     connect(menupoint2,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint2(QAction*)));
-    //ui->pBScore_2->showMenu();
+
     ui->pBSet->setText("0");
     ui->pBSet_2->setText("0");
-    //ui->groupBoxAction->setVisible(true);
-    ui->groupBox_2->setVisible(true);
-    //ui->groupBox_3->setVisible (true);
-    //ui->groupBox_4->setVisible (true);
-    //ui->groupBox_5->setVisible (false);
+
 
     _isMatchEnCour=false;
     ui->comboBox->addItems(InitAction::donneInstance()->GetListAction());
-    //ui->textEdit_2->setVisible (false);
+
 
 
     QStringList joueurname;
@@ -341,14 +300,13 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     _trace->SetTrace("Debut du match");
     this->_TraceListAction->Debut();
     MatchEncour ->setAdvers(advs);
-    //Match::donneInstance(this)->setCurrentEquipe(team);
-    //MatchEncour->getTeam()->SetListAction(this->_listAction);
+
     this->_PlacementJoueur->InitListJoueur(MatchEncour->GetListJoueur());
     JoueurAPlacer();
     for(int i=0;i<MatchEncour->GetListJoueur().size();i++)
     {
         Joueur*joue= MatchEncour->GetListJoueur().at(i);
-        //joue->SetListAction(this->_listAction);
+
         QString strjoueur="";
         strjoueur=((QString("%1 ").arg(joue->get_NumMaillot())));
         if(strjoueur.size()==2)
@@ -364,23 +322,20 @@ void Ecran::InitialisationMatch(QString team,QString advs)
         }
         joueurname.append(strjoueur);
     }
-    /*ui->listJoueur->addItems(joueurname);
-    ui->listJoueur->sortItems(Qt::AscendingOrder);
-    delete ui->listJoueur->item(0);*/
+
 
 
 
     ui->comboBox->setEnabled(false);
     LineEdit2->setEnabled(false);
-    //ui->positionAdvers->setEnabled(false);
+
     ChangeBouton=new QPushButton(this);
-    // Initialisation de la fentre de stat
+
     this->myWidget->SetEquipe (MatchEncour->getTeam());
     this->_WtabEff->Init();
     this->myWidget->Initialisation ();
     this->myWidget->InitListAction(_listAction);
     this->_PlacementJoueur->InitLineEditSize ();
-    ui->tabWidget->setVisible(true);
     ui->label_5->setText(MatchEncour->getadvs().toUpper());
     ui->label_3->setText(MatchEncour->getTeam()->GetNom().toUpper());
     ui->label_11->setText("");
@@ -422,7 +377,7 @@ void Ecran::slot_score()
         else
         {
         }
-            //ui->pushButton_6->setVisible(true);
+
     }
 
 }
@@ -451,15 +406,8 @@ void Ecran::Slot_start()
         this->_PlacementJoueur->Initialisation();
         this->JoueurBanc();
         ui->label_4-> setPixmap (QPixmap("Image/new_terrain.png"));
-        ui->groupBox_3->setVisible(true);
-        ui->groupBox_6->setVisible(true);
-        ui->groupBox_7->setVisible(true);
-        ui->groupBox_9->setVisible(true);
+        ui->frame_3->setVisible(true);
         ui->groupBox_4->setVisible(false);
-
-        //ui->groupBox_8->setVisible(false);
-        //ui->listAction->setVisible (true);
-        //ui->listAction->setSelectionMode (QAbstractItemView::MultiSelection);
 
         LineEdit2->setFocus();
         this->LineEdit2->setCursorPosition(LineEdit2->text().size());
@@ -502,7 +450,6 @@ void Ecran::Slot_start()
         ui->groupBox_2->setVisible(true);
         ui->groupBox_3->setVisible(true);
         ui->groupBox_6->setVisible(true);
-        ui->groupBox_7->setVisible(true);
         ui->groupBox_9->setVisible(true);
         ui->groupBox_4->setVisible(false);
         //ui->groupBox_5->setVisible (true);
@@ -525,23 +472,12 @@ void Ecran::SlotAddJoueur()
 {
     if(Match::donneInstance()->getTeam()!=0)
     {
-        fbjoueur* Diajoueur=new fbjoueur(Match::donneInstance()->getTeam(),this);
-        Joueur* play=Diajoueur->Ajouter(Match::donneInstance()->getTeam());
-        if(play!=0)
-        {
-            // RaffraichirList();
-            // Match::donneInstance()->getTeam()->AddJoueur(joueur);
+        fbjoueur* Diajoueur=new fbjoueur(Match::donneInstance()->getTeam(),0,this);
+        //Joueur* play=Diajoueur->Ajouter(Match::donneInstance()->getTeam());
 
-            this->AddJoueurBanc(play);
             this->EnregistrerXML();
 
-        }
-        else
-        {
-            QMessageBox::warning (this,tr("erreur"),tr("Verifier que l'?quipe est bien selectionn?"));
-        }
-
-    }
+     }
 }
 void Ecran::SlotSupJoueur()
 {
@@ -559,6 +495,7 @@ void Ecran::SlotSupJoueur()
             Match::donneInstance()->getTeam()->supJoueur(listJoueur.at(i));
             this->EnregistrerXML();
             boutton->deleteLater();
+            slot_initChangement();
         }
     }
 
@@ -568,7 +505,6 @@ void Ecran::SlotSupJoueur()
 void Ecran::SlotModifJoueur()
 {
     QPushButton *boutton=(QPushButton*) sender();
-    fbjoueur* joueur=new fbjoueur(Match::donneInstance()->getTeam(),this);
     QStringList strlist=boutton->text().split("(");
     strlist=strlist[1].split(")");
     QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
@@ -580,7 +516,8 @@ void Ecran::SlotModifJoueur()
 
             int num=listJoueur.at(i)->get_NumMaillot();
             QString prenom=listJoueur.at(i)->get_Prenom();
-            joueur->Modif(listJoueur.at(i),true);
+           // joueur->Modif(listJoueur.at(i),true);
+              fbjoueur* joueur=new fbjoueur(Match::donneInstance()->getTeam(),listJoueur.at(i),this);
             if(joueur->exec()==1)
             {
                 /*if(num!=listJoueur.at(i)->get_NumMaillot() ||
@@ -1050,7 +987,6 @@ void Ecran::FinSet()
 
     JoueurAPlacer();
     ui->groupBox_4->setVisible(true);
-    ui->groupBox_7->setVisible(false);
     ui->groupBox_2->setVisible(false);
     // _finSet=false;
     //TempsMort();
@@ -1078,7 +1014,6 @@ void Ecran::FinMatch()
         this->_ListeEquipe.clear();
         //ui->listJoueur->clear ();
         this->myWidget->clean();
-        ui->groupBox->setVisible(false);
         Initialisation();
         this->_FenetreStat->Initialisation(file);
         ui->actionRevoir_un_match->setEnabled(true);
@@ -1739,7 +1674,7 @@ void Ecran::JoueurBanc()
             AddJoueurBanc(listJoueur.at(i));
         }
     }
-    // ui-> gridLayout_19->addWidget(ui->groupBox_4, 0,listJoueur.size() , 1, 1);
+
 }
 
 void Ecran::bouttonLClicked()

@@ -119,7 +119,6 @@ QString MatchXml::Rechercheposte(int post)
 void MatchXml::SauvegardeAction(Joueur* player,int Action,int valu)
 {
 
-
     QString nom=player->get_Prenom()+"_"+QString::number(player->get_NumMaillot());
 
 
@@ -239,106 +238,7 @@ void MatchXml::ChangementDeSet(int numero)
     _file.close();
 
 }
-        /*
-    QDomElement Equipe= _doc.createElement("Equipe");
-    Equipe.setAttribute("Nom",this->_currrentEquipe->GetNom());
-    Equipe.setAttribute("listAction",this->_currrentEquipe->GetStringAction());
-    Equipe.setAttribute("ListeValeur",_currrentEquipe->GetStringValeur());
-    root.appendChild(Equipe);
-    for(int k=0;k<this->_currrentEquipe->GetListeJoueur ().size ();k++)
-    {
-        QDomElement Joueur= _doc.createElement("Joueur");
-        Joueur.setAttribute("Nom",_currrentEquipe->GetListeJoueur ().at(k)->get_Prenom());
-        QString num;
-        num.setNum(_currrentEquipe->GetListeJoueur ().at(k)->get_NumMaillot());
-        Joueur.setAttribute("NumMaillot",num);
-        Joueur.setAttribute("poste",_currrentEquipe->GetListeJoueur ().at(k)->get_poste());
-        Equipe.appendChild(Joueur);
-    }
 
-
-
-    QDomElement Stat=_doc.createElement ("Statisitique");
-    root.appendChild(Stat);
-    //le match
-
-    QDomElement statMatch=_doc.createElement ("MatchStat");
-
-    //team.setAttribute ("Match",this->Restaurer ("team"));
-    Stat.appendChild (statMatch);
-    QDomElement equipe=_doc.createElement ("team");
-
-    equipe.setAttribute ("stat",this->StatString ("team"));
-    statMatch.appendChild (equipe);
-    for(int k=0;k<this->_currrentEquipe->GetListeJoueur ().size ();k++)
-    {
-
-        Joueur.setNum (this->_currrentEquipe->GetListeJoueur ().at (k)->get_NumMaillot ());
-        clef="Num_"+Joueur;
-        QDomElement joueur=_doc.createElement (clef);
-
-        joueur.setAttribute ("stat",this->StatString (Joueur));
-        statMatch.appendChild (joueur);
-    }
-
-    for(int i=1;i<_numCurentSet;i++)
-    {
-        QString numset;
-        numset.setNum (i);
-        numset="Set"+numset;
-        QDomElement Set=_doc.createElement (numset);
-        //Set.setAttribute("score",this->_ListeSet.at (i-1)->ScoreSave());
-
-
-        //  Set.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer ("team"));
-        Stat.appendChild (Set);
-
-
-        /// Equipe
-        clef="Team";
-        QDomElement equipe=_doc.createElement (clef);
-
-        //equipe.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer ("team"));
-        Set.appendChild (equipe);
-        for(int k=0;k<this->_currrentEquipe->GetListeJoueur ().size ();k++)
-        {
-
-            Joueur.setNum (this->_currrentEquipe->GetListeJoueur ().at (k)->get_NumMaillot ());
-            clef="Num_"+Joueur;
-            QDomElement joueur=_doc.createElement (clef);
-
-            //   joueur.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer (Joueur));
-            Set.appendChild (joueur);
-        }
-    }
-
-      for(int k=0;k<this->_currrentEquipe->GetListeJoueur ().size ();k++)
-    {
-
-        QString Joueur;
-        QString clef;
-
-        Joueur.setNum (this->_currrentEquipe->GetListeJoueur ().at (k)->get_NumMaillot ());
-        clef="Num_"+Joueur;
-        QDomElement joueur=_doc.createElement (clef);
-        Stat.appendChild (joueur);
-        joueur.setAttribute ("Match",this->Restaurer (Joueur));
-
-        for(int i=1;i<_numCurentSet;i++)
-        {
-            QString numset;
-            numset.setNum (i);
-            numset="Set"+numset;
-            QDomElement Set=_doc.createElement (numset);
-           // Set.setAttribute("score",this->_ListeSet.at (i-1)->ScoreSave());
-
-
-            Set.setAttribute ("stat",this->_ListeSet.at (i-1)->Restaurer (Joueur));
-            joueur.appendChild (Set);
-
-        }
-
-    }*/
 
 
 
