@@ -33,16 +33,18 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "fbjoueur.h"
 
 
-fbjoueur::fbjoueur(Equipe* Team,QWidget *parent) :
-        QDialog(parent)
+fbjoueur::fbjoueur(Equipe* Team,Joueur* play,QWidget *parent) :
+    QDialog(parent)
 
 {
     _Team=Team;
+    _curentJoueur=play;
     ui.setupUi(this);
     connect(ui.buttonBox,SIGNAL(accepted()),this,SLOT(SlotEnregistrer()));
 
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
     Init();
+    this->exec();
 }
 
 void fbjoueur::Init()
@@ -50,123 +52,148 @@ void fbjoueur::Init()
     QStringList listPost;
     listPost<<tr("Passeur")<<tr("Libero")<<tr("Complet")<<tr("Pointu")<<tr("Recep/Attaque")<<tr("Central");
     ui.comboBox_2->addItems (listPost);
-    if(_Team!=0)
+    if(_curentJoueur==0)
     {
-        ui.comboBox->addItem(_Team->GetNom());
-    }
-    else
-    {
-        QMessageBox::warning (this,tr("erreur"),tr("Verifier que l'équipe est bien selectionné"));
-        this->reject ();
-        this->close ();
-    }
-    _modif=false;
 
-}
-Joueur* fbjoueur::Ajouter(Equipe *Team)
-{
-    ui.comboBox->setEnabled(false);
-    Joueur* play=0;
-    if(this->exec())
-    {
-        play=new Joueur();
-        play->set_Nom(ui.lineEdit_Nom->text());
-        play->set_Prenom(ui.lineEdit_prenom->text());
-        play->set_Addresse(ui.lineEdit_add->text());
-        play->set_Email(ui.lineEdit_Email->text());
-        play->set_Tel(ui.lineEdit_tel->text().toInt());
-        play->set_poste(ui.comboBox_2->currentText ());
-        play->set_NLisence(ui.lineEdit_lis->text().toInt());
-        play->set_Age(ui.lineEdit_age->text().toInt());
-        play->set_NumMaillot(ui.spinBox->value ());
-        if(Team!=0)
+        if(_Team!=0)
         {
-            Team->AddJoueur(play);
+            ui.comboBox->addItem(_Team->GetNom());
         }
-
-    }
-    return play;
-}
-
-void fbjoueur::Modif(Joueur* player,bool isMathEncours)
-{
-
-    ui.lineEdit_Nom->setText(player->get_Nom());
-    ui.lineEdit_prenom->setText(player->get_Prenom());
-    ui.lineEdit_add->setText(player->get_Addresse());
-    ui.lineEdit_Email->setText(player->get_Email());
-    QString tel;
-    tel=tel.setNum(player->get_Tel());
-    ui.lineEdit_tel->setText(tel);
-    ui.comboBox_2->setCurrentIndex (ui.comboBox_2->findText (player->get_poste ()));
-
-    QString lisence;
-    lisence=lisence.setNum(player->get_NLisence());
-    ui.lineEdit_lis->setText(lisence);
-    QString age;
-    age=age.setNum(player->get_Age());
-    ui.lineEdit_age->setText(age);
-
-    ui.spinBox->setValue (player->get_NumMaillot());
-    _curentJoueur=player;
-    _modif=true;
-    if(isMathEncours==true)
-    {
-
-        ui.comboBox->setEnabled(false);
-
-
+        else
+        {
+            QMessageBox::warning (this,tr("erreur"),tr("Verifier que l'équipe est bien selectionné"));
+            this->reject ();
+            this->close ();
+        }
     }
     else
     {
+        ui.lineEdit_Nom->setText(_curentJoueur->get_Nom());
+        ui.lineEdit_prenom->setText(_curentJoueur->get_Prenom());
+        ui.lineEdit_add->setText(_curentJoueur->get_Addresse());
+        ui.lineEdit_Email->setText(_curentJoueur->get_Email());
+        QString tel;
+        tel=tel.setNum(_curentJoueur->get_Tel());
+        ui.lineEdit_tel->setText(tel);
+        ui.comboBox_2->setCurrentIndex (ui.comboBox_2->findText (_curentJoueur->get_poste ()));
 
+        QString lisence;
+        lisence=lisence.setNum(_curentJoueur->get_NLisence());
+        ui.lineEdit_lis->setText(lisence);
+        QString age;
+        age=age.setNum(_curentJoueur->get_Age());
+        ui.lineEdit_age->setText(age);
 
-        ui.comboBox->setEnabled(true);
+        ui.spinBox->setValue (_curentJoueur->get_NumMaillot());
 
-        this->exec();
     }
 
+
 }
-
-
 void fbjoueur::SlotEnregistrer()
 {
-    Joueur* play;
-    if(_modif==true)
+    if(_modif==false)
     {
-        play=_curentJoueur;
+       // Ajouter();
+        this->Enregistrer();
     }
     else
+    {
+        this->Enregistrer();
+    }
+
+
+}
+
+void fbjoueur::SetjoueurfromIHM(Joueur* play)
+{
+    play->set_Nom(ui.lineEdit_Nom->text());
+    play->set_Prenom(ui.lineEdit_prenom->text());
+    play->set_Addresse(ui.lineEdit_add->text());
+    play->set_Email(ui.lineEdit_Email->text());
+    play->set_Tel(ui.lineEdit_tel->text().toInt());
+    play->set_poste(ui.comboBox_2->currentText ());
+    play->set_NLisence(ui.lineEdit_lis->text().toInt());
+    play->set_Age(ui.lineEdit_age->text().toInt());
+    play->set_NumMaillot(ui.spinBox->value ());
+}
+
+bool fbjoueur::isNumeroOk()
+{
+    bool retour=true;
+    if(_Team!=0)
+    {
+        QList <Joueur*> listJoueur= _Team->GetListeJoueur();
+        for(int l=0;l<listJoueur.size();l++)
+        {
+            if(ui.spinBox->value ()==listJoueur.at(l)->get_NumMaillot())
+            {
+                retour=false;
+                break;
+
+            }
+        }
+        return retour;
+    }
+}
+
+void fbjoueur::Enregistrer()
+{
+    Joueur* play;
+
+    if(this->_curentJoueur==0)
     {
 
         play=new Joueur();
-    }
-    if((ui.lineEdit_prenom->text()==""))
+        if((ui.lineEdit_prenom->text()==""))
+        {
+            QMessageBox::warning(this,tr("Erreur Formulaire"),tr("toute les * doivent etre reseigner"));
+        }
+        else if(ui.spinBox->value ()==0)
+        {
+            QMessageBox::warning(this,tr("Erreur Formulaire"),tr("le numero 0 est reserve"));
+        }
+        else
+        {
 
-    {
-        QMessageBox::warning(this,tr("Erreur Formulaire"),tr("toute les * doivent etre reseigner"));
+            bool AjoutImpossible=isNumeroOk();
+
+            if(AjoutImpossible==true)
+            {
+
+                SetjoueurfromIHM(play);
+                _Team->AddJoueur(play);
+            }
+
+            else
+            {
+                QMessageBox::warning(this,tr("Ajout Impossible"),tr("Numero de maillot deja present"));
+
+            }
+        }
+
     }
-    else if(ui.spinBox->value ()==0)
-    {
-        QMessageBox::warning(this,tr("Erreur Formulaire"),tr("le numero 0 est reserve"));
-    }
+
     else
     {
-        play->set_Nom(ui.lineEdit_Nom->text());
-        play->set_Prenom(ui.lineEdit_prenom->text());
-        play->set_Addresse(ui.lineEdit_add->text());
-        play->set_Email(ui.lineEdit_Email->text());
-        play->set_Tel(ui.lineEdit_tel->text().toInt());
-        play->set_poste(ui.comboBox_2->currentText ());
-        play->set_NLisence(ui.lineEdit_lis->text().toInt());
-        play->set_Age(ui.lineEdit_age->text().toInt());
-        play->set_NumMaillot(ui.spinBox->value ());
-        if(_modif==false)
+        if(_curentJoueur->get_NumMaillot()!=ui.spinBox->value())
         {
-            if(_Team!=0)
-                _Team->AddJoueur(play);
+            if(isNumeroOk()==true)
+            {
+                SetjoueurfromIHM(_curentJoueur);
+            }
             else
-                QMessageBox::warning(this,tr("Erreur"),tr("Pas d'équipe séléctionné"));
+            {
+                QMessageBox::warning(this,tr("Ajout Impossible"),tr("Numero de maillot deja present"));
+            }
         }
+        else
+        {
+            SetjoueurfromIHM(_curentJoueur);
+        }
+
     }
+
+    this->hide();
+
 }

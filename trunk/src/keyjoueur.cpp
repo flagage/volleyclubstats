@@ -107,189 +107,15 @@ void KeyJoueur::bouttonLClicked()
                  }
             }
 
-           /* if(isenplace==false)
-            {
-
-
-                buttons[posbanc]->setText(text);
-                posbanc++;
-            }*/
-
         }
         emit Tlm_en_place();
     }
 }
 
-/*void KeyJoueur::bouttonRClicked()
-{
-   QPushButton *button=(QPushButton*) sender();
-    emit ModifPoste (button);
-}*/
 
 void KeyJoueur::createLayout(int pos)
 {
-  /*  _pos=pos;
-   int colonne=pos+1;
-    if(colonne==3)
-    {
-        colonne=2;
-    }
-    int nbJoueutTerrain;
-    QLayout* layout=_parent->layout ();
-    if(layout!=0)
-    {
-        delete layout;
-    }
-    _layout=new QGridLayout(this);
-    _layout->setSpacing(6);
-    _layout->addWidget(_labelPosition, 0,4);
-    //_layout->addWidget(_labelPosition,2,5);
-    _layout->addWidget(buttons[_nbJoueur],0,colonne,1,3);
-   QGridLayout* gridLayout = new QGridLayout();
-    gridLayout->setSpacing(6);
-    switch(pos)
-    {
-        case 0:
-
-       // buttons[0]->adjustSize();
-        gridLayout->addWidget (buttons[0],2,4);
-
-        //buttons[1]->adjustSize();
-        gridLayout->addWidget (buttons[1],2,0);
-
-
-      //  buttons[2]->adjustSize();
-        gridLayout->addWidget (buttons[2],6,0);
-
-
-       // buttons[3]->adjustSize();
-        gridLayout->addWidget (buttons[3],12,0);
-
-
-       // buttons[4]->adjustSize();
-        gridLayout->addWidget (buttons[4],12,4);
-
-
-//        buttons[5]->adjustSize();
-        gridLayout->addWidget (buttons[5],6,4);
-
-        if (_Islibero==true)
-        {
-          //  buttons[6]->adjustSize();
-            gridLayout->addWidget (buttons[6],6,2);
-
-        }
-        break;
-
-    case 1:
-
-
-
-
-        gridLayout->addWidget (buttons[3],2,0);
-
-
-        gridLayout->addWidget (buttons[2],2,2);
-
-
-        gridLayout->addWidget (buttons[1],2,4);
-
-
-        gridLayout->addWidget (buttons[4],12,0);
-
-
-        gridLayout->addWidget (buttons[5],12,2);
-
-
-        gridLayout->addWidget (buttons[0],12,4);
-
-        if (_Islibero==true)
-        {
-            gridLayout->addWidget (buttons[6],6,2);
-
-        }
-
-        break;
-
-        case 2:
-
-
-
-        gridLayout->addWidget (buttons[4],2,0);
-
-
-        gridLayout->addWidget (buttons[3],2,4);
-
-
-        gridLayout->addWidget (buttons[5],6,0);
-
-
-        gridLayout->addWidget (buttons[2],6,4);
-
-
-        gridLayout->addWidget (buttons[0],12,0);
-
-
-        gridLayout->addWidget (buttons[1],12,4);
-
-
-
-        if (_Islibero==true)
-        {
-            gridLayout->addWidget (buttons[6],6,2);
-
-        }
-        break;
-        case 3:
-        gridLayout->addWidget (buttons[0],2,0);
-
-
-        gridLayout->addWidget (buttons[5],2,2);
-
-
-        gridLayout->addWidget (buttons[4],2,4);
-
-
-        gridLayout->addWidget (buttons[1],12,0);
-
-
-        gridLayout->addWidget (buttons[2],12,2);
-
-
-        gridLayout->addWidget (buttons[3],12,4);
-
-        if (_Islibero==true)
-        {
-            gridLayout->addWidget (buttons[6],6,2);
-
-        }
-        break;
-
-    }
-
-
-_layout->addLayout(gridLayout, 1, colonne,1,3);
-    if(_Islibero==true)
-    {
-        buttons[6]->setStyleSheet ("color: black; background-color: cyan; border-style: outset;border-width: 2px; border-color: beige;");
-
-
-        nbJoueutTerrain=7;
-    }
-    else
-    {
-        nbJoueutTerrain=6;
-    }
-
-    QGridLayout* gridLayout2 = new QGridLayout();
-     gridLayout2->setSpacing(6);
-    for(int i=nbJoueutTerrain;i<this->_nbJoueur;i++)
-    {
-        gridLayout2->addWidget(buttons[i],0,i-nbJoueutTerrain,1,1);
-    }
-_layout->addLayout(gridLayout2, 3, colonne,1,3);
-*/
-    QLayout* layout=_parent->layout ();
+     QLayout* layout=_parent->layout ();
     if(layout!=0)
     {
         delete layout;
@@ -450,9 +276,6 @@ void KeyJoueur::InitListJoueur(QList <Joueur*> joueur)
 void KeyJoueur::Initialisation()
 {
     bool ok;
-
-
-
 
 }
 

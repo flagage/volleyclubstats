@@ -67,18 +67,7 @@ Fenetreequipe::~Fenetreequipe()
 }
 void Fenetreequipe::ListChange()
 {
-    QList<Equipe*> LEquipe=_ecran->GetListeEquipe();
-    Equipe* Team;
-    for(int i=0;i<LEquipe.count();i++)
-    {
-        Team=LEquipe.at(i);
-        if(Team->GetNom()==(ui->SuppresionBox->currentText()))
-        {
-            _currentTeam=Team;
-            break;
-        }
 
-    }
     RaffraichirList();
 
 }
@@ -108,7 +97,7 @@ void Fenetreequipe::RemplitTableauJoueur(Joueur* player,int row)
     strLisence=strLisence.setNum(player->get_NLisence());
 
     ui->tableWidget->setItem(row,4,new QTableWidgetItem(QString(strLisence)));//"License";
-
+    ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
 
 
 }
@@ -141,9 +130,8 @@ void Fenetreequipe::Ajouter()
 {
     if(_currentTeam!=0)
     {
-        QDialog* joueur=new fbjoueur(_currentTeam,this);
-        if(joueur->exec())
-            RaffraichirList();
+        if(QDialog* joueur=new fbjoueur(_currentTeam,0,this));
+                 RaffraichirList();
     }
     else
     {
@@ -165,8 +153,8 @@ void Fenetreequipe::Modifier()
         {
             if(text.toInt()==LJoueur.at(i)->get_NumMaillot())
             {
-                fbjoueur* joueur=new fbjoueur(_currentTeam,this);
-                joueur->Modif(LJoueur.at(i));
+                if(fbjoueur* joueur=new fbjoueur(_currentTeam,LJoueur.at(i),this));
+
                 break;
             }
 
@@ -210,6 +198,18 @@ void Fenetreequipe::RaffraichirList()
 
     ui->tableWidget->clear();
     ui->tableWidget->setSortingEnabled(false);
+    QList<Equipe*> LEquipe=_ecran->GetListeEquipe();
+    Equipe* Team;
+    for(int i=0;i<LEquipe.count();i++)
+    {
+        Team=LEquipe.at(i);
+        if(Team->GetNom()==(ui->SuppresionBox->currentText()))
+        {
+            _currentTeam=Team;
+            break;
+        }
+
+    }
     if(_currentTeam!=0)
     {
     QList<Joueur*> LJoueur=_currentTeam->GetListeJoueur();
@@ -252,11 +252,14 @@ void Fenetreequipe::slot_Export()
 void Fenetreequipe::slot_Import()
 {
     QString fichier = QFileDialog::getOpenFileName(this, tr("fichier d'import"), QString(), "*.csv");
-    Equipe *Team=new Equipe();
-    Team->ImportCVS(fichier);
-    this->_ecran->AddEquipe(Team);
-    QMessageBox::information(this,tr("Information"),tr("Importation terminer"));
+    if(fichier!=0)
+    {
+        Equipe *Team=new Equipe();
+        Team->ImportCVS(fichier);
+        this->_ecran->AddEquipe(Team);
+        QMessageBox::information(this,tr("Information"),tr("Importation terminer"));
 
-    InitListEquipe();
+        InitListEquipe();
+    }
 }
 
