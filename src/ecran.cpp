@@ -46,10 +46,6 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "fenetrejoueurstat.h"
 
 
-
-
-
-
 Ecran::Ecran(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Ecran)
@@ -104,6 +100,7 @@ Ecran::Ecran(QWidget *parent) :
     connect(ui->menuFichier, SIGNAL(triggered(QAction *)), this, SLOT(AffSession(QAction *)));
     connect(ui->menuMatch,SIGNAL(triggered(QAction*)),this,SLOT(AffSession(QAction*)));
     connect(ui->menuFenetre, SIGNAL(triggered(QAction *)), this, SLOT(Slot_Fenetre(QAction *)));
+    connect(ui->menuEquipe,SIGNAL(triggered(QAction*)),this,SLOT(SlotMenuEquipe(QAction *)));
     _trace=new TraceLog(this);
     _TraceListAction= new ListActionXml();
     connect(this->_trace,SIGNAL(EnvoieTrace(QString)),this,SLOT(AfficherTrace(QString)));
@@ -725,6 +722,40 @@ void Ecran::RetirerPoint(bool qui)
 
 }
 
+void Ecran::SlotMenuEquipe(QAction *action)
+{
+    if(action->text()=="Gestion Equipes")
+    {
+        QDialog* equipe=new Fenetreequipe(this);
+
+        equipe->exec();
+        this->EnregistrerXML();
+    }
+    else if(action->text()=="Exporter Equipe")
+    {
+       // QString file=QInputDialog::getText(this)
+        FenetreVisualisation * choixEquipe=new FenetreVisualisation(this->GetListeEquipe(),1,this);
+        if( choixEquipe->exec())
+        {
+        Equipe * team=choixEquipe->GetSelectedTeam();
+        QString fichier = QFileDialog::getSaveFileName(this, tr("Enregistrer un fichier"), QString(), "*.csv");
+        team->ExportCVS(fichier);
+        }
+    }
+    else if(action->text()=="Importer Equipe")
+    {
+          FenetreVisualisation * choixEquipe=new FenetreVisualisation(this->GetListeEquipe(),2,this);
+          if(choixEquipe->exec())
+          {
+          Equipe * team=choixEquipe->GetSelectedTeam();
+          this->SetListeEquipe(choixEquipe->GetlistEquipe());
+           QString fichier = QFileDialog::getOpenFileName(this, tr("fichier d'import"), QString(), "*.csv");
+           team->ImportCVS(fichier);
+          }
+
+    }
+}
+
 void Ecran::Slot_Fenetre(QAction *action)
 {
     if(action->text()=="Score")
@@ -748,14 +779,7 @@ void Ecran::Slot_Fenetre(QAction *action)
 void Ecran::AffSession(QAction *action)
 {
 
-    if(action->text()=="Gestion Equipes")
-    {
-        QDialog* equipe=new Fenetreequipe(this);
-
-        equipe->exec();
-        this->EnregistrerXML();
-    }
-    else if(action->text() == "Lancer le Match")
+  if(action->text() == "Lancer le Match")
     {
         Match* play=Match::donneInstance();
         FenetreLancement* lance=new FenetreLancement(this);
@@ -847,6 +871,11 @@ QList <Equipe*> Ecran::GetListeEquipe()
 {
     return _ListeEquipe;
 }
+void Ecran::SetListeEquipe(QList <Equipe*> list)
+{
+    _ListeEquipe=list;
+}
+
 void Ecran::AddEquipe(Equipe* team)
 {
     _ListeEquipe.append(team);

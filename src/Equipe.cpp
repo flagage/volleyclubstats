@@ -306,20 +306,20 @@ void Equipe::ImportCVS(QString fichier)
                 if(joueur.at(0)!="")
                 {
                 Joueur * play=new Joueur();
-                play->set_Nom(joueur.at(0));
-                play->set_Prenom(joueur.at(1));
-                play->set_NumMaillot(joueur.at(2).toInt());
-                play->set_poste(joueur.at(3));
+                play->set_Nom(joueur.at(1));
+                play->set_Prenom(joueur.at(2));
+                play->set_NumMaillot(joueur.at(3).toInt());
+                play->set_poste(joueur.at(4));
                 if(joueur.size()>=5)
-                play->set_NLisence(joueur.at(4).toInt());
+                play->set_NLisence(joueur.at(5).toInt());
                 if(joueur.size()>=6)
-                play->set_Addresse(joueur.at(5));
+                play->set_Addresse(joueur.at(6));
                 if(joueur.size()>=7)
-                play->set_Tel(joueur.at(6).toInt());
+                play->set_Tel(joueur.at(7).toInt());
                 if(joueur.size()>=8)
-                play->set_Email(joueur.at(7));
+                play->set_Email(joueur.at(8));
                 if(joueur.size()>=9)
-                play->set_Age(joueur.at(8).toInt());
+                play->set_Age(joueur.at(9).toInt());
 
                 this->AddJoueur(play);
                 }
