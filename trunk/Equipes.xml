@@ -29,4 +29,13 @@
   <joueur Maillot="16" Adresse="" Tel="0" Prenom="Alexandra" Nom="fr" License="0" Email="" Age="0" poste="Complet"/>
   <joueur Maillot="12" Adresse="" Tel="0" Prenom="Virginia" Nom="fr" License="0" Email="" Age="0" poste="Complet"/>
  </Equipe>
+ <Equipe Nom="fredteam">
+  <joueur Maillot="1" Adresse="" Tel="0" Prenom="test" Nom="fred" License="0" Email="" Age="0" poste="Central"/>
+  <joueur Maillot="2" Adresse="" Tel="0" Prenom="lulu" Nom="fred" License="0" Email="" Age="0" poste="Complet"/>
+  <joueur Maillot="3" Adresse="" Tel="0" Prenom="Mario" Nom="fred" License="0" Email="" Age="0" poste="Passe"/>
+  <joueur Maillot="4" Adresse="" Tel="0" Prenom="greg" Nom="fred" License="0" Email="" Age="0" poste="Libero"/>
+  <joueur Maillot="5" Adresse="" Tel="0" Prenom="francois" Nom="fred" License="0" Email="" Age="0" poste="Pointu"/>
+  <joueur Maillot="6" Adresse="" Tel="0" Prenom="henri" Nom="fred" License="0" Email="" Age="0" poste="Central"/>
+  <joueur Maillot="7" Adresse="" Tel="0" Prenom="hello" Nom="fred" License="0" Email="" Age="0" poste="Complet"/>
+ </Equipe>
 </root>

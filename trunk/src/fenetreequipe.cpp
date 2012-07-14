@@ -57,8 +57,8 @@ void Fenetreequipe::Connexion()
     connect(ui->ButtonModifier,SIGNAL(clicked()),this,SLOT(Modifier()));
     connect(ui->ButtonSupprimer,SIGNAL(clicked()),this,SLOT(Supprimer()));
     connect(ui->ButtonEquipe,SIGNAL(clicked()),this,SLOT(GestionEquipe()));
-    connect(ui->pushButton_Export,SIGNAL(clicked()),this,SLOT(slot_Export()));
-    connect(ui->pushButton_Import,SIGNAL(clicked()),this,SLOT(slot_Import()));
+    //connect(ui->pushButton_Export,SIGNAL(clicked()),this,SLOT(slot_Export()));
+    //connect(ui->pushButton_Import,SIGNAL(clicked()),this,SLOT(slot_Import()));
 }
 
 Fenetreequipe::~Fenetreequipe()
@@ -112,6 +112,7 @@ void Fenetreequipe::Enregistrer()
 
 void Fenetreequipe::InitListEquipe()
 {
+    ui->SuppresionBox->clear();
     QList<Equipe*> LEquipe=_ecran->GetListeEquipe();
     for(int i=0;i<LEquipe.count();i++)
     {
@@ -228,12 +229,15 @@ void Fenetreequipe::RaffraichirList()
 
 void Fenetreequipe::GestionEquipe()
 {
-    QDialog* visualisation=new FenetreVisualisation(_ecran,this);
-    visualisation->exec();
-    ui->SuppresionBox->clear();
-    InitListEquipe();
+    FenetreVisualisation* visualisation=new FenetreVisualisation(_ecran->GetListeEquipe(),0,this);
+    if(visualisation->exec());
+    {
+        _ecran->SetListeEquipe(visualisation->GetlistEquipe());
+        ui->SuppresionBox->clear();
+        InitListEquipe();
+    }
 }
-
+/*
 void Fenetreequipe::slot_Export()
 {
     QString fichier = QFileDialog::getSaveFileName(this, tr("Enregistrer un fichier"), QString(), "*.csv");
@@ -262,4 +266,4 @@ void Fenetreequipe::slot_Import()
         InitListEquipe();
     }
 }
-
+*/

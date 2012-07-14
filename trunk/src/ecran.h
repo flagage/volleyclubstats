@@ -78,6 +78,7 @@ public:
     void RestaurerXML();
 
     QList <Equipe*> GetListeEquipe();
+    void SetListeEquipe(QList <Equipe*> list);
     QStringList* _listBanc;
     QStringList* _listPosition;
     QPushButton* ChangeBouton;
@@ -170,6 +171,7 @@ public slots:
     void Slot_Scoreplus(int position);
     void Slot_SuppAction();
     void Slot_ModifAction();
+    void SlotMenuEquipe(QAction *action);
     //void Slot_ActionMM();
     //void Slot_ActionM();
     //void Slot_Action0();

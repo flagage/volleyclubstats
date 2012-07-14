@@ -65,8 +65,8 @@ public slots:
     void Modifier();
     void Supprimer();
     void GestionEquipe();
-    void slot_Export();
-    void slot_Import();
+    //void slot_Export();
+    //void slot_Import();
 };
 
 #endif // FENETREEQUIPE_H

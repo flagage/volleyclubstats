@@ -447,8 +447,6 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actionGestion_Equipes"/>
-    <addaction name="separator"/>
     <addaction name="actionLancer_le_Match"/>
     <addaction name="separator"/>
     <addaction name="actionRevoir_un_match"/>
@@ -478,10 +476,21 @@
     <addaction name="actionR_sultat_ffvb"/>
     <addaction name="actionManuel"/>
    </widget>
+   <widget class="QMenu" name="menuEquipe">
+    <property name="title">
+     <string>Gestion</string>
+    </property>
+    <addaction name="actionGestion_Equipe"/>
+    <addaction name="actionGestion_Club_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionExporter_Equipe"/>
+    <addaction name="actionImporter_Equipe"/>
+   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuMatch"/>
    <addaction name="menuFenetre"/>
    <addaction name="menuAide"/>
+   <addaction name="menuEquipe"/>
   </widget>
   <action name="actionAjouterEquipe">
    <property name="text">
@@ -579,6 +588,26 @@
    </property>
   </action>
   <action name="actionGestion_Club">
+   <property name="text">
+    <string>Gestion Club</string>
+   </property>
+  </action>
+  <action name="actionGestion_Equipe">
+   <property name="text">
+    <string>Gestion Equipes</string>
+   </property>
+  </action>
+  <action name="actionExporter_Equipe">
+   <property name="text">
+    <string>Exporter Equipe</string>
+   </property>
+  </action>
+  <action name="actionImporter_Equipe">
+   <property name="text">
+    <string>Importer Equipe</string>
+   </property>
+  </action>
+  <action name="actionGestion_Club_2">
    <property name="text">
     <string>Gestion Club</string>
    </property>

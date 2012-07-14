@@ -35,23 +35,37 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 
 
 #include <QDialog>
-#include "ecran.h"
+#include "Equipe.h"
+
 namespace Ui {
     class FenetreVisualisation;
 }
+
+
 
 class FenetreVisualisation : public QDialog
 {
     Q_OBJECT
 
+
 public:
-    explicit FenetreVisualisation(Ecran* ecran,QWidget *parent = 0);
+
+    explicit FenetreVisualisation(QList <Equipe*> listEquipe,int act=0,QWidget *parent = 0);
     ~FenetreVisualisation();
-    void Initialisation();
+    Equipe * GetSelectedTeam();
+    QList <Equipe*> GetlistEquipe();
+
+
 
 private:
+
     Ui::FenetreVisualisation *ui;
-     Ecran* _ecran;
+    QList <Equipe*>_listEquipe;
+    int _whataction;
+    Equipe *_CurrentTeam;
+
+    void Initialisation();
+
  public slots:
      void Ajouter();
      void Supprimer();
