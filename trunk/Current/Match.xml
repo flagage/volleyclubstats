@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
 <Info>
- <Match Contre="test" Equipe="Villebon Senior F" NbDeSet="0" Heure="" Arbitre="" Type="Championnat" Date="09_07_2012_08_03_03" Duree="temps"/>
+ <Match Contre="_curentJoueur" Equipe="Villebon Senior F" NbDeSet="0" Heure="" Arbitre="" Type="Championnat" Date="15_07_2012_17_54_47" Duree="temps"/>
  <S1>
   <Position>
-   <Poste1>lulu_19</Poste1>
-   <Poste2>Mario_18</Poste2>
-   <Poste3>fred_13</Poste3>
+   <Poste1>solenne_7</Poste1>
+   <Poste2>Alexandra_16</Poste2>
+   <Poste3>Virginie_9</Poste3>
    <Poste4>Rosemary_17</Poste4>
    <Poste5>Alexia_10</Poste5>
    <Poste6>Alix_6</Poste6>
-   <Libero>Veronique_4</Libero>
+   <Libero>Maryline_1</Libero>
   </Position>
-  <Score>1:0</Score>
+  <Score>0:0</Score>
   <Stat>
-   <lulu_19>
+   <solenne_7>
     <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Contre PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Defense PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-   </lulu_19>
-   <Mario_18>
+   </solenne_7>
+   <Alexandra_16>
     <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Contre PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Defense PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-   </Mario_18>
-   <fred_13>
+   </Alexandra_16>
+   <Virginie_9>
     <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Contre PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Defense PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-   </fred_13>
+   </Virginie_9>
    <Rosemary_17>
-    <Service PP="1" MM="0" tot="1" M="0" P="0" 0="0" eff1="100"/>
+    <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Contre PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Defense PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
@@ -61,14 +61,14 @@
     <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
    </Alix_6>
-   <Veronique_4>
+   <Maryline_1>
     <Service PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Reception PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Contre PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Defense PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Passe PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
     <Attaque PP="0" MM="0" tot="0" M="0" P="0" 0="0" eff1="0"/>
-   </Veronique_4>
+   </Maryline_1>
   </Stat>
  </S1>
  <S2>

@@ -81,8 +81,15 @@ void fbjoueur::Init()
         lisence=lisence.setNum(_curentJoueur->get_NLisence());
         ui.lineEdit_lis->setText(lisence);
         QString age;
-        age=age.setNum(_curentJoueur->get_Age());
-        ui.lineEdit_age->setText(age);
+        age=_curentJoueur->get_Age();
+        QStringList agedate=age.split("/");
+        QDate date;
+        if(agedate.size()==3)
+            date.setDate(agedate[2].toInt(),agedate[1].toInt(),agedate[0].toInt());
+
+
+        ui.dateEdit->setDate(date);
+        //ui.lineEdit_age->setText(age);
 
         ui.spinBox->setValue (_curentJoueur->get_NumMaillot());
 
@@ -114,7 +121,7 @@ void fbjoueur::SetjoueurfromIHM(Joueur* play)
     play->set_Tel(ui.lineEdit_tel->text().toInt());
     play->set_poste(ui.comboBox_2->currentText ());
     play->set_NLisence(ui.lineEdit_lis->text().toInt());
-    play->set_Age(ui.lineEdit_age->text().toInt());
+    play->set_Age(ui.dateEdit->date().toString("dd/MM/yyyy"));
     play->set_NumMaillot(ui.spinBox->value ());
 }
 
@@ -139,12 +146,12 @@ bool fbjoueur::isNumeroOk()
 
 void fbjoueur::Enregistrer()
 {
-    Joueur* play;
+
 
     if(this->_curentJoueur==0)
     {
 
-        play=new Joueur();
+        _curentJoueur=new Joueur();
         if((ui.lineEdit_prenom->text()==""))
         {
             QMessageBox::warning(this,tr("Erreur Formulaire"),tr("toute les * doivent etre reseigner"));
@@ -161,8 +168,8 @@ void fbjoueur::Enregistrer()
             if(AjoutImpossible==true)
             {
 
-                SetjoueurfromIHM(play);
-                _Team->AddJoueur(play);
+                SetjoueurfromIHM(_curentJoueur);
+                _Team->AddJoueur(_curentJoueur);
             }
 
             else
@@ -196,4 +203,9 @@ void fbjoueur::Enregistrer()
 
     this->hide();
 
+}
+
+Joueur* fbjoueur::GetCurrentJoueur()
+{
+    return _curentJoueur;
 }

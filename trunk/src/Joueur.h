@@ -48,7 +48,7 @@ public:
 private:
     QString _Nom;
     QString _Prenom;
-    int _Age;
+    QString _Age;
     int _NLisence;
     int _Tel;
     int _NumMaillot;
@@ -67,8 +67,8 @@ public:
     /// acceseur
     QString get_Prenom();
     void set_Prenom(QString prenon);
-    int get_Age();
-    void set_Age(int age);
+    QString get_Age();
+    void set_Age(QString age);
     int get_NLisence();
     void set_NLisence(int lisence);
     void set_Tel(int tel);

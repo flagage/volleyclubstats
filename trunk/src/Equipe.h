@@ -50,7 +50,9 @@ private:    //attribut
     statFinal statSet;
     QStringList _listAction;
     QStringList _listValeur;
-    Club _club;
+    QString _Division;
+    QString _Categorie;
+
 public: //fonction
 
     /// acceseur
@@ -65,6 +67,11 @@ public: //fonction
     Equipe();
     Equipe(QString nom);
     ~Equipe();
+
+    void SetDivision(QString div);
+    QString GetDivision();
+    void SetCategorie(QString cat);
+    QString GetCategorie();
 
     /// Sauvegarde
     void EnregistrerXML(QDomDocument doc,QDomElement root);
@@ -92,6 +99,7 @@ public: //fonction
     void setStatMatch(int action,int pos,double valeur);
     void ExportCVS(QString Fichier);
     void ImportCVS(QString);
+
 
 
 
