@@ -41,6 +41,8 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 Equipe::Equipe()
 {
     _Nom="";
+    _Categorie="";
+    _Division="";
     this->_listAction=InitAction::donneInstance()->GetListAction();
     this->_listValeur=InitValeur::donneInstance()->GetListValeur();
     for(int i=0;i<6;i++)
@@ -139,6 +141,9 @@ void Equipe::EnregistrerXML( QDomDocument doc,QDomElement root)
 {
     QDomElement Equipe = doc.createElement("Equipe");
     Equipe.setAttribute("Nom",_Nom);
+    Equipe.setAttribute("Categorie",_Categorie);
+    Equipe.setAttribute("Division",_Division);
+
     root.appendChild(Equipe);
     for(int i=0;i<_ListeJoueur.count();i++)
     {
@@ -153,6 +158,8 @@ void Equipe::RestaurerXML(QDomNode noeud)
 {
     QDomElement Team=noeud.toElement();
     this->_Nom=Team.attribute("Nom");
+    _Categorie=Team.attribute("Categorie");
+    _Division=Team.attribute("Division");
     QDomNode child = Team.firstChild();
     while(!child.isNull())
     {
@@ -274,8 +281,8 @@ void Equipe::ExportCVS(QString fichier)
             out<<strint+";"<<player->get_Addresse()+";";
             strint.setNum(player->get_Tel());
             out<<strint+";"<<player->get_Email()+";";
-            strint.setNum(player->get_Age());
-            out<<strint+";"<<"\n";
+
+            out<<player->get_Age()+";"<<"\n";
         }
         file.close();
 }
@@ -319,7 +326,7 @@ void Equipe::ImportCVS(QString fichier)
                 if(joueur.size()>=8)
                 play->set_Email(joueur.at(8));
                 if(joueur.size()>=9)
-                play->set_Age(joueur.at(9).toInt());
+                play->set_Age(joueur.at(9));
 
                 this->AddJoueur(play);
                 }
@@ -331,3 +338,24 @@ void Equipe::ImportCVS(QString fichier)
     }
 }
 
+
+void Equipe::SetDivision(QString div)
+{
+    _Division=div;
+}
+
+QString Equipe::GetDivision()
+{
+    return _Division;
+
+}
+
+void Equipe::SetCategorie(QString cat)
+{
+    _Categorie=cat;
+}
+
+QString Equipe::GetCategorie()
+{
+    return _Categorie;
+}

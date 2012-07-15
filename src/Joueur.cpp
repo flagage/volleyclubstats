@@ -37,7 +37,7 @@ Joueur::Joueur()
 {
     _Nom="";
     _Prenom="";
-    _Age=0;
+    _Age="";
     _NLisence=0;
     _Tel=0;
     _Email="";
@@ -66,7 +66,7 @@ QString Joueur::get_Prenom()
 {
     return _Prenom;
 }
-int Joueur::get_Age()
+QString Joueur::get_Age()
 {
     return _Age;
 }
@@ -103,7 +103,7 @@ void Joueur::set_Prenom(QString prenon)
     _Prenom=prenon;
 }
 
-void Joueur::set_Age(int age)
+void Joueur::set_Age(QString age)
 {
     _Age=age;
 }
@@ -223,7 +223,7 @@ void Joueur::RestaurerXML(QDomNode noeud)
 
     _Nom=playeur.attribute("Nom");
     _Prenom=playeur.attribute("Prenom");
-    _Age=playeur.attribute("Age").toInt();
+    _Age=playeur.attribute("Age");
     _NLisence=playeur.attribute("License").toInt();
     _Tel=playeur.attribute("Tel").toInt();
     _Email=playeur.attribute("Email");

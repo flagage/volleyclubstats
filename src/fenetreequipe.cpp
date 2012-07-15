@@ -57,8 +57,7 @@ void Fenetreequipe::Connexion()
     connect(ui->ButtonModifier,SIGNAL(clicked()),this,SLOT(Modifier()));
     connect(ui->ButtonSupprimer,SIGNAL(clicked()),this,SLOT(Supprimer()));
     connect(ui->ButtonEquipe,SIGNAL(clicked()),this,SLOT(GestionEquipe()));
-    //connect(ui->pushButton_Export,SIGNAL(clicked()),this,SLOT(slot_Export()));
-    //connect(ui->pushButton_Import,SIGNAL(clicked()),this,SLOT(slot_Import()));
+
 }
 
 Fenetreequipe::~Fenetreequipe()
@@ -144,7 +143,7 @@ void Fenetreequipe::Ajouter()
 void Fenetreequipe::Modifier()
 {
 
-    //QLabel * qlab=(QLabel*)(ui->tableWidget(ui->tableWidget->currentRow(),1));
+
     QTableWidgetItem *item=ui->tableWidget->item(ui->tableWidget->currentRow(),0);
     if(item!=0)
     {
@@ -170,7 +169,7 @@ void Fenetreequipe::Modifier()
 
 void Fenetreequipe::Supprimer()
 {
-    //QLabel * qlab=(QLabel*)(ui->tableWidget->cellWidget(ui->tableWidget->currentRow(),1));
+
     QTableWidgetItem *item=ui->tableWidget->item(ui->tableWidget->currentRow(),0);
     if(item!=0)
     {
@@ -213,15 +212,17 @@ void Fenetreequipe::RaffraichirList()
     }
     if(_currentTeam!=0)
     {
-    QList<Joueur*> LJoueur=_currentTeam->GetListeJoueur();
-    ui->tableWidget->setColumnCount(_listColumn.size());
-    ui->tableWidget->setHorizontalHeaderLabels(_listColumn);
-    ui->tableWidget->setRowCount(LJoueur.count());
-    for(int i=0;i<LJoueur.count();i++)
-    {
-        RemplitTableauJoueur(LJoueur.at(i),i);
-    }
-    //ui->tableWidget->setSortingEnabled();
+        ui->lineEdit_2->setText(_currentTeam->GetDivision());
+        ui->lineEdit->setText(_currentTeam->GetCategorie());
+        QList<Joueur*> LJoueur=_currentTeam->GetListeJoueur();
+        ui->tableWidget->setColumnCount(_listColumn.size());
+        ui->tableWidget->setHorizontalHeaderLabels(_listColumn);
+        ui->tableWidget->setRowCount(LJoueur.count());
+        for(int i=0;i<LJoueur.count();i++)
+        {
+            RemplitTableauJoueur(LJoueur.at(i),i);
+        }
+
     }
     ui->tableWidget->setSortingEnabled(true);
     ui->tableWidget->sortItems(0,Qt::AscendingOrder);
@@ -237,33 +238,4 @@ void Fenetreequipe::GestionEquipe()
         InitListEquipe();
     }
 }
-/*
-void Fenetreequipe::slot_Export()
-{
-    QString fichier = QFileDialog::getSaveFileName(this, tr("Enregistrer un fichier"), QString(), "*.csv");
 
-    QList<Equipe*> LEquipe=_ecran->GetListeEquipe();
-    for(int i=0;i<LEquipe.count();i++)
-    {
-        Equipe* Team=LEquipe.at(i);
-        Team->ExportCVS(fichier);
-    }
-    QMessageBox::information(this,tr("Information"),tr("L'export c'est effectué correctement"));
-    this->close();
-
-}
-
-void Fenetreequipe::slot_Import()
-{
-    QString fichier = QFileDialog::getOpenFileName(this, tr("fichier d'import"), QString(), "*.csv");
-    if(fichier!=0)
-    {
-        Equipe *Team=new Equipe();
-        Team->ImportCVS(fichier);
-        this->_ecran->AddEquipe(Team);
-        QMessageBox::information(this,tr("Information"),tr("Importation terminer"));
-
-        InitListEquipe();
-    }
-}
-*/

@@ -65,10 +65,15 @@ private:
     Equipe *_CurrentTeam;
 
     void Initialisation();
+    void Modifier();
+    void Ajouter();
+    void Supprimer();
 
  public slots:
-     void Ajouter();
-     void Supprimer();
+
+    void Valider();
+    void changement(int);
+    void Slot_InitCatDiv(QString team);
 };
 
 #endif // FENETREVISUALISATION_H

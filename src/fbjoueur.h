@@ -48,6 +48,7 @@ public:
      void Enregistrer();
      void SetjoueurfromIHM(Joueur* play);
      bool isNumeroOk();
+     Joueur* GetCurrentJoueur();
 
 signals:
 

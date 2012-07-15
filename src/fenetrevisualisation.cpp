@@ -42,9 +42,10 @@ FenetreVisualisation::FenetreVisualisation(QList <Equipe*> listEquipe,int act,QW
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
      _listEquipe=listEquipe;
      _whataction=act;
-     connect(ui->pushAjouter,SIGNAL(clicked()),this,SLOT(Ajouter()));
-     connect(ui->pushButton_Supprimer,SIGNAL(clicked()),this,SLOT(Supprimer()));
-     connect(ui->pushButton_Annuler,SIGNAL(clicked()),this,SLOT(accept()));
+     connect(ui->pushAjouter,SIGNAL(clicked()),this,SLOT(Valider()));
+     connect(ui->pushButton_Annuler,SIGNAL(clicked()),this,SLOT(close()));
+     connect(ui->tabWidget,SIGNAL(currentChanged(int)),this,SLOT(changement(int)));
+     connect(ui->comboBox_2,SIGNAL(currentIndexChanged(QString)),this,SLOT(Slot_InitCatDiv(QString)));
 
     Initialisation();
 }
@@ -54,6 +55,7 @@ void FenetreVisualisation::Initialisation()
     for(int i=0;i<_listEquipe.count();i++)
     {
            ui->comboBox->addItem(_listEquipe.at(i)->GetNom());
+           ui->comboBox_2->addItem(_listEquipe.at(i)->GetNom());
     }
     if(_whataction==1)
     {
@@ -64,14 +66,15 @@ void FenetreVisualisation::Initialisation()
        ui->tabWidget->setTabText(1,"Exporter");
        ui->pushButton_Annuler->setVisible(false);
        ui->pushAjouter->setVisible(false);
-       ui->pushButton_Supprimer->setText("Valider");
        ui->tabWidget->setTabEnabled(0,false);
+       ui->tabWidget->setTabEnabled(1,false);
     }
     else if(_whataction==2)
     {
         ui->pushButton_Annuler->setVisible(false);
 
         ui->tabWidget->setTabEnabled(1,false);
+        ui->tabWidget->setTabEnabled(2,false);
     }
 
 }
@@ -80,6 +83,55 @@ FenetreVisualisation::~FenetreVisualisation()
 {
     delete ui;
 }
+void FenetreVisualisation::Valider()
+{
+    if(ui->tabWidget->currentIndex()==0)
+    {
+        this->Ajouter();
+    }
+    else if(ui->tabWidget->currentIndex()==1)
+    {
+        this->Modifier();
+
+    }
+    else
+    {
+        this->Supprimer();
+    }
+
+}
+
+void FenetreVisualisation::changement(int i)
+{
+    switch (i)
+    {
+    case 0:
+        ui->pushAjouter->setText("Ajouter");
+        break;
+    case 1:
+        ui->pushAjouter->setText("Modifier");
+        break;
+    case 2:
+        ui->pushAjouter->setText("Suprimer");
+        break;
+    default:
+        break;
+    }
+
+}
+void FenetreVisualisation::Slot_InitCatDiv(QString team)
+{
+
+    for(int i=0;i<_listEquipe.size ();i++)
+    {
+        if(_listEquipe.at (i)->GetNom ()==team)
+        {
+            ui->lineEdit_4->setText(_listEquipe.at (i)->GetDivision());
+            ui->lineEdit_cat_2->setText(_listEquipe.at (i)->GetCategorie());
+        }
+    }
+}
+
 void FenetreVisualisation::Ajouter()
 {
 
@@ -94,6 +146,9 @@ void FenetreVisualisation::Ajouter()
         }
 
         Equipe * Team=new Equipe(ui->lineEdit->text());
+        Team->SetDivision(ui->lineEdit_4->text());
+        Team->SetCategorie(ui->lineEdit_cat->text());
+
         _listEquipe.append(Team);
 
         ui->lineEdit->setText("");
@@ -109,6 +164,19 @@ void FenetreVisualisation::Ajouter()
 
 }
 
+void FenetreVisualisation::Modifier()
+{
+    for(int i=0;i<_listEquipe.size ();i++)
+    {
+        if(_listEquipe.at (i)->GetNom ()==ui->comboBox_2->currentText())
+        {
+            _listEquipe.at (i)->SetCategorie(ui->lineEdit_cat_2->text());
+            _listEquipe.at (i)->SetDivision(ui->lineEdit_4->text());
+
+        }
+    }
+    this->accept();
+}
 
 void FenetreVisualisation::Supprimer()
 {

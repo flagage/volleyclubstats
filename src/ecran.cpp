@@ -470,9 +470,11 @@ void Ecran::SlotAddJoueur()
     if(Match::donneInstance()->getTeam()!=0)
     {
         fbjoueur* Diajoueur=new fbjoueur(Match::donneInstance()->getTeam(),0,this);
-        //Joueur* play=Diajoueur->Ajouter(Match::donneInstance()->getTeam());
-
+        if(Diajoueur)
+        {
+            this->AddJoueurBanc(Diajoueur->GetCurrentJoueur());
             this->EnregistrerXML();
+        }
 
      }
 }
@@ -730,6 +732,10 @@ void Ecran::SlotMenuEquipe(QAction *action)
 
         equipe->exec();
         this->EnregistrerXML();
+    }
+    if(action->text()=="Gestion Club")
+    {
+
     }
     else if(action->text()=="Exporter Equipe")
     {
