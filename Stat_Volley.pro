@@ -51,7 +51,8 @@ SOURCES += src/tracelog.cpp \
     src/tracematch.cpp \
     src/matchxml.cpp \
     src/twstatjoueur.cpp \
-    src/fenetrejoueurstat.cpp
+    src/fenetrejoueurstat.cpp \
+    src/listevenement.cpp
 
 
 HEADERS  += src/tracelog.h \
@@ -90,7 +91,8 @@ HEADERS  += src/tracelog.h \
     src/matchxml.h \
     src/twstatjoueur.h \
     src/fenetrejoueurstat.h \
-    src/fenetrejoueurstat.h
+    src/fenetrejoueurstat.h \
+    src/listevenement.h
 
 
 FORMS    +=  ui/statwidget.ui \

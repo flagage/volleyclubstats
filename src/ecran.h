@@ -47,6 +47,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "vcslineedit.h"
 #include "listactionxml.h"
 #include "volleyInit.h"
+#include "listevenement.h"
 
 namespace Ui {
     class Ecran;
@@ -141,7 +142,7 @@ private:
      InitValeur * _ValeurInitial;
      InitAction * _ListActionInit;
      int _joueurBanc;
-
+    ListEvenement _ListEvent;
 
 
 protected:
@@ -201,7 +202,7 @@ public slots:
 
     void SlotMenupoint1(QAction*);
     void SlotMenupoint2(QAction*);
-
+    void slot_UpdateListEvent();
 
 signals:
     void ScorePlus(int);
