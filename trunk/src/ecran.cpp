@@ -272,7 +272,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     menupoint->addAction("-1");
     ui->pBScore->setMenu(menupoint);
     connect(menupoint,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint1(QAction*)));
-
+    connect(this->_ListEvent,SIGNAL(Update()),this,SLOT(slot_UpdateListEvent()));
     ui->pBScore_2->setText("0");
     QMenu * menupoint2=new QMenu(this);
     menupoint2->addAction("+1");
@@ -1828,7 +1828,10 @@ void Ecran::SlotMenupoint1(QAction * action)
     }
 }
 
+void Ecran::slot_UpdateListEvent()
+{
 
+}
 
 void Ecran::SlotMenupoint2(QAction * action)
 {
