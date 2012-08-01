@@ -44,6 +44,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "fenetreinternet.h"
 #include "lecteurvideo.h"
 #include "fenetrejoueurstat.h"
+#include "fenetremodifevenement.h"
 
 
 Ecran::Ecran(QWidget *parent) :
@@ -227,7 +228,7 @@ void Ecran::Initialisation()
 void Ecran::InitialisationError()
 {
 
-    ui->textEdit->setVisible(false);
+    //ui->textEdit->setVisible(false);
     ui->menuBar->setEnabled(false);
 
 
@@ -244,7 +245,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->centralWidget->setPalette(palette);
     ui->frame->setVisible(true);
     ui->frame_2->setVisible(true);
-   ui->groupBox_4->setVisible(true);
+    ui->groupBox_4->setVisible(true);
 
 
     ui->label_4->setPixmap(QPixmap("Image/new_terrain.png"));
@@ -272,7 +273,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     menupoint->addAction("-1");
     ui->pBScore->setMenu(menupoint);
     connect(menupoint,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint1(QAction*)));
-    connect(this->_ListEvent,SIGNAL(Update()),this,SLOT(slot_UpdateListEvent()));
+    //connect(this->_ListEvent,SIGNAL(),this,SLOT(slot_UpdateListEvent()));
     ui->pBScore_2->setText("0");
     QMenu * menupoint2=new QMenu(this);
     menupoint2->addAction("+1");
@@ -337,6 +338,13 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->label_3->setText(MatchEncour->getTeam()->GetNom().toUpper());
     ui->label_11->setText("");
     ui->label_12->setText("");
+    ui->listWidget->setVisible(false);
+    _ListEvent = new ListEvenement(ui->groupBox_9);
+    _ListEvent->setObjectName(QString::fromUtf8("listWidget"));
+    ui->gridLayout_7->addWidget(_ListEvent, 0, 0, 1, 1);
+    connect(_ListEvent,SIGNAL(add(int)),this,SLOT(slot_addEvent(int)));
+    connect(_ListEvent,SIGNAL(modif(int)),this,SLOT(slot_ModifEvent(int)));
+    connect(_ListEvent,SIGNAL(sup(int)),this,SLOT(slot_suppEvent(int)));
 
 
 }
@@ -943,7 +951,8 @@ void Ecran::Rotation()
 
 void Ecran::AfficherTrace(QString message)
 {
-    ui->textEdit->append(message);
+    //ui->textEdit->append(message);
+
 }
 
 
@@ -1033,7 +1042,7 @@ void Ecran::FinMatch()
     if(QMessageBox::question(this,tr("Fin de match"),tr("Voulez vous quitter le match"),QMessageBox::Ok,QMessageBox::Cancel)==QMessageBox::Ok)
     {
 
-        ui->textEdit->clear();
+        //ui->textEdit->clear();
         _trace->SetTrace(tr("Fin Match"));
         _TraceListAction->Fin();
         QString  file=Match::donneInstance ()->GetFichierXml();
@@ -1245,14 +1254,17 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
         QString msgTrace=numjoueur+" "+_listAction.at(IAction)+" "+ValeurAction+" "+strPosition;
 
         QString MsgAction;
+        QString MsgEvent;
         QString MsgSet;
         QString MsgPos;
         MsgSet=MsgSet.setNum(_currentSet);
         MsgPos=MsgPos.setNum(_currentposition);
         MsgAction=MsgSet+"_"+MsgPos+"_"+numjoueur+"_"+_listAction.at(IAction)+"_"+ValeurAction;
+        MsgEvent=numjoueur+" "+_listAction.at(IAction)+" "+ValeurAction;
 
         _trace->SetTrace(msgTrace);
         this->_TraceListAction->SetTrace(MsgAction);
+        this->_ListEvent->addItem(MsgEvent);
         //ui->listAction->addItem (MsgAction);
         this->_WtabEff->SlotMiseAJour();
         this->_PlacementJoueur->Stat();
@@ -1880,4 +1892,37 @@ void Ecran::AfficherStat()
             ui->label_12->setText(adv);
         }
     }
+}
+
+void Ecran::slot_addEvent(int i)
+{
+    QStringList numero;
+    QStringList valeur;
+    for(int i=0;i<Match::donneInstance()->GetListJoueur().size();i++)
+    {
+        numero.append(QString::number(Match::donneInstance()->GetListJoueur().at(i)->get_NumMaillot()));
+    }
+    valeur<<"++"<<"+0"<<"00"<<"-0"<<"--";
+    FenetreModifEvenement fenModif(numero,_ListActionInit->GetListAction(),valeur,this);
+    if(fenModif.exec()==1)
+    _ListEvent->insertItem(i,fenModif.ReturnText());
+}
+
+void Ecran::slot_ModifEvent(int i)
+{
+    QStringList numero;
+    QStringList valeur;
+    for(int i=0;i<Match::donneInstance()->GetListJoueur().size();i++)
+    {
+        numero.append(QString::number(Match::donneInstance()->GetListJoueur().at(i)->get_NumMaillot()));
+    }
+    valeur<<"++"<<"+0"<<"00"<<"-0"<<"--";
+    FenetreModifEvenement fenModif(numero,_ListActionInit->GetListAction(),valeur,this);
+    fenModif.Modif(this->_ListEvent->item(i)->text());
+    if(fenModif.exec()==1)
+        _ListEvent->item(i)->setText(fenModif.ReturnText());
+}
+void Ecran::slot_suppEvent(int i)
+{
+    delete _ListEvent->item(i);
 }
