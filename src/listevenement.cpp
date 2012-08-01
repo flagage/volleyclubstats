@@ -1,30 +1,69 @@
 #include "listevenement.h"
+#include "QMessageBox"
+#include "QInputDialog"
 
-ListEvenement::ListEvenement(QObject *parent) :
-    QObject(parent)
+
+ListEvenement::ListEvenement(QWidget *parent) :
+    QListWidget(parent)
 {
+
+     Initialisation();
+    Connection();
+}
+ListEvenement::~ListEvenement ()
+{
+    delete _menu;
 }
 
-
-QStringList ListEvenement::GetListEvenet()
+void ListEvenement::Initialisation()
 {
-    return _list;
+     //_ItemSelect=0;
+     _menu=new QMenu(this);
+     _menu->addAction (tr("Ajouter Avant"));
+     _menu->addAction (tr("Modifier"));
+     _menu->addAction (tr("Supprimer"));
+
 }
 
-void ListEvenement::AddEvenement(QString event)
+void ListEvenement::Connection()
 {
-    _list.append(event);
-    Update();
+    connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem*)),this,SLOT(Slot_DClick()));
+   // connect(this,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(Slot_Click()));
+    connect(_menu,SIGNAL(triggered(QAction*)),this,SLOT(Slot_Action(QAction *)));
 }
 
-void ListEvenement::SuppEvenement(QString event)
+void ListEvenement::Slot_DClick()
 {
-    for (int i=0;i<event.size();i++)
+
+   // _ItemSelect=this->currentItem ();
+    _menu->exec (QCursor::pos ());
+
+
+}
+
+/*void ListEvenement::Slot_Click()
+{
+ _ItemSelect=this->currentItem ();
+ }*/
+void ListEvenement::Slot_Action(QAction * action)
+{
+
+    if(action->text ()==tr("Ajouter Avant"))
     {
-        if(_list.at(i)==event)
-        {
-            _list.removeAt(i);
-        }
+        emit add(this->currentRow ());
+
     }
-    Update();
+    if(action->text ()==(tr("Modifier")))
+    {
+
+        emit modif(this->currentRow ());
+    }
+    if(action->text ()==(tr("Supprimer")))
+    {
+
+       emit sup(this->currentRow ());
+
+    }
 }
+
+

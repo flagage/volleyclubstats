@@ -52,7 +52,8 @@ SOURCES += src/tracelog.cpp \
     src/matchxml.cpp \
     src/twstatjoueur.cpp \
     src/fenetrejoueurstat.cpp \
-    src/listevenement.cpp
+    src/listevenement.cpp \
+    src/fenetremodifevenement.cpp
 
 
 HEADERS  += src/tracelog.h \
@@ -92,7 +93,8 @@ HEADERS  += src/tracelog.h \
     src/twstatjoueur.h \
     src/fenetrejoueurstat.h \
     src/fenetrejoueurstat.h \
-    src/listevenement.h
+    src/listevenement.h \
+    src/fenetremodifevenement.h
 
 
 FORMS    +=  ui/statwidget.ui \
@@ -114,7 +116,8 @@ FORMS    +=  ui/statwidget.ui \
     ui/fenetreinternet.ui \
     ui/lecteurvideo.ui \
     ui/twstatjoueur.ui \
-    ui/fenetrejoueurstat.ui
+    ui/fenetrejoueurstat.ui \
+    ui/fenetremodifevenement.ui
 
 
 

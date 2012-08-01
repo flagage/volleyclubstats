@@ -142,7 +142,7 @@ private:
      InitValeur * _ValeurInitial;
      InitAction * _ListActionInit;
      int _joueurBanc;
-    ListEvenement _ListEvent;
+    ListEvenement* _ListEvent;
 
 
 protected:
@@ -203,6 +203,10 @@ public slots:
     void SlotMenupoint1(QAction*);
     void SlotMenupoint2(QAction*);
     void slot_UpdateListEvent();
+
+    void slot_addEvent(int );
+    void slot_ModifEvent(int);
+    void slot_suppEvent(int);
 
 signals:
     void ScorePlus(int);
