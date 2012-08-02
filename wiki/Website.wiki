@@ -1,5 +1,5 @@
+#summary Actualite de volleyclubstats.
 #labels Actualitedevolleyclubstats
-#Actualite de volleyclubstats.
 
 = Introduction =
 
