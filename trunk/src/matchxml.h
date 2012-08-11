@@ -47,6 +47,7 @@ public:
     void SauvegardeAction(Joueur* player,int Action,int valeur);
     void SauvegardeScore(int Slocal,int Svisiteur);
     void ChangementDeSet(int numero);
+    void MiseaJourposte();
 private:
     /// liste des joueurs sur le terrain
     QList <Joueur*> _ListJoueurTer;

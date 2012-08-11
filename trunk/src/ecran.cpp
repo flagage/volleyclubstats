@@ -237,6 +237,37 @@ void Ecran::InitialisationError()
 
 void Ecran::InitialisationMatch(QString team,QString advs)
 {
+
+    QMenu * menupoint=new QMenu(this);
+    menupoint->addAction("+1");
+    menupoint->addAction("-1");
+    ui->pBScore->setMenu(menupoint);
+    connect(menupoint,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint1(QAction*)));
+    ui->pBScore_2->setText("0");
+    QMenu * menupoint2=new QMenu(this);
+    menupoint2->addAction("+1");
+    menupoint2->addAction("-1");
+    ui->pBScore_2->setMenu(menupoint2);
+    connect(menupoint2,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint2(QAction*)));
+
+    _TimerScore->start(10);
+
+
+
+    _isMatchEnCour=false;
+    ui->comboBox->addItems(InitAction::donneInstance()->GetListAction());
+
+    /// il faut verifier qu'il n'y est pas de match en cour
+    QFile file("Current/Match.xml");
+    if(file.exists())
+    {
+        //QMessageBox::information(this,"Test","test");
+        /// relecture du fichier
+        //InitialisationFromXml();
+       Match::donneInstance()->Restaurer();
+    }
+    else
+    {
     QPalette palette;
     _flagsup=false;
     _currentSet=1;
@@ -251,7 +282,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->label_4->setPixmap(QPixmap("Image/new_terrain.png"));
     this->_positionEcran=0;
     this->_PlacementJoueur->createLayout(0);
-    _TimerScore->start(10);
+
     palette.setColor(QPalette::Window ,QColor(0, 0, 255));
 
 
@@ -268,25 +299,11 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->label_2->setText(advs);
     ui->label->setText(team);
     ui->pBScore->setText("0");
-    QMenu * menupoint=new QMenu(this);
-    menupoint->addAction("+1");
-    menupoint->addAction("-1");
-    ui->pBScore->setMenu(menupoint);
-    connect(menupoint,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint1(QAction*)));
-    //connect(this->_ListEvent,SIGNAL(),this,SLOT(slot_UpdateListEvent()));
-    ui->pBScore_2->setText("0");
-    QMenu * menupoint2=new QMenu(this);
-    menupoint2->addAction("+1");
-    menupoint2->addAction("-1");
-    ui->pBScore_2->setMenu(menupoint2);
-    connect(menupoint2,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint2(QAction*)));
 
     ui->pBSet->setText("0");
     ui->pBSet_2->setText("0");
 
 
-    _isMatchEnCour=false;
-    ui->comboBox->addItems(InitAction::donneInstance()->GetListAction());
 
 
 
@@ -345,9 +362,14 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     connect(_ListEvent,SIGNAL(add(int)),this,SLOT(slot_addEvent(int)));
     connect(_ListEvent,SIGNAL(modif(int)),this,SLOT(slot_ModifEvent(int)));
     connect(_ListEvent,SIGNAL(sup(int)),this,SLOT(slot_suppEvent(int)));
-
+    }
 
 }
+
+/*void Ecran::InitialisationFromXml()
+{
+
+}*/
 
 void Ecran::slot_score()
 {

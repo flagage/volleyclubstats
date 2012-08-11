@@ -143,7 +143,10 @@ void Match::SetDate(QString str)
 Score* Match::GetScore()
 {
     if(_Fichierxml!=0)
-    this->_Fichierxml->SauvegardeScore(_score->get_Score_E1(),_score->get_Score_E2());
+    {
+        this->_Fichierxml->SauvegardeScore(_score->get_Score_E1(),_score->get_Score_E2());
+        this->_Fichierxml->MiseaJourposte();
+    }
     return this->_score;
 }
 QString Match::GetFichierXml()
