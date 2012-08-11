@@ -48,7 +48,23 @@ KeyJoueur::KeyJoueur(QWidget *parent,int nbjoueur,bool libero) :
     int compte=0;
     for(int i=0;i<_nbJoueur;i++)
     {
-        QString strPosition="Position"+QString::number (i+1);
+         QString strPosition;
+        if(i==3)
+        {
+           strPosition="Position"+QString::number (1);
+        }
+        else if(i==5)
+        {
+             strPosition="Position"+QString::number (5);
+        }
+        else if(i==6)
+        {
+            strPosition="Position"+QString::number (7);
+        }
+        else
+        {
+         strPosition="Position"+QString::number (i+2);
+        }
         buttons[i]=new BouttonJoueur(strPosition,this);
 
         connect(buttons[i],SIGNAL(lclicked()),this,SLOT(bouttonLClicked()));
@@ -372,6 +388,7 @@ void KeyJoueur::Rotation(int &joueur)
     buttons[5]->setText(buttons[4]->text());
     buttons[4]->setText(post1);
     this->ChercherJoueur(joueur);
+    this->UpdatePosition();
 }
 void KeyJoueur::RotationM(int &joueur)
 {
@@ -384,6 +401,7 @@ void KeyJoueur::RotationM(int &joueur)
     buttons[2]->setText(buttons[1]->text());
     buttons[1]->setText(post1);
     this->ChercherJoueur(joueur);
+    this->UpdatePosition();
 }
 
 Joueur* KeyJoueur::RechercheJoueur(int numero)
@@ -592,7 +610,24 @@ QList<Joueur *> KeyJoueur::GetJoueurTerrain()
         Joueur* player=RechercheJoueur(numero);
         if(player!=0)
         {
-            player->SetPosition(i+1);
+
+             if(i==3)
+            {
+                player->SetPosition(1);
+            }
+
+            else if(i==5)
+            {
+                player->SetPosition(5);
+            }
+            else if(i==6)
+            {
+                player->SetPosition(7);
+            }
+            else
+            {
+                player->SetPosition(i+2);
+            }
             list.append(player);
         }
     }
@@ -610,4 +645,40 @@ void KeyJoueur::Reinitialisation()
     }
     _nbjoueurEnPlace=0;
 
+}
+
+void KeyJoueur::UpdatePosition()
+{
+    for(int i=0;i<InitGlobal::donneInstance()->GetNbJoueur()+1;i++)
+    {
+
+        QString strtext =buttons[i]->text();
+        QStringList listtext=strtext.split("\n");
+        strtext=listtext.at(0);
+        QStringList listStr=strtext.split("(");
+        int numero=listStr.at(0).toInt();
+
+        Joueur* player=RechercheJoueur(numero);
+        if(player!=0)
+        {
+
+             if(i==3)
+            {
+                player->SetPosition(1);
+            }
+
+            else if(i==5)
+            {
+                player->SetPosition(5);
+            }
+            else if(i==6)
+            {
+                player->SetPosition(7);
+            }
+            else
+            {
+                player->SetPosition(i+2);
+            }
+    }
+    }
 }

@@ -28,11 +28,9 @@ void MatchXml::Initialisation()
     Info.setAttribute ("Duree",_ListInfo.at(6));
     Info.setAttribute("NbDeSet",0);
     _root.appendChild(Info);
-    QDomElement set1=_doc.createElement(this->_CurrentSet);
-    _root.appendChild(set1);
     /// position des joueurs
     QDomElement position=_doc.createElement("Position");
-    set1.appendChild(position);
+    _root.appendChild(position);
     QDomElement poste1=_doc.createElement ("Poste1");
     QDomText text=_doc.createTextNode(Rechercheposte(1));
     poste1.appendChild(text);
@@ -63,10 +61,14 @@ void MatchXml::Initialisation()
     poste6.appendChild(text);
     position.appendChild(poste6);
 
-    QDomElement poste7=_doc.createElement ("Libero");
+    QDomElement poste7=_doc.createElement ("Poste7");
     text=_doc.createTextNode(Rechercheposte(7));
     poste7.appendChild(text);
     position.appendChild(poste7);
+
+    QDomElement set1=_doc.createElement(this->_CurrentSet);
+    _root.appendChild(set1);
+
 
 
     /// score
@@ -240,6 +242,37 @@ void MatchXml::ChangementDeSet(int numero)
 }
 
 
+void MatchXml::MiseaJourposte()
+{
+    QDomElement docElem = _doc.documentElement();
+    QDomNode n = docElem.firstChild();
+    while(!n.isNull())
+    {
+        QDomElement e = n.toElement();
+        //QString test=e.tagName();
+        if(e.tagName()=="Position")
+        {
+            QDomNode child=e.firstChild();
+            while(!child.isNull())
+            {
+                QDomElement f=child.toElement();
+                QString poste=f.tagName();
+                QString number=poste.at(5);
+                int ipost=number.toInt();
+                f.replaceChild(_doc.createTextNode(this->Rechercheposte(ipost)),f.firstChild());
+
+                child=child.nextSibling();
+            }
+
+        }
+        n = n.nextSibling();
+    }
+    if (!_file.open(QIODevice::WriteOnly))
+        return;
+    QTextStream ts( &_file );
+    ts << _doc.toString();
+    _file.close();
+}
 
 
 
