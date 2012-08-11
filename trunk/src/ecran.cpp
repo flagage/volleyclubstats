@@ -493,6 +493,7 @@ void Ecran::ChercherPasseur()
 void Ecran::slot_changement(QPushButton *boutton)
 {
     changement(boutton->text(),boutton);
+    Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
 }
 
 void Ecran::SlotAddJoueur()

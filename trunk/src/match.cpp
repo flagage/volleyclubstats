@@ -142,11 +142,7 @@ void Match::SetDate(QString str)
 }*/
 Score* Match::GetScore()
 {
-    if(_Fichierxml!=0)
-    {
-        this->_Fichierxml->SauvegardeScore(_score->get_Score_E1(),_score->get_Score_E2());
-        this->_Fichierxml->MiseaJourposte();
-    }
+
     return this->_score;
 }
 QString Match::GetFichierXml()
@@ -541,6 +537,10 @@ void Match::InitFichierXml()
 void Match::SetJoueurTerr(QList<Joueur *> list)
 {
     _ListTerrain=list;
+    if(_Fichierxml!=0)
+    {
+        this->_Fichierxml->UpdateListJoueur(list);
+    }
 }
 
 int Match::GetPoint(bool adv)
@@ -565,6 +565,12 @@ void Match::addPoint(bool adv)
     {
         _pointAdv++;
     }
+    if(_Fichierxml!=0)
+    {
+        this->_Fichierxml->SauvegardeScore(_score->get_Score_E1(),_score->get_Score_E2());
+        this->_Fichierxml->MiseaJourposte();
+    }
+
 }
 
 int Match::GetFaute(bool adv)
@@ -602,3 +608,5 @@ void Match::supFaute(bool adv)
        this->_fauteAdv--;
     }
 }
+
+

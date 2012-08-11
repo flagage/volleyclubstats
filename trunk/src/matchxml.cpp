@@ -275,4 +275,9 @@ void MatchXml::MiseaJourposte()
 }
 
 
+void MatchXml::UpdateListJoueur(QList <Joueur*> listJoueur)
+{
+    this->_ListJoueurTer.clear();
+    _ListJoueurTer=listJoueur;
 
+}
