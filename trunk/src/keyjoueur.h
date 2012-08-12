@@ -77,7 +77,7 @@ QString UpdateJoueur(Joueur* player);
 QList<Joueur *> GetJoueurTerrain();
 void Reinitialisation();
 void UpdatePosition();
-
+void Placement(QList<Joueur*> joueur);
 signals:
     void Changement(QPushButton *button);
     void JoueurStat(QPushButton *button);

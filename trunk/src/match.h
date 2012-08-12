@@ -41,6 +41,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QDomDocument>
 #include <QFile>
 #include <QDate>
+#include <QMap>
 
 class Match
 {
@@ -65,6 +66,7 @@ private:
     int _pointAdv;
     int _faute;
     int _fauteAdv;
+    QList <QString> _listPosition;
 protected:
     Match();
     Match(const Match&);
@@ -116,6 +118,7 @@ public:
     void InitFichierXml();
 
     void SetJoueurTerr(QList<Joueur *> list);
+    QList<Joueur *> GetListJoueurTerr();
 
     int GetPoint(bool adv=false);
     int GetFaute(bool adv=false);
@@ -123,7 +126,8 @@ public:
     void addFaute(bool adv=false);
     void supPoint(bool adv=false);
     void supFaute(bool adv=false);
-
+    /// restauration xml
+    void InfoFromXML( QList <Equipe*> listequipe);
 
 };
 

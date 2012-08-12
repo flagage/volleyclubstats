@@ -70,6 +70,7 @@ public:
     void Initialisation();
     void InitialisationError();
     void InitialisationMatch(QString team,QString adv);
+    void InitialisationMatchFromXML();
     void InitialisationAction(QStringList Action);
    // void InitialisationValeur(QStringList Valeur);
     void ChercherPasseur();
@@ -104,6 +105,8 @@ public:
     void JoueurBanc();
     void AddJoueurBanc(Joueur* joueur);
      void AfficherStat();
+
+     void InitialisationFromXml();
 
 
 

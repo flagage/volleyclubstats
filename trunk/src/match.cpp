@@ -543,6 +543,7 @@ void Match::SetJoueurTerr(QList<Joueur *> list)
     }
 }
 
+
 int Match::GetPoint(bool adv)
 {
     if(adv==false)
@@ -609,4 +610,83 @@ void Match::supFaute(bool adv)
     }
 }
 
+void Match::InfoFromXML( QList <Equipe*> listequipe)
+{
+    QFile file("Current/Match.xml");
+    QDomDocument doc;
+    if (!file.open(QIODevice::ReadOnly))
+        return;
+    QString msg;
+    int posli;
+    int poscol;
+    if (!doc.setContent(&file,&msg,&posli,&poscol))
+    {
+        file.close(); // tablit le document XML  partir des donnes du fichier (hirarchie, etc.)
+        return;
+    }
+    file.close();
+    QString nomEquipe="";
+    QString adv="";
+    QDomElement racine = doc.documentElement(); // renvoie la balise racine
+    QDomNode noeud = racine.firstChild(); // renvoie la premire balise  mesure
+    while(!noeud.isNull())
+    {
+
+          QDomElement element=noeud.toElement();
+
+          if(element.tagName()=="Match")
+          {
+
+              this->_advers=element.attribute("Contre");
+              this->_Arbitre=element.attribute("Arbitre");
+              this->_numCurentSet=element.attribute("NbDeSet").toInt();
+              this->_Type=element.attribute("Type");
+              nomEquipe=element.attribute("Equipe");
+          }
+          if(element.tagName()=="Position")
+          {
+              QDomNode child = element.firstChild();
+              while(!child.isNull())
+              {
+                  QString debug=child.toElement().tagName();
+                  QString debug4=child.toElement().nodeValue();
+                _listPosition.append(child.toElement().text());
+               child=child.nextSibling();
+              }
+          }
+             noeud=noeud.nextSibling();
+    }
+    if(nomEquipe!="")
+    {
+        for(int i=0;i<listequipe.size();i++)
+        {
+            if(listequipe.at(i)->GetNom()==nomEquipe)
+            {
+                this->_currrentEquipe=listequipe.at(i);
+                break;
+            }
+        }
+    }
+}
+QList<Joueur *>  Match::GetListJoueurTerr()
+{
+    QList<Joueur *> listjoueur=this->_currrentEquipe->GetListeJoueur();
+    for(int i=0;i<this->_listPosition.size();i++)
+    {
+        QString valeur=_listPosition.at(i);
+        QStringList listval=valeur.split("_");
+        for(int k=0;k<listjoueur.size();k++)
+        {
+            if(listjoueur.at(k)->get_NumMaillot()==listval[1].toInt())
+            {
+                listjoueur.at(k)->SetPosition(i+1);
+                _ListTerrain.append(listjoueur.at(k));
+                break;
+            }
+
+
+        }
+    }
+    return _ListTerrain;
+}
 

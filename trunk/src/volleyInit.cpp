@@ -5,7 +5,7 @@ InitValeur* InitValeur::_InstanceValeur = NULL;
 
 InitValeur::InitValeur()
 {
-    _ListValeur<<"PP"<<"P"<<"0"<<"M"<<"MM"<<"tot";
+    _ListValeur<<"PP"<<"P"<<"Z"<<"M"<<"MM"<<"tot";
 
     //_InstanceValeur=NULL;
 }
@@ -56,7 +56,7 @@ QString InitValeur::GetElementValeur(int valu)
         return "P";
         break;
     case V0:
-        return "0";
+        return "Z";
         break;
     case VM:
         return "M";

@@ -235,6 +235,66 @@ void Ecran::InitialisationError()
     QMessageBox::information(this,tr("Licence invalide"),tr("Votre licence a expirer"));
 }
 
+void Ecran::InitialisationMatchFromXML()
+{
+
+    QMenu * menupoint=new QMenu(this);
+    menupoint->addAction("+1");
+    menupoint->addAction("-1");
+    ui->pBScore->setMenu(menupoint);
+    connect(menupoint,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint1(QAction*)));
+    ui->pBScore_2->setText("0");
+    QMenu * menupoint2=new QMenu(this);
+    menupoint2->addAction("+1");
+    menupoint2->addAction("-1");
+    ui->pBScore_2->setMenu(menupoint2);
+    connect(menupoint2,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint2(QAction*)));
+
+    _TimerScore->start(10);
+
+
+
+    _isMatchEnCour=false;
+    ui->comboBox->addItems(InitAction::donneInstance()->GetListAction());
+
+    //QMessageBox::information(this,"Test","test");
+    /// relecture du fichier
+    InitialisationFromXml();
+    ui->frame->setVisible(true);
+    ui->frame_2->setVisible(true);
+    //ui->label_4->setPixmap(QPixmap("Image/new_terrain.png"));
+    ui->frame_3->setVisible(true);
+    ui->comboBox->setEnabled(false);
+    LineEdit2->setEnabled(false);
+
+    ChangeBouton=new QPushButton(this);
+    Match* MatchEncour=Match::donneInstance();
+    this->myWidget->SetEquipe (MatchEncour->getTeam());
+    //this->_WtabEff->Init();
+    //this->myWidget->Initialisation ();
+    //this->myWidget->InitListAction(_listAction);
+    //this->_PlacementJoueur->InitLineEditSize ();
+    ui->label_5->setText(MatchEncour->getadvs().toUpper());
+    ui->label_3->setText(MatchEncour->getTeam()->GetNom().toUpper());
+    ui->label_11->setText("");
+    ui->label_12->setText("");
+    ui->listWidget->setVisible(false);
+    _ListEvent = new ListEvenement(ui->groupBox_9);
+    _ListEvent->setObjectName(QString::fromUtf8("listWidget"));
+    ui->gridLayout_7->addWidget(_ListEvent, 0, 0, 1, 1);
+    connect(_ListEvent,SIGNAL(add(int)),this,SLOT(slot_addEvent(int)));
+    connect(_ListEvent,SIGNAL(modif(int)),this,SLOT(slot_ModifEvent(int)));
+    connect(_ListEvent,SIGNAL(sup(int)),this,SLOT(slot_suppEvent(int)));
+
+    /// placement des joueurs
+    this->_PlacementJoueur->Placement(MatchEncour->GetListJoueurTerr());
+    this->JoueurBanc();
+    this->JoueurAPlacer();
+   //Match::donneInstance()->Restaurer();
+    //this->Slot_start();
+
+}
+
 void Ecran::InitialisationMatch(QString team,QString advs)
 {
 
@@ -261,10 +321,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     QFile file("Current/Match.xml");
     if(file.exists())
     {
-        //QMessageBox::information(this,"Test","test");
-        /// relecture du fichier
-        //InitialisationFromXml();
-       Match::donneInstance()->Restaurer();
+
     }
     else
     {
@@ -366,10 +423,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
 
 }
 
-/*void Ecran::InitialisationFromXml()
-{
 
-}*/
 
 void Ecran::slot_score()
 {
@@ -819,6 +873,13 @@ void Ecran::AffSession(QAction *action)
   if(action->text() == "Lancer le Match")
     {
         Match* play=Match::donneInstance();
+        QFile file("Current/Match.xml");
+        if(file.exists())
+        {
+            InitialisationMatchFromXML();
+        }
+        else
+        {
         FenetreLancement* lance=new FenetreLancement(this);
         if(lance->exec())
         {
@@ -832,6 +893,7 @@ void Ecran::AffSession(QAction *action)
         }
 
     }
+  }
     else if(action->text ().toUpper ()=="REVOIR UN MATCH")
     {
         _FenetreChoix=new FenetreChoixMatch(this);
@@ -1948,4 +2010,9 @@ void Ecran::slot_ModifEvent(int i)
 void Ecran::slot_suppEvent(int i)
 {
     delete _ListEvent->item(i);
+}
+
+void Ecran::InitialisationFromXml()
+{
+    Match::donneInstance()->GetInstance()->InfoFromXML( this->_ListeEquipe);
 }
