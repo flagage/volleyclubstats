@@ -11,8 +11,9 @@ MatchXml::MatchXml(QStringList listInfo, QList<Joueur *> listJoueur)
 void MatchXml::Initialisation()
 {
 
+
     /// information generiques sur le match
-    _doc.setNodeValue("Info");
+
     QDomNode noeud=_doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"");
    _doc.insertBefore (noeud,_doc.firstChild ());
     _root = _doc.createElement("Info");

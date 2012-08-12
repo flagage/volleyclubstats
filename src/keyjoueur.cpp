@@ -45,7 +45,7 @@ KeyJoueur::KeyJoueur(QWidget *parent,int nbjoueur,bool libero) :
     _parent=parent;
     _pos=0;
     _nbjoueurEnPlace=0;
-    int compte=0;
+
     for(int i=0;i<_nbJoueur;i++)
     {
          QString strPosition;
@@ -681,4 +681,39 @@ void KeyJoueur::UpdatePosition()
             }
     }
     }
+}
+void KeyJoueur::Placement(QList<Joueur *> joueur)
+{
+    for(int i=0;i<joueur.size();i++)
+    {
+        int pos=joueur.at(i)->GetPosition();
+        QString text=joueur.at(i)->get_Prenom()+"_"+QString::number(joueur.at(i)->get_NumMaillot());
+        switch (pos)
+        {
+        case 1:
+            buttons[3]->setText(this->UpdateJoueur(joueur.at(i)));
+            break;
+        case 2:
+            buttons[0]->setText(this->UpdateJoueur(joueur.at(i)));
+            break;
+        case 3:
+            buttons[1]->setText(this->UpdateJoueur(joueur.at(i)));
+            break;
+        case 4:
+            buttons[2]->setText(this->UpdateJoueur(joueur.at(i)));
+            break;
+        case 5:
+            buttons[5]->setText(this->UpdateJoueur(joueur.at(i)));
+            break;
+        case 6:
+            buttons[4]->setText(this->UpdateJoueur(joueur.at(i)));
+            break;
+        case 7:
+            buttons[6]->setText(this->UpdateJoueur(joueur.at(i)));
+            break;
+        }
+
+    }
+    _listjoueur=Match::donneInstance()->GetListJoueur();
+    ChercherJoueur(0);
 }
