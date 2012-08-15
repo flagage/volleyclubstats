@@ -715,5 +715,5 @@ void KeyJoueur::Placement(QList<Joueur *> joueur)
 
     }
     _listjoueur=Match::donneInstance()->GetListJoueur();
-    ChercherJoueur(0);
+    //this->ChercherJoueur(0);
 }

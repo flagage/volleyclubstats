@@ -129,6 +129,8 @@ public:
     /// restauration xml
     void InfoFromXML( QList <Equipe*> listequipe);
 
+
+
 };
 
 

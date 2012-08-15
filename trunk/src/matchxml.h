@@ -41,7 +41,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 class MatchXml
 {
 public:
-    MatchXml(QStringList listInfo,QList <Joueur*> listJoueur);
+    MatchXml(QStringList listInfo,QList <Joueur*> listJoueur,QStringList,QStringList);
     void Initialisation();
     QString Rechercheposte(int post);
     void SauvegardeAction(Joueur* player,int Action,int valeur);
@@ -58,6 +58,8 @@ private:
     QDomDocument _doc;
     QFile _file;
     QDomElement _root;
+    QStringList _listRatio;
+    QStringList _listAction;
 };
 
 #endif // MATCHXML_H
