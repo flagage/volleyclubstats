@@ -172,6 +172,7 @@ public slots:
     void SlotModifJoueur();
     void slot_initChangement();
     void slot_score();
+    void InitScore();
     void Slot_Scoreplus(int position);
     void Slot_SuppAction();
     void Slot_ModifAction();

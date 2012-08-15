@@ -81,6 +81,52 @@ QString InitValeur::GetElementValeur(int valu)
         break;
     }
 }
+
+int InitValeur::GetValeurFromString(QString valeur)
+{
+    if(valeur=="PP")
+    {
+        return VPP;
+    }
+    if(valeur=="P")
+    {
+        return VP;
+    }
+    if(valeur=="Z")
+    {
+        return V0;
+    }
+    if(valeur=="M")
+    {
+        return VM;
+    }
+    if(valeur=="MM")
+    {
+        return VMM;
+    }
+    if(valeur=="tot")
+    {
+        return TOT;
+    }
+    if(valeur=="eff1")
+    {
+        return EFF1;
+    }
+    if(valeur=="eff2")
+    {
+        return EFF2;
+    }
+    if(valeur=="eff3")
+    {
+        return EFF3;
+    }
+    if(valeur=="eff4")
+    {
+        return EFF4;
+    }
+
+}
+
 void InitValeur::SetSelection(QStringList list)
 {
      for(int i=0;i<list.size();i++)
@@ -160,6 +206,36 @@ QString InitAction::GetElementAction(int valu)
     }
     return strretour;
 }
+
+int InitAction::GetActionFromString(QString valeur)
+{
+    if(valeur=="Service")
+    {
+        return SERV;
+    }
+    if(valeur=="Reception")
+    {
+        return RECEP;
+    }
+    if(valeur=="Contre")
+    {
+        return CONTRE;
+    }
+    if(valeur=="Defense")
+    {
+        return DEF;
+    }
+    if(valeur=="Passe")
+    {
+        return PASSE;
+    }
+    if(valeur=="Attaque")
+    {
+        return ATTA;
+    }
+
+}
+
 void InitAction::SetSelection(QStringList list)
 {
     for(int i=0;i<list.size();i++)

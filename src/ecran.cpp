@@ -249,6 +249,21 @@ void Ecran::InitialisationMatchFromXML()
     menupoint2->addAction("-1");
     ui->pBScore_2->setMenu(menupoint2);
     connect(menupoint2,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint2(QAction*)));
+    QPalette palette;
+
+    palette.setColor(QPalette::Window ,QColor(167,167,167));
+    ui->centralWidget->setPalette(palette);
+
+
+    palette.setColor(QPalette::Window ,QColor(0, 0, 255));
+
+
+    palette.setColor(QPalette::Window ,QColor(34, 139, 34));
+
+
+    ui->groupBox->setPalette(palette);
+    ui->groupBox_2->setPalette(palette);
+    ui->groupBox_3->setPalette (palette);
 
     _TimerScore->start(10);
 
@@ -270,7 +285,7 @@ void Ecran::InitialisationMatchFromXML()
     ChangeBouton=new QPushButton(this);
     Match* MatchEncour=Match::donneInstance();
     this->myWidget->SetEquipe (MatchEncour->getTeam());
-    //this->_WtabEff->Init();
+    this->_WtabEff->Init();
     //this->myWidget->Initialisation ();
     //this->myWidget->InitListAction(_listAction);
     //this->_PlacementJoueur->InitLineEditSize ();
@@ -278,6 +293,10 @@ void Ecran::InitialisationMatchFromXML()
     ui->label_3->setText(MatchEncour->getTeam()->GetNom().toUpper());
     ui->label_11->setText("");
     ui->label_12->setText("");
+    ui->label_6->setVisible(false);
+    ui->label_7->setVisible(false);
+    ui->label_8->setVisible(false);
+    ui->label_9->setVisible(false);
     ui->listWidget->setVisible(false);
     _ListEvent = new ListEvenement(ui->groupBox_9);
     _ListEvent->setObjectName(QString::fromUtf8("listWidget"));
@@ -290,7 +309,9 @@ void Ecran::InitialisationMatchFromXML()
     this->_PlacementJoueur->Placement(MatchEncour->GetListJoueurTerr());
     this->JoueurBanc();
     this->JoueurAPlacer();
-   //Match::donneInstance()->Restaurer();
+
+    InitScore();
+    //Match::donneInstance()->Restaurer();
     //this->Slot_start();
 
 }
@@ -423,7 +444,23 @@ void Ecran::InitialisationMatch(QString team,QString advs)
 
 }
 
+void Ecran::InitScore()
+{
+    Score* score= Match::donneInstance()->GetScore();
+    ui->label->setText(score->get_Equipe_1());
+    ui->label_2->setText(score->get_Equipe_2());
+    QString stScore;
+    stScore=QString("%1").arg(score->get_Score_E1());
+    ui->pBScore->setText(stScore);
+    stScore=QString("%1").arg(score->get_Score_E2());
+    ui->pBScore_2->setText(stScore);
 
+    stScore=QString("%1").arg(score->get_Set_E1());
+    ui->pBSet->setText(stScore);
+    stScore=QString("%1").arg(score->get_Set_E2());
+    ui->pBSet_2->setText(stScore);
+    /// TODO Initialiser les temps morts
+}
 
 void Ecran::slot_score()
 {

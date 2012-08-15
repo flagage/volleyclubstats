@@ -61,6 +61,7 @@ public:
     int GetSizeValeur();
 
     QString GetElementValeur(int valu);
+    int GetValeurFromString(QString valeur);
     QStringList GetListValeur();
     void SetSelection(QStringList list);
 
@@ -91,6 +92,7 @@ public:
     int GetSizeAction();
     QString GetElementAction(int valu);
     QStringList GetListAction();
+    int GetActionFromString(QString valeur);
     void SetSelection(QStringList list);
 
 

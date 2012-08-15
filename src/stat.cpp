@@ -57,7 +57,7 @@ statValeur::statValeur(QStringList valeur)
 
     _ListEntre=InitValeur::donneInstance()->GetListValeur();
 
- //   Initialisation();
+    Initialisation();
 
 }
 
@@ -249,19 +249,19 @@ void statValeur::setValeur(int pos,double valeur)
 void  statValeur::SetValeurEff(int pos,double valeur)
 {
     int value=pos-6;
-    if(this->_ListEntre.at(value)=="eff1")
+    if(this->_ListValeur.at(value)=="eff1")
     {
         this->eff1=valeur;
     }
-    if(this->_ListEntre.at(value)=="eff2")
+    if(this->_ListValeur.at(value)=="eff2")
     {
         this->eff2=valeur;
     }
-    if(this->_ListEntre.at(value)=="eff3")
+    if(this->_ListValeur.at(value)=="eff3")
     {
         this->eff3=valeur;
     }
-    if(this->_ListEntre.at(value)=="eff4")
+    if(this->_ListValeur.at(value)=="eff4")
     {
         this->eff4=valeur;
     }
@@ -269,20 +269,20 @@ void  statValeur::SetValeurEff(int pos,double valeur)
 double statValeur::ValeurEff(int value)
 {
 
-    this->_ListEntre=InitValeur::donneInstance()->GetListValeur();
-    if(this->_ListEntre.at(value)=="eff1")
+   // this->_ListEntre=InitValeur::donneInstance()->GetListValeur();
+    if(this->_ListValeur.at(value)=="eff1")
     {
         return this->eff1;
     }
-    if(this->_ListEntre.at(value)=="eff2")
+    if(this->_ListValeur.at(value)=="eff2")
     {
         return this->eff2;
     }
-    if(this->_ListEntre.at(value)=="eff3")
+    if(this->_ListValeur.at(value)=="eff3")
     {
         return this->eff3;
     }
-    if(this->_ListEntre.at(value)=="eff4")
+    if(this->_ListValeur.at(value)=="eff4")
     {
         return this->eff4;
     }

@@ -1,10 +1,12 @@
 #include "matchxml.h"
 
-MatchXml::MatchXml(QStringList listInfo, QList<Joueur *> listJoueur)
+MatchXml::MatchXml(QStringList listInfo, QList<Joueur *> listJoueur,QStringList listRatio,QStringList listAction)
 {
     _ListInfo=listInfo;
     _ListJoueurTer=listJoueur;
     _CurrentSet="S1";
+    _listRatio=listRatio;
+    _listAction=listAction;
     Initialisation();
 }
 
@@ -29,11 +31,22 @@ void MatchXml::Initialisation()
     Info.setAttribute ("Duree",_ListInfo.at(6));
     Info.setAttribute("NbDeSet",0);
     _root.appendChild(Info);
+    /// Information sur les ratio choisie
+    QDomElement Ratio=_doc.createElement("Ratio");
+    QDomText text=_doc.createTextNode(_listRatio.join(","));
+    Ratio.appendChild(text);
+    _root.appendChild(Ratio);
+
+    /// Information sur les actions choisies
+    QDomElement Action=_doc.createElement("Action");
+    text=_doc.createTextNode(_listAction.join(","));
+    Action.appendChild(text);
+    _root.appendChild(Action);
     /// position des joueurs
     QDomElement position=_doc.createElement("Position");
     _root.appendChild(position);
     QDomElement poste1=_doc.createElement ("Poste1");
-    QDomText text=_doc.createTextNode(Rechercheposte(1));
+     text=_doc.createTextNode(Rechercheposte(1));
     poste1.appendChild(text);
     position.appendChild(poste1);
 
