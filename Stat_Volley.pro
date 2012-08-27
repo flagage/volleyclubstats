@@ -92,7 +92,6 @@ HEADERS  += src/tracelog.h \
     src/matchxml.h \
     src/twstatjoueur.h \
     src/fenetrejoueurstat.h \
-    src/fenetrejoueurstat.h \
     src/listevenement.h \
     src/fenetremodifevenement.h
 

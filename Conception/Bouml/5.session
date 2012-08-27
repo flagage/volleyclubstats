@@ -1,0 +1,13 @@
+window_sizes 1600 838 375 1125 600 82
+diagrams
+  active  classdiagram_ref 128005 // diagram_classe
+    971 544 100 4 0 0
+end
+show_stereotypes
+selected operation_ref 130053 // Match
+open
+  class_ref 128005 // Match
+  class_ref 128133 // Score
+end
+end
+verbose
