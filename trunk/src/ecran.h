@@ -134,7 +134,6 @@ private:
     WidgetTabEff* _WtabEff;
     bool _finSet;
     QList<QString> _ListActionModif;
-    QStringList _listActionMatch;
     QStringList _listActionPlus;
     QStringList _listActionMoins;
     QStringList _listValeurStat;

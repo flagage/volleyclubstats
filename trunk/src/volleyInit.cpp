@@ -238,6 +238,7 @@ int InitAction::GetActionFromString(QString valeur)
 
 void InitAction::SetSelection(QStringList list)
 {
+    this->_ListAction.clear();
     for(int i=0;i<list.size();i++)
     {
         this->_ListAction.append(list.at(i));

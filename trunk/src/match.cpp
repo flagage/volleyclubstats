@@ -149,6 +149,15 @@ QString Match::GetFichierXml()
 {
     return this->_nomFichier;
 }
+void Match::InitialisationAction(QStringList action)
+{
+    this->_listActionMatch=action;
+}
+
+QStringList Match::GetListAction()
+{
+    return this->_listActionMatch;
+}
 
 void Match::EnregistrerXMl()
 {
@@ -174,7 +183,8 @@ void Match::EnregistrerXMl()
 
     QDomElement Equipe= doc.createElement("Equipe");
     Equipe.setAttribute("Nom",this->_currrentEquipe->GetNom());
-    Equipe.setAttribute("listAction",this->_currrentEquipe->GetStringAction());
+
+    Equipe.setAttribute("listAction", this->_listActionMatch.join(","));
     Equipe.setAttribute("ListeValeur",_currrentEquipe->GetStringValeur());
     root.appendChild(Equipe);
     for(int k=0;k<this->_currrentEquipe->GetListeJoueur ().size ();k++)
@@ -536,9 +546,9 @@ void Match::InitFichierXml()
     {
         Ratio.append(InitValeur::donneInstance()->GetElementValeur(i));
     }
-    for(int i=0;i<InitAction::donneInstance()->GetSizeAction();i++)
+    for(int i=0;i<_listActionMatch.size();i++)
     {
-        Action.append(InitAction::donneInstance()->GetElementAction(i));
+        Action.append(_listActionMatch.at(i));
     }
 
     this->_Fichierxml=new MatchXml(Info,_ListTerrain,Ratio,Action);
@@ -674,7 +684,9 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
           if(element.tagName()=="Action")
           {
               QStringList listelement=element.text().split(",");
+              _listActionMatch=listelement;
               InitAction::donneInstance()->SetSelection(listelement);
+
           }
           if(element.tagName()=="S1")
           {
@@ -706,7 +718,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
                               int action=InitAction::donneInstance()->GetActionFromString(strAction);
                               for(int i=0;i<InitValeur::donneInstance()->GetSizeValeur();i++)
                               {
-                                 joue->setStatMatch(action,i,G2child.toElement().attribute(InitValeur::donneInstance()->GetElementValeur(i)).toDouble());
+                                 //joue->setStatMatch(action,i,G2child.toElement().attribute(InitValeur::donneInstance()->GetElementValeur(i)).toDouble());
 
                               }
                               G2child=G2child.nextSibling();

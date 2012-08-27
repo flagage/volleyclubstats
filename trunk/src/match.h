@@ -67,6 +67,7 @@ private:
     int _faute;
     int _fauteAdv;
     QList <QString> _listPosition;
+    QStringList _listActionMatch;
 protected:
     Match();
     Match(const Match&);
@@ -87,6 +88,9 @@ public:
 
     int GetCurentSet();
     void SetNbSet(int i);
+
+    void InitialisationAction(QStringList);
+    QStringList GetListAction();
 
     void SetType(QString str);
     QString GetType();
