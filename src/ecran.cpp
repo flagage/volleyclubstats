@@ -313,6 +313,11 @@ void Ecran::InitialisationMatchFromXML()
     InitScore();
     //Match::donneInstance()->Restaurer();
     //this->Slot_start();
+    LineEdit2->setFocus();
+    this->LineEdit2->setCursorPosition(LineEdit2->text().size());
+    ui->comboBox->setEnabled(true);
+    LineEdit2->setEnabled(true);
+    this->_isMatchEnCour=true;
 
 }
 
@@ -441,7 +446,7 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     connect(_ListEvent,SIGNAL(modif(int)),this,SLOT(slot_ModifEvent(int)));
     connect(_ListEvent,SIGNAL(sup(int)),this,SLOT(slot_suppEvent(int)));
     }
-
+//this->InitialisationAction(InitAction::donneInstance()->GetListAction());
 }
 
 void Ecran::InitScore()
@@ -502,7 +507,8 @@ void Ecran::slot_score()
 
 void Ecran::InitialisationAction(QStringList Action)
 {
-    this->_listActionMatch=Action;
+    //this->_listActionMatch=Action;
+    Match::donneInstance()->InitialisationAction(Action);
 
 }
 
@@ -1175,7 +1181,6 @@ void Ecran::FinMatch()
         // this->_FenetreStat->exec();
         Match::libereInstance();
         ui->comboBox->clear();
-        this->_listActionMatch.clear();
         this->_listBanc->clear();
         this->_ListeEquipe.clear();
         //ui->listJoueur->clear ();
@@ -1342,6 +1347,7 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
     int position=1;
     QString strPosition;
     StatValeur StatAction=V0;
+    QStringList listActionMatch=Match::donneInstance()->GetListAction();
 
 
     if(ValeurAction== "++")
@@ -1394,10 +1400,11 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
 
     //Algo de suivi des actions
     //Service;Defence;Passe;Attaque;Defence;Passe;Attaque
-    IAction=_listActionMatch.size()-1;
-    for(int k=0;k<_listActionMatch.size();k++)
+
+    IAction=listActionMatch.size()-1;
+    for(int k=0;k<listActionMatch.size();k++)
     {
-        if(Action==_listActionMatch.at(k))
+        if(Action==listActionMatch.at(k))
         {
             IAction=k;
             break;
@@ -1411,7 +1418,7 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
         // this->LineEdit2->ChangeBackColor(2);
         for(int i=0;i<ui->comboBox->count();i++)
         {
-            if(ui->comboBox->itemText(i)==this->_listActionMatch.at(2))
+            if(ui->comboBox->itemText(i)==Match::donneInstance()->GetListAction().at(2))
             {
                 ui->comboBox->setCurrentIndex (i);
                 this->LineEdit2->ChangeBackColor(i);
@@ -1421,13 +1428,14 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
     }
     else if(IAction==1)
     {
-        if(_listActionMatch.contains (tr("Passe")))
+        if(listActionMatch.contains (tr("Passe")))
         {
             //ui->comboBox->setCurrentIndex (this->_listActionMatch.size()-2);
             //this->LineEdit2->ChangeBackColor(this->_listActionMatch.size()-2);
+
             for(int i=0;i<ui->comboBox->count();i++)
             {
-                if(ui->comboBox->itemText(i)==this->_listActionMatch.at(this->_listActionMatch.size()-2))
+                if(ui->comboBox->itemText(i)==listActionMatch.at(listActionMatch.size()-2))
                 {
                     ui->comboBox->setCurrentIndex (i);
                     this->LineEdit2->ChangeBackColor(i);
@@ -1440,7 +1448,7 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
         {
             for(int i=0;i<ui->comboBox->count();i++)
             {
-                if(ui->comboBox->itemText(i)==this->_listActionMatch.at(_listActionMatch.size()-1))
+                if(ui->comboBox->itemText(i)==listActionMatch.at(listActionMatch.size()-1))
                 {
                     ui->comboBox->setCurrentIndex (i);
                     this->LineEdit2->ChangeBackColor(i);
@@ -1452,13 +1460,13 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
 
         }
     }
-    else if(IAction==this->_listActionMatch.size()-1)
+    else if(IAction==listActionMatch.size()-1)
     {
         // ui->comboBox->setCurrentIndex(2);
         // this->LineEdit2->ChangeBackColor(2);
         for(int i=0;i<ui->comboBox->count();i++)
         {
-            if(ui->comboBox->itemText(i)==this->_listActionMatch.at(2))
+            if(ui->comboBox->itemText(i)==listActionMatch.at(2))
             {
                 ui->comboBox->setCurrentIndex (i);
                 this->LineEdit2->ChangeBackColor(i);
@@ -1470,7 +1478,7 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
     {
         for(int i=0;i<ui->comboBox->count();i++)
         {
-            if(ui->comboBox->itemText(i)==this->_listActionMatch.at(IAction+1))
+            if(ui->comboBox->itemText(i)==listActionMatch.at(IAction+1))
             {
                 ui->comboBox->setCurrentIndex (i);
                 this->LineEdit2->ChangeBackColor(i);
@@ -1486,12 +1494,12 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
 
     if(StatAction== VMM)
         PointMoins(numjoueur);
-    if(_listActionMoins.contains(_listActionMatch.at(IAction)) &&StatAction==VM)
+    if(_listActionMoins.contains(listActionMatch.at(IAction)) &&StatAction==VM)
     {
         PointMoins(numjoueur);
     }
 
-    if(_listActionPlus.contains(_listActionMatch.at(IAction))
+    if(_listActionPlus.contains(listActionMatch.at(IAction))
             && StatAction== VPP)
     {
         this->PointPlus(numjoueur);
@@ -2052,4 +2060,6 @@ void Ecran::slot_suppEvent(int i)
 void Ecran::InitialisationFromXml()
 {
     Match::donneInstance()->GetInstance()->InfoFromXML( this->_ListeEquipe);
+
+    Match::donneInstance()->GetInstance()->InitFichierXml();
 }
