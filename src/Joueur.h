@@ -64,6 +64,7 @@ private:
 public:
     /// constructeur
     Joueur();
+    ~Joueur();
     /// acceseur
     QString get_Prenom();
     void set_Prenom(QString prenon);

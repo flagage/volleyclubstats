@@ -161,7 +161,7 @@ QStringList Match::GetListAction()
 
 void Match::EnregistrerXMl()
 {
-    QString Joueur;
+   /* QString Joueur;
     QString clef;
     QDomDocument doc("Info");
     QDomNode noeud=doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"");
@@ -280,14 +280,14 @@ void Match::EnregistrerXMl()
 
         }
 
-    }*/
+    }
 
     QFile file(QString("Sauvegarde/"+_nomFichier));
     if (!file.open(QIODevice::WriteOnly))
         return;
     QTextStream ts( &file );
     ts << doc.toString();
-    file.close();
+    file.close();*/
 }
 
 void Match::CreerSet(QString score,QStringList list)
@@ -303,12 +303,10 @@ void Match::CreerSet(QString score,QStringList list)
 void Match::FinSet()
 {
     _numCurentSet++;
-    //this->_curentset->setAdv(this->GetScore()->get_Score_E2());
-    //this->_curentset->setEquipe(this->GetScore()->get_Score_E1());
-    //this->_curentset->Enregistrer();
-    //this->_curentset=new Set(this->_currrentEquipe,_numCurentSet);
-    //this->_curentset->Initialise();
-    //this->_ListeSet.append(_curentset);
+
+    if(_Fichierxml==0)
+        return;
+
     this->_Fichierxml->ChangementDeSet(_numCurentSet);
     if(this->_score->get_Score_E1()>this->_score->get_Score_E2())
     {
@@ -713,12 +711,16 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
                           QDomNode G2child=Gchild.firstChild();
                           while(!G2child.isNull())
                           {
+                              QDomElement G2chElement=G2child.toElement();
+                              QString strAction=G2chElement.tagName();
 
-                              QString strAction=G2child.toElement().tagName();
                               int action=InitAction::donneInstance()->GetActionFromString(strAction);
                               for(int i=0;i<InitValeur::donneInstance()->GetSizeValeur();i++)
                               {
-                                 //joue->setStatMatch(action,i,G2child.toElement().attribute(InitValeur::donneInstance()->GetElementValeur(i)).toDouble());
+                                  QString valeur=InitValeur::donneInstance()->GetElementValeur(i);
+                                  QString element=G2chElement.attribute(valeur);
+
+                                 joue->setStatMatch(action,i,element.toDouble());
 
                               }
                               G2child=G2child.nextSibling();
@@ -745,7 +747,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
           }
              noeud=noeud.nextSibling();
     }
-
+    InitFichierXml();
 }
 QList<Joueur *>  Match::GetListJoueurTerr()
 {
@@ -766,6 +768,7 @@ QList<Joueur *>  Match::GetListJoueurTerr()
 
         }
     }
+    this->SetJoueurTerr(_ListTerrain);
     return _ListTerrain;
 }
 

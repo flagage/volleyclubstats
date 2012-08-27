@@ -62,6 +62,11 @@ Equipe::~Equipe()
         delete (_ListeJoueur.at(i));
     }
     _ListeJoueur.clear();
+    for(int i=0;i<6;i++)
+    {
+        delete _VectorStat[i];
+    }
+
 }
 
 
