@@ -323,6 +323,14 @@ statFinal::statFinal()
     }
 
 }
+statFinal::~statFinal()
+{
+    for(int i=0;i<_listAction.size();i++)
+    {
+        delete statMap[i];
+    }
+}
+
 int statFinal::GetNbValeur()
 {
     return statMap[0]->GetAfficheValeur();

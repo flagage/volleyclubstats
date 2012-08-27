@@ -51,6 +51,14 @@ Joueur::Joueur()
 
 
 }
+Joueur::~Joueur()
+{
+    for(int i=0;i<6;i++)
+    {
+        delete _listStat[i] ;
+    }
+}
+
 
 int Joueur::get_num()
 {
