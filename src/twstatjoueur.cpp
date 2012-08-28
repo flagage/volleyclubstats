@@ -24,9 +24,9 @@ void TwStatJoueur::Connection()
 void TwStatJoueur::Initialisation()
 {
 
-    for (int i=0;i<InitAction::donneInstance()->GetSizeAction();i++)
+    for (int i=0;i<_currentJoueur->GetListAction().size();i++)
     {
-        for (int j=0;j<InitValeur::donneInstance()->GetSizeValeur();j++)
+        for (int j=0;j<_currentJoueur->GetListValeur().size();j++)
         {
             QString strAffiche;
            double valeur= _currentJoueur->getStatMatch(i,j);
@@ -35,9 +35,9 @@ void TwStatJoueur::Initialisation()
         }
     }
 
-    for (int i=0;i<InitAction::donneInstance()->GetSizeAction();i++)
+    for (int i=0;i<_currentJoueur->GetListAction().size();i++)
     {
-        for (int j=0;j<InitValeur::donneInstance()->GetSizeValeur();j++)
+        for (int j=0;j<_currentJoueur->GetListValeur().size();j++)
         {
             QString strAffiche;
            double valeur= _currentJoueur->getStatSet(i,j);

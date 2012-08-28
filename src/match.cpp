@@ -52,6 +52,7 @@ Match::Match()
     _fauteAdv=0;
     _point=0;
     _pointAdv=0;
+    _isStart=false;
 
 
 
@@ -110,18 +111,13 @@ bool Match::lancer()
     return _lancementok;
 }
 
-void Match::setCurrentEquipe(Equipe *Team)
-{
-    _currrentEquipe=Team;
-    _score->set_Equipe_1(Team->GetNom());
 
-}
 
 void Match::setAdvers(QString nom)
 {
-    //_advers=nom;
+
     _ParamMatch->set_NomEquipeVisiteur(nom);
-    _score->set_Equipe_2(nom);
+
 
 }
 
@@ -149,7 +145,6 @@ QString Match::GetDate()
 }*/
 Score* Match::GetScore()
 {
-
     return this->_score;
 }
 QString Match::GetFichierXml()
@@ -170,8 +165,8 @@ void Match::EnregistrerXMl()
     QDomDocument doc("Info");
     QDomNode noeud=doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"");
     doc.insertBefore (noeud,doc.firstChild ());
-    QDomElement root = doc.createElement("Info");
-    doc.appendChild(root);
+    QDomElement _root = doc.createElement("Info");
+    doc.appendChild(_root);
 
     QDomElement Info = doc.createElement("Match");
     Info.setAttribute("Date",_date.toString("dd_MM_yyyy"));
@@ -182,7 +177,7 @@ void Match::EnregistrerXMl()
     Info.setAttribute ("Arbitre",this->_Arbitre);
     Info.setAttribute ("Duree","temps");
     Info.setAttribute("NbDeSet",_numCurentSet-1);
-    root.appendChild(Info);
+    _root.appendChild(Info);
 
 
     QDomElement Equipe= doc.createElement("Equipe");
@@ -190,7 +185,7 @@ void Match::EnregistrerXMl()
 
     Equipe.setAttribute("listAction", this->_listActionMatch.join(","));
     Equipe.setAttribute("ListeValeur",_currrentEquipe->GetStringValeur());
-    root.appendChild(Equipe);
+    _root.appendChild(Equipe);
     for(int k=0;k<this->_currrentEquipe->GetListeJoueur ().size ();k++)
     {
         QDomElement Joueur= doc.createElement("Joueur");
@@ -205,7 +200,7 @@ void Match::EnregistrerXMl()
 
 
     QDomElement Stat=doc.createElement ("Statisitique");
-    root.appendChild(Stat);
+    _root.appendChild(Stat);
     //le match
 
     QDomElement statMatch=doc.createElement ("MatchStat");
@@ -306,7 +301,7 @@ void Match::CreerSet(QString score,QStringList list)
 
 void Match::FinSet()
 {
-    _numCurentSet++;
+   /* _numCurentSet++;
 
     if(_Fichierxml==0)
         return;
@@ -332,7 +327,7 @@ void Match::FinSet()
         }
 
     }
-
+*/
 
 }
 
@@ -351,7 +346,7 @@ int Match::GetCurentSet ()
 
 void Match::Enregistrer()
 {
-    QString Msg;
+   /* QString Msg;
     QString id;
     QString str;
     double value;
@@ -387,7 +382,7 @@ void Match::Enregistrer()
     }
     _MatchSave.insert ("team",Msg);
 
-   // this->_TempsSet.addSecs(_date.secsTo(QDateTime::currentDateTime()));
+   // this->_TempsSet.addSecs(_date.secsTo(QDateTime::currentDateTime()));*/
 }
 
 void Match::Enregistrer(QStringList list)
@@ -414,7 +409,7 @@ void Match::Restaurer()
 {
 
     // pour l'equipe
-    QString old=this->_MatchSave["team"];
+   /* QString old=this->_MatchSave["team"];
     QStringList listold=old.split ("_");
     int count=0;
 
@@ -449,7 +444,7 @@ void Match::Restaurer()
             }
         }
     }
-
+*/
 }
 QString Match::GetTemps()
 {
@@ -525,37 +520,14 @@ QList <Joueur*> Match::GetListJoueur()
 }
 
 void Match::EcritureCurrentMatch()
-{/*
-    QStringList Info;
-    QStringList Ratio;
-    QStringList Action;
-    Info.append(GetDate());
-    Info.append(GetTemps());
-    Info.append(_currrentEquipe->GetNom());
-    Info.append(GetType());
-    Info.append(getadvs());
-    Info.append(GetArbitre());
-    Info.append("temps");
-    for(int i=0;i<InitValeur::donneInstance()->GetSizeValeur();i++)
-    {
-        Ratio.append(InitValeur::donneInstance()->GetElementValeur(i));
-    }
-    for(int i=0;i<_ParamMatch->get_Action().size();i++)
-    {
-        Action.append(_ParamMatch->get_Action().at(i));
-    }
+{
+    _fileXmlCurrent.setFileName(QString("Current/Match.xml"));
+    QDomNode noeud=_doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"");
+   _doc.insertBefore (noeud,_doc.firstChild ());
+    _root = _doc.createElement("Info");
+    _doc.appendChild(_root);
 
-    this->_Fichierxml=new MatchXml(Info,_ListTerrain,Ratio,Action);
-    */
-    QDomDocument doc;
-    QFile file;
-    QDomElement root;
-    QDomNode noeud=doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"");
-   doc.insertBefore (noeud,doc.firstChild ());
-    root = doc.createElement("Info");
-    doc.appendChild(root);
-
-    QDomElement Info = doc.createElement("Match");
+    QDomElement Info = _doc.createElement("Match");
     Info.setAttribute("Date",_ParamMatch->get_Date().toString("ddMMyyyy"));
     //Info.setAttribute ("Heure",_ListInfo.at(1));
     Info.setAttribute("Equipe",_ParamMatch->get_NomEquipeLocal());
@@ -569,78 +541,83 @@ void Match::EcritureCurrentMatch()
     Info.setAttribute("Aveclibero",_ParamMatch->AvecLibero());
     //Info.setAttribute ("Duree",_ListInfo.at(6));
     //Info.setAttribute("NbDeSet",0);
-    root.appendChild(Info);
+    _root.appendChild(Info);
     /// Information sur les ratio choisie
-    QDomElement Ratio=doc.createElement("Ratio");
-    QDomText text=doc.createTextNode(_ParamMatch->get_Valeur().join(","));
+    QDomElement Ratio=_doc.createElement("Ratio");
+    QDomText text=_doc.createTextNode(_ParamMatch->get_Valeur().join(","));
     Ratio.appendChild(text);
-    root.appendChild(Ratio);
+    _root.appendChild(Ratio);
 
     /// Information sur les actions choisies
-    QDomElement Action=doc.createElement("Action");
-    text=doc.createTextNode(_ParamMatch->get_Action().join(","));
+    QDomElement Action=_doc.createElement("Action");
+    text=_doc.createTextNode(_ParamMatch->get_Action().join(","));
     Action.appendChild(text);
-    root.appendChild(Action);
+    _root.appendChild(Action);
     /// position des joueurs
-    QDomElement position=doc.createElement("Position");
-    root.appendChild(position);
-    QDomElement poste1=doc.createElement ("Poste1");
-     text=doc.createTextNode(Rechercheposte(1));
+    QDomElement position=_doc.createElement("Position");
+    _root.appendChild(position);
+    QDomElement poste1=_doc.createElement ("Poste1");
+     text=_doc.createTextNode(Rechercheposte(1));
     poste1.appendChild(text);
     position.appendChild(poste1);
 
-    QDomElement poste2=doc.createElement ("Poste2");
-    text=doc.createTextNode(Rechercheposte(2));
+    QDomElement poste2=_doc.createElement ("Poste2");
+    text=_doc.createTextNode(Rechercheposte(2));
     poste2.appendChild(text);
     position.appendChild(poste2);
 
-    QDomElement poste3=doc.createElement ("Poste3");
-    text=doc.createTextNode(Rechercheposte(3));
+    QDomElement poste3=_doc.createElement ("Poste3");
+    text=_doc.createTextNode(Rechercheposte(3));
     poste3.appendChild(text);
     position.appendChild(poste3);
 
-    QDomElement poste4=doc.createElement ("Poste4");
-    text=doc.createTextNode(Rechercheposte(4));
+    QDomElement poste4=_doc.createElement ("Poste4");
+    text=_doc.createTextNode(Rechercheposte(4));
     poste4.appendChild(text);
     position.appendChild(poste4);
 
-    QDomElement poste5=doc.createElement ("Poste5");
-    text=doc.createTextNode(Rechercheposte(5));
+    QDomElement poste5=_doc.createElement ("Poste5");
+    text=_doc.createTextNode(Rechercheposte(5));
     poste5.appendChild(text);
     position.appendChild(poste5);
 
-    QDomElement poste6=doc.createElement ("Poste6");
-    text=doc.createTextNode(Rechercheposte(6));
+    QDomElement poste6=_doc.createElement ("Poste6");
+    text=_doc.createTextNode(Rechercheposte(6));
     poste6.appendChild(text);
     position.appendChild(poste6);
 
-    QDomElement poste7=doc.createElement ("Poste7");
-    text=doc.createTextNode(Rechercheposte(7));
+    QDomElement poste7=_doc.createElement ("Poste7");
+    text=_doc.createTextNode(Rechercheposte(7));
     poste7.appendChild(text);
     position.appendChild(poste7);
 /*
-    QDomElement set1=doc.createElement();
-    root.appendChild(set1);
+    QDomElement set1=_doc.createElement();
+    _root.appendChild(set1);
 
+*/
 
-/*
     /// score
     QDomElement score=_doc.createElement("Score");
-    set1.appendChild(score);
-    text=_doc.createTextNode("0:0");
-    score.appendChild(text);
-
+    score.setAttribute("ScLocal",_score->get_ScLocal());
+    score.setAttribute("SetLocal",_score->get_SetLocal());
+    score.setAttribute("TmLocal",_score->get_TmLocal());
+    score.setAttribute("ScVisiteur",_score->get_ScVisiteur());
+    score.setAttribute("SetVisiteur",_score->get_SetVisiteur());
+    score.setAttribute("TmVisiteur",_score->get_TmVisiteur());
+    score.setAttribute ("Service",_score->get_Service());
+    _root.appendChild(score);
+/*
     /// stat liste des joueurs sur le terrain le reste ne sert pas
-    QDomElement stat=_doc.createElement("Stat");
+    QDomElement stat=__doc.createElement("Stat");
     set1.appendChild(stat);
     for(int i=0;i<this->_ListJoueurTer.size();i++)
     {
         QString label=_ListJoueurTer.at(i)->get_Prenom()+"_"+QString::number(_ListJoueurTer.at(i)->get_NumMaillot());
-        QDomElement player=_doc.createElement(label);
+        QDomElement player=__doc.createElement(label);
         stat.appendChild(player);
         for(int j=0;j<InitAction::donneInstance()->GetSizeAction();j++)
         {
-          QDomElement action=_doc.createElement(InitAction::donneInstance()->GetElementAction(j));
+          QDomElement action=__doc.createElement(InitAction::donneInstance()->GetElementAction(j));
           for(int k=0;k<InitValeur::donneInstance()->GetSizeValeur();k++)
           {
               action.setAttribute(InitValeur::donneInstance()->GetElementValeur(k),0);
@@ -649,21 +626,23 @@ void Match::EcritureCurrentMatch()
         }
     }
 */
-  file.setFileName(QString("Current/Match.xml"));
-    if (!file.open(QIODevice::WriteOnly))
+
+    if (!_fileXmlCurrent.open(QIODevice::WriteOnly))
         return;
-    QTextStream ts( &file );
-    ts << doc.toString();
-    file.close();
+    QTextStream ts( &_fileXmlCurrent );
+    ts << _doc.toString();
+    _fileXmlCurrent.close();
 }
+
+
 
 void Match::SetJoueurTerr(QList<Joueur *> list)
 {
+    _ListTerrain.clear();
     _ListTerrain=list;
-    if(_Fichierxml!=0)
-    {
-        this->_Fichierxml->UpdateListJoueur(list);
-    }
+
+     MiseaJourposte();
+
 }
 
 
@@ -689,11 +668,13 @@ void Match::addPoint(bool adv)
     {
         _pointAdv++;
     }
-    if(_Fichierxml!=0)
+   /* if(_Fichierxml!=0)
     {
         this->_Fichierxml->SauvegardeScore(_score->get_Score_E1(),_score->get_Score_E2());
-        this->_Fichierxml->MiseaJourposte();
-    }
+
+    }*/
+    MiseajourScore();
+     MiseaJourposte();
 
 }
 
@@ -735,20 +716,20 @@ void Match::supFaute(bool adv)
 
 void Match::InfoFromXML( QList <Equipe*> listequipe)
 {
-    QFile file("Current/Match.xml");
-    QDomDocument doc;
-    if (!file.open(QIODevice::ReadOnly))
+    _fileXmlCurrent.setFileName(QString("Current/Match.xml"));
+
+    if (!_fileXmlCurrent.open(QIODevice::ReadOnly))
         return;
     QString msg;
     int posli;
     int poscol;
-    if (!doc.setContent(&file,&msg,&posli,&poscol))
+    if (!_doc.setContent(&_fileXmlCurrent,&msg,&posli,&poscol))
     {
-        file.close(); // tablit le document XML  partir des donnes du fichier (hirarchie, etc.)
+        _fileXmlCurrent.close(); // tablit le document XML  partir des donnes du fichier (hirarchie, etc.)
         return;
     }
-    file.close();
-    QDomElement racine = doc.documentElement(); // renvoie la balise racine
+    _fileXmlCurrent.close();
+    QDomElement racine = _doc.documentElement(); // renvoie la balise racine
     QDomNode noeud = racine.firstChild(); // renvoie la premire balise  mesure
     while(!noeud.isNull())
     {
@@ -761,11 +742,10 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
               _ParamMatch->set_NomEquipeVisiteur(element.attribute("Contre"));
               _ParamMatch->set_NomArbitre1(element.attribute("Arbitre1"));
               _ParamMatch->set_NomArbitre2(element.attribute("Arbitre2"));
-              //this->_numCurentSet=element.attribute("NbDeSet").toInt();
               _ParamMatch->set_TypeDeMatch(element.attribute("Type"));
               _ParamMatch->set_NbSet(element.attribute("NbDeSet").toInt());
-              _ParamMatch->set_NbJoueur(element.attribute("NbJoueur").toInt());
-              _ParamMatch->SetLibero(element.attribute("AvecLibero").toInt());
+              _ParamMatch->set_NbJoueur(element.attribute("Nbjoueur").toInt());
+              _ParamMatch->SetLibero(element.attribute("Aveclibero").toInt());
               _ParamMatch->set_ScoreMax(element.attribute("NbPoint").toInt());
 
               QString nomEquipe=element.attribute("Equipe");
@@ -781,8 +761,8 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
                       }
                   }
               }
-              _score->set_Equipe_1(nomEquipe);
-              _score->set_Equipe_2(_ParamMatch->get_NomEquipeVisiteur());
+              //_score->set_Equipe_1(nomEquipe);
+            //  _score->set_Equipe_2(_ParamMatch->get_NomEquipeVisiteur());
           }
           if(element.tagName()=="Ratio")
           {
@@ -792,11 +772,20 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
           if(element.tagName()=="Action")
           {
               QStringList listelement=element.text().split(",");
-              //_listActionMatch=listelement;
               _ParamMatch->set_Action(listelement);
 
           }
-          if(element.tagName()=="S1")
+          if(element.tagName()=="Score")
+          {
+              _score->set_ScLocal(element.attribute("ScLocal").toInt());
+              _score->set_SetLocal(element.attribute("SetLocal").toInt());
+              _score->set_TmLocal(element.attribute("TmLocal").toInt());
+              _score->set_ScVisiteur(element.attribute("ScVisiteur").toInt());
+              _score->set_SetVisiteur(element.attribute("SetVisiteur").toInt());
+              _score->set_TmVisiteur(element.attribute("TmVisiteur").toInt());
+              _score->set_Service(element.attribute("Service").toInt());
+          }
+          /*if(element.tagName()=="S1")
           {
               QDomNode child = element.firstChild();
               while(!child.isNull())
@@ -805,9 +794,8 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
                   {
                       QString score=child.toElement().text();
                       QStringList listScore=score.split(":");
-                      _score->set_Score_E1(listScore[0].toInt());
-                      //this->_point=listScore[0].toInt();
-                       _score->set_Score_E2(listScore[1].toInt());
+                      //_score->set_Score_E1(listScore[0].toInt());
+                      //_score->set_Score_E2(listScore[1].toInt());
                   }
                   if(child.toElement().tagName()=="Stat")
                   {
@@ -844,7 +832,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
                   child=child.nextSibling();
               }
 
-          }
+          }*/
           if(element.tagName()=="Position")
           {
               QDomNode child = element.firstChild();
@@ -857,28 +845,35 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
           }
              noeud=noeud.nextSibling();
     }
-    //InitFichierXml();*/
+    InitListTerrainfromPosition();
 }
+void Match::InitListTerrainfromPosition()
+{
+    _ListTerrain.clear();
+    QList<Joueur *> listjoueur=this->_currrentEquipe->GetListeJoueur();
+        for(int i=0;i<this->_listPosition.size();i++)
+        {
+            QString valeur=_listPosition.at(i);
+            QStringList listval=valeur.split("_");
+            for(int k=0;k<listjoueur.size();k++)
+            {
+                if(listjoueur.at(k)->get_NumMaillot()==listval[1].toInt())
+                {
+                    listjoueur.at(k)->SetPosition(i+1);
+                    _ListTerrain.append(listjoueur.at(k));
+                    break;
+                }
+
+
+            }
+        }
+        this->SetJoueurTerr(_ListTerrain);
+}
+
+
 QList<Joueur *>  Match::GetListJoueurTerr()
 {
-    QList<Joueur *> listjoueur=this->_currrentEquipe->GetListeJoueur();
-    for(int i=0;i<this->_listPosition.size();i++)
-    {
-        QString valeur=_listPosition.at(i);
-        QStringList listval=valeur.split("_");
-        for(int k=0;k<listjoueur.size();k++)
-        {
-            if(listjoueur.at(k)->get_NumMaillot()==listval[1].toInt())
-            {
-                listjoueur.at(k)->SetPosition(i+1);
-                _ListTerrain.append(listjoueur.at(k));
-                break;
-            }
 
-
-        }
-    }
-    this->SetJoueurTerr(_ListTerrain);
     return _ListTerrain;
 }
 
@@ -904,4 +899,90 @@ QString Match::Rechercheposte(int post)
         }
     }
     return label;
+}
+void Match::MiseajourScore()
+{
+    QDomElement docElem = _doc.documentElement();
+    QDomNode n = docElem.firstChild();
+    while(!n.isNull())
+    {
+        QDomElement e = n.toElement();
+        if(e.tagName()=="Score")
+        {
+               e.setAttribute("ScLocal",_score->get_ScLocal());
+                e.setAttribute("SetLocal",_score->get_SetLocal());
+                e.setAttribute("TmLocal",_score->get_TmLocal());
+                e.setAttribute("ScVisiteur",_score->get_ScVisiteur());
+                e.setAttribute("SetVisiteur",_score->get_SetVisiteur());
+                e.setAttribute("TmVisiteur",_score->get_TmVisiteur());
+                e.setAttribute ("Service",_score->get_Service());
+
+        }
+        n = n.nextSibling();
+    }
+
+
+      if (!_fileXmlCurrent.open(QIODevice::WriteOnly))
+          return;
+    QTextStream ts( &_fileXmlCurrent );
+    ts << _doc.toString();
+    _fileXmlCurrent.close();
+}
+
+void Match:: MiseaJourposte()
+{
+
+    QDomElement docElem = _doc.documentElement();
+    QDomNode n = docElem.firstChild();
+    while(!n.isNull())
+    {
+        QDomElement e = n.toElement();
+        if(e.tagName()=="Position")
+        {
+            QDomNode child=e.firstChild();
+            while(!child.isNull())
+            {
+                QDomElement f=child.toElement();
+                QString poste=f.tagName();
+                QString number=poste.at(5);
+                int ipost=number.toInt();
+                f.replaceChild(_doc.createTextNode(this->Rechercheposte(ipost)),f.firstChild());
+
+                child=child.nextSibling();
+            }
+
+        }
+        n = n.nextSibling();
+    }
+
+
+      if (!_fileXmlCurrent.open(QIODevice::WriteOnly))
+          return;
+    QTextStream ts( &_fileXmlCurrent );
+    ts << _doc.toString();
+    _fileXmlCurrent.close();
+}
+
+bool Match::isStart()
+{
+    return _isStart;
+}
+
+void Match::setStart(bool valeur)
+{
+    _isStart=valeur;
+}
+
+void Match::setCurrentEquipe(Equipe *Team)
+{
+    _currrentEquipe=Team;
+
+}
+
+void Match::InitialiseStatJoueur()
+{
+    for(int i=0;i<_currrentEquipe->GetListeJoueur().size();i++)
+    {
+        _currrentEquipe->GetListeJoueur().at(i)->InitialisationStat(this->_ParamMatch->get_NbSet(),this->_ParamMatch->get_Action(),this->_ParamMatch->get_Valeur());
+    }
 }

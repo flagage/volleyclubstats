@@ -83,6 +83,7 @@ private:
     QStringList _listAction;
 public:
     statFinal();
+    statFinal(QStringList,QStringList);
     ~statFinal();
     void AjoutValeur(int action,int pos);
     void SupValeur(int action, int pos);

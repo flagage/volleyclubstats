@@ -57,9 +57,12 @@ private:
     QString _Addresse;
     QString _poste;
     int _num;
+    int _nbSet;
     statFinal statMatch;
     statFinal statSet;
     QVector<statFinal*> _listStat;
+    QStringList _ListValeur;
+    QStringList _ListAction;
 
 public:
     /// constructeur
@@ -109,6 +112,9 @@ public:
 
     void SetPosition(int numpos);
     int GetPosition();
+    void InitialisationStat(int NbSet,QStringList Action,QStringList Valeur);
+    QStringList GetListAction();
+    QStringList GetListValeur();
     //void SetListAction(QStringList list);
 
 };

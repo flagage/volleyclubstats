@@ -68,11 +68,16 @@ private:
     int _faute;
     int _fauteAdv;
     QList <QString> _listPosition;
+    QDomDocument _doc;
+    QFile _fileXmlCurrent;
+    QDomElement _root;
+    bool _isStart;
 
 protected:
     Match();
     ~Match();
     Match(const Match&);
+
 
 
 public:
@@ -137,7 +142,13 @@ public:
     void setParametreMatch(ParametreMatch *);
     ParametreMatch* GetParametreMatch();
     QString Rechercheposte(int post);
+    void MiseaJourposte();
+    void MiseajourScore();
 
+    bool isStart();
+    void setStart(bool);
+    void InitListTerrainfromPosition();
+    void InitialiseStatJoueur();
 
 };
 

@@ -16,7 +16,7 @@ void MatchXml::Initialisation()
 
     /// information generiques sur le match
 
-    QDomNode noeud=_doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"");
+   /* QDomNode noeud=_doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"");
    _doc.insertBefore (noeud,_doc.firstChild ());
     _root = _doc.createElement("Info");
     _doc.appendChild(_root);
@@ -115,7 +115,7 @@ void MatchXml::Initialisation()
         return;
     QTextStream ts( &_file );
     ts << _doc.toString();
-    _file.close();
+    _file.close();*/
 }
 
 QString MatchXml::Rechercheposte(int post)
@@ -135,7 +135,7 @@ QString MatchXml::Rechercheposte(int post)
 void MatchXml::SauvegardeAction(Joueur* player,int Action,int valu)
 {
 
-    QString nom=player->get_Prenom()+"_"+QString::number(player->get_NumMaillot());
+  /*  QString nom=player->get_Prenom()+"_"+QString::number(player->get_NumMaillot());
 
 
          QDomElement docElem = _doc.documentElement();
@@ -191,7 +191,7 @@ void MatchXml::SauvegardeAction(Joueur* player,int Action,int valu)
              return;
          QTextStream ts( &_file );
          ts << _doc.toString();
-         _file.close();
+         _file.close();*/
     }
 
 void MatchXml::SauvegardeScore(int Slocal,int Svisiteur)
