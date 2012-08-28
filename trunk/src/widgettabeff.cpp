@@ -63,7 +63,7 @@ void WidgetTabEff::Init()
 {
 
     _listJoueur=Match::donneInstance()->GetListJoueur();
-    _listaction=InitAction::donneInstance()->GetListAction();
+    _listaction=Match::donneInstance()->GetParametreMatch()->get_Action();
     _tabElts=new TableEff(ui->groupBox,_listJoueur,_listaction);
 }
 

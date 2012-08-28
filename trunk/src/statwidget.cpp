@@ -212,7 +212,7 @@ void StatWidget::SetOldStatJoueurSet(Joueur *player,int numSet)
 
 void StatWidget::SetStatEquipeSet(Equipe *team,int numSet)
 {
-    double stat;
+   /* double stat;
     int col=1;
     QString strAffiche;
     for(int Action=0;Action<_listAction.size();Action++)
@@ -227,7 +227,7 @@ void StatWidget::SetStatEquipeSet(Equipe *team,int numSet)
             col++;
         }
 
-    }
+    }*/
 
 }
 
@@ -256,7 +256,7 @@ void StatWidget::SetStatJoueurMatch(Joueur *player)
 
 void StatWidget::SetStatEquipeMatch(Equipe *team)
 {
-    double stat;
+   /* double stat;
     int col=1;
     QString strAffiche;
     for(int Action=0;Action<_listAction.size();Action++)
@@ -270,7 +270,7 @@ void StatWidget::SetStatEquipeMatch(Equipe *team)
             col++;
         }
 
-    }
+    }*/
 
 }
 void StatWidget::SetStatoldEquipeMatch()

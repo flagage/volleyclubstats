@@ -39,4 +39,7 @@
   <joueur Maillot="6" Adresse="" Tel="0" Prenom="henri" Nom="fred" License="0" Email="" Age="0" poste="Central"/>
   <joueur Maillot="7" Adresse="" Tel="0" Prenom="hello" Nom="fred" License="0" Email="" Age="0" poste="Complet"/>
  </Equipe>
+ <Equipe Nom="test" Division="Regional" Categorie="departemental"/>
+ <Equipe Nom="villebon2" Division="Regional" Categorie=""/>
+ <Equipe Nom="tst" Division="Regional" Categorie=""/>
 </root>

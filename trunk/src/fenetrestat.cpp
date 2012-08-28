@@ -62,8 +62,8 @@ void FenetreStat::Initialisation(QString chemin)
     lect.lectureInfoGeneral(chemin);
     QStringList listGeneral= lect.GetInfoGeneral();
     Equipe *team=new Equipe(lect.GetNomEquipe());
-    team->SetStringAction(lect.GetListAction());
-    team->SetStringValeur(lect.GetListValeur());
+    //team->SetStringAction(lect.GetListAction());
+    //team->SetStringValeur(lect.GetListValeur());
     //team->SetListAction(lect.GetListAction().split("_"));
 
     for(int i=0;i<lect.GetListJoueur().size();i++)
@@ -79,10 +79,10 @@ void FenetreStat::Initialisation(QString chemin)
     }
     newMatch=Match::donneInstance();
     newMatch->setCurrentEquipe(team);
-    newMatch->SetDate(listGeneral.at(0));
-    newMatch->SetType(listGeneral.at(2));
+   // newMatch->SetDate(listGeneral.at(0));
+   // newMatch->SetType(listGeneral.at(2));
     newMatch->setAdvers(listGeneral.at(4));
-    newMatch->setArbitre(listGeneral.at(5));
+    //newMatch->setArbitre(listGeneral.at(5));
 
     lect.lectureStat(chemin);
     newMatch->Enregistrer(lect.GetStatMatch());

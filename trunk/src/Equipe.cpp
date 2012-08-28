@@ -43,13 +43,9 @@ Equipe::Equipe()
     _Nom="";
     _Categorie="";
     _Division="";
-    this->_listAction=InitAction::donneInstance()->GetListAction();
-    this->_listValeur=InitValeur::donneInstance()->GetListValeur();
-    for(int i=0;i<6;i++)
-    {
-        this->_VectorStat.append(new statFinal());
-    }
+
 }
+
 Equipe::Equipe(QString nom)
 {
     _Nom=nom;
@@ -62,10 +58,7 @@ Equipe::~Equipe()
         delete (_ListeJoueur.at(i));
     }
     _ListeJoueur.clear();
-    for(int i=0;i<6;i++)
-    {
-        delete _VectorStat[i];
-    }
+
 
 }
 
@@ -176,7 +169,7 @@ void Equipe::RestaurerXML(QDomNode noeud)
 
 }
 
-
+/*
 QString Equipe::GetStringValeur()
 {
     QString str;
@@ -262,7 +255,7 @@ void Equipe::supStatSet(int action,int pos)
 {
     this->_VectorStat[Match::donneInstance()->GetCurentSet()]->SupValeur (action,pos);
 }
-
+*/
 void Equipe::ExportCVS(QString fichier)
 {
 

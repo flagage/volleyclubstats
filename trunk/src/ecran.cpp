@@ -53,6 +53,95 @@ Ecran::Ecran(QWidget *parent) :
 {
 
     ui->setupUi(this);
+    InitialisationIhm();
+    Connexion();
+    /// lecture du fichier contenant le nom des equipes
+    this->RestaurerXML();
+}
+
+Ecran::~Ecran()
+{
+    delete LineEdit2;
+    delete _PlacementJoueur;
+    delete myWidget;
+    delete _WtabEff;
+}
+
+void Ecran::InitialisationIhm()
+{
+    /// valeur a initialiser
+    _joueurBanc=0;
+    /// ligne de saisi
+    ui->lineEdit->setVisible(false);
+    LineEdit2 =  new VCSLineEdit(ui->centralWidget);
+    LineEdit2->setObjectName(QString::fromUtf8("lineEdit"));
+    ui->gridLayout->addWidget(LineEdit2,0, 0, 1, 1);
+
+    /// Placement des joueurs
+   int nbjoueur= Match::donneInstance()->GetParametreMatch()->get_TotJoueur();
+    _PlacementJoueur=new KeyJoueur(ui->label_4,nbjoueur,true);
+    QHBoxLayout *layout=new QHBoxLayout();
+    layout->addWidget (_PlacementJoueur);
+
+    /// Chargement des icons
+    this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
+    ui->label_6->setPixmap((QPixmap("Icone/Yellow_card.png")));
+    ui->label_7->setPixmap((QPixmap("Icone/Yellow_card.png")));
+    ui->label_8->setPixmap((QPixmap("Icone/Yellow_card.png")));
+    ui->label_9->setPixmap((QPixmap("Icone/Yellow_card.png")));
+
+    ui->groupBox_4->setVisible(false);
+
+    myWidget=new StatWidget(ui->groupBox_3,this);
+    _WtabEff=new WidgetTabEff(ui->groupBox_6);
+
+    ui->frame->setVisible(false);
+    ui->frame_2->setVisible(false);
+    ui->frame_3->setVisible(false);
+
+
+    QPalette    palette( ui->centralWidget->palette());
+    QPixmap        bg("Icone/Volleyclubstats_gris.png");
+
+    palette.setBrush(QPalette::Background, bg);
+    ui->centralWidget->setPalette(palette);
+    ui->tabWidget->setVisible(true);
+
+    /// timer utiliser lors du changement d'un joueur
+    _TimerChange = new QTimer (this);
+    connect (_TimerChange,SIGNAL(timeout()),this,SLOT(slot_initChangement()));
+
+}
+
+void Ecran::Connexion()
+{
+    connect(this->_PlacementJoueur,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
+    connect(this->_PlacementJoueur,SIGNAL(JoueurStat(QPushButton*)),this,SLOT(slot_AfficheStat(QPushButton*)));
+    connect(this->_PlacementJoueur,SIGNAL(Tlm_en_place()),this,SLOT(Slot_start()));
+    connect(this,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
+    connect(this->LineEdit2,SIGNAL(ChangeAction()),this,SLOT(SlotCombobox()));
+    connect(this->LineEdit2,SIGNAL(Attaque()),this,SLOT(Slot_posAction()));
+    connect(this->LineEdit2,SIGNAL(Reception()),this,SLOT(Slot_posReception()));
+    connect(this->LineEdit2,SIGNAL(Service()),this,SLOT(Slot_posService()));
+    connect(this->LineEdit2,SIGNAL(Defense()),this,SLOT(Slot_posDefense()));
+    connect(this->LineEdit2,SIGNAL(Contre()),this,SLOT(Slot_posContre()));
+    connect(this->LineEdit2,SIGNAL(Passe()),this,SLOT(Slot_posPasse()));
+    connect(this->LineEdit2,SIGNAL(ComplementAction()),this,SLOT(Slot_ComplAction()));
+    connect(ui->menuFichier, SIGNAL(triggered(QAction *)), this, SLOT(AffSession(QAction *)));
+    connect(ui->menuMatch,SIGNAL(triggered(QAction*)),this,SLOT(AffSession(QAction*)));
+    connect(ui->menuFenetre, SIGNAL(triggered(QAction *)), this, SLOT(Slot_Fenetre(QAction *)));
+    connect(ui->menuEquipe,SIGNAL(triggered(QAction*)),this,SLOT(SlotMenuEquipe(QAction *)));
+    connect(ui->pushButton_TM,SIGNAL(clicked()),this,SLOT(TempsMort()));
+    connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(ActionService(int)));
+    //bouton de rotation
+    connect (ui->pBRotationPlus,SIGNAL(clicked()),this,SLOT(slot_rotationP()));
+    connect (ui->pBRotationMoins,SIGNAL(clicked()),this,SLOT(slot_rotationM()));
+
+
+}
+
+
+    /*
     _ValeurInitial=InitValeur::donneInstance();
     _ListActionInit=InitAction::donneInstance();
     _position=0;
@@ -61,7 +150,7 @@ Ecran::Ecran(QWidget *parent) :
     _ischangement=false;
     _finSet=false;
 
-    ui->lineEdit->setVisible(false);
+
 
     //ui->lineEdit_PBP->setVisible(false);
     LineEdit2 =  new VCSLineEdit(ui->centralWidget);
@@ -71,7 +160,7 @@ Ecran::Ecran(QWidget *parent) :
 
     /*QDesktopWidget *desktop=QApplication::desktop ();
     QRect size=desktop->screenGeometry ();*/
-    this->resize(1000,500);
+    /*this->resize(1000,500);
     this->move(0,0);
 
     _PlacementJoueur=new KeyJoueur(ui->label_4,7,true);
@@ -119,8 +208,7 @@ Ecran::Ecran(QWidget *parent) :
 
 
 
-    _TimerChange = new QTimer (this);
-    connect (_TimerChange,SIGNAL(timeout()),this,SLOT(slot_initChangement()));
+
     _TimerScore=new QTimer (this);
     connect (_TimerScore,SIGNAL(timeout()),this,SLOT(slot_score()));
 
@@ -161,7 +249,7 @@ Ecran::Ecran(QWidget *parent) :
     ui->Button_P->setVisible(false);
     ui->Button_PP->setVisible(false);
     ui->tabWidget->setVisible(false);*/
-    ui->label_4->setPixmap (QPixmap("Image/new_terrain.png"));
+    /*ui->label_4->setPixmap (QPixmap("Image/new_terrain.png"));
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
 
 
@@ -234,7 +322,7 @@ void Ecran::InitialisationError()
 
     QMessageBox::information(this,tr("Licence invalide"),tr("Votre licence a expirer"));
 }
-
+*/
 void Ecran::InitialisationMatchFromXML()
 {
 
@@ -321,7 +409,7 @@ void Ecran::InitialisationMatchFromXML()
 
 }
 
-void Ecran::InitialisationMatch(QString team,QString advs)
+void Ecran::InitialisationMatch()
 {
 
     QMenu * menupoint=new QMenu(this);
@@ -336,12 +424,16 @@ void Ecran::InitialisationMatch(QString team,QString advs)
     ui->pBScore_2->setMenu(menupoint2);
     connect(menupoint2,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint2(QAction*)));
 
-    _TimerScore->start(10);
+//    _TimerScore->start(10);
 
-
+    /// les parametre du match
+    Match* MatchEncour=Match::donneInstance();
+    ParametreMatch* param=MatchEncour->GetParametreMatch();
+    QString advs=param->get_NomEquipeVisiteur();
+    QString team=param->get_NomEquipeLocal();
 
     _isMatchEnCour=false;
-    ui->comboBox->addItems(InitAction::donneInstance()->GetListAction());
+    ui->comboBox->addItems(param->get_Action());
 
     /// il faut verifier qu'il n'y est pas de match en cour
     QFile file("Current/Match.xml");
@@ -391,14 +483,14 @@ void Ecran::InitialisationMatch(QString team,QString advs)
 
 
     QStringList joueurname;
-    Match* MatchEncour=Match::donneInstance();
-    QString strTrace="Match_"+MatchEncour->GetDate ();
+
+    /*QString strTrace="Match_"+MatchEncour->GetDate ();
     _trace->SetFile (strTrace);
     this->_TraceListAction->SetFile(strTrace);
     _trace->SetTrace("Debut du match");
     this->_TraceListAction->Debut();
     MatchEncour ->setAdvers(advs);
-
+    */
     this->_PlacementJoueur->InitListJoueur(MatchEncour->GetListJoueur());
     JoueurAPlacer();
     for(int i=0;i<MatchEncour->GetListJoueur().size();i++)
@@ -429,13 +521,13 @@ void Ecran::InitialisationMatch(QString team,QString advs)
 
     ChangeBouton=new QPushButton(this);
 
-    this->myWidget->SetEquipe (MatchEncour->getTeam());
-    this->_WtabEff->Init();
-    this->myWidget->Initialisation ();
-    this->myWidget->InitListAction(_listAction);
+   // this->myWidget->SetEquipe (MatchEncour->getTeam());
+   // this->_WtabEff->Init();
+   // this->myWidget->Initialisation ();
+    //this->myWidget->InitListAction(param->get_Action());
     this->_PlacementJoueur->InitLineEditSize ();
-    ui->label_5->setText(MatchEncour->getadvs().toUpper());
-    ui->label_3->setText(MatchEncour->getTeam()->GetNom().toUpper());
+    ui->label_5->setText(advs.toUpper());
+    ui->label_3->setText(team.toUpper());
     ui->label_11->setText("");
     ui->label_12->setText("");
     ui->listWidget->setVisible(false);
@@ -505,12 +597,6 @@ void Ecran::slot_score()
 
 }
 
-void Ecran::InitialisationAction(QStringList Action)
-{
-    //this->_listActionMatch=Action;
-    Match::donneInstance()->InitialisationAction(Action);
-
-}
 
 
 void Ecran::slot_initChangement()
@@ -567,7 +653,7 @@ void Ecran::Slot_start()
 
         _isMatchEnCour=true;
         Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
-        Match::donneInstance()->InitFichierXml();
+        Match::donneInstance()->EcritureCurrentMatch();
     }
     else
     {
@@ -682,7 +768,7 @@ void Ecran::changement(QString joueur,QPushButton *bouton)
         msg=QString(tr("Changement Joueur %1 par")).arg(ChangeJoueur);
         msg=msg+joueur;
         msg=msg+" S:"+ui->pBScore->text()+"-"+ui->pBScore_2->text();
-        this->_trace->SetTrace(msg);
+        //this->_trace->SetTrace(msg);
         _TimerChange->start(30000);
         ChangeBouton->setText(joueur);
         bouton->setText(ChangeJoueur);
@@ -693,7 +779,7 @@ void Ecran::changement(QString joueur,QPushButton *bouton)
         {
             ActionService(0);
         }
-        this->_PlacementJoueur->Stat();
+        //this->_PlacementJoueur->Stat();
 
     }
 
@@ -856,6 +942,7 @@ void Ecran::SlotMenuEquipe(QAction *action)
 {
     if(action->text()=="Gestion Equipes")
     {
+
         QDialog* equipe=new Fenetreequipe(this);
 
         equipe->exec();
@@ -923,16 +1010,14 @@ void Ecran::AffSession(QAction *action)
         }
         else
         {
-        FenetreLancement* lance=new FenetreLancement(this);
+        Match::donneInstance();
+        FenetreLancement* lance=new FenetreLancement(this->_ListeEquipe);
         if(lance->exec())
         {
-            if(play->lancer()==true)
-            {
-                InitialisationMatch(play->getTeam()->GetNom(),play->getadvs());
-                ui->actionRevoir_un_match->setEnabled(false);
-                ui->actionGestion_Equipes->setEnabled(false);
-                ui->actionLancer_le_Match->setEnabled(false);
-            }
+            InitialisationMatch();
+            ui->actionRevoir_un_match->setEnabled(false);
+            ui->actionGestion_Equipes->setEnabled(false);
+            ui->actionLancer_le_Match->setEnabled(false);
         }
 
     }
@@ -1185,7 +1270,7 @@ void Ecran::FinMatch()
         this->_ListeEquipe.clear();
         //ui->listJoueur->clear ();
         this->myWidget->clean();
-        Initialisation();
+        //Initialisation();
         this->_FenetreStat->Initialisation(file);
         ui->actionRevoir_un_match->setEnabled(true);
         ui->actionGestion_Equipes->setEnabled(true);
@@ -1865,7 +1950,7 @@ void Ecran::closeEvent(QCloseEvent * event )
 
     if(Match::GetInstance ()!=0)
     {
-        _trace->SetTrace(tr("Fin Match"));
+        //_trace->SetTrace(tr("Fin Match"));
         QString  file=Match::donneInstance ()->GetFichierXml();
         Match::donneInstance ()->FinSet ();
         Match::donneInstance ()->Enregistrer ();
@@ -1997,7 +2082,7 @@ void Ecran::AfficherStat()
     {
         QString element=InitAction::donneInstance()->GetElementAction(i);
         element.truncate(1);
-        equipe=equipe+element+" "+QString::number(currentT->getStatMatch(i,0))+" | ";
+        //equipe=equipe+element+" "+QString::number(currentT->getStatMatch(i,0))+" | ";
 
     }
     equipe=equipe+"Point "+QString::number(currentM->GetPoint())+" | ";
@@ -2061,5 +2146,5 @@ void Ecran::InitialisationFromXml()
 {
     Match::donneInstance()->GetInstance()->InfoFromXML( this->_ListeEquipe);
 
-    Match::donneInstance()->GetInstance()->InitFichierXml();
+    //Match::donneInstance()->GetInstance()->InitFichierXml();
 }
