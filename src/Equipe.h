@@ -45,11 +45,6 @@ private:    //attribut
     QString _Nom;
 
     QList <Joueur*>_ListeJoueur;
-    QVector<statFinal*> _VectorStat;
-    statFinal statMatch;
-    statFinal statSet;
-    QStringList _listAction;
-    QStringList _listValeur;
     QString _Division;
     QString _Categorie;
 
@@ -81,22 +76,8 @@ public: //fonction
     Joueur* seachjoueur(QString nomJoueur);
     Joueur* seachjoueur(int numjoueur);
 
-    /// stat
-     void addStatMatch(int action,int pos);
-    double getStatMatch(int action,int pos);
-    void addStatSet(int action,int pos);
-    void setStatSet(int action,int pos,double valeur);
-    double getStatSet(int action,int pos);
-    void initSet();
-    void supStatMatch(int action,int pos);
-    void supStatSet(int action,int pos);
-    int GetnbValeurStat();
-    void SetStringValeur(QString valeur);
-    QString GetStringValeur();
-    QString GetStringAction();
-    void SetStringAction(QString action);
-    int GetTotalPoint();
-    void setStatMatch(int action,int pos,double valeur);
+
+
     void ExportCVS(QString Fichier);
     void ImportCVS(QString);
 

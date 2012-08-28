@@ -38,6 +38,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "Equipe.h"
 #include "Score.h"
 #include "matchxml.h"
+#include "parametrematch.h"
 #include <QDomDocument>
 #include <QFile>
 #include <QDate>
@@ -49,14 +50,14 @@ class Match
 private:
     static Match* instanceMatch;
     Equipe* _currrentEquipe;
-    QString _advers;
+    ParametreMatch* _ParamMatch;
+    Score* _score;
+
     QString _nomFichier;
-    QString _Arbitre;
-    QString _Type;
+
     QMap<QString,QString> _MatchSave;
     int _numCurentSet;
-    QDateTime _date;
-    bool _lancementok;
+     bool _lancementok;
     QTime _TempsSet;
     QList <Joueur*> _ListJoueur;
     QList <Joueur*> _ListTerrain;
@@ -67,11 +68,12 @@ private:
     int _faute;
     int _fauteAdv;
     QList <QString> _listPosition;
-    QStringList _listActionMatch;
+
 protected:
     Match();
+    ~Match();
     Match(const Match&);
-    Score* _score;
+
 
 public:
     static Match* donneInstance();
@@ -89,10 +91,9 @@ public:
     int GetCurentSet();
     void SetNbSet(int i);
 
-    void InitialisationAction(QStringList);
     QStringList GetListAction();
 
-    void SetType(QString str);
+
     QString GetType();
 
     void EnregistrerXMl();
@@ -100,9 +101,9 @@ public:
      void Enregistrer();
     //QString Restaurer(QString id);
     QString GetDate();
-    void SetDate(QString str);
 
-    void setArbitre(QString);
+
+
     QString GetArbitre();
 
     QString GetFichierXml();
@@ -119,7 +120,7 @@ public:
     QList <Joueur*> GetListJoueur();
 
     /// traitement de la sauvegarde
-    void InitFichierXml();
+    void EcritureCurrentMatch();
 
     void SetJoueurTerr(QList<Joueur *> list);
     QList<Joueur *> GetListJoueurTerr();
@@ -132,7 +133,10 @@ public:
     void supFaute(bool adv=false);
     /// restauration xml
     void InfoFromXML( QList <Equipe*> listequipe);
-
+    /// acce au parametre du match
+    void setParametreMatch(ParametreMatch *);
+    ParametreMatch* GetParametreMatch();
+    QString Rechercheposte(int post);
 
 
 };

@@ -105,8 +105,13 @@ void KeyJoueur::bouttonLClicked()
     emit Changement (button);
     _nbjoueurEnPlace++;
     bool isenplace=false;
-    int posbanc=InitGlobal::donneInstance()->GetNbJoueur();
-    if(_nbjoueurEnPlace>InitGlobal::donneInstance()->GetNbJoueur())
+    int nbjoueuraplacer=Match::donneInstance()->GetParametreMatch()->get_NbJoueur();
+    if(Match::donneInstance()->GetParametreMatch()->AvecLibero()==true)
+    {
+        nbjoueuraplacer++;
+    }
+
+    if(_nbjoueurEnPlace>nbjoueuraplacer)
     {
         QList<Joueur *> list_terrain=this->GetJoueurTerrain();
         for(int i=0;i<this->_listjoueur.size();i++)
@@ -598,7 +603,12 @@ void KeyJoueur::SetAdv(QString nom)
 QList<Joueur *> KeyJoueur::GetJoueurTerrain()
 {
     QList<Joueur *> list;
-    int tot=InitGlobal::donneInstance()->GetNbJoueur()+1;
+    //int tot=InitGlobal::donneInstance()->GetNbJoueur()+1;
+    int tot=Match::donneInstance()->GetParametreMatch()->get_NbJoueur();
+    if(Match::donneInstance()->GetParametreMatch()->AvecLibero()==true)
+    {
+        tot++;
+    }
     for(int i=0;i<tot;i++)
     {
         QString strtext =buttons[i]->text();
@@ -649,7 +659,12 @@ void KeyJoueur::Reinitialisation()
 
 void KeyJoueur::UpdatePosition()
 {
-    for(int i=0;i<InitGlobal::donneInstance()->GetNbJoueur()+1;i++)
+    int tot=Match::donneInstance()->GetParametreMatch()->get_NbJoueur();
+    if(Match::donneInstance()->GetParametreMatch()->AvecLibero()==true)
+    {
+        tot++;
+    }
+    for(int i=0;i<tot;i++)
     {
 
         QString strtext =buttons[i]->text();

@@ -66,13 +66,14 @@ public:
     Ecran(const Ecran&);
     virtual ~Ecran();
 
-
-    void Initialisation();
-    void InitialisationError();
-    void InitialisationMatch(QString team,QString adv);
+    void InitialisationIhm();
+    void Connexion();
+    //void Initialisation();
+    //void InitialisationError();
+    void InitialisationMatch();
     void InitialisationMatchFromXML();
-    void InitialisationAction(QStringList Action);
-   // void InitialisationValeur(QStringList Valeur);
+
+
     void ChercherPasseur();
     void Actionpasse();
     /// Sauvegarde

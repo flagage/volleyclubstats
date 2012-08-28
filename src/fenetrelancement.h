@@ -47,16 +47,16 @@ class FenetreLancement : public QDialog
     Q_OBJECT
 
 public:
-    explicit FenetreLancement(Ecran* ecran,QWidget *parent = 0);
+    explicit FenetreLancement(QList<Equipe*> ListEquipe,QWidget *parent = 0);
     ~FenetreLancement();
     void Initialisation();
 
 
 private:
     Ui::FenetreLancement *ui;
+    QList<Equipe*> _ListEquipe;
 
 
-    Ecran * _ecran;
 
 public slots:
     void ok();

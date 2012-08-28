@@ -36,17 +36,16 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "match.h"
 #include "volleyInit.h"
 
-FenetreLancement::FenetreLancement(Ecran* ecran,QWidget *parent) :
+FenetreLancement::FenetreLancement(QList<Equipe*> ListEquipe,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FenetreLancement)
 {
     ui->setupUi(this);
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
-
-    _ecran=ecran;
     connect(ui->pushButton_ok,SIGNAL(clicked()),this,SLOT(ok()));
     connect(ui->pushButton_annuler,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->checkBox_10,SIGNAL(clicked(bool)),this,SLOT(Slot_perso(bool)));
+    _ListEquipe=ListEquipe;
     Initialisation();
 }
 
@@ -66,14 +65,11 @@ void FenetreLancement::Initialisation()
     ui->spinBox_3->setValue(0);
     ui->spinBox_4->setValue(0);
     ui->spinBox_5->setValue(0);
-    ui->radioButton->setChecked (true);
-    ui->radioButton_3->setChecked (true);
-    ui->radioButton_4->setCheckable (false);
 
-    QList<Equipe*> LEquipe=_ecran->GetListeEquipe();
-    for(int i=0;i<LEquipe.count();i++)
+
+    for(int i=0;i<_ListEquipe.count();i++)
     {
-        Equipe* Team=LEquipe.at(i);
+        Equipe* Team=_ListEquipe.at(i);
         ui->comboBox->addItem(Team->GetNom());
     }
     ui->comboBox->adjustSize();
@@ -84,25 +80,18 @@ void FenetreLancement::Initialisation()
 
 void FenetreLancement::ok()
 {
-    QList<Equipe*> LEquipe=_ecran->GetListeEquipe();
-    Equipe* Team;
 
+ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
     if(ui->comboBox->currentText()!="")
     {
-    for(int i=0;i<LEquipe.count();i++)
-    {
-        Team=LEquipe.at(i);
-        if(Team->GetNom()==(ui->comboBox->currentText()))
-        {
-            Match::donneInstance()->setCurrentEquipe(Team);
-            break;
-        }
+        param->set_NomEquipeLocal(ui->comboBox->currentText());
 
-    }
-    Match::donneInstance()->setAdvers(ui->lineEdit->text());
+
+    param->set_NomEquipeVisiteur(ui->lineEdit->text());
     ///Initialise l'arbitre
-    Match::donneInstance()->setArbitre(ui->lineEditArbitre->text());
-    Match::donneInstance()->SetType(ui->comboBox_2->currentText());
+    param->set_NomArbitre1(ui->lineEditArbitre->text());
+    param->set_NomArbitre2(ui->lineEditArbitre_2->text());
+    param->set_TypeDeMatch(ui->comboBox_2->currentText());
     ///list des actions a prendre en compte
     QStringList actionSelection;
     actionSelection<<tr("Service")<<tr("Récéption");
@@ -114,10 +103,10 @@ void FenetreLancement::ok()
         actionSelection <<tr("Passe");
 
      actionSelection<<tr("Attaque");
-    this->_ecran->InitialisationAction(actionSelection);
+    param->set_Action(actionSelection);
 
     QStringList ValeurSelection;
-
+    ValeurSelection<<"PP"<<"P"<<"Z"<<"M"<<"MM";
     if(ui->checkBox_7->isChecked())
         ValeurSelection<<tr("eff1");
     if(ui->checkBox_8->isChecked())
@@ -136,13 +125,25 @@ void FenetreLancement::ok()
     }
 
 
-    InitValeur::donneInstance()->SetSelection(ValeurSelection);
+
+    param->set_Valeur(ValeurSelection);
     //this->_ecran->InitialisationValeur(ValeurSelection);
 
-    if(ui->radioButton_2->isChecked ())
+    param->SetLibero(ui->checkBox_11->isChecked());
+    param->set_NbJoueur(ui->spinBox_8->value());
+    param->set_NbSet(ui->spinBox_6->value());
+    param->set_ScoreMax(ui->spinBox_7->value());
+
+
+    /// ajout de l'equipe
+    for(int i=0;i<_ListEquipe.count();i++)
     {
-        _ecran->SetTactile (true);
+        Equipe* Team=_ListEquipe.at(i);
+        if(ui->comboBox->currentText()==Team->GetNom())
+        Match::donneInstance()->setCurrentEquipe(Team);
+        break;
     }
+
     accept();
     }
     else
