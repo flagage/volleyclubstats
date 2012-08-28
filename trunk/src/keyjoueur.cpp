@@ -111,7 +111,7 @@ void KeyJoueur::bouttonLClicked()
         nbjoueuraplacer++;
     }
 
-    if(_nbjoueurEnPlace>nbjoueuraplacer)
+    if(_nbjoueurEnPlace>nbjoueuraplacer && Match::donneInstance()->isStart()==false)
     {
         QList<Joueur *> list_terrain=this->GetJoueurTerrain();
         for(int i=0;i<this->_listjoueur.size();i++)
@@ -296,7 +296,7 @@ void KeyJoueur::InitListJoueur(QList <Joueur*> joueur)
 
 void KeyJoueur::Initialisation()
 {
-    bool ok;
+
 
 }
 

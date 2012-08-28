@@ -137,7 +137,7 @@ void StatWidget::slot_recu(int pos)
 
 void StatWidget::SetStatJoueurSet(Joueur *player,int numSet)
 {
-    double stat;
+ /*   double stat;
     int col=1;
     QString strAffiche;
     for(int Action=0;Action<_listAction.size();Action++)
@@ -152,7 +152,7 @@ void StatWidget::SetStatJoueurSet(Joueur *player,int numSet)
             col++;
         }
 
-    }
+    }*/
 
 }
 void StatWidget::SetOldStatEquipeSet(int numSet)
@@ -238,7 +238,7 @@ void StatWidget::SetStatJoueurMatch(Joueur *player)
     QString strAffiche;
     for(int Action=0;Action<_listAction.size();Action++)
     {
-        for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
+       /* for(int valeur=0;valeur<InitValeur::donneInstance()->GetSizeValeur();valeur++)
         {
             stat=player->getStatMatch (Action,valeur);
             strAffiche.setNum (stat,'g',4);
@@ -247,7 +247,7 @@ void StatWidget::SetStatJoueurMatch(Joueur *player)
              this->StatJoueur[player->get_NumMaillot ()]->Resize ();
 
             col++;
-        }
+        }*/
 
     }
 
@@ -556,7 +556,7 @@ void StatWidget::Resize ()
 
 QString StatWidget::ColonneHtml(QString html)
 {
-    html=html+"<TR>";
+   /* html=html+"<TR>";
     html=html+"<td></td>"+"<td></td>"+"<td></td>";
 
 
@@ -579,7 +579,7 @@ QString StatWidget::ColonneHtml(QString html)
     }
         html=html+"</TR>";
         html=html+"<TR>";
-    return html;
+    return html;*/
 }
 void StatWidget::clean ()
 {
@@ -646,7 +646,7 @@ void StatWidget::SetColor(int Action,QTableWidgetItem *item)
 
 TableElementsState::TableElementsState(QWidget * parent)
 {
-    int sizeValeur=InitValeur::donneInstance()->GetSizeValeur();
+   /* int sizeValeur=InitValeur::donneInstance()->GetSizeValeur();
     int sizeAction=InitAction::donneInstance()->GetSizeAction();
     this->setColumnCount (sizeAction*sizeValeur+1);
     this->setRowCount (8);
@@ -659,6 +659,7 @@ TableElementsState::TableElementsState(QWidget * parent)
     this->verticalHeader ()->hide();
     /*QTableWidgetItem * item=new QTableWidgetItem(QString( "Attaque"));
     item->setTextAlignment (Qt::AlignCenter);*/
+    /*
     this->setItem (0,0,new QTableWidgetItem(QString( "Phases")));
     this->setItem (2,0,new QTableWidgetItem(QString( "Match")));
     this->setItem (3,0,new QTableWidgetItem(QString( "Set1")));
@@ -716,7 +717,7 @@ TableElementsState::TableElementsState(QWidget * parent)
 
 
     this->resizeColumnsToContents();
-    this->resizeRowsToContents();
+    this->resizeRowsToContents();*/
 
 }
 

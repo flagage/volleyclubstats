@@ -34,21 +34,17 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "ui_fenetrescore.h"
 #include "QMessageBox"
 
-FenetreScore::FenetreScore(QWidget *parent, Score *score) :
+FenetreScore::FenetreScore(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FenetreScore)
 {
-    this->_score=score;
-
+    _currentMatch=Match::donneInstance();
     ui->setupUi(this);
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(parent,SIGNAL(ScorePlus(int)),this,SLOT(Slot_Scoreplus()));
     connect(ui->spinBox,SIGNAL(valueChanged(int)),this,SLOT(slot_changeScore(int)));
     connect(ui->spinBox_2,SIGNAL(valueChanged(int)),this,SLOT(slot_changeScore(int)));
-    // QPalette palette;
-    //palette.setColor(QPalette::Window ,QColor(0, 0, 255));
-    //ui->widgetScore->setPalette(palette);
     ui->widgetScore->setStyleSheet ("background-color: blue");
     ui->spinBox->setStyleSheet (" font: bold 124px;background-color:beige; border-style: outset;border-width: 2px;border-radius: 10px;border-color: beige;padding: 6px;b");
     ui->spinBox_2->setStyleSheet (" font: bold 124px;background-color:beige; border-style: outset;border-width: 2px;border-radius: 10px;border-color: beige;padding: 6px;b");
@@ -62,24 +58,25 @@ void FenetreScore::InitialiseIHMFromData()
 
 {
 
-    if(_score!=0)
+    if(_currentMatch->GetScore()!=0)
     {
-        ui->label_2->setText(_score->get_Equipe_1());
-        ui->label_3->setText(this->_score->get_Equipe_2());
-        ui->spinBox->setValue(this->_score->get_Score_E1());
-        ui->spinBox_2->setValue(this->_score->get_Score_E2());
-        ui->spinBox_4->setValue(this->_score->get_Set_E1());
-        ui->spinBox_3->setValue(this->_score->get_Set_E2());
+
+        ui->label_2->setText(_currentMatch->GetParametreMatch()->get_NomEquipeLocal());
+        ui->label_3->setText(_currentMatch->GetParametreMatch()->get_NomEquipeVisiteur());
+        ui->spinBox->setValue(_currentMatch->GetScore()->get_ScLocal());
+        ui->spinBox_2->setValue(_currentMatch->GetScore()->get_ScVisiteur());
+        ui->spinBox_4->setValue(_currentMatch->GetScore()->get_SetLocal());
+        ui->spinBox_3->setValue(_currentMatch->GetScore()->get_SetVisiteur());
 
     }
 
 }
 void FenetreScore::InitialiseDataFromIHM()
 {
-    _score->set_Score_E1(ui->spinBox->value());
-    _score->set_Score_E2(ui->spinBox_2->value());
-    _score->set_Set_E1(ui->spinBox_4->value());
-    _score->set_Set_E2(ui->spinBox_3->value());
+    _currentMatch->GetScore()->set_SetLocal(ui->spinBox->value());
+    _currentMatch->GetScore()->set_ScVisiteur(ui->spinBox_2->value());
+    _currentMatch->GetScore()->set_SetLocal(ui->spinBox_4->value());
+    _currentMatch->GetScore()->set_SetVisiteur(ui->spinBox_3->value());
 }
 
 void FenetreScore::Slot_Scoreplus()
@@ -93,9 +90,10 @@ FenetreScore::~FenetreScore()
     delete ui;
 
 }
-void FenetreScore::slot_changeScore(int score)
+
+void FenetreScore::slot_changeScore(int )
 {
-    _score->set_Score_E1(ui->spinBox->value());
-    _score->set_Score_E2(ui->spinBox_2->value());
+    _currentMatch->GetScore()->set_ScLocal(ui->spinBox->value());
+    _currentMatch->GetScore()->set_ScVisiteur(ui->spinBox_2->value());
 }
 

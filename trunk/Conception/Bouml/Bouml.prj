@@ -1,6 +1,6 @@
 format 76
 "Bouml"
-  revision 1
+  revision 2
   modified_by 5 "fred"
 
 
@@ -39,6 +39,10 @@ format 76
   mark_for_import
   
   package_ref 128005 // Volleyclubstats
+
+  package_ref 134533 // Essai
+
+  package_ref 134661 // SRC
 preserve_bodies
 
 end

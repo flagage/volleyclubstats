@@ -72,6 +72,7 @@ public:
     //void InitialisationError();
     void InitialisationMatch();
     void InitialisationMatchFromXML();
+    void InitIhmMatch();
 
 
     void ChercherPasseur();

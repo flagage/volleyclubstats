@@ -44,16 +44,12 @@ Joueur::Joueur()
     _Addresse="";
     _poste="";
     _num=0;
-    for(int i=0;i<6;i++)
-    {
-        this->_listStat.append(new statFinal());
-    }
-
-
+    _nbSet=0;
 }
+
 Joueur::~Joueur()
 {
-    for(int i=0;i<6;i++)
+    for(int i=0;i<_nbSet;i++)
     {
         delete _listStat[i] ;
     }
@@ -164,66 +160,7 @@ void Joueur::EnregistrerXML(QDomDocument doc,  QDomElement Equipe)
     Equipe.appendChild(tag);
 
 }
-void Joueur::EnregistrerStatXML(QDomDocument doc, QDomElement Set)
-{
-    /*QDomElement tag = doc.createElement("joueur");
-    tag.setAttribute("Prenom",_Prenom);
-    tag.setAttribute("Maillot",this->_NumMaillot);
-    Set.appendChild(tag);
 
-
-    //score par position
-    QDomElement tag2=doc.createElement("Attaques");
-    tag.appendChild(tag2);
-    QDomElement tag3;
-    for(int i=0;i<6;i++)
-    {
-        QString strpos="position";
-        QString num;
-        num.setNum(i);
-        strpos=strpos+num;
-        tag3=doc.createElement(strpos);
-        tag3.setAttribute("PP",this->GetAction(Atta,VPP,i));
-        tag3.setAttribute("P",this->GetAction(Atta,VP,i));
-        tag3.setAttribute("o",this->GetAction(Atta,V0,i));
-        tag3.setAttribute("M",this->GetAction(Atta,VM,i));
-        tag3.setAttribute("MM",this->GetAction(Atta,VMM,i));
-        tag2.appendChild(tag3);
-    }
-    tag2=doc.createElement("Reception");
-    tag.appendChild(tag2);
-    for(int i=0;i<6;i++)
-    {
-        QString strpos="position";
-        QString num;
-        num.setNum(i);
-        strpos=strpos+num;
-        QDomElement tag3=doc.createElement(strpos);
-        tag3.setAttribute("PP",this->GetAction(Recep,VPP,i));
-        tag3.setAttribute("P",this->GetAction(Recep,VP,i));
-        tag3.setAttribute("o",this->GetAction(Recep,V0,i));
-        tag3.setAttribute("M",this->GetAction(Recep,VM,i));
-        tag3.setAttribute("MM",this->GetAction(Recep,VMM,i));
-        tag2.appendChild(tag3);
-    }
-    tag2=doc.createElement("Service");
-    tag.appendChild(tag2);
-
-    QString strpos="position1";
-
-
-    tag3=doc.createElement(strpos);
-    tag3.setAttribute("PP",this->GetAction(Serv,VPP,1));
-    tag3.setAttribute("P",this->GetAction(Serv,VP,1));
-    tag3.setAttribute("O",this->GetAction(Serv,V0,1));
-    tag3.setAttribute("M",this->GetAction(Serv,VM,1));
-    tag3.setAttribute("MM",this->GetAction(Serv,VMM,1));
-    tag2.appendChild(tag3);
-
-*/
-
-
-}
 
 void Joueur::RestaurerXML(QDomNode noeud)
 {
@@ -241,97 +178,7 @@ void Joueur::RestaurerXML(QDomNode noeud)
 
 
 }
-/*
-void Joueur::Attaque(int position,StatValeur valeur)
-{
-    switch (valeur)
-    {
-    case  VPP:
-        this->tabAction[0].AjouterVPP(position);
-        break;
-    case VP:
-        this->tabAction[0].AjouterVP(position);
-        break;
-    case V0:
-        this->tabAction[0].AjouterV0(position);
-        break;
-    case VM:
-        this->tabAction[0].AjouterVM(position);
-        break;
-    case VMM:
-        this->tabAction[0].AjouterVMM(position);
-        break;
-    }
 
-}
-void Joueur::Reception(int position,StatValeur valeur)
-{
-    switch (valeur)
-    {
-    case  VPP:
-        this->tabAction[1].AjouterVPP(position);
-        break;
-    case VP:
-        this->tabAction[1].AjouterVP(position);
-        break;
-    case V0:
-        this->tabAction[1].AjouterV0(position);
-        break;
-    case VM:
-        this->tabAction[1].AjouterVM(position);
-        break;
-    case VMM:
-        this->tabAction[1].AjouterVMM(position);
-        break;
-    }
-
-}
-void Joueur::Service(int position, StatValeur valeur)
-{
-
-    switch (valeur)
-    {
-    case  VPP:
-        this->tabAction[2].AjouterVPP(position);
-        break;
-    case VP:
-        this->tabAction[2].AjouterVP(position);
-        break;
-    case V0:
-        this->tabAction[2].AjouterV0(position);
-        break;
-    case VM:
-        this->tabAction[2].AjouterVM(position);
-        break;
-    case VMM:
-        this->tabAction[2].AjouterVMM(position);
-        break;
-    }
-}
-/*int Joueur::GetAction(Action action,StatValeur valeur,int position)
-{
-    int statretour=0;
-    statJoueur stat=this->tabAction[action];
-    switch (valeur)
-    {
-    case  VPP:
-        statretour = stat.GetVPP(position);
-        break;
-    case VP:
-        statretour = stat.GetVP(position);
-        break;
-    case V0:
-        statretour = stat.GetV0(position);
-        break;
-    case VM:
-        statretour = stat.GetVM(position);
-        break;
-    case VMM:
-        statretour = stat.GetVMM(position);
-        break;
-    }
-    return statretour;
-}*/
 
 void Joueur::addStatMatch(int action,int pos)
 {
@@ -386,9 +233,22 @@ int Joueur::GetPosition()
     return _Position;
 }
 
-/*
-void Joueur::SetListAction(QStringList list)
+void Joueur::InitialisationStat(int NbSet,QStringList Action,QStringList Valeur)
 {
-    this->statMatch.SetListAction(list);
-    this->statSet.SetListAction(list);
-}*/
+    _nbSet=NbSet+1; //+1 pour les stats sur le match en entier.
+    _ListAction=Action;
+    _ListValeur=Valeur;
+    for(int i=0;i<_nbSet;i++)
+    {
+        this->_listStat.append(new statFinal(Action,Valeur));
+    }
+}
+
+QStringList Joueur::GetListAction()
+{
+    return _ListAction;
+}
+QStringList Joueur::GetListValeur()
+{
+    return _ListValeur;
+}

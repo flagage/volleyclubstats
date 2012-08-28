@@ -34,7 +34,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #define FENETRESCORE_H
 
 #include <QDialog>
-#include "Score.h"
+#include "match.h"
 namespace Ui {
     class FenetreScore;
 }
@@ -44,14 +44,14 @@ class FenetreScore : public QDialog
     Q_OBJECT
 
 public:
-    explicit FenetreScore(QWidget *parent = 0,Score * score=0);
+    explicit FenetreScore(QWidget *parent = 0);
     ~FenetreScore();
     void InitialiseIHMFromData();
     void InitialiseDataFromIHM();
 
 private:
   Ui::FenetreScore *ui;
-  Score *_score;
+  Match *_currentMatch;
 
 public slots:
   void Slot_Scoreplus();

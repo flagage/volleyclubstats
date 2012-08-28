@@ -55,7 +55,7 @@ statValeur::statValeur(QStringList valeur)
     this->_coef4=0;
     this->_coef5=0;
 
-    _ListEntre=InitValeur::donneInstance()->GetListValeur();
+    _ListEntre=valeur;
 
     Initialisation();
 
@@ -269,7 +269,7 @@ void  statValeur::SetValeurEff(int pos,double valeur)
 double statValeur::ValeurEff(int value)
 {
 
-    this->_ListEntre=InitValeur::donneInstance()->GetListValeur();
+   // this->_ListEntre=InitValeur::donneInstance()->GetListValeur();
     if(this->_ListEntre.at(value)=="eff1")
     {
         return this->eff1;
@@ -316,10 +316,15 @@ QStringList statValeur::GetListValeurStat()
 statFinal::statFinal()
 {
 
-    _listAction=InitAction::donneInstance()->GetListAction();
+}
+
+statFinal::statFinal(QStringList Action,QStringList Valeur)
+{
+
+    _listAction=Action;
     for(int i=0;i<_listAction.size();i++)
     {
-        statMap[i]=new statValeur(InitValeur::donneInstance()->GetListValeur());
+        statMap[i]=new statValeur(Valeur);
     }
 
 }
