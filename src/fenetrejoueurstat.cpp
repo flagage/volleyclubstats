@@ -2,17 +2,27 @@
 #include "ui_fenetrejoueurstat.h"
 
 
-FenetreJoueurStat::FenetreJoueurStat(Joueur* player,QWidget *parent) :
+FenetreJoueurStat::FenetreJoueurStat(Joueur* player,Equipe* team,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FenetreJoueurStat)
 {
     ui->setupUi(this);
 
-       _MyWidget=new TwStatJoueur(player,ui->groupBox);
-       _MyWidget->show();
+    _tabWidget = new TwStat(player,team,this);
+
+    _tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+    ui->gridLayout->addWidget(_tabWidget, 0, 0, 1, 1);
+    this->show();
 }
+
+
+
+
 
 FenetreJoueurStat::~FenetreJoueurStat()
 {
-    delete ui;
+    if(_tabWidget!=0)
+        delete _tabWidget;
+
+delete ui;
 }

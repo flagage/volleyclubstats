@@ -4,6 +4,8 @@
 #include <QDialog>
 #include "twstatjoueur.h"
 #include "Joueur.h"
+#include "Equipe.h"
+
 
 namespace Ui {
 class FenetreJoueurStat;
@@ -14,12 +16,15 @@ class FenetreJoueurStat : public QDialog
     Q_OBJECT
     
 public:
-    explicit FenetreJoueurStat(Joueur* player,QWidget *parent = 0);
+   explicit FenetreJoueurStat(Joueur* player,Equipe* team=0,QWidget *parent = 0);
+
+
+
     ~FenetreJoueurStat();
     
 private:
     Ui::FenetreJoueurStat *ui;
-    TwStatJoueur *_MyWidget;
+     TwStat* _tabWidget;
 };
 
 #endif // FENETREJOUEURSTAT_H

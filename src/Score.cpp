@@ -87,3 +87,23 @@ int Score::get_ScLocal()
 {
     return _ScLocal;
 }
+void Score::SauvegardeScore()
+{
+    QString score=QString::number(_ScLocal)+":"+QString::number(_ScVisiteur);
+    _ListScore.append(score);
+    if(_ScLocal>_ScVisiteur)
+    {
+        _SetLocal++;
+    }
+    else
+    {
+        _SetVisiteur++;
+    }
+    _ScLocal=0;
+    _ScVisiteur=0;
+}
+
+QStringList Score::ListdesScore()
+{
+    return _ListScore;
+}

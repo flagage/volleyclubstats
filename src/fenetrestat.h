@@ -64,10 +64,5 @@ public slots:
    void Imprimer();
 };
 
-class TableState: public QTabWidget
-{
-public:
-    explicit TableState(QWidget *parent = 0);
 
-};
 #endif // FENETRESTAT_H

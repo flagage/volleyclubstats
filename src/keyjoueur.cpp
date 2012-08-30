@@ -74,6 +74,7 @@ KeyJoueur::KeyJoueur(QWidget *parent,int nbjoueur,bool libero) :
 
     }
      buttons[_nbJoueur]=new BouttonJoueur(tr("Adv"),this);
+    connect(buttons[_nbJoueur],SIGNAL(rclicked()),this,SLOT(bouttonRClicked()));
 
     _labelPosition=new QLabel();
     QFont police("calibri");

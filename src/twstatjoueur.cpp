@@ -1,64 +1,141 @@
 #include "twstatjoueur.h"
 #include "ui_twstatjoueur.h"
 
-TwStatJoueur::TwStatJoueur(Joueur *player, QWidget *parent) :
+TwStat::TwStat(Joueur *player,Equipe* team, QWidget *parent) :
     QTabWidget(parent),
     ui(new Ui::TwStatJoueur)
 {
     ui->setupUi(this);
-    _currentJoueur=player;
-     _statJoueurMatch=new TableStateJoueur(ui->tab);
-     _statJoueurSet=new TableStateJoueur(ui->tab_2);
-    this->Connection();
-    this->Initialisation();
-    ui->pushButton->setText(player->get_Prenom()+"_"+QString::number(player->get_NumMaillot())+"_Fermer");
-    ui->pushButton_2->setText(player->get_Prenom()+"_"+QString::number(player->get_NumMaillot())+"_Fermer");
+    if(player!=0)
+    {
+        _currentJoueur=player;
+        _ListAction=_currentJoueur->GetListAction();
+        _ListValeur=_currentJoueur->GetListValeur();
+        _NbSet=_currentJoueur->GetNbSet();
+        InitJoueur();
+    }
+    else
+    {
+        _currentTeam=team;
+        _ListAction=_currentTeam->GetListAction();
+        _ListValeur=_currentTeam->GetListValeur();
+        _NbSet=_currentTeam->GetNbSet();
+
+        InitEquipe();
+
+    }
+
+
+
+    Initialisation();
+    Connection();
+
 }
 
-void TwStatJoueur::Connection()
+
+void TwStat::Connection()
 {
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Slot_fermer()));
-    connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(Slot_fermer()));
+    // connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(Slot_fermer()));
+}
+void TwStat::Initialisation()
+{
+    _statMatch=new TableState(ui->tab,_ListAction,_ListValeur);
+    ///creation des tab
+    for(int t=1;t<_NbSet;t++)
+    {
+        QWidget *CreerNouveauOnglet = new QWidget;
+
+        QVBoxLayout *layout = new QVBoxLayout;
+        layout->setContentsMargins(0,0,0,0);
+
+        CreerNouveauOnglet->setLayout(layout);
+        QString strlabel="Set n°"+QString::number(t);
+        this->addTab(CreerNouveauOnglet,strlabel);
+        _VectorStatSet.append(new TableState(CreerNouveauOnglet,_ListAction,_ListValeur));
+    }
+
 }
 
-void TwStatJoueur::Initialisation()
+void TwStat::InitEquipe()
 {
 
-    for (int i=0;i<_currentJoueur->GetListAction().size();i++)
+    ui->pushButton->setText(_currentTeam->GetNom()+"_Fermer");
+    for (int i=0;i<_currentTeam->GetListAction().size();i++)
     {
-        for (int j=0;j<_currentJoueur->GetListValeur().size();j++)
+        for (int j=0;j<_currentTeam->GetListValeur().size();j++)
         {
             QString strAffiche;
-           double valeur= _currentJoueur->getStatMatch(i,j);
+            double valeur= _currentTeam->getStatMatch(i,j);
             strAffiche=QString::number(valeur);
-            _statJoueurMatch->setItem (i+1,j+1,new QTableWidgetItem(strAffiche));
+            _statMatch->setItem (i+1,j+1,new QTableWidgetItem(strAffiche));
         }
     }
 
-    for (int i=0;i<_currentJoueur->GetListAction().size();i++)
+    for(int t=1;t<_currentTeam->GetNbSet();t++)
     {
-        for (int j=0;j<_currentJoueur->GetListValeur().size();j++)
+        for (int i=0;i<_currentTeam->GetListAction().size();i++)
         {
-            QString strAffiche;
-           double valeur= _currentJoueur->getStatSet(i,j);
-            strAffiche=QString::number(valeur);
-            _statJoueurSet->setItem (i+1,j+1,new QTableWidgetItem(strAffiche));
+            for (int j=0;j<_currentTeam->GetListValeur().size();j++)
+            {
+                QString strAffiche;
+                double valeur= _currentTeam->getStatSet(i,j,t);
+                strAffiche=QString::number(valeur);
+                _VectorStatSet.at(t-1)->setItem(i+1,j+1,new QTableWidgetItem(strAffiche));
+            }
         }
     }
-
 
     this->show();
 
 }
 
-void TwStatJoueur::Slot_fermer()
+void TwStat::InitJoueur()
+{
+
+    ui->pushButton->setText(_currentJoueur->get_Prenom()+"_"+QString::number(_currentJoueur->get_NumMaillot())+"_Fermer");
+    for (int i=0;i<_currentJoueur->GetListAction().size();i++)
+    {
+        for (int j=0;j<_currentJoueur->GetListValeur().size();j++)
+        {
+            QString strAffiche;
+            double valeur= _currentJoueur->getStatMatch(i,j);
+            strAffiche=QString::number(valeur);
+            _statMatch->setItem (i+1,j+1,new QTableWidgetItem(strAffiche));
+        }
+    }
+
+    for(int t=1;t<_currentJoueur->GetNbSet();t++)
+    {
+        for (int i=0;i<_currentJoueur->GetListAction().size();i++)
+        {
+            for (int j=0;j<_currentJoueur->GetListValeur().size();j++)
+            {
+                QString strAffiche;
+                double valeur= _currentJoueur->getStatSet(i,j,t);
+                strAffiche=QString::number(valeur);
+                _VectorStatSet.at(t-1)->setItem(i+1,j+1,new QTableWidgetItem(strAffiche));
+            }
+        }
+    }
+
+    this->show();
+
+}
+void TwStat::Slot_fermer()
 {
     this->hide();
 }
 
 
-TwStatJoueur::~TwStatJoueur()
+TwStat::~TwStat()
 {
+
+    delete _statMatch;
+
+
+     _VectorStatSet.clear();
+
     delete ui;
 }
 
@@ -82,10 +159,14 @@ TwStatJoueur::~TwStatJoueur()
 /   Tableau stats joueur
 /*********************************************************/
 
-TableStateJoueur::TableStateJoueur(QWidget * parent)
+TableState::TableState(QWidget * parent,QStringList Action,QStringList valeur)
 {
-    int sizeValeur=InitValeur::donneInstance()->GetSizeValeur();
-    int sizeAction=InitAction::donneInstance()->GetSizeAction();
+    QStringList ListAction=Action;
+    QStringList ListValeur=valeur;
+
+    int sizeValeur=ListValeur.size();
+    int sizeAction=ListAction.size();
+
     this->setColumnCount (sizeValeur+1);
     this->setRowCount (sizeAction+1);
     this->horizontalHeader ()->hide();
@@ -94,11 +175,11 @@ TableStateJoueur::TableStateJoueur(QWidget * parent)
     QColor color;
     for(int i=0;i<sizeValeur;i++)
     {
-        this->setItem(0,i+1,new QTableWidgetItem(QString(InitValeur::donneInstance()->GetElementValeur(i))));
+        this->setItem(0,i+1,new QTableWidgetItem(QString(ListValeur.at(i))));
     }
     for(int j=0;j<sizeAction;j++)
     {
-        this->setItem(j+1,0,new QTableWidgetItem(QString(InitAction::donneInstance()->GetElementAction(j))));
+        this->setItem(j+1,0,new QTableWidgetItem(QString(ListAction.at(j))));
     }
     /*for(int i=0;i<sizeAction;i++)
     {
@@ -153,8 +234,8 @@ TableStateJoueur::TableStateJoueur(QWidget * parent)
 }
 
 
-void TableStateJoueur::Resize()
+void TableState::Resize()
 {
-this->resizeColumnsToContents ();
-this->resizeRowsToContents ();
+    this->resizeColumnsToContents ();
+    this->resizeRowsToContents ();
 }

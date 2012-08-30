@@ -194,9 +194,9 @@ void Joueur::supStatMatch(int action,int pos)
     this->_listStat[0]->SupValeur (action,pos);
 }
 
-void Joueur::supStatSet(int action,int pos)
+void Joueur::supStatSet(int action,int pos,int numset)
 {
-    this->_listStat[Match::donneInstance()->GetCurentSet()]->SupValeur (action,pos);
+    this->_listStat[numset]->SupValeur (action,pos);
 }
 
 
@@ -205,24 +205,24 @@ double Joueur::getStatMatch(int action,int pos)
     return this->_listStat[0]->GetValeur(action,pos);
 }
 
-void Joueur::setStatSet(int action,int pos,double valeur)
+void Joueur::setStatSet(int action,int pos,double valeur,int numset)
 {
-    this->_listStat[Match::donneInstance()->GetCurentSet()]->SetValeur (action,pos,valeur);
+    this->_listStat[numset]->SetValeur (action,pos,valeur);
 }
 
-void Joueur::addStatSet(int action,int pos)
+void Joueur::addStatSet(int action,int pos,int numset)
 {
-    this->_listStat[Match::donneInstance()->GetCurentSet()]->AjoutValeur(action,pos);
+    this->_listStat[numset]->AjoutValeur(action,pos);
 }
 
-double Joueur::getStatSet(int action,int pos)
+double Joueur::getStatSet(int action,int pos,int numset)
 {
-   return  this->_listStat[Match::donneInstance()->GetCurentSet()]->GetValeur(action,pos);
+   return  this->_listStat[numset]->GetValeur(action,pos);
 }
 
-void Joueur::initSet()
+void Joueur::initSet(int numset)
 {
-    this->_listStat[Match::donneInstance()->GetCurentSet()]->init();
+    this->_listStat[numset]->init();
 }
 void Joueur::SetPosition(int numpos)
 {
@@ -238,6 +238,7 @@ void Joueur::InitialisationStat(int NbSet,QStringList Action,QStringList Valeur)
     _nbSet=NbSet+1; //+1 pour les stats sur le match en entier.
     _ListAction=Action;
     _ListValeur=Valeur;
+    _listStat.clear();
     for(int i=0;i<_nbSet;i++)
     {
         this->_listStat.append(new statFinal(Action,Valeur));
@@ -251,4 +252,8 @@ QStringList Joueur::GetListAction()
 QStringList Joueur::GetListValeur()
 {
     return _ListValeur;
+}
+int Joueur::GetNbSet()
+{
+    return _nbSet;
 }

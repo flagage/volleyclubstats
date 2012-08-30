@@ -1,5 +1,6 @@
 #ifndef _SCORE_H
 #define _SCORE_H
+#include "QStringList"
 
 
 //Classe decrivant le score du match en cours
@@ -23,6 +24,7 @@ private:
     //si 1 service pour l'equipe visiteur
     int _Service;
 
+    QStringList _ListScore;
 
 public:
     int get_Service();
@@ -51,6 +53,10 @@ public:
 
     int get_ScLocal();
     void set_ScLocal(int value);
+
+    void SauvegardeScore();
+    QStringList ListdesScore();
+
 
     Score();
 

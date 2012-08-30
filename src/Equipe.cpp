@@ -43,7 +43,36 @@ Equipe::Equipe()
     _Nom="";
     _Categorie="";
     _Division="";
+    _NbSet=0;
+}
 
+void Equipe::InitialisationStat(int NbSet,QStringList Action,QStringList Valeur)
+{
+    _NbSet=NbSet+1; //+1 pour les stats sur le match en entier.
+    _ListAction=Action;
+    _ListValeur=Valeur;
+    _VectorStat.clear();
+    for(int i=0;i<_NbSet;i++)
+    {
+        this->_VectorStat.append(new statFinal(Action,Valeur));
+    }
+    /// Initialisation stat joueur
+    for(int i=0;i<_ListeJoueur.size();i++)
+    {
+        _ListeJoueur.at(i)->InitialisationStat(NbSet,Action,Valeur);
+    }
+}
+QStringList Equipe::GetListAction()
+{
+    return _ListAction;
+}
+QStringList Equipe::GetListValeur()
+{
+    return _ListValeur;
+}
+int Equipe::GetNbSet()
+{
+    return this->_NbSet;
 }
 
 Equipe::Equipe(QString nom)
@@ -58,6 +87,10 @@ Equipe::~Equipe()
         delete (_ListeJoueur.at(i));
     }
     _ListeJoueur.clear();
+    for(int j=0;j<_NbSet;j++)
+    {
+        delete(_VectorStat.at(j));
+    }
 
 
 }
@@ -207,7 +240,7 @@ int Equipe::GetnbValeurStat()
 {
     return this->_VectorStat[0]->GetNbValeur();
 }
-
+*/
 
 void Equipe::addStatMatch(int action,int pos)
 {
@@ -221,41 +254,41 @@ double Equipe::getStatMatch(int action,int pos)
 {
    return this->_VectorStat[0]->GetValeur(action,pos);
 }
-int Equipe::GetTotalPoint()
+/*int Equipe::GetTotalPoint()
 {
     return this->_VectorStat[0]->GetTotal();
-}
+}*/
 
-void Equipe::addStatSet(int action,int pos)
+void Equipe::addStatSet(int action,int pos,int numset)
 {
-    this->_VectorStat[Match::donneInstance()->GetCurentSet()]->AjoutValeur(action,pos);
+    this->_VectorStat[numset]->AjoutValeur(action,pos);
 }
-void Equipe::setStatSet(int action,int pos,double valeur)
+void Equipe::setStatSet(int action,int pos,double valeur,int numset)
 {
-    this->_VectorStat[Match::donneInstance()->GetCurentSet()]->SetValeur (action,pos,valeur);
+    this->_VectorStat[numset]->SetValeur (action,pos,valeur);
 }
-double Equipe::getStatSet(int action,int pos)
+double Equipe::getStatSet(int action,int pos,int numset)
 {
-    double Dvalue=this->_VectorStat[Match::donneInstance()->GetCurentSet()]->GetValeur(action,pos);
+    double Dvalue=this->_VectorStat[numset]->GetValeur(action,pos);
    return  Dvalue;
 }
 
-void Equipe::initSet()
+/*void Equipe::initSet()
 {
 
-    this->_VectorStat[Match::donneInstance()->GetCurentSet()]->init();
+    //this->_VectorStat[Match::donneInstance()->GetCurentSet()]->init();
 
-}
+}*/
 
 void Equipe::supStatMatch(int action,int pos)
 {
     this->_VectorStat[0]->SupValeur (action,pos);
 }
-void Equipe::supStatSet(int action,int pos)
+void Equipe::supStatSet(int action,int pos,int numset)
 {
-    this->_VectorStat[Match::donneInstance()->GetCurentSet()]->SupValeur (action,pos);
+    this->_VectorStat[numset]->SupValeur (action,pos);
 }
-*/
+
 void Equipe::ExportCVS(QString fichier)
 {
 
