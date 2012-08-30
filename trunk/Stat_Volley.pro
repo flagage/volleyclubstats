@@ -122,5 +122,6 @@ FORMS    +=  ui/statwidget.ui \
 
 
 
+
 OTHER_FILES += \
     VolleyClubStat.rc \

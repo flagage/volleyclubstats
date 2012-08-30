@@ -93,28 +93,26 @@ public:
     void RestaurerXML(QDomNode noeud);
     void EnregistrerStatXML(QDomDocument doc,  QDomElement Equipe);
     void RestaurerStatXML(QDomNode noeud);
-    /// Enregistrement Action
-   // void Attaque(int position,StatValeur valeur);
-  //  void Reception(int position,StatValeur valeur);
-  //  void Service(int position,StatValeur valeur);;
-    //int GetAction(Action action,StatValeur valeur,int position);
+
+
 
     /// stat
     void addStatMatch(int action,int pos);
     void setStatMatch(int action,int pos,double valeur);
     double getStatMatch(int action,int pos);
-    void addStatSet(int action,int pos);
-    void setStatSet(int action,int pos,double valeur);
-    double getStatSet(int action,int pos);
-    void initSet();
+    void addStatSet(int action,int pos,int numset);
+    void setStatSet(int action,int pos,double valeur,int numset);
+    double getStatSet(int action,int pos,int numset);
+    void initSet(int numset);
     void supStatMatch(int action,int pos);
-    void supStatSet(int action,int pos);
+    void supStatSet(int action,int pos,int numset);
 
     void SetPosition(int numpos);
     int GetPosition();
     void InitialisationStat(int NbSet,QStringList Action,QStringList Valeur);
     QStringList GetListAction();
     QStringList GetListValeur();
+    int GetNbSet();
     //void SetListAction(QStringList list);
 
 };

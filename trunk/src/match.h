@@ -49,7 +49,8 @@ class Match
 
 private:
     static Match* instanceMatch;
-    Equipe* _currrentEquipe;
+    Equipe* _currentEquipe;
+    Equipe* _EquipeVisiteur;
     ParametreMatch* _ParamMatch;
     Score* _score;
 
@@ -144,11 +145,20 @@ public:
     QString Rechercheposte(int post);
     void MiseaJourposte();
     void MiseajourScore();
+    void MiseAjourStat(Equipe* team,Joueur *player,int Action,bool isSet=false);
+    void MiseAjourStatTeam( QDomElement f,int Action,Equipe* team,bool isSet);
+    void MiseAjourStatPlayer( QDomElement f,int Action,Joueur* player,bool isSet);
 
     bool isStart();
     void setStart(bool);
     void InitListTerrainfromPosition();
-    void InitialiseStatJoueur();
+    void InitStatFromXml(QDomNode child,int TemOrPl,bool isSet,int numset=0,Joueur* player=0);
+    Equipe * GetEquipeVisiteur();
+   void EcrireStatMatchxml(QDomElement * element);
+   void EcrireStatXml(QDomElement * element);
+   Joueur* RechercheJoueur(QString strjoueur);
+   void AddJoueurToXml(Joueur * player,bool isset=false);
+   void AddSetToXml();
 
 };
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>479</width>
-    <height>300</height>
+    <width>519</width>
+    <height>307</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,23 +26,6 @@
     </item>
     <item row="1" column="0">
      <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="tab_2">
-   <attribute name="title">
-    <string>Set Actuel</string>
-   </attribute>
-   <layout class="QGridLayout" name="gridLayout_4">
-    <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout_3"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="pushButton_2">
       <property name="text">
        <string/>
       </property>

@@ -35,6 +35,7 @@ private :
        int _Nb_Joueur;
        int _Score_Max;
        int _AvecLibero;
+       int _NumSet;
 
 
 public:
@@ -91,6 +92,12 @@ public:
   void SetLibero(int );
 
   int get_TotJoueur();
+
+  int GetNumSet();
+
+  void SetNumSet(int valeur);
+
+  int GetActionFromString(QString);
 
 };
 

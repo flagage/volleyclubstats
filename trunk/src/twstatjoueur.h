@@ -3,37 +3,48 @@
 
 #include <QTabWidget>
 #include "QTableWidget"
+#include "QVector"
 #include "Joueur.h"
+#include "Equipe.h"
 
 namespace Ui {
 class TwStatJoueur;
 }
 
 
-class TableStateJoueur: public QTableWidget
+class TableState: public QTableWidget
 {
 
 public:
 
-   TableStateJoueur(QWidget * parent);
+   TableState(QWidget * parent,QStringList action,QStringList valeur);
    void Resize();
 };
 
-class TwStatJoueur : public QTabWidget
+
+
+class TwStat : public QTabWidget
 {
     Q_OBJECT
     
 public:
-    explicit TwStatJoueur(Joueur * player,QWidget *parent = 0);
-    ~TwStatJoueur();
+    explicit TwStat(Joueur * player,Equipe* team,QWidget *parent = 0);
+
+    ~TwStat();
     void Initialisation();
-    
+    void InitJoueur();
+    void InitEquipe();
 private:
     Ui::TwStatJoueur *ui;
     Joueur* _currentJoueur;
+    Equipe* _currentTeam;
+    QStringList _ListAction;
+    QStringList _ListValeur;
+    int _NbSet;
     void Connection();
-    TableStateJoueur* _statJoueurSet;
-    TableStateJoueur* _statJoueurMatch;
+    QVector <TableState*> _VectorStatSet;
+    TableState* _statMatch;
+
 public slots:
     void Slot_fermer();
 };

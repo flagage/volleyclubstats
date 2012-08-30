@@ -2,6 +2,7 @@
 
 ParametreMatch::ParametreMatch()
 {
+    this->_NumSet=1;
 }
 
 
@@ -152,4 +153,24 @@ int ParametreMatch::get_TotJoueur()
     }
     else
         return _Nb_Joueur+1;
+}
+int ParametreMatch::GetNumSet()
+{
+    return _NumSet;
+}
+
+void ParametreMatch::SetNumSet(int valeur)
+{
+    _NumSet=valeur;
+}
+int ParametreMatch::GetActionFromString(QString strValeur)
+{
+    for(int i=0;i<_Action.size();i++)
+    {
+        if(_Action.at(i)==strValeur)
+        {
+            return i;
+        }
+    }
+    return 0;
 }

@@ -43,10 +43,13 @@ class Equipe
 {
 private:    //attribut
     QString _Nom;
-
+    QVector<statFinal*> _VectorStat;
     QList <Joueur*>_ListeJoueur;
     QString _Division;
     QString _Categorie;
+    QStringList _ListValeur;
+    QStringList _ListAction;
+    int _NbSet;
 
 public: //fonction
 
@@ -80,6 +83,21 @@ public: //fonction
 
     void ExportCVS(QString Fichier);
     void ImportCVS(QString);
+
+    void InitialisationStat(int NbSet,QStringList Action,QStringList Valeur);
+    QStringList GetListAction();
+    QStringList GetListValeur();
+    int GetNbSet();
+
+    /// stat
+    void addStatMatch(int action,int pos);
+    double getStatMatch(int action,int pos);
+    void addStatSet(int action,int pos,int numset);
+    void setStatSet(int action,int pos,double valeur,int numset);
+    double getStatSet(int action,int pos,int numset);
+    void supStatMatch(int action,int pos);
+    void supStatSet(int action,int pos,int numset);
+    void setStatMatch(int action,int pos,double valeur);
 
 
 

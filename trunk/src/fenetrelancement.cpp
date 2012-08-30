@@ -88,6 +88,7 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
 
 
     param->set_NomEquipeVisiteur(ui->lineEdit->text());
+
     ///Initialise l'arbitre
     param->set_NomArbitre1(ui->lineEditArbitre->text());
     param->set_NomArbitre2(ui->lineEditArbitre_2->text());
@@ -106,7 +107,7 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
     param->set_Action(actionSelection);
 
     QStringList ValeurSelection;
-    ValeurSelection<<"PP"<<"P"<<"Z"<<"M"<<"MM";
+    ValeurSelection<<"PP"<<"P"<<"Z"<<"M"<<"MM"<<"tot";
     if(ui->checkBox_7->isChecked())
         ValeurSelection<<tr("eff1");
     if(ui->checkBox_8->isChecked())
@@ -143,7 +144,7 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
         Match::donneInstance()->setCurrentEquipe(Team);
         break;
     }
-
+    Match::donneInstance()->setAdvers(ui->lineEdit->text());
     accept();
     }
     else

@@ -132,7 +132,7 @@ private:
     QString ChangeJoueur;
     QTimer * _TimerChange;
     QTimer * _TimerScore;
-    StatWidget* myWidget;
+    //StatWidget* myWidget;
     WidgetTabEff* _WtabEff;
     bool _finSet;
     QList<QString> _ListActionModif;
