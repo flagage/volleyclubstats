@@ -63,9 +63,7 @@ statValeur::statValeur(QStringList valeur)
 
 void statValeur::Initialisation()
 {
-    this->_AfficheValeur=6;
 
-    _ListValeur<<"++"<<"+"<<"0"<<"-"<<"--"<<"tot";
     for(int k=0;k<_ListEntre.size();k++)
     {
         if(_ListEntre.at(k)=="(")
@@ -75,7 +73,7 @@ void statValeur::Initialisation()
             this->AddCoef(listCoeff[0].toInt(),listCoeff[1].toInt(),listCoeff[2].toInt(),listCoeff[3].toInt(),listCoeff[4].toInt());
             break;
         }
-        _AfficheValeur=_AfficheValeur;
+
         _ListValeur<<_ListEntre.at(k);
     }
 }
@@ -248,20 +246,20 @@ void statValeur::setValeur(int pos,double valeur)
 }
 void  statValeur::SetValeurEff(int pos,double valeur)
 {
-    int value=pos-6;
-    if(this->_ListValeur.at(value)=="eff1")
+
+    if(this->_ListValeur.at(pos)=="eff1")
     {
         this->eff1=valeur;
     }
-    if(this->_ListValeur.at(value)=="eff2")
+    if(this->_ListValeur.at(pos)=="eff2")
     {
         this->eff2=valeur;
     }
-    if(this->_ListValeur.at(value)=="eff3")
+    if(this->_ListValeur.at(pos)=="eff3")
     {
         this->eff3=valeur;
     }
-    if(this->_ListValeur.at(value)=="eff4")
+    if(this->_ListValeur.at(pos)=="eff4")
     {
         this->eff4=valeur;
     }
@@ -303,10 +301,7 @@ void statValeur::init()
 
 }
 
-int statValeur::GetAfficheValeur()
-{
-    return _AfficheValeur;
-}
+
 
 QStringList statValeur::GetListValeurStat()
 {
@@ -336,10 +331,7 @@ statFinal::~statFinal()
     }
 }
 
-int statFinal::GetNbValeur()
-{
-    return statMap[0]->GetAfficheValeur();
-}
+
 int statFinal::GetTotal()
 {
     return 0;

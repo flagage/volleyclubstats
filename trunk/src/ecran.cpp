@@ -47,6 +47,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "fenetremodifevenement.h"
 
 
+
 Ecran::Ecran(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Ecran)
@@ -64,7 +65,7 @@ Ecran::~Ecran()
     delete LineEdit2;
     delete _PlacementJoueur;
     //delete myWidget;
-  //  delete _WtabEff;
+    //delete _WtabEff;
 }
 
 void Ecran::InitialisationIhm()
@@ -89,7 +90,7 @@ void Ecran::InitialisationIhm()
     ui->groupBox_4->setVisible(false);
 
     //myWidget=new StatWidget(ui->groupBox_3,this);
-    _WtabEff=new WidgetTabEff(ui->groupBox_6);
+    //_WtabEff=new WidgetTabEff(ui->tabWidget->widget(1));
 
     ui->frame->setVisible(false);
     ui->frame_2->setVisible(false);
@@ -141,6 +142,8 @@ void Ecran::Connexion()
     connect (ui->pBRotationMoins,SIGNAL(clicked()),this,SLOT(slot_rotationM()));
 
     connect(this,SIGNAL(ScorePlus(int)),this,SLOT(Slot_Scoreplus(int)));
+
+    connect(ui->tabWidget,SIGNAL(currentChanged(int)),this,SLOT(UpdateTabVue(int)));
 
 
 }
@@ -408,6 +411,52 @@ void Ecran::InitIhmMatch()
     connect(_ListEvent,SIGNAL(modif(int)),this,SLOT(slot_ModifEvent(int)));
     connect(_ListEvent,SIGNAL(sup(int)),this,SLOT(slot_suppEvent(int)));
     this->_TimerScore->start(10);
+
+    /// Initialisation efficacite
+    QTabWidget* tabWidget = new QTabWidget(ui->tabWidget->widget(1));
+    for(int i=0;i<Match::donneInstance()->GetParametreMatch()->get_NbSet()+1;i++)
+     {
+         QWidget* tabelement=new QWidget();
+         QString NomOnglet;
+         if(i==0)
+         {
+             NomOnglet="Match";
+         }
+         else
+         {
+             NomOnglet="Set n°"+QString::number(i);
+         }
+         tabWidget->addTab(tabelement,NomOnglet);
+         _VectortabEff.append(new WidgetTabEff(tabelement));
+     }
+    ui->gridLayout_21->addWidget(tabWidget, 0, 0, 1, 1);
+    /// initialisation tabAction
+    for(int a=0;a<Match::donneInstance()->GetListAction().size();a++)
+    {
+        QWidget *CreerNouveauOnglet = new QWidget;
+        QGridLayout *layout = new QGridLayout;
+        layout->setContentsMargins(0,0,0,0);
+
+        CreerNouveauOnglet->setLayout(layout);
+
+        QString strlabel=Match::donneInstance()->GetListAction().at(a);
+        ui->tabWidget->addTab(CreerNouveauOnglet,strlabel);
+
+        QTabWidget* tabWidget = new QTabWidget(ui->tabWidget->widget(a+2));
+         tabWidget->setObjectName(QString::fromUtf8("tabWidget_2"));
+         for(int i=0;i<Match::donneInstance()->GetParametreMatch()->get_NbSet()+1;i++)
+         {
+             QWidget* tabelement=new QWidget();
+             tabWidget->addTab(tabelement,QString("test"));
+              _VectorTabFram.append(new FramStats(a,Match::donneInstance()->getTeam()->GetListeJoueur(),tabelement));
+         }
+
+         layout->addWidget(tabWidget, 0, 0, 1, 1);
+
+         //CreerNouveauOnglet->
+
+       //ui->tabWidget_2
+    }
 
 
 }
@@ -1374,7 +1423,18 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
         //this->_TraceListAction->SetTrace(MsgAction);
         this->_ListEvent->addItem(MsgEvent);
         //ui->listAction->addItem (MsgAction);
-        //this->_WtabEff->SlotMiseAJour();
+        int i=ui->tabWidget->currentIndex();
+        if(i==1)
+        {
+               this->_VectortabEff.at(0)->SlotMiseAJour();
+            this->_VectortabEff.at(1)->SlotMiseAJour(true,1);
+        }
+        else if(i>1)
+        {
+           _VectorTabFram.at(i-2)->SlotMiseAJour();
+
+        }
+
         this->_PlacementJoueur->Stat();
     }
 
@@ -1519,9 +1579,9 @@ void Ecran::PointPlus(QString numjoueur)
         _PointForUs=true;
 
     }
-    // this->_WtabEff->SlotMiseAJour();
+    //this->_WtabEff->SlotMiseAJour();
     //this->myWidget->Resize();
-    //this->AfficherStat();
+    this->AfficherStat();
 }
 
 void Ecran::PointMoins(QString numjoueur)
@@ -1886,17 +1946,32 @@ void Ecran::AddJoueurBanc(Joueur* joueur)
 
 void Ecran::UpdateTabVue(int tab)
 {
+    int numSet=Match::donneInstance()->GetParametreMatch()->GetNumSet();
     switch(tab)
     {
-    case 1:
-        _WtabEff->clean();
-        _WtabEff->Init();
+    case 0:
         break;
-    case 2:
+    case 1:
+        _VectortabEff.at(0)->clean();
+        _VectortabEff.at(numSet)->clean();
+        _VectortabEff.at(0)->Init();
+        _VectortabEff.at(numSet)->Init();
+        break;
+    default:
+        FramStats *currentfram=_VectorTabFram.at(tab-2);
+        currentfram->clean();
+        currentfram->Init();
+        QPalette Palette;
+        Palette=ui->tabWidget->currentWidget()->palette();
+        Palette.setColor(QPalette::Base,QColor(255,153,153));
+        currentfram->setPalette(Palette);
+       // ui->tabWidget->setPalette(Palette);
         //myWidget->clean();
        // this->myWidget->SetEquipe (Match::donneInstance()->getTeam());
        // this->myWidget->Initialisation ();
        // this->myWidget->InitListAction(_listAction);
+        //FramStats *currentfram=new FramStats(0,Match::donneInstance()->getTeam()->GetListeJoueur(),ui->tabWidget->currentWidget());
+        currentfram->SlotMiseAJour();
         break;
     }
 }

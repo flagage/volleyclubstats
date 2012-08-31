@@ -58,7 +58,7 @@ private:
     int _coef5;
 
     /// nombre de valeur à afficher
-     int _AfficheValeur;
+
      QStringList _ListValeur;
      QStringList _ListEntre;
 public:
@@ -72,7 +72,7 @@ public:
     void SetValeurEff(int pos,double valeur);
     void init();
     void AddCoef(int C1,int C2,int C3,int C4,int C5);
-    int GetAfficheValeur();
+
     QStringList GetListValeurStat();
 };
 

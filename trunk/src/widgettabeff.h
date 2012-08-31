@@ -60,14 +60,16 @@ public:
     void Init();
     void Ouvrir();
     void clean();
+    Joueur* PlayerfromNum(QString num);
 public slots:
-    void SlotMiseAJour();
+    void SlotMiseAJour(bool isSet=false,int numSet=0);
 
 private:
     Ui::WidgetTabEff *ui;
     TableEff* _tabElts;
     QStringList _listaction;
     QList <Joueur*>_listJoueur;
+
 
 };
 

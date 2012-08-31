@@ -14,7 +14,6 @@
   <joueur Maillot="14" Adresse="" Tel="0" Prenom="Marie" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
   <joueur Maillot="21" Adresse="" Tel="0" Prenom="Marion" Nom="" License="0" Email="" Age="01/01/2000" poste="Recep/Attaque"/>
   <joueur Maillot="20" Adresse="" Tel="0" Prenom="fanny" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
-  <joueur Maillot="0" Adresse="" Tel="0" Prenom="_curentJoueur" Nom="" License="0" Email="" Age="" poste=""/>
   <joueur Maillot="5" Adresse="" Tel="0" Prenom="Pamela" Nom="" License="0" Email="" Age="01/01/2000" poste="Libero"/>
  </Equipe>
  <Equipe Nom="Villebon 2 Senior F" Division="" Categorie="">

@@ -6,12 +6,14 @@ TwStat::TwStat(Joueur *player,Equipe* team, QWidget *parent) :
     ui(new Ui::TwStatJoueur)
 {
     ui->setupUi(this);
+
     if(player!=0)
     {
         _currentJoueur=player;
         _ListAction=_currentJoueur->GetListAction();
         _ListValeur=_currentJoueur->GetListValeur();
         _NbSet=_currentJoueur->GetNbSet();
+         Initialisation();
         InitJoueur();
     }
     else
@@ -20,14 +22,14 @@ TwStat::TwStat(Joueur *player,Equipe* team, QWidget *parent) :
         _ListAction=_currentTeam->GetListAction();
         _ListValeur=_currentTeam->GetListValeur();
         _NbSet=_currentTeam->GetNbSet();
-
+        Initialisation();
         InitEquipe();
 
     }
 
 
 
-    Initialisation();
+
     Connection();
 
 }
