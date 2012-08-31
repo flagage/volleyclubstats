@@ -111,16 +111,7 @@
           <attribute name="title">
            <string>Efficacité</string>
           </attribute>
-          <layout class="QGridLayout" name="gridLayout_21">
-           <item row="0" column="0">
-            <widget class="QGroupBox" name="groupBox_6">
-             <property name="title">
-              <string>Efficacité</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_13"/>
-            </widget>
-           </item>
-          </layout>
+          <layout class="QGridLayout" name="gridLayout_21"/>
          </widget>
         </widget>
        </item>

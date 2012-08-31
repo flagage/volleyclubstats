@@ -48,6 +48,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "listactionxml.h"
 #include "volleyInit.h"
 #include "listevenement.h"
+#include "framstats.h"
 
 namespace Ui {
     class Ecran;
@@ -133,7 +134,8 @@ private:
     QTimer * _TimerChange;
     QTimer * _TimerScore;
     //StatWidget* myWidget;
-    WidgetTabEff* _WtabEff;
+    QVector <WidgetTabEff*> _VectortabEff;
+    QVector<FramStats*> _VectorTabFram;
     bool _finSet;
     QList<QString> _ListActionModif;
     QStringList _listActionPlus;

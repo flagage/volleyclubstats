@@ -54,7 +54,8 @@ SOURCES += src/tracelog.cpp \
     src/fenetrejoueurstat.cpp \
     src/listevenement.cpp \
     src/fenetremodifevenement.cpp \
-    src/parametrematch.cpp
+    src/parametrematch.cpp \
+    src/framstats.cpp
 
 
 HEADERS  += src/tracelog.h \
@@ -95,7 +96,8 @@ HEADERS  += src/tracelog.h \
     src/fenetrejoueurstat.h \
     src/listevenement.h \
     src/fenetremodifevenement.h \
-    src/parametrematch.h
+    src/parametrematch.h \
+    src/framstats.h
 
 
 FORMS    +=  ui/statwidget.ui \
@@ -118,7 +120,8 @@ FORMS    +=  ui/statwidget.ui \
     ui/lecteurvideo.ui \
     ui/twstatjoueur.ui \
     ui/fenetrejoueurstat.ui \
-    ui/fenetremodifevenement.ui
+    ui/fenetremodifevenement.ui \
+    ui/framstats.ui
 
 
 

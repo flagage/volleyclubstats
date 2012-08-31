@@ -145,6 +145,8 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
         break;
     }
     Match::donneInstance()->setAdvers(ui->lineEdit->text());
+    Match::donneInstance()->GetScore()->set_ScLocal(ui->spinBox_9->value());
+    Match::donneInstance()->GetScore()->set_ScLocal(ui->spinBox_10->value());
     accept();
     }
     else

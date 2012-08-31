@@ -42,6 +42,8 @@ WidgetTabEff::WidgetTabEff(QWidget *parent) :
     ui->setupUi(this);
     if(parent->layout() != 0)
         parent->layout()->addWidget(this);
+
+    _tabElts=0;
 }
 
 WidgetTabEff::~WidgetTabEff()
@@ -56,6 +58,7 @@ void WidgetTabEff::Ouvrir()
 }
 void WidgetTabEff::clean()
 {
+    if(_tabElts!=0)
     delete _tabElts;
 }
 
@@ -67,52 +70,96 @@ void WidgetTabEff::Init()
     _tabElts=new TableEff(ui->groupBox,_listJoueur,_listaction);
 }
 
-void WidgetTabEff::SlotMiseAJour()
+void WidgetTabEff::SlotMiseAJour(bool isSet,int numSet)
 {
+     _tabElts->setSortingEnabled(false);
     for(int k=0;k<_listJoueur.size();k++)
     {
-        Joueur * player=_listJoueur.at(k);
+
+        QTableWidgetItem *item=_tabElts->item(k,1);
+        Joueur * player=PlayerfromNum(item->text());
+
         for(int i=0;i<_listaction.size();i++)
         {
-            QTableWidgetItem *item=_tabElts->item(k+1,i+1);
-            double valeur=player->getStatMatch(i,6);
+            ///Total
+            item=_tabElts->item(k,(i*2)+2);
+            double valeur;
+            if(isSet==false)
+                valeur=player->getStatMatch(i,5);
+            else
+                valeur=player->getStatSet(i,5,numSet);
             QString strValeur;
             strValeur.setNum(valeur,'g',4);
             if(item!=0)
             {
                 item->setText(strValeur);
             }
+            ///Efficacite
+            QTableWidgetItem *itemEff=_tabElts->item(k,(i*2)+3);
+            double valeurEff;
+            if(isSet==false)
+                valeurEff=player->getStatMatch(i,6);
+            else
+                valeurEff=player->getStatSet(i,6,numSet);
+            QString strValeurEff;
+            strValeurEff.setNum(valeurEff,'g',4);
+            if(itemEff!=0)
+            {
+                itemEff->setText(strValeurEff);
+            }
+
+        }
+    }
+    _tabElts->setSortingEnabled(true);
+}
+
+
+Joueur* WidgetTabEff::PlayerfromNum(QString num)
+{
+    for(int k=0;k<_listJoueur.size();k++)
+    {
+
+        if(num.toInt()==_listJoueur.at(k)->get_NumMaillot())
+        {
+            return _listJoueur.at(k);
         }
     }
 }
 
-
 TableEff::TableEff(QWidget * parent,QList <Joueur*> listJoueur,QStringList Listaction)
     :  QTableWidget(parent)
 {
-    this->setColumnCount (Listaction.size()+1);
-    this->setRowCount (listJoueur.size()+1);
-    //this->setSpan (0,1,0,5);
+    this->setColumnCount (Listaction.size()*2+2);
+    this->setRowCount (listJoueur.size());
 
-
-    //this->setHorizontalHeaderItem(0,new QTableWidgetItem(QString( "Attaque" ) ));
-    // this->hideRow (0);
-    this->horizontalHeader ()->hide();
+    this->horizontalHeader ();
     this->verticalHeader ()->hide();
-    /*QTableWidgetItem * item=new QTableWidgetItem(QString( "Attaque"));
-    item->setTextAlignment (Qt::AlignCenter);*/
-    this->setItem (0,0,new QTableWidgetItem(QString( "Joueur")));
-    /*this->setItem (2,0,new QTableWidgetItem(QString( "Match")));
-    }*/
+
+    this->setSortingEnabled(true);
+    this->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+    this->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    this->setHorizontalHeaderItem(0,new QTableWidgetItem(QString( "Joueur")));
+     this->setHorizontalHeaderItem (1,new QTableWidgetItem(QString( "Num")));
+
     /// On remplit la premiere ligne
     for(int i=0;i<Listaction.size();i++)
     {
-        this->setItem (0,i+1,new QTableWidgetItem(QString(Listaction.at(i))));
+        QString strAction=Listaction.at(i).left(3)+" tot";
+        QString strEff=Listaction.at(i).left(3)+" Eff";
+        this->setHorizontalHeaderItem ((i*2)+2,new QTableWidgetItem(strAction));
+        this->setHorizontalHeaderItem((i*2)+3,new QTableWidgetItem(strEff));
     }
     /// On remplit la premiere colonne
     for(int k=0;k<listJoueur.size();k++)
     {
-        this->setItem(k+1,0,new QTableWidgetItem(QString(listJoueur.at(k)->get_Prenom())));
+        this->setItem(k,0,new QTableWidgetItem(QString(listJoueur.at(k)->get_Prenom())));
+        this->item(k,0)->setBackground(QColor(167,167,167));
+        QString numero=QString::number(listJoueur.at(k)->get_NumMaillot());
+        if(numero.size()==1)
+            numero="0"+numero;
+         this->setItem(k,1,new QTableWidgetItem(numero));
+         this->item(k,1)->setBackground(QColor(167,167,167));
     }
 
     /// On remplit le reste
@@ -122,10 +169,44 @@ TableEff::TableEff(QWidget * parent,QList <Joueur*> listJoueur,QStringList Lista
         Joueur * player=listJoueur.at(k);
         for(int i=0;i<Listaction.size();i++)
         {
-            double valeur=player->getStatMatch(i,6);
-            QString strValeur;
-            strValeur.setNum(valeur);
-            this->setItem(k+1,i+1,new QTableWidgetItem(QString(strValeur)));
+            QColor ColorAction;
+            switch (i)
+            {
+            case 0:
+                ColorAction=QColor(255,153,153);
+                break;
+            case 1:
+                ColorAction= QColor(64,224,208);
+                break;
+            case 2:
+                ColorAction=QColor(153,255,153);
+                break;
+            case 3:
+                ColorAction=QColor(204,204,255);
+                break;
+            case 4:
+                ColorAction=QColor(255,102,255);
+                break;
+            case 5:
+                ColorAction=QColor(238,203,173);
+                break;
+
+            default:
+                ColorAction=QColor(Qt::white);
+                break;
+
+            }
+
+            double valeureff=player->getStatMatch(i,6);
+            double valeurtot=player->getStatMatch(i,5);
+            QString strValeureff;
+            strValeureff.setNum(valeureff);
+            QString strValeurtot;
+            strValeurtot.setNum(valeurtot);
+            this->setItem(k,(i*2)+2,new QTableWidgetItem(QString(strValeurtot)));
+            this->item(k,(i*2)+2)->setBackgroundColor(ColorAction);
+            this->setItem(k,(i*2)+3,new QTableWidgetItem(QString(strValeureff)));
+            this->item(k,(i*2)+3)->setBackgroundColor(ColorAction);
         }
     }
 
