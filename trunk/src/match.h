@@ -94,6 +94,7 @@ public:
     QString GetTemps();
 
 
+
     int GetCurentSet();
     void SetNbSet(int i);
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>670</width>
-    <height>454</height>
+    <width>714</width>
+    <height>475</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -110,6 +110,9 @@
       </item>
       <item row="1" column="2">
        <widget class="QSpinBox" name="spinBox_8">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimum">
          <number>2</number>
         </property>
@@ -123,6 +126,9 @@
       </item>
       <item row="1" column="3">
        <widget class="QCheckBox" name="checkBox_11">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Oui</string>
         </property>
@@ -183,6 +189,9 @@
      <layout class="QGridLayout" name="gridLayout_9">
       <item row="4" column="0">
        <widget class="QCheckBox" name="checkBox_10">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Perso</string>
         </property>
@@ -423,6 +432,9 @@
           <property name="text">
            <string>Service</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="0" column="1">
@@ -440,6 +452,9 @@
           <property name="text">
            <string>Réception </string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="1" column="1">
@@ -456,6 +471,9 @@
           </property>
           <property name="text">
            <string>Attaque</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
           <property name="tristate">
            <bool>false</bool>
@@ -523,9 +541,6 @@
   <zorder>groupBox_4</zorder>
   <zorder></zorder>
   <zorder></zorder>
-  <zorder>groupBox</zorder>
-  <zorder>groupBox</zorder>
-  <zorder>groupBox_5</zorder>
  </widget>
  <tabstops>
   <tabstop>checkBox</tabstop>

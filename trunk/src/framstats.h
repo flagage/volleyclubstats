@@ -29,6 +29,7 @@ public:
     ~FramStats();
     void Init();
     void clean();
+    Joueur* PlayerfromNum(QString num);
 
     
 private:
@@ -39,7 +40,7 @@ private:
     int _Action;
 
 public slots:
-    void SlotMiseAJour();
+    void SlotMiseAJour(bool isSet=false,int numSet=0);
 };
 
 #endif // FRAMSTATS_H

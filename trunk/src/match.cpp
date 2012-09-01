@@ -295,13 +295,14 @@ void Match::CreerSet(QString score,QStringList list)
 
 void Match::FinSet()
 {
-    _ParamMatch->SetNumSet(_ParamMatch->GetNumSet()+1);
 
     if(_ParamMatch->GetNumSet()<_ParamMatch->get_NbSet())
     {
         _score->SauvegardeScore();
+        _ParamMatch->SetNumSet(_ParamMatch->GetNumSet()+1);
         this->MiseajourScore();
         this->AddSetToXml();
+
     }
 
 
@@ -814,6 +815,10 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
             _score->set_SetVisiteur(element.attribute("SetVisiteur").toInt());
             _score->set_TmVisiteur(element.attribute("TmVisiteur").toInt());
             _score->set_Service(element.attribute("Service").toInt());
+            QStringList listScore=element.attribute("ListScore").split("_");
+            _score->Set_ListScore(listScore);
+            _ParamMatch->SetNumSet(listScore.size());
+
         }
 
         /// Relecture des stats
@@ -829,7 +834,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
                 }
                 else if(child.toElement().tagName()=="EquipeVisiteur")
                 {
-                     InitStatFromXml(child,1,false);
+                    InitStatFromXml(child,1,false);
                 }
                 else
                 {
@@ -839,7 +844,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
                         InitStatFromXml(child,3,false,0,player);
                     }
                 }
-             child=child.nextSibling();
+                child=child.nextSibling();
             }
         }
         if(element.tagName().contains("StatSet"))
@@ -855,7 +860,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
                 }
                 else if(child.toElement().tagName()=="EquipeVisiteur")
                 {
-                     InitStatFromXml(child,1,true,strSet.toInt());
+                    InitStatFromXml(child,1,true,strSet.toInt());
                 }
                 else
                 {
@@ -865,7 +870,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
                         InitStatFromXml(child,3,true,strSet.toInt(),player);
                     }
                 }
-             child=child.nextSibling();
+                child=child.nextSibling();
             }
         }
         /*if(element.tagName()=="S1")
@@ -1178,7 +1183,7 @@ void Match::MiseAjourStat(Equipe* team,Joueur *player,int Action,bool isSet)
                 child=child.nextSibling();
             }
         }
-         n=n.nextSibling();
+        n=n.nextSibling();
     }
     if (!_fileXmlCurrent.open(QIODevice::WriteOnly))
         return;
@@ -1199,26 +1204,26 @@ void Match::MiseAjourStatTeam( QDomElement f,int Action,Equipe* team,bool isSet)
     while (!GChild.isNull())
     {
 
-                QDomElement h=GChild.toElement();
-                //test=h.tagName();
-                if(h.tagName()==_ParamMatch->get_Action().at(Action))
+        QDomElement h=GChild.toElement();
+        //test=h.tagName();
+        if(h.tagName()==_ParamMatch->get_Action().at(Action))
+        {
+            for(int k=0;k<_ParamMatch->get_Valeur().size();k++)
+            {
+                double valeur;
+                if(isSet==false)
                 {
-                    for(int k=0;k<_ParamMatch->get_Valeur().size();k++)
-                    {
-                        double valeur;
-                        if(isSet==false)
-                        {
-                             valeur=team->getStatMatch(Action,k);
-                        }
-                        else
-                        {
-                            valeur=team->getStatSet(Action,k,_ParamMatch->GetNumSet());
-                        }
-                        QString attValeur=_ParamMatch->get_Valeur().at(k);
-                        QString valuValeur=QString::number(valeur);
-                        h.setAttribute(attValeur,valuValeur);
-                    }
+                    valeur=team->getStatMatch(Action,k);
                 }
+                else
+                {
+                    valeur=team->getStatSet(Action,k,_ParamMatch->GetNumSet());
+                }
+                QString attValeur=_ParamMatch->get_Valeur().at(k);
+                QString valuValeur=QString::number(valeur);
+                h.setAttribute(attValeur,valuValeur);
+            }
+        }
 
         GChild=GChild.nextSibling();
     }
@@ -1230,26 +1235,26 @@ void Match::MiseAjourStatPlayer( QDomElement f,int Action,Joueur* player,bool is
     while (!GChild.isNull())
     {
 
-                QDomElement h=GChild.toElement();
-                //test=h.tagName();
-                if(h.tagName()==_ParamMatch->get_Action().at(Action))
+        QDomElement h=GChild.toElement();
+        //test=h.tagName();
+        if(h.tagName()==_ParamMatch->get_Action().at(Action))
+        {
+            for(int k=0;k<_ParamMatch->get_Valeur().size();k++)
+            {
+                double valeur;
+                if(isSet==false)
                 {
-                    for(int k=0;k<_ParamMatch->get_Valeur().size();k++)
-                    {
-                        double valeur;
-                        if(isSet==false)
-                        {
-                             valeur=player->getStatMatch(Action,k);
-                        }
-                        else
-                        {
-                            valeur=player->getStatSet(Action,k,_ParamMatch->GetNumSet());
-                        }
-                        QString attValeur=_ParamMatch->get_Valeur().at(k);
-                        QString valuValeur=QString::number(valeur);
-                        h.setAttribute(attValeur,valuValeur);
-                    }
+                    valeur=player->getStatMatch(Action,k);
                 }
+                else
+                {
+                    valeur=player->getStatSet(Action,k,_ParamMatch->GetNumSet());
+                }
+                QString attValeur=_ParamMatch->get_Valeur().at(k);
+                QString valuValeur=QString::number(valeur);
+                h.setAttribute(attValeur,valuValeur);
+            }
+        }
 
         GChild=GChild.nextSibling();
     }
@@ -1268,36 +1273,36 @@ void Match::AddJoueurToXml(Joueur * player,bool isSet)
     QDomElement docElem = _doc.documentElement();
     QDomNode n = docElem.firstChild();
     QString  strjoueur=player->get_Prenom()+"_"+QString::number(player->get_NumMaillot());
-     QDomElement placerici;
-     QString strSetMatch;
-     if(isSet==true)
-     {
-         strSetMatch="StatSet"+QString::number(_ParamMatch->GetNumSet());
-     }
-     else
-     {
-         strSetMatch="StatMatch";
-     }
+    QDomElement placerici;
+    QString strSetMatch;
+    if(isSet==true)
+    {
+        strSetMatch="StatSet"+QString::number(_ParamMatch->GetNumSet());
+    }
+    else
+    {
+        strSetMatch="StatMatch";
+    }
     while(!n.isNull())
     {
 
-                 QDomElement e = n.toElement();
+        QDomElement e = n.toElement();
 
-                if(e.tagName()==strSetMatch)
+        if(e.tagName()==strSetMatch)
+        {
+            placerici=e;
+            //On cherche si le joueur n'est pas deja dans les stats pour pas avoir de doublon
+            QDomNode Gchild=placerici.firstChild();
+            while(!Gchild.isNull())
+            {
+                if(Gchild.toElement().tagName()==strjoueur)
                 {
-                    placerici=e;
-                    //On cherche si le joueur n'est pas deja dans les stats pour pas avoir de doublon
-                    QDomNode Gchild=placerici.firstChild();
-                    while(!Gchild.isNull())
-                    {
-                          if(Gchild.toElement().tagName()==strjoueur)
-                          {
-                              return;
-                          }
-                        Gchild=Gchild.nextSibling();
-                    }
-
+                    return;
                 }
+                Gchild=Gchild.nextSibling();
+            }
+
+        }
 
 
         n=n.nextSibling();
