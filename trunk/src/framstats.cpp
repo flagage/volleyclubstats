@@ -60,23 +60,36 @@ TableStat::TableStat(QWidget * parent,QList <Joueur*> listJoueur,int action,QStr
     this->setColumnCount (ListValeur.size()+1);
     this->setRowCount (listJoueur.size()+1);
 
-    this->horizontalHeader ()->hide();
+    this->setSortingEnabled(true);
+    this->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+    this->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+ //   this->horizontalHeader ()->hide();
     this->verticalHeader ()->hide();
 
-    this->setItem (0,0,new QTableWidgetItem(QString( "Joueur")));
-
+    this->setHorizontalHeaderItem(0,new QTableWidgetItem(QString( "Joueur")));
+    this->setHorizontalHeaderItem(1,new QTableWidgetItem(QString( "Num")));
     /// On remplit la premiere ligne
     for(int i=0;i<ListValeur.size();i++)
     {
         QString strvaleur=ListValeur.at(i);
 
-        this->setItem (0,i+1,new QTableWidgetItem(strvaleur));
+        this->setHorizontalHeaderItem(i+2,new QTableWidgetItem(strvaleur));
 
     }
     /// On remplit la premiere colonne
     for(int k=0;k<listJoueur.size();k++)
     {
-        this->setItem(k+1,0,new QTableWidgetItem(QString(listJoueur.at(k)->get_Prenom())));
+        this->setItem(k,0,new QTableWidgetItem(QString(listJoueur.at(k)->get_Prenom())));
+        QString num=QString::number(listJoueur.at(k)->get_NumMaillot());
+        if(num.size()==1)
+        {
+            num="0"+num;
+        }
+        this->setItem(k,1,new QTableWidgetItem(num));
+        this->item(k,0)->setBackgroundColor(QColor(167,167,167));
+        this->item(k,1)->setBackgroundColor(QColor(167,167,167));
     }
 
     /// On remplit le reste
@@ -90,7 +103,7 @@ TableStat::TableStat(QWidget * parent,QList <Joueur*> listJoueur,int action,QStr
             QString strValeur;
             strValeur.setNum(valeur);
 
-            this->setItem(k+1,i+1,new QTableWidgetItem(QString(strValeur)));
+            this->setItem(k,i+2,new QTableWidgetItem(QString(strValeur)));
 
         }
     }

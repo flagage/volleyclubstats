@@ -414,10 +414,11 @@ void Ecran::InitIhmMatch()
 
     /// Initialisation efficacite
     QTabWidget* tabWidget = new QTabWidget(ui->tabWidget->widget(1));
+    QString NomOnglet;
     for(int i=0;i<Match::donneInstance()->GetParametreMatch()->get_NbSet()+1;i++)
      {
          QWidget* tabelement=new QWidget();
-         QString NomOnglet;
+
          if(i==0)
          {
              NomOnglet="Match";
@@ -447,7 +448,15 @@ void Ecran::InitIhmMatch()
          for(int i=0;i<Match::donneInstance()->GetParametreMatch()->get_NbSet()+1;i++)
          {
              QWidget* tabelement=new QWidget();
-             tabWidget->addTab(tabelement,QString("test"));
+             if(i==0)
+             {
+                 NomOnglet="Match";
+             }
+             else
+             {
+                 NomOnglet="Set n°"+QString::number(i);
+             }
+             tabWidget->addTab(tabelement,NomOnglet);
               _VectorTabFram.append(new FramStats(a,Match::donneInstance()->getTeam()->GetListeJoueur(),tabelement));
          }
 
@@ -1431,7 +1440,10 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
         }
         else if(i>1)
         {
-           _VectorTabFram.at(i-2)->SlotMiseAJour();
+            for(int Ac=0;Ac<Match::donneInstance()->GetParametreMatch()->get_Action().size();Ac++)
+            {
+                _VectorTabFram.at((Ac*5)+i-2)->SlotMiseAJour();
+            }
 
         }
 
@@ -1958,7 +1970,7 @@ void Ecran::UpdateTabVue(int tab)
         _VectortabEff.at(numSet)->Init();
         break;
     default:
-        FramStats *currentfram=_VectorTabFram.at(tab-2);
+        FramStats *currentfram=_VectorTabFram.at((tab-2*6));
         currentfram->clean();
         currentfram->Init();
         QPalette Palette;
