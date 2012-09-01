@@ -37,7 +37,7 @@ TwStat::TwStat(Joueur *player,Equipe* team, QWidget *parent) :
 
 void TwStat::Connection()
 {
-    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Slot_fermer()));
+    //connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(Slot_fermer()));
     // connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(Slot_fermer()));
 }
 void TwStat::Initialisation()
@@ -62,7 +62,7 @@ void TwStat::Initialisation()
 void TwStat::InitEquipe()
 {
 
-    ui->pushButton->setText(_currentTeam->GetNom()+"_Fermer");
+    //ui->pushButton->setText(_currentTeam->GetNom()+"_Fermer");
     for (int i=0;i<_currentTeam->GetListAction().size();i++)
     {
         for (int j=0;j<_currentTeam->GetListValeur().size();j++)
@@ -95,7 +95,7 @@ void TwStat::InitEquipe()
 void TwStat::InitJoueur()
 {
 
-    ui->pushButton->setText(_currentJoueur->get_Prenom()+"_"+QString::number(_currentJoueur->get_NumMaillot())+"_Fermer");
+    //ui->pushButton->setText(_currentJoueur->get_Prenom()+"_"+QString::number(_currentJoueur->get_NumMaillot())+"_Fermer");
     for (int i=0;i<_currentJoueur->GetListAction().size();i++)
     {
         for (int j=0;j<_currentJoueur->GetListValeur().size();j++)
