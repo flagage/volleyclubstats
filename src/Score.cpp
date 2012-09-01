@@ -20,32 +20,32 @@ Score::~Score()
 
 void Score::set_Service(int value)
 {
-  _Service = value;
+    _Service = value;
 }
 
 void Score::set_TmVisiteur(int value)
 {
-  _TmVisiteur = value;
+    _TmVisiteur = value;
 }
 
 void Score::set_TmLocal(int value)
 {
-  _TmLocal = value;
+    _TmLocal = value;
 }
 
 void Score::set_SetVisiteur(int value)
 {
-  _SetVisiteur = value;
+    _SetVisiteur = value;
 }
 
 void Score::set_SetLocal(int value)
 {
-  _SetLocal = value;
+    _SetLocal = value;
 }
 
 void Score::set_ScVisiteur(int value)
 {
-  _ScVisiteur = value;
+    _ScVisiteur = value;
 }
 
 void Score::set_ScLocal(int value)
@@ -106,4 +106,9 @@ void Score::SauvegardeScore()
 QStringList Score::ListdesScore()
 {
     return _ListScore;
+}
+
+void Score::Set_ListScore(QStringList list)
+{
+    _ListScore=list;
 }

@@ -338,7 +338,6 @@ void Ecran::InitIhmMatch()
     menupoint->addAction("-1");
     ui->pBScore->setMenu(menupoint);
     connect(menupoint,SIGNAL(triggered(QAction *)),this,SLOT(SlotMenupoint1(QAction*)));
-    ui->pBScore_2->setText("0");
     QMenu * menupoint2=new QMenu(this);
     menupoint2->addAction("+1");
     menupoint2->addAction("-1");
@@ -390,8 +389,8 @@ void Ecran::InitIhmMatch()
 
     ui->label_2->setText(advs);
     ui->label->setText(team);
-    ui->pBScore->setText("0");
-
+    ui->pBScore->setText(QString::number(MatchEncour->GetScore()->get_ScLocal()));
+    ui->pBScore_2->setText(QString::number(MatchEncour->GetScore()->get_ScVisiteur()));
     ui->pBSet->setText("0");
     ui->pBSet_2->setText("0");
     ui->comboBox->setEnabled(false);
@@ -431,6 +430,7 @@ void Ecran::InitIhmMatch()
          _VectortabEff.append(new WidgetTabEff(tabelement));
      }
     ui->gridLayout_21->addWidget(tabWidget, 0, 0, 1, 1);
+
     /// initialisation tabAction
     for(int a=0;a<Match::donneInstance()->GetListAction().size();a++)
     {
@@ -485,6 +485,7 @@ void Ecran::InitialisationMatchFromXML()
    // this->JoueurAPlacer();
 
     InitScore();
+
     LineEdit2->setFocus();
     this->LineEdit2->setCursorPosition(LineEdit2->text().size());
     ui->comboBox->setEnabled(true);
@@ -1222,7 +1223,7 @@ void Ecran::FinSet()
 {
 
     Match::donneInstance()->FinSet();
-
+    _TimerScore->start(10);
 }
 
 void Ecran::FinMatch()
@@ -1433,17 +1434,20 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
         this->_ListEvent->addItem(MsgEvent);
         //ui->listAction->addItem (MsgAction);
         int i=ui->tabWidget->currentIndex();
+        int numSet=Match::donneInstance()->GetParametreMatch()->GetNumSet();
         if(i==1)
         {
-               this->_VectortabEff.at(0)->SlotMiseAJour();
-            this->_VectortabEff.at(1)->SlotMiseAJour(true,1);
+            this->_VectortabEff.at(0)->SlotMiseAJour();
+            this->_VectortabEff.at(1)->SlotMiseAJour(true,numSet);
         }
         else if(i>1)
         {
-            for(int Ac=0;Ac<Match::donneInstance()->GetParametreMatch()->get_Action().size();Ac++)
-            {
-                _VectorTabFram.at((Ac*5)+i-2)->SlotMiseAJour();
-            }
+
+                int num=(i-2)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
+                int numAcSet=num+numSet;
+                _VectorTabFram.at(num)->SlotMiseAJour();
+                _VectorTabFram.at(numAcSet)->SlotMiseAJour(true,numSet);
+
 
         }
 
@@ -1915,10 +1919,10 @@ void Ecran::closeEvent(QCloseEvent * event )
     if(Match::GetInstance ()!=0)
     {
         //_trace->SetTrace(tr("Fin Match"));
-        QString  file=Match::donneInstance ()->GetFichierXml();
-        Match::donneInstance ()->FinSet ();
-        Match::donneInstance ()->Enregistrer ();
-        Match::donneInstance ()->EnregistrerXMl ();
+       // QString  file=Match::donneInstance ()->GetFichierXml();
+       // Match::donneInstance ()->FinSet ();
+       // Match::donneInstance ()->Enregistrer ();
+       // Match::donneInstance ()->EnregistrerXMl ();
     }
 }
 
@@ -1970,20 +1974,15 @@ void Ecran::UpdateTabVue(int tab)
         _VectortabEff.at(numSet)->Init();
         break;
     default:
-        FramStats *currentfram=_VectorTabFram.at((tab-2*6));
+        int num=(tab-2)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
+        int numAcSet=num+numSet;
+        FramStats *currentfram=_VectorTabFram.at(num);
         currentfram->clean();
         currentfram->Init();
-        QPalette Palette;
-        Palette=ui->tabWidget->currentWidget()->palette();
-        Palette.setColor(QPalette::Base,QColor(255,153,153));
-        currentfram->setPalette(Palette);
-       // ui->tabWidget->setPalette(Palette);
-        //myWidget->clean();
-       // this->myWidget->SetEquipe (Match::donneInstance()->getTeam());
-       // this->myWidget->Initialisation ();
-       // this->myWidget->InitListAction(_listAction);
-        //FramStats *currentfram=new FramStats(0,Match::donneInstance()->getTeam()->GetListeJoueur(),ui->tabWidget->currentWidget());
-        currentfram->SlotMiseAJour();
+        FramStats *currentframSet=_VectorTabFram.at(numAcSet);
+        currentframSet->clean();
+        currentframSet->Init();
+
         break;
     }
 }

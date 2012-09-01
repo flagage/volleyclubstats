@@ -57,6 +57,7 @@ public:
     void SauvegardeScore();
     QStringList ListdesScore();
 
+    void Set_ListScore(QStringList list);
 
     Score();
 

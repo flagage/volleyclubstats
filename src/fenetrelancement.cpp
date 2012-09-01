@@ -95,7 +95,19 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
     param->set_TypeDeMatch(ui->comboBox_2->currentText());
     ///list des actions a prendre en compte
     QStringList actionSelection;
-    actionSelection<<tr("Service")<<tr("Récéption");
+
+    if(ui->checkBox->isChecked())
+    {
+        actionSelection<<tr("Service");
+    }
+    if(ui->checkBox_2->isChecked())
+    {
+          actionSelection<<tr("Récéption");
+    }
+    if(ui->checkBox_3->isChecked())
+    {
+           actionSelection<<tr("Attaque");
+    }
     if(ui->checkBox_4->isChecked())
         actionSelection <<tr("Contre");
     if(ui->checkBox_5->isChecked())
@@ -103,7 +115,7 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
     if(ui->checkBox_6->isChecked())
         actionSelection <<tr("Passe");
 
-     actionSelection<<tr("Attaque");
+
     param->set_Action(actionSelection);
 
     QStringList ValeurSelection;
@@ -146,7 +158,7 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
     }
     Match::donneInstance()->setAdvers(ui->lineEdit->text());
     Match::donneInstance()->GetScore()->set_ScLocal(ui->spinBox_9->value());
-    Match::donneInstance()->GetScore()->set_ScLocal(ui->spinBox_10->value());
+    Match::donneInstance()->GetScore()->set_ScVisiteur(ui->spinBox_10->value());
     accept();
     }
     else
