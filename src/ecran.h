@@ -69,14 +69,12 @@ public:
 
     void InitialisationIhm();
     void Connexion();
-    //void Initialisation();
-    //void InitialisationError();
     void InitialisationMatch();
     void InitialisationMatchFromXML();
     void InitIhmMatch();
 
 
-    void ChercherPasseur();
+    QString ChercherPasseur();
     void Actionpasse();
     /// Sauvegarde
     void EnregistrerXML();
@@ -84,8 +82,6 @@ public:
 
     QList <Equipe*> GetListeEquipe();
     void SetListeEquipe(QList <Equipe*> list);
-    QStringList* _listBanc;
-    QStringList* _listPosition;
     QPushButton* ChangeBouton;
     Equipe RechercheEquipe(QString nom);
     void AddEquipe(Equipe* team);
@@ -117,11 +113,12 @@ private:
     Ui::Ecran *ui;
     VCSLineEdit *LineEdit2;
     QList <Equipe*> _ListeEquipe;
+    QList < BouttonJoueur*> _ListBanc;
     bool _Bchangement;
     bool _isMatchEnCour;
     bool _flagsup;
     bool _PointForUs;
-    bool _Istactile;
+    bool _flagService;
     TraceLog* _trace;
     ListActionXml * _TraceListAction;
     int _position;
@@ -176,15 +173,10 @@ public slots:
     void slot_initChangement();
     void slot_score();
     void InitScore();
-    void Slot_Scoreplus(int position);
     void Slot_SuppAction();
     void Slot_ModifAction();
     void SlotMenuEquipe(QAction *action);
-    //void Slot_ActionMM();
-    //void Slot_ActionM();
-    //void Slot_Action0();
-    //void Slot_ActionP();
-    //void Slot_ActionPP();
+
 
     void Slot_PplusL();
     void Slot_PplusA();
@@ -214,9 +206,12 @@ public slots:
     void slot_addEvent(int );
     void slot_ModifEvent(int);
     void slot_suppEvent(int);
+    void AjouterEvent(int index ,QString text);
+    StatValeur GetStatValeur(QString valu);
 
+    void MiseAjourtab(int i);
 signals:
-    void ScorePlus(int);
+
     void ScoreMoins(int);
     void SignalAction(int);
     void Changement(QPushButton *button);

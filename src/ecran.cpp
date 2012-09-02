@@ -45,7 +45,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "lecteurvideo.h"
 #include "fenetrejoueurstat.h"
 #include "fenetremodifevenement.h"
-
+#include "fenetrefermeture.h"
 
 
 Ecran::Ecran(QWidget *parent) :
@@ -58,14 +58,12 @@ Ecran::Ecran(QWidget *parent) :
     Connexion();
     /// lecture du fichier contenant le nom des equipes
     this->RestaurerXML();
+    this->_PlacementJoueur=0;
 }
 
 Ecran::~Ecran()
 {
-    delete LineEdit2;
-    delete _PlacementJoueur;
-    //delete myWidget;
-    //delete _WtabEff;
+
 }
 
 void Ecran::InitialisationIhm()
@@ -131,7 +129,7 @@ void Ecran::Connexion()
     connect(this->LineEdit2,SIGNAL(Contre()),this,SLOT(Slot_posContre()));
     connect(this->LineEdit2,SIGNAL(Passe()),this,SLOT(Slot_posPasse()));
     connect(this->LineEdit2,SIGNAL(ComplementAction()),this,SLOT(Slot_ComplAction()));
-    connect(ui->menuFichier, SIGNAL(triggered(QAction *)), this, SLOT(AffSession(QAction *)));
+    // connect(ui->menuFichier, SIGNAL(triggered(QAction *)), this, SLOT(AffSession(QAction *)));
     connect(ui->menuMatch,SIGNAL(triggered(QAction*)),this,SLOT(AffSession(QAction*)));
     connect(ui->menuFenetre, SIGNAL(triggered(QAction *)), this, SLOT(Slot_Fenetre(QAction *)));
     connect(ui->menuEquipe,SIGNAL(triggered(QAction*)),this,SLOT(SlotMenuEquipe(QAction *)));
@@ -141,7 +139,7 @@ void Ecran::Connexion()
     connect (ui->pBRotationPlus,SIGNAL(clicked()),this,SLOT(slot_rotationP()));
     connect (ui->pBRotationMoins,SIGNAL(clicked()),this,SLOT(slot_rotationM()));
 
-    connect(this,SIGNAL(ScorePlus(int)),this,SLOT(Slot_Scoreplus(int)));
+
 
     connect(ui->tabWidget,SIGNAL(currentChanged(int)),this,SLOT(UpdateTabVue(int)));
 
@@ -149,7 +147,7 @@ void Ecran::Connexion()
 }
 
 
-    /*
+/*
     _ValeurInitial=InitValeur::donneInstance();
     _ListActionInit=InitAction::donneInstance();
     _position=0;
@@ -168,7 +166,7 @@ void Ecran::Connexion()
 
     /*QDesktopWidget *desktop=QApplication::desktop ();
     QRect size=desktop->screenGeometry ();*/
-    /*this->resize(1000,500);
+/*this->resize(1000,500);
     this->move(0,0);
 
     _PlacementJoueur=new KeyJoueur(ui->label_4,7,true);
@@ -257,7 +255,7 @@ void Ecran::Connexion()
     ui->Button_P->setVisible(false);
     ui->Button_PP->setVisible(false);
     ui->tabWidget->setVisible(false);*/
-    /*ui->label_4->setPixmap (QPixmap("Image/new_terrain.png"));
+/*ui->label_4->setPixmap (QPixmap("Image/new_terrain.png"));
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
 
 
@@ -351,7 +349,7 @@ void Ecran::InitIhmMatch()
 
 
     /// Placement des joueurs
-   int nbjoueur= Match::donneInstance()->GetParametreMatch()->get_TotJoueur();
+    int nbjoueur= Match::donneInstance()->GetParametreMatch()->get_TotJoueur();
     _PlacementJoueur=new KeyJoueur(ui->label_4,nbjoueur,true);
     QHBoxLayout *layout=new QHBoxLayout();
     layout->addWidget (_PlacementJoueur);
@@ -415,20 +413,20 @@ void Ecran::InitIhmMatch()
     QTabWidget* tabWidget = new QTabWidget(ui->tabWidget->widget(1));
     QString NomOnglet;
     for(int i=0;i<Match::donneInstance()->GetParametreMatch()->get_NbSet()+1;i++)
-     {
-         QWidget* tabelement=new QWidget();
+    {
+        QWidget* tabelement=new QWidget();
 
-         if(i==0)
-         {
-             NomOnglet="Match";
-         }
-         else
-         {
-             NomOnglet="Set n°"+QString::number(i);
-         }
-         tabWidget->addTab(tabelement,NomOnglet);
-         _VectortabEff.append(new WidgetTabEff(tabelement));
-     }
+        if(i==0)
+        {
+            NomOnglet="Match";
+        }
+        else
+        {
+            NomOnglet="Set n°"+QString::number(i);
+        }
+        tabWidget->addTab(tabelement,NomOnglet);
+        _VectortabEff.append(new WidgetTabEff(tabelement));
+    }
     ui->gridLayout_21->addWidget(tabWidget, 0, 0, 1, 1);
 
     /// initialisation tabAction
@@ -444,27 +442,27 @@ void Ecran::InitIhmMatch()
         ui->tabWidget->addTab(CreerNouveauOnglet,strlabel);
 
         QTabWidget* tabWidget = new QTabWidget(ui->tabWidget->widget(a+2));
-         tabWidget->setObjectName(QString::fromUtf8("tabWidget_2"));
-         for(int i=0;i<Match::donneInstance()->GetParametreMatch()->get_NbSet()+1;i++)
-         {
-             QWidget* tabelement=new QWidget();
-             if(i==0)
-             {
-                 NomOnglet="Match";
-             }
-             else
-             {
-                 NomOnglet="Set n°"+QString::number(i);
-             }
-             tabWidget->addTab(tabelement,NomOnglet);
-              _VectorTabFram.append(new FramStats(a,Match::donneInstance()->getTeam()->GetListeJoueur(),tabelement));
-         }
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget_2"));
+        for(int i=0;i<Match::donneInstance()->GetParametreMatch()->get_NbSet()+1;i++)
+        {
+            QWidget* tabelement=new QWidget();
+            if(i==0)
+            {
+                NomOnglet="Match";
+            }
+            else
+            {
+                NomOnglet="Set n°"+QString::number(i);
+            }
+            tabWidget->addTab(tabelement,NomOnglet);
+            _VectorTabFram.append(new FramStats(a,Match::donneInstance()->getTeam()->GetListeJoueur(),tabelement));
+        }
 
-         layout->addWidget(tabWidget, 0, 0, 1, 1);
+        layout->addWidget(tabWidget, 0, 0, 1, 1);
 
-         //CreerNouveauOnglet->
+        //CreerNouveauOnglet->
 
-       //ui->tabWidget_2
+        //ui->tabWidget_2
     }
 
 
@@ -482,7 +480,7 @@ void Ecran::InitialisationMatchFromXML()
     Match * MatchEncour=Match::donneInstance();
     this->_PlacementJoueur->Placement(MatchEncour->GetListJoueurTerr());
     //this->JoueurBanc();
-   // this->JoueurAPlacer();
+    // this->JoueurAPlacer();
 
     InitScore();
 
@@ -491,6 +489,28 @@ void Ecran::InitialisationMatchFromXML()
     ui->comboBox->setEnabled(true);
     LineEdit2->setEnabled(true);
     this->_isMatchEnCour=true;
+
+    ///Mise a jour des tableau de stat
+
+    for(int i=1;i<Match::donneInstance()->GetParametreMatch()->GetNumSet();i++)
+    {
+        _VectortabEff.at(i)->clean();
+        _VectortabEff.at(i)->Init();
+        _VectortabEff.at(i)->SlotMiseAJour(true,i);
+        for(int k=0;k<Match::donneInstance()->GetParametreMatch()->get_Action().size();k++)
+        {
+            int ActionSet=i+k*(Match::donneInstance()->GetParametreMatch()->GetNumSet()+1);
+            _VectorTabFram.at(ActionSet)->clean();
+            _VectorTabFram.at(ActionSet)->Init();
+            _VectorTabFram.at(ActionSet)->SlotMiseAJour(true,i);
+        }
+
+    }
+    /// Initialisation de la liste des evenmenet
+    for(int i=0;i<Match::donneInstance()->GetListEvenement().size();i++)
+    {
+        this->_ListEvent->addItem(Match::donneInstance()->GetListEvenement().at(i));
+    }
     Slot_start();
 
 }
@@ -500,14 +520,14 @@ void Ecran::InitialisationMatch()
 
 
 
-//    _TimerScore->start(10);
+    //    _TimerScore->start(10);
 
 
 
 
     InitIhmMatch();
 
- Match * MatchEncour=Match::donneInstance();
+    Match * MatchEncour=Match::donneInstance();
     QStringList joueurname;
 
     this->_PlacementJoueur->InitListJoueur(MatchEncour->GetListJoueur());
@@ -577,25 +597,28 @@ void Ecran::slot_score()
     this->_TimerScore->start(50);
     int diff=abs(score->get_SetLocal()-score->get_ScVisiteur());
     int scoreMax=Match::donneInstance()->GetParametreMatch()->get_ScoreMax();
-    if((score->get_ScLocal()>=scoreMax && diff>=2)
-            ||((score->get_ScVisiteur()>=scoreMax)
-               && (diff>=2))
-            &&(_finSet==false))
+    if((_finSet==false))
     {
-        this->_TimerScore->stop();
-
-        int reponse=QMessageBox::question(this,tr("Information"),tr("Fin de set"),QMessageBox::Yes,QMessageBox::No);
-        if(reponse==QMessageBox::Yes)
+        if((score->get_ScLocal()>=scoreMax && diff>=2)
+                ||((score->get_ScVisiteur()>=scoreMax)&& (diff>=2))
+                )
         {
+            this->_TimerScore->stop();
 
-            //_finSet=true;
-            this->FinSet();
+            int reponse=QMessageBox::question(this,tr("Information"),tr("Fin de set"),QMessageBox::Yes,QMessageBox::No);
+            if(reponse==QMessageBox::Yes)
+            {
 
+                //_finSet=true;
+                this->FinSet();
+
+            }
+            else
+            {
+                this->_TimerScore->start(10);
+                _finSet=true;
+            }
         }
-        else
-        {
-        }
-
     }
 
 }
@@ -615,59 +638,59 @@ void Ecran::Slot_start()
 {
 
 
-        Match::donneInstance()->SetJoueurTerr(_PlacementJoueur->GetJoueurTerrain());
-        Match::donneInstance()->setStart(true);
-        this->JoueurBanc();
-        ui->label_4-> setPixmap (QPixmap("Image/new_terrain.png"));
-        ui->frame_3->setVisible(true);
-        ui->groupBox_4->setVisible(false);
+    Match::donneInstance()->SetJoueurTerr(_PlacementJoueur->GetJoueurTerrain());
+    Match::donneInstance()->setStart(true);
+    this->JoueurBanc();
+    ui->label_4-> setPixmap (QPixmap("Image/new_terrain.png"));
+    ui->frame_3->setVisible(true);
+    ui->groupBox_4->setVisible(false);
 
-        LineEdit2->setFocus();
-        this->LineEdit2->setCursorPosition(LineEdit2->text().size());
-        ui->comboBox->setEnabled(true);
-        LineEdit2->setEnabled(true);
-        //ui->groupBox_5->setVisible (true);
-        ui->label_6->setVisible(false);
-        ui->label_7->setVisible(false);
-        ui->label_8->setVisible(false);
-        ui->label_9->setVisible(false);
+    LineEdit2->setFocus();
+    this->LineEdit2->setCursorPosition(LineEdit2->text().size());
+    ui->comboBox->setEnabled(true);
+    LineEdit2->setEnabled(true);
+    //ui->groupBox_5->setVisible (true);
+    ui->label_6->setVisible(false);
+    ui->label_7->setVisible(false);
+    ui->label_8->setVisible(false);
+    ui->label_9->setVisible(false);
 
-        //ui->pushButton_FM->setVisible(true);
-        ui->pushButton_TM->setVisible(true);
+    //ui->pushButton_FM->setVisible(true);
+    ui->pushButton_TM->setVisible(true);
 
-        //ui->Start->setVisible (false);
+    //ui->Start->setVisible (false);
 
-        FenetreService * fenetre=new FenetreService(Match::donneInstance()->getTeam()->GetNom(),Match::donneInstance()->getadvs());
-        fenetre->exec();
+    FenetreService * fenetre=new FenetreService(Match::donneInstance()->getTeam()->GetNom(),Match::donneInstance()->getadvs());
+    fenetre->exec();
 
-        if(fenetre->isUS()==true)
-        {
-            ActionService(0);
-            Match::donneInstance()->GetScore()->set_Service(0);
-        }
-        else
-        {
-            ui->comboBox->setCurrentIndex(1);
-            this->LineEdit2->ChangeBackColor(1);
-            Match::donneInstance()->GetScore()->set_Service(1);
-        }
-        this->_PlacementJoueur->Start();
-        ChercherPasseur();
+    if(fenetre->isUS()==true)
+    {
+        ActionService(0);
+        Match::donneInstance()->GetScore()->set_Service(0);
+    }
+    else
+    {
+        ui->comboBox->setCurrentIndex(1);
+        this->LineEdit2->ChangeBackColor(1);
+        Match::donneInstance()->GetScore()->set_Service(1);
+    }
+    this->_PlacementJoueur->Start();
+    ChercherPasseur();
 
-        _isMatchEnCour=true;
-        Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
-        QFile file("Current/Match.xml");
-        if(!file.exists())
-        {
-           Match::donneInstance()->EcritureCurrentMatch();
-        }
+    _isMatchEnCour=true;
+    Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
+    QFile file("Current/Match.xml");
+    if(!file.exists())
+    {
+        Match::donneInstance()->EcritureCurrentMatch();
+    }
 
-        _isMatchEnCour=true;
+    _isMatchEnCour=true;
 
 }
-void Ecran::ChercherPasseur()
+QString  Ecran::ChercherPasseur()
 {
-    this->_PlacementJoueur->ChercherJoueur(this->_currentposition);
+    return this->_PlacementJoueur->ChercherJoueur(this->_currentposition);
 
 
 }
@@ -694,7 +717,7 @@ void Ecran::SlotAddJoueur()
             this->EnregistrerXML();
         }
 
-     }
+    }
 }
 void Ecran::SlotSupJoueur()
 {
@@ -733,8 +756,8 @@ void Ecran::SlotModifJoueur()
 
             int num=listJoueur.at(i)->get_NumMaillot();
             QString prenom=listJoueur.at(i)->get_Prenom();
-           // joueur->Modif(listJoueur.at(i),true);
-              fbjoueur* joueur=new fbjoueur(Match::donneInstance()->getTeam(),listJoueur.at(i),this);
+            // joueur->Modif(listJoueur.at(i),true);
+            fbjoueur* joueur=new fbjoueur(Match::donneInstance()->getTeam(),listJoueur.at(i),this);
             if(joueur->exec()==1)
             {
                 /*if(num!=listJoueur.at(i)->get_NumMaillot() ||
@@ -744,8 +767,8 @@ void Ecran::SlotModifJoueur()
                 }
                 else
                 {*/
-                    QString text=this->_PlacementJoueur->UpdateJoueur(listJoueur.at(i));
-                    boutton->setText(text);
+                QString text=this->_PlacementJoueur->UpdateJoueur(listJoueur.at(i));
+                boutton->setText(text);
                 //}
 
                 break;
@@ -958,27 +981,28 @@ void Ecran::SlotMenuEquipe(QAction *action)
     }
     else if(action->text()=="Exporter Equipe")
     {
-       // QString file=QInputDialog::getText(this)
+        // QString file=QInputDialog::getText(this)
         FenetreVisualisation * choixEquipe=new FenetreVisualisation(this->GetListeEquipe(),1,this);
         if( choixEquipe->exec())
         {
-        Equipe * team=choixEquipe->GetSelectedTeam();
-        QString fichier = QFileDialog::getSaveFileName(this, tr("Enregistrer un fichier"), QString(), "*.csv");
-        team->ExportCVS(fichier);
+            Equipe * team=choixEquipe->GetSelectedTeam();
+            QString fichier = QFileDialog::getSaveFileName(this, tr("Enregistrer un fichier"), QString(), "*.csv");
+            team->ExportCVS(fichier);
         }
     }
     else if(action->text()=="Importer Equipe")
     {
-          FenetreVisualisation * choixEquipe=new FenetreVisualisation(this->GetListeEquipe(),2,this);
-          if(choixEquipe->exec())
-          {
-          Equipe * team=choixEquipe->GetSelectedTeam();
-          this->SetListeEquipe(choixEquipe->GetlistEquipe());
-           QString fichier = QFileDialog::getOpenFileName(this, tr("fichier d'import"), QString(), "*.csv");
-           team->ImportCVS(fichier);
-          }
+        FenetreVisualisation * choixEquipe=new FenetreVisualisation(this->GetListeEquipe(),2,this);
+        if(choixEquipe->exec())
+        {
+            Equipe * team=choixEquipe->GetSelectedTeam();
+            this->SetListeEquipe(choixEquipe->GetlistEquipe());
+            QString fichier = QFileDialog::getOpenFileName(this, tr("fichier d'import"), QString(), "*.csv");
+            team->ImportCVS(fichier);
+        }
 
     }
+
 }
 
 void Ecran::Slot_Fenetre(QAction *action)
@@ -1004,7 +1028,7 @@ void Ecran::Slot_Fenetre(QAction *action)
 void Ecran::AffSession(QAction *action)
 {
 
-  if(action->text() == "Lancer le Match")
+    if(action->text() == "Lancer le Match")
     {
         Match* play=Match::donneInstance();
         QFile file("Current/Match.xml");
@@ -1014,18 +1038,18 @@ void Ecran::AffSession(QAction *action)
         }
         else
         {
-        Match::donneInstance();
-        FenetreLancement* lance=new FenetreLancement(this->_ListeEquipe);
-        if(lance->exec())
-        {
-            InitialisationMatch();
-            ui->actionRevoir_un_match->setEnabled(false);
-            ui->actionGestion_Equipes->setEnabled(false);
-            ui->actionLancer_le_Match->setEnabled(false);
-        }
+            Match::donneInstance();
+            FenetreLancement* lance=new FenetreLancement(this->_ListeEquipe);
+            if(lance->exec())
+            {
+                InitialisationMatch();
+                ui->actionRevoir_un_match->setEnabled(false);
+                ui->actionGestion_Equipes->setEnabled(false);
+                ui->actionLancer_le_Match->setEnabled(false);
+            }
 
+        }
     }
-  }
     else if(action->text ().toUpper ()=="REVOIR UN MATCH")
     {
         _FenetreChoix=new FenetreChoixMatch(this);
@@ -1042,8 +1066,46 @@ void Ecran::AffSession(QAction *action)
 
 
     }
+    else if(action->text()=="Supprimer le match en cours")
+    {
+
+        if(QMessageBox::question(this,tr("Attention"),tr("Toutes les donnees vont etre suprrimer continuer?")))
+        {
+            /// destruction de l'IHM
+            if(this->_PlacementJoueur!=0)
+            {
+                delete this->_PlacementJoueur;
+                for(int i=Match::donneInstance()->GetParametreMatch()->get_Action().size();i>=0;i--)
+                {
+                    delete ui->tabWidget->widget(i+2);
+                }
+                //ui->tabWidget->clear();
+                Match::donneInstance()->libereInstance();
+                this->_listActionMoins.clear();
+                this->_listActionPlus.clear();
+                this->_VectortabEff.clear();
+                this->_VectorTabFram.clear();
+                for(int i=0;i<_ListBanc.size();i++)
+                {
+                    delete _ListBanc.at(i);
+                }
+
+
+                InitialisationIhm();
+                QFile file ("Current/Match.xml");
+                if(file.exists())
+                {
+                    file.remove();
+                }
+
+
+            }
+        }
+
+    }
     else if(action->text()=="Quitter")
     {
+
         this->close();
     }
 
@@ -1427,30 +1489,18 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
         MsgSet=MsgSet.setNum(_currentSet);
         MsgPos=MsgPos.setNum(_currentposition);
         MsgAction=MsgSet+"_"+MsgPos+"_"+numjoueur+"_"+Match::donneInstance()->GetParametreMatch()->get_Action().at(IAction)+"_"+ValeurAction;
-        MsgEvent=numjoueur+" "+Match::donneInstance()->GetParametreMatch()->get_Action().at(IAction)+" "+ValeurAction;
 
-        //_trace->SetTrace(msgTrace);
-        //this->_TraceListAction->SetTrace(MsgAction);
-        this->_ListEvent->addItem(MsgEvent);
-        //ui->listAction->addItem (MsgAction);
-        int i=ui->tabWidget->currentIndex();
+        MsgEvent=numjoueur+" "+Match::donneInstance()->GetParametreMatch()->get_Action().at(IAction).left(3)+" "+ValeurAction+" "+this->ChercherPasseur();
+
+        QDateTime date=QDateTime::currentDateTime();
+        QString identifiant=date.toString("Ihhmmss");
+        QString MsgEventtot=identifiant+" "+MsgEvent;
+        this->_ListEvent->addItem(MsgEventtot);
+        Match::donneInstance()->AjoutEvenement(identifiant,MsgEvent);
+
         int numSet=Match::donneInstance()->GetParametreMatch()->GetNumSet();
-        if(i==1)
-        {
-            this->_VectortabEff.at(0)->SlotMiseAJour();
-            this->_VectortabEff.at(1)->SlotMiseAJour(true,numSet);
-        }
-        else if(i>1)
-        {
 
-                int num=(i-2)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
-                int numAcSet=num+numSet;
-                _VectorTabFram.at(num)->SlotMiseAJour();
-                _VectorTabFram.at(numAcSet)->SlotMiseAJour(true,numSet);
-
-
-        }
-
+        MiseAjourtab(numSet);
         this->_PlacementJoueur->Stat();
     }
 
@@ -1549,7 +1599,9 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
     //Algo suivi du score
 
     if(StatAction== VMM)
+    {
         PointMoins(numjoueur);
+    }
     if(_listActionMoins.contains(listActionMatch.at(IAction)) &&StatAction==VM)
     {
         PointMoins(numjoueur);
@@ -1561,68 +1613,66 @@ void Ecran::SetAction(QString numjoueur,QString ValeurAction)
         this->PointPlus(numjoueur);
     }
 
-    /// Apparition de la deuxieme bar de saisi sur reception + ou ++
-    if(StatAction==VP || StatAction==VPP &&
-            ui->comboBox->currentText()==tr("Attaque"))
 
-    {
-        //ui->lineEdit_PBP->setVisible(false);
-    }
     int num=numjoueur.toInt();
     SignalAction(num);
 }
 
 void Ecran::PointPlus(QString numjoueur)
 {
-
+    Score *scorematch=Match::donneInstance()->GetScore();
     if(numjoueur=="00")
     {
-        //ui->spinBox_2->setValue(ui->spinBox_2->value()+1);
         ui->comboBox->setCurrentIndex(1);
         this->LineEdit2->ChangeBackColor(1);
-        emit ScorePlus(0);
-        _PointForUs=false;
-        _flagsup=true;
-
+        scorematch->set_ScVisiteur(scorematch->get_ScVisiteur()+1);
+        _flagService=false; //l'equipe visiteur prend le service
     }
     else
     {
-        //ui->spinBox->setValue(ui->spinBox->value()+1);
+
         ui->comboBox->setCurrentIndex(0);
         this->LineEdit2->ChangeBackColor(0);
-        emit ScorePlus(1);
-        _flagsup=true;
-        _PointForUs=true;
-
+        scorematch->set_ScLocal(scorematch->get_ScLocal()+1);
+        if(_flagService==false) //l'equipe local prend le service donc rotation
+        {
+            Rotation(); //Il y a donc une rotation
+            _flagService=true;
+        }
     }
-    //this->_WtabEff->SlotMiseAJour();
-    //this->myWidget->Resize();
+
+    this->_finSet=false;
     this->AfficherStat();
+    Match::donneInstance()->MiseajourScore();
 }
 
 void Ecran::PointMoins(QString numjoueur)
 {
+    Score *scorematch=Match::donneInstance()->GetScore();
     if(numjoueur=="00")
     {
 
         ui->comboBox->setCurrentIndex(0);
         this->LineEdit2->ChangeBackColor(0);
-        emit ScorePlus(1);
-        _PointForUs=true;
-        Match::donneInstance()->addFaute(true);
-        Match::donneInstance()->addPoint();
+        scorematch->set_ScLocal(scorematch->get_ScLocal()+1);
+        if(_flagService==false) // l'equipe local prend le service
+        {
+            Rotation();
+            _flagService=true;
+        }
     }
     else
     {
         ui->comboBox->setCurrentIndex(1);
         this->LineEdit2->ChangeBackColor(1);
-        emit ScorePlus(0);
-        _PointForUs=false;
-        Match::donneInstance()->addFaute();
-        Match::donneInstance()->addPoint(true);
+        scorematch->set_ScVisiteur(scorematch->get_ScVisiteur()+1);
+        _flagService=false; // l'equipe local perd le service
+
     }
-    //this->myWidget->Resize();
-    //this->AfficherStat();
+
+    Match::donneInstance()->MiseajourScore();
+    this->AfficherStat();
+    this->_finSet=false;
 }
 
 void Ecran::ActionService(int position)
@@ -1699,43 +1749,7 @@ void Ecran::dropEvent(QDropEvent* event)
 }
 
 
-void Ecran::Slot_Scoreplus(int position)
-{
 
-    if(position!=0)
-    {
-
-        Match::donneInstance()->GetScore()->set_ScLocal(Match::donneInstance()->GetScore()->get_ScLocal()+1);
-
-        this->_flagsup=true;
-        this->ActionService (0);
-
-    }
-    else
-    {
-
-        Match::donneInstance()->GetScore()->set_ScVisiteur(Match::donneInstance()->GetScore()->get_ScVisiteur()+1);
-        ui->comboBox->setCurrentIndex(1);
-        this->LineEdit2->ChangeBackColor(1);
-        this->_flagsup=true;
-    }
-
-    QString msgTrace;
-    int score1=Match::donneInstance()->GetScore()->get_ScLocal();
-    int score2=Match::donneInstance()->GetScore()->get_ScVisiteur();
-    QString Strscore1,Strscore2;
-    Strscore1.setNum(score1);
-    Strscore2.setNum(score2);
-
-    msgTrace=" Score:"+Strscore1+"-"+Strscore2;
-    //_trace->SetTrace(msgTrace,false);
-    Match::donneInstance()->MiseajourScore();
-}
-
-void Ecran::SetTactile (bool valeur)
-{
-    this->_Istactile=valeur;
-}
 
 
 void Ecran::Slot_PplusL()
@@ -1914,16 +1928,14 @@ void Ecran::bouttonLClicked()
 }
 void Ecran::closeEvent(QCloseEvent * event )
 {
-    // this->FinMatch();
-
-    if(Match::GetInstance ()!=0)
+    QFile file("Current/Match.xml");
+    if(file.exists())
     {
-        //_trace->SetTrace(tr("Fin Match"));
-       // QString  file=Match::donneInstance ()->GetFichierXml();
-       // Match::donneInstance ()->FinSet ();
-       // Match::donneInstance ()->Enregistrer ();
-       // Match::donneInstance ()->EnregistrerXMl ();
+        FenetreFermeture* fermeture=new FenetreFermeture(this);
+        fermeture->exec();
     }
+
+
 }
 
 void Ecran::SlotButonRclicked()
@@ -1957,6 +1969,7 @@ void Ecran::AddJoueurBanc(Joueur* joueur)
     connect(pushButton,SIGNAL(AddJoueur()),this,SLOT(SlotAddJoueur()));
     connect(pushButton,SIGNAL(SupJoueur()),this,SLOT(SlotSupJoueur()));
     connect(pushButton,SIGNAL(AfficheStat()),this,SLOT(slot_Stat()));
+    _ListBanc.append(pushButton);
     _joueurBanc++;
 }
 
@@ -1997,7 +2010,7 @@ void Ecran::slot_AfficheStat(QPushButton * boutton)
 {
     if(boutton==0)
     {
-       boutton=(QPushButton*) sender();
+        boutton=(QPushButton*) sender();
     }
     QStringList strlist=boutton->text().split("(");
     if(strlist[0].toInt()==0)
@@ -2007,21 +2020,21 @@ void Ecran::slot_AfficheStat(QPushButton * boutton)
     }
     else
     {
-    strlist=strlist[1].split(")");
-    QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
-    for(int i=0;i<listJoueur.size();i++)
-    {
-
-        if (listJoueur.at(i)->get_Prenom()==strlist[0])
+        strlist=strlist[1].split(")");
+        QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
+        for(int i=0;i<listJoueur.size();i++)
         {
 
-            FenetreJoueurStat* fstat=new FenetreJoueurStat(listJoueur.at(i),0,this);
-            fstat->show();
+            if (listJoueur.at(i)->get_Prenom()==strlist[0])
+            {
+
+                FenetreJoueurStat* fstat=new FenetreJoueurStat(listJoueur.at(i),0,this);
+                fstat->show();
 
 
+            }
         }
     }
-}
 }
 
 void Ecran::SlotMenupoint1(QAction * action)
@@ -2067,7 +2080,7 @@ void Ecran::AfficherStat()
 
     }
     equipe=equipe+"Point "+QString::number(currentM->GetPoint())+" | ";
-     equipe=equipe+"Faute_Adv "+QString::number(currentM->GetFaute(true));
+    equipe=equipe+"Faute_Adv "+QString::number(currentM->GetFaute(true));
     ui->label_11->setText(equipe);
 
     for(int k=0;k<currentT->GetListeJoueur().size();k++)
@@ -2090,7 +2103,7 @@ void Ecran::AfficherStat()
     }
 }
 
-void Ecran::slot_addEvent(int i)
+void Ecran::slot_addEvent(int index)
 {
     QStringList numero;
     QStringList valeur;
@@ -2099,12 +2112,17 @@ void Ecran::slot_addEvent(int i)
         numero.append(QString::number(Match::donneInstance()->GetListJoueur().at(i)->get_NumMaillot()));
     }
     valeur<<"++"<<"+0"<<"00"<<"-0"<<"--";
-    FenetreModifEvenement fenModif(numero,_ListActionInit->GetListAction(),valeur,this);
+    FenetreModifEvenement fenModif(numero,Match::donneInstance()->GetParametreMatch()->get_Action(),valeur,this);
     if(fenModif.exec()==1)
-    _ListEvent->insertItem(i,fenModif.ReturnText());
+    {
+
+        /// on recupere l'identifiant precedent
+        AjouterEvent(index ,fenModif.ReturnText());
+
+    }
 }
 
-void Ecran::slot_ModifEvent(int i)
+void Ecran::slot_ModifEvent(int index)
 {
     QStringList numero;
     QStringList valeur;
@@ -2113,14 +2131,84 @@ void Ecran::slot_ModifEvent(int i)
         numero.append(QString::number(Match::donneInstance()->GetListJoueur().at(i)->get_NumMaillot()));
     }
     valeur<<"++"<<"+0"<<"00"<<"-0"<<"--";
-    FenetreModifEvenement fenModif(numero,_ListActionInit->GetListAction(),valeur,this);
-    fenModif.Modif(this->_ListEvent->item(i)->text());
+    FenetreModifEvenement fenModif(numero,Match::donneInstance()->GetListAction(),valeur,this);
+    QStringList ListText=this->_ListEvent->item(index)->text().split(" ");
+    QString finaltext=ListText[1]+" "+ListText[2]+" "+ListText[3]+" "+ListText[4];
+    fenModif.Modif(finaltext);
     if(fenModif.exec()==1)
-        _ListEvent->item(i)->setText(fenModif.ReturnText());
+    {
+        slot_suppEvent(index);
+        AjouterEvent(index,fenModif.ReturnText());
+    }
+
 }
 void Ecran::slot_suppEvent(int i)
 {
+
+    /// suppression dans le fichier xml
+    QString strElementSupp=_ListEvent->item(i)->text();
+    QStringList listElement=strElementSupp.split(" ");
+    Match::donneInstance()->SuppElement(listElement[0]);
+    Match::donneInstance()->MiseajourScore();
+
+    /// suppresion stat
+    int action=0;
+    for(int i=0;i<Match::donneInstance()->GetParametreMatch()->get_Action().size();i++)
+    {
+        if(Match::donneInstance()->GetParametreMatch()->get_Action().at(i).left(3)==listElement[2])
+        {
+            action=i;
+        }
+    }
+
+    StatValeur StatAction=GetStatValeur(listElement[3]);
+    Match::donneInstance()->SupAction(listElement[1],StatAction,action);
+    MiseAjourtab(Match::donneInstance()->GetParametreMatch()->GetNumSet());
+
+    /// Suppresion du point si point sur l'action
+    Score * pScore=Match::donneInstance()->GetScore();
+    if( StatAction==VMM)
+    {
+        if(listElement[1]=="0")
+        {
+            pScore->set_ScLocal(pScore->get_ScLocal()-1);
+
+        }
+        else
+        {
+            pScore->set_ScVisiteur(pScore->get_ScVisiteur()-1);
+        }
+    }
+
+    if(_listActionMoins.contains(Match::donneInstance()->GetParametreMatch()->get_Action().at(action)) && StatAction==VM)
+    {
+        if(listElement[1]=="0")
+        {
+            pScore->set_ScLocal(pScore->get_ScLocal()-1);
+
+        }
+        else
+        {
+            pScore->set_ScVisiteur(pScore->get_ScVisiteur()-1);
+        }
+    }
+
+    if(_listActionPlus.contains(Match::donneInstance()->GetParametreMatch()->get_Action().at(action))
+            && StatAction==VPP)
+    {
+        if(listElement[1]=="0")
+        {
+            pScore->set_ScVisiteur(pScore->get_ScVisiteur()-1);
+        }
+        else
+        {
+            pScore->set_ScLocal(pScore->get_ScLocal()-1);
+        }
+    }
+
+    /// supression sur la liste
     delete _ListEvent->item(i);
+
 }
 
 void Ecran::InitialisationFromXml()
@@ -2128,4 +2216,121 @@ void Ecran::InitialisationFromXml()
     Match::donneInstance()->GetInstance()->InfoFromXML( this->_ListeEquipe);
 
     //Match::donneInstance()->GetInstance()->InitFichierXml();
+}
+
+void Ecran::MiseAjourtab(int numSet)
+{
+    if(ui->tabWidget->currentIndex()==1)
+    {
+        this->_VectortabEff.at(0)->SlotMiseAJour();
+        this->_VectortabEff.at(numSet)->SlotMiseAJour(true,numSet);
+    }
+    else if(ui->tabWidget->currentIndex()>1)
+    {
+
+        int num=(ui->tabWidget->currentIndex()-2)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
+        int numAcSet=num+numSet;
+        _VectorTabFram.at(num)->SlotMiseAJour();
+        _VectorTabFram.at(numAcSet)->SlotMiseAJour(true,numSet);
+
+
+    }
+}
+
+StatValeur Ecran::GetStatValeur(QString valu)
+{
+    StatValeur StatAction;
+    if(valu== "++")
+    {
+        StatAction=VPP;
+    }
+    else if (valu== "+0")
+    {
+        StatAction=VP;
+    }
+    else if (valu== "00")
+    {
+        StatAction=V0;
+    }
+    else if (valu== "-0")
+    {
+        StatAction=VM;
+    }
+    else if (valu== "--")
+    {
+        StatAction=VMM;
+    }
+
+    return StatAction;
+}
+
+
+void Ecran::AjouterEvent(int index ,QString text)
+{
+
+    QString textPrecedent=_ListEvent->item(index-1)->text();
+    QStringList listidentifiant=textPrecedent.split(" ");
+    int numidentifiant=listidentifiant[0].remove(0,1).toInt()+1;
+    QString identifiant=QString::number(numidentifiant);
+    _ListEvent->insertItem(index,"I"+identifiant+" "+text);
+
+    /// On ajout l'action au stat
+    QStringList Listevent=text.split(" ");
+    int action=0;
+    for(int i=0;i<Match::donneInstance()->GetParametreMatch()->get_Action().size();i++)
+    {
+        if(Match::donneInstance()->GetParametreMatch()->get_Action().at(i).left(3)==Listevent[1])
+        {
+            action=i;
+        }
+    }
+    Match::donneInstance()->AddAction(Listevent[0],0,GetStatValeur(Listevent[2]),action);
+
+
+    /// On ajoute au socre dans le cas de point positif
+    Score * pScore=Match::donneInstance()->GetScore();
+    StatValeur StatAction=GetStatValeur(Listevent[2]);
+    if( StatAction==VMM)
+    {
+        if(Listevent[0]=="0")
+        {
+            pScore->set_ScLocal(pScore->get_ScLocal()+1);
+
+        }
+        else
+        {
+            pScore->set_ScVisiteur(pScore->get_ScVisiteur()+1);
+        }
+    }
+
+    if(_listActionMoins.contains(Match::donneInstance()->GetParametreMatch()->get_Action().at(action)) && StatAction==VM)
+    {
+        if(Listevent[0]=="0")
+        {
+            pScore->set_ScLocal(pScore->get_ScLocal()+1);
+
+        }
+        else
+        {
+            pScore->set_ScVisiteur(pScore->get_ScVisiteur()+1);
+        }
+    }
+
+    if(_listActionPlus.contains(Match::donneInstance()->GetParametreMatch()->get_Action().at(action))
+            && StatAction==VPP)
+    {
+        if(Listevent[0]=="0")
+        {
+            pScore->set_ScVisiteur(pScore->get_ScVisiteur()+1);
+        }
+        else
+        {
+            pScore->set_ScLocal(pScore->get_ScLocal()+1);
+        }
+    }
+    /// Ajout dans le fichier xml
+    QString strElementSupp=_ListEvent->item(index)->text();
+    QStringList listElement=strElementSupp.split(" ");
+    Match::donneInstance()->AjoutEvenement(listElement[0].remove(0,1),listElement[1]+" "+listElement[2]+" "+listElement[3]+" "+listElement[4]);
+    Match::donneInstance()->MiseajourScore();
 }

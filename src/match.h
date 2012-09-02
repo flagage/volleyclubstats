@@ -73,6 +73,7 @@ private:
     QFile _fileXmlCurrent;
     QDomElement _root;
     bool _isStart;
+    QStringList _ListEvenement;
 
 protected:
     Match();
@@ -124,6 +125,7 @@ public:
     QString StatString(QString id);
 
     bool AddAction(QString joueurname,int position, StatValeur valu,int action);
+    bool SupAction(QString joueurname, StatValeur valu,int action);
     QList <Joueur*> GetListJoueur();
 
     /// traitement de la sauvegarde
@@ -160,6 +162,12 @@ public:
    Joueur* RechercheJoueur(QString strjoueur);
    void AddJoueurToXml(Joueur * player,bool isset=false);
    void AddSetToXml();
+
+   void SetListEvenement(QStringList);
+   QStringList GetListEvenement();
+
+   void AjoutEvenement(QString,QString);
+   void SuppElement(QString identifiant);
 
 };
 

@@ -11,7 +11,7 @@ public:
     explicit ListEvenement(QWidget *parent = 0);
     ~ListEvenement();
     void AjouterItem();
-
+    void addItem( QString label);
 private:
   QMenu* _menu;
   //QListWidgetItem* _ItemSelect;

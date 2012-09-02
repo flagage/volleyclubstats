@@ -58,6 +58,7 @@ int _nbjoueurEnPlace;
 
 public:
 explicit KeyJoueur(QWidget *parent = 0,int nbjoueur=0,bool libero=true);
+~KeyJoueur();
 void createLayout(int pos);
 void InitListJoueur(QList <Joueur*> joueur);
 void Initialisation();
