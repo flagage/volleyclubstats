@@ -9,6 +9,9 @@ FenetreModifEvenement::FenetreModifEvenement(QStringList list1,QStringList list2
     ui->comboBox->addItems (list1);
     ui->comboBox_2->addItems (list2);
     ui->comboBox_3->addItems (list3);
+    QStringList listPosition;
+    listPosition<<"P1"<<"P2"<<"P3"<<"P4"<<"P5"<<"P6";
+    ui->comboBox_4->addItems(listPosition);
 }
 
 FenetreModifEvenement::~FenetreModifEvenement()
@@ -43,12 +46,20 @@ void FenetreModifEvenement::Modif(QString message)
             break;
         }
     }
+    for(int i=0;i<ui->comboBox_4->count ();i++)
+    {
+        if (list[3]==ui->comboBox_4->itemText (i))
+        {
+            ui->comboBox_4->setCurrentIndex (i);
+            break;
+        }
+    }
 }
 
 QString FenetreModifEvenement::ReturnText()
 {
-    QString text=ui->comboBox->currentText ()+" "+ui->comboBox_2->currentText ()+" "+
-    ui->comboBox_3->currentText ();
+    QString text=ui->comboBox->currentText ()+" "+ui->comboBox_2->currentText ().left(3)+" "+
+            ui->comboBox_3->currentText ()+ " "+ui->comboBox_4->currentText();
 
     return text;
 }

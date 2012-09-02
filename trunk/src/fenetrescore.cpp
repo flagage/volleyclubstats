@@ -42,7 +42,6 @@ FenetreScore::FenetreScore(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(close()));
-    connect(parent,SIGNAL(ScorePlus(int)),this,SLOT(Slot_Scoreplus()));
     connect(ui->spinBox,SIGNAL(valueChanged(int)),this,SLOT(slot_changeScore(int)));
     connect(ui->spinBox_2,SIGNAL(valueChanged(int)),this,SLOT(slot_changeScore(int)));
     ui->widgetScore->setStyleSheet ("background-color: blue");

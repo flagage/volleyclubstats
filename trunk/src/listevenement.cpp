@@ -59,4 +59,11 @@ void ListEvenement::Slot_Action(QAction * action)
     }
 }
 
+void ListEvenement::addItem( QString label)
+{
+    QStringList Listlabel=label.split(" ");
+    if(Listlabel.size()==5)
+    QListWidget::addItem(Listlabel[1]+" "+Listlabel[2]+" "+Listlabel[3]+" "+Listlabel[4] );
+}
+
 

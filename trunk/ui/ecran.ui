@@ -396,20 +396,9 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFichier">
-    <property name="title">
-     <string>Fichier</string>
-    </property>
-    <addaction name="actionLancer_le_Match"/>
-    <addaction name="separator"/>
-    <addaction name="actionRevoir_un_match"/>
-    <addaction name="separator"/>
-    <addaction name="actionQuitter"/>
-    <addaction name="actionGestion_Club"/>
-   </widget>
    <widget class="QMenu" name="menuFenetre">
     <property name="title">
-     <string>Parametre</string>
+     <string>Fenetre</string>
     </property>
     <addaction name="actionScore"/>
     <addaction name="actionResultat_ffvb"/>
@@ -421,6 +410,9 @@
     </property>
     <addaction name="actionLancer_le_match"/>
     <addaction name="actionRevoir_un_match_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionSupprimer_le_match_en_cours"/>
+    <addaction name="actionQuitter_2"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -431,7 +423,7 @@
    </widget>
    <widget class="QMenu" name="menuEquipe">
     <property name="title">
-     <string>Gestion</string>
+     <string>Equipes</string>
     </property>
     <addaction name="actionGestion_Equipe"/>
     <addaction name="actionGestion_Club_2"/>
@@ -439,11 +431,10 @@
     <addaction name="actionExporter_Equipe"/>
     <addaction name="actionImporter_Equipe"/>
    </widget>
-   <addaction name="menuFichier"/>
    <addaction name="menuMatch"/>
+   <addaction name="menuEquipe"/>
    <addaction name="menuFenetre"/>
    <addaction name="menuAide"/>
-   <addaction name="menuEquipe"/>
   </widget>
   <action name="actionAjouterEquipe">
    <property name="text">
@@ -563,6 +554,16 @@
   <action name="actionGestion_Club_2">
    <property name="text">
     <string>Gestion Club</string>
+   </property>
+  </action>
+  <action name="actionSupprimer_le_match_en_cours">
+   <property name="text">
+    <string>Supprimer le match en cours</string>
+   </property>
+  </action>
+  <action name="actionQuitter_2">
+   <property name="text">
+    <string>Quitter</string>
    </property>
   </action>
  </widget>

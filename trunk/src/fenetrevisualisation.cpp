@@ -61,13 +61,17 @@ void FenetreVisualisation::Initialisation()
     {
        ui->tab->setVisible(false);
        ui->tab->setEnabled(true);
-       ui->tabWidget->setCurrentIndex(1);
+       ui->tabWidget->setCurrentIndex(2);
        ui->tab_2->setVisible(true);
-       ui->tabWidget->setTabText(1,"Exporter");
+       ui->tabWidget->setTabText(2,"Exporter");
        ui->pushButton_Annuler->setVisible(false);
+
        ui->pushAjouter->setVisible(false);
        ui->tabWidget->setTabEnabled(0,false);
        ui->tabWidget->setTabEnabled(1,false);
+
+        ui->pushAjouter->setVisible(true);
+        ui->pushAjouter->setText("exporter");
     }
     else if(_whataction==2)
     {

@@ -93,6 +93,13 @@ _labelPosition->setStyleSheet("color:gray; font-size: 30px;");
 
 
 }
+KeyJoueur::~KeyJoueur()
+{
+    for(int i=0;i<_nbJoueur+1;i++)
+    {
+        delete   buttons[i];
+    }
+}
 
 void KeyJoueur::bouttonRClicked()
 {
@@ -112,7 +119,7 @@ void KeyJoueur::bouttonLClicked()
         nbjoueuraplacer++;
     }
 
-    if(_nbjoueurEnPlace>nbjoueuraplacer && Match::donneInstance()->isStart()==false)
+    if(_nbjoueurEnPlace>=nbjoueuraplacer && Match::donneInstance()->isStart()==false)
     {
         QList<Joueur *> list_terrain=this->GetJoueurTerrain();
         for(int i=0;i<this->_listjoueur.size();i++)
