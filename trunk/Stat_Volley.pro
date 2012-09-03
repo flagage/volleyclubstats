@@ -16,7 +16,6 @@ QT+= phonon
 
 RC_FILE = VolleyClubStat.rc
 SOURCES += src/tracelog.cpp \
-    src/statwidget.cpp \
     src/stat.cpp \
     src/Score.cpp \
     src/match.cpp \
@@ -60,7 +59,6 @@ SOURCES += src/tracelog.cpp \
 
 
 HEADERS  += src/tracelog.h \
-    src/statwidget.h \
     src/stat.h \
     src/Score.h \
     src/match.h \
@@ -102,7 +100,7 @@ HEADERS  += src/tracelog.h \
     src/fenetrefermeture.h
 
 
-FORMS    +=  ui/statwidget.ui \
+FORMS    +=  \
     ui/fenetrevisualisation.ui \
     ui/fenetrestat.ui \
     ui/fenetreservice.ui \

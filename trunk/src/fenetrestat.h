@@ -36,7 +36,6 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include <QDialog>
 #include "Joueur.h"
 #include <QTableWidget>
-#include "statwidget.h"
 #include "match.h"
 
 namespace Ui {
@@ -56,7 +55,6 @@ public:
 
 private:
     Ui::FenetreStat *ui;
-    StatWidget * myWidget;
     Match* newMatch;
 public slots:
    void ok();

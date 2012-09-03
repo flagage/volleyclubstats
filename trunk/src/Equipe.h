@@ -64,7 +64,12 @@ public: //fonction
     /// constructeur
     Equipe();
     Equipe(QString nom);
+    Equipe(Equipe* team);
     ~Equipe();
+
+    /// operateur
+
+    void operator ==(Equipe * team);
 
     void SetDivision(QString div);
     QString GetDivision();
@@ -76,6 +81,7 @@ public: //fonction
     void RestaurerXML(QDomNode noeud);
 
     /// recherche d'un joueur dans l'equipe
+    Joueur* RechercheJoueur(QString strjoueur);
     Joueur* seachjoueur(QString nomJoueur);
     Joueur* seachjoueur(int numjoueur);
 

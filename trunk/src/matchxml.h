@@ -35,31 +35,31 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "QString"
 #include "QDomElement"
 #include "QFile"
-#include "Joueur.h"
+#include "parametrematch.h"
+#include "Score.h"
+#include "Equipe.h"
 #include <QTextStream>
 
 class MatchXml
 {
-public:
-    MatchXml(QStringList listInfo,QList <Joueur*> listJoueur,QStringList,QStringList);
-    void Initialisation();
-    QString Rechercheposte(int post);
-    void SauvegardeAction(Joueur* player,int Action,int valeur);
-    void SauvegardeScore(int Slocal,int Svisiteur);
-    void ChangementDeSet(int numero);
-    void MiseaJourposte();
-    void UpdateListJoueur(QList <Joueur*> listJoueur);
 private:
-    /// liste des joueurs sur le terrain
-    QList <Joueur*> _ListJoueurTer;
-    QStringList _ListInfo;
-    QString _nomFichier;
-    QString _CurrentSet;
+    QFile _fileXmlCurrent;
+    ParametreMatch *_ParamMatch;
+    Score* _score;
+    Equipe* _EquipeLocal;
+    Equipe* _EquipeVisiteur;
+    QStringList* _ListEvenement;
+    QList <QString>* _listPosition;
     QDomDocument _doc;
-    QFile _file;
     QDomElement _root;
-    QStringList _listRatio;
-    QStringList _listAction;
+
+public:
+    MatchXml( ParametreMatch *,Score*,Equipe*,QStringList*,QList <QString>*);
+    void LectureXML();
+    void setEquipe(Equipe *team);
+    void InitStatFromXml(QDomNode child,int TemOrPl,bool isSet,int numset=0,Joueur* player=0);
+    void LectureParametreMatch();
+
 };
 
 #endif // MATCHXML_H

@@ -41,7 +41,6 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "fenetrestat.h"
 #include "fenetrescore.h"
 #include "fenetrechoixmatch.h"
-#include "statwidget.h"
 #include "keyjoueur.h"
 #include "widgettabeff.h"
 #include "vcslineedit.h"
