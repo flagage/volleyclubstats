@@ -40,7 +40,7 @@ FenetreStat::FenetreStat(QWidget *parent) :
         ui(new Ui::FenetreStat)
 {
     ui->setupUi(this);
-    myWidget=new StatWidget(ui->groupBox,parent);
+
     this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
 
     connect(ui->pushButtonOK,SIGNAL(clicked()),this,SLOT(ok()));
@@ -52,8 +52,8 @@ FenetreStat::FenetreStat(QWidget *parent) :
 
 FenetreStat::~FenetreStat()
 {
-    myWidget->clean();
-    delete myWidget;
+
+
     delete ui;
 }
 void FenetreStat::Initialisation(QString chemin)
@@ -96,7 +96,7 @@ void FenetreStat::Initialisation(QString chemin)
 
 void FenetreStat::Ouvrir()//Match * match)
 {
-
+/*
 
     QString Titre;
     Titre="Match du "+newMatch->GetDate ()+"\n";
@@ -112,7 +112,7 @@ void FenetreStat::Ouvrir()//Match * match)
         num=num.setNum (k+1);
         score="Set"+num+" "+newMatch->GetCurentSet (k+1)->ScoreSave ()+"\n";
         score=score+"Temps"+newMatch->GetOldSet (k+1)->GetTempsSet();
-    }*/
+    }
     ui->label_5->setText (score);
     myWidget->SetEquipe (newMatch->getTeam ());
     myWidget->InitListAction(InitAction::donneInstance()->GetListAction());
@@ -137,29 +137,29 @@ void FenetreStat::Ouvrir()//Match * match)
         myWidget->SetStatJoueurSet (newMatch->getTeam ()->GetListeJoueur().at(j),newMatch->GetCurentSet ());
     }
     myWidget->Resize();
-    exec();
+    exec();*/
 }
 
 
 void FenetreStat::ok()
 {
-    myWidget->clean();
+   /* myWidget->clean();
     Match::libereInstance ();
 
-    this->accept ();
+    this->accept ();*/
 }
 void FenetreStat::Fermer()
 {
-    myWidget->clean();
+    /*myWidget->clean();
     Match::libereInstance ();
 
-    this->close ();
+    this->close ();*/
 }
 
 
 void FenetreStat::Imprimer()
 {
-    myWidget->Imprimer();
+    //myWidget->Imprimer();
 }
 
 

@@ -79,6 +79,17 @@ Equipe::Equipe(QString nom)
 {
     _Nom=nom;
 }
+Equipe::Equipe(Equipe *team)
+{
+    _Nom=team->GetNom();
+    _NbSet=team->GetNbSet();
+    _Categorie=team->GetCategorie();
+    _Division=team->GetDivision();
+    _ListeJoueur=team->GetListeJoueur();
+    _ListValeur=team->GetListValeur();
+    _ListAction=team->GetListAction();
+     //_VectorStat=team->Get;
+    }
 
 Equipe::~Equipe()
 {
@@ -136,6 +147,21 @@ void Equipe::supJoueur(Joueur* joue)
         }
     }
 
+}
+
+/// recherche joueur avec la string "premon_numMaillot"
+Joueur* Equipe::RechercheJoueur(QString strjoueur)
+{
+
+    QStringList liststrjoueur=strjoueur.split("_");
+    for(int i=0;i<this->GetListeJoueur().size();i++)
+    {
+        if(this->GetListeJoueur().at(i)->get_NumMaillot()==liststrjoueur.at(1).toInt())
+        {
+            return this->GetListeJoueur().at(i);
+        }
+    }
+    return 0;
 }
 Joueur* Equipe::seachjoueur(QString nomJoueur)
 {
@@ -389,4 +415,15 @@ void Equipe::SetCategorie(QString cat)
 QString Equipe::GetCategorie()
 {
     return _Categorie;
+}
+void Equipe::operator ==(Equipe * team)
+{
+    _Nom=team->GetNom();
+    _NbSet=team->GetNbSet();
+    _Categorie=team->GetCategorie();
+    _Division=team->GetDivision();
+    _ListeJoueur=team->GetListeJoueur();
+    _ListValeur=team->GetListValeur();
+    _ListAction=team->GetListAction();
+
 }

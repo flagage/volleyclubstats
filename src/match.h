@@ -155,7 +155,7 @@ public:
     bool isStart();
     void setStart(bool);
     void InitListTerrainfromPosition();
-    void InitStatFromXml(QDomNode child,int TemOrPl,bool isSet,int numset=0,Joueur* player=0);
+
     Equipe * GetEquipeVisiteur();
    void EcrireStatMatchxml(QDomElement * element);
    void EcrireStatXml(QDomElement * element);
