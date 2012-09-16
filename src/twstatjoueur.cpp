@@ -117,6 +117,29 @@ void TwStat::InitJoueur()
                 double valeur= _currentJoueur->getStatSet(i,j,t);
                 strAffiche=QString::number(valeur);
                 _VectorStatSet.at(t-1)->setItem(i+1,j+1,new QTableWidgetItem(strAffiche));
+                QColor color;
+                switch(i)
+                {
+                case 0:
+                    color.setRgb (255,153,153);
+                    break;
+                case 1:
+                    color.setRgb (64,224,208);
+                    break;
+                case 2:
+                    color.setRgb (153,255,153);
+                    break;
+                case 3:
+                    color.setRgb (204,204,255);
+                    break;
+                case 4:
+                    color.setRgb (255,102,255);
+                    break;
+                case 5:
+                    color.setRgb (238,203,173);
+                    break;
+                }
+                _VectorStatSet.at(t-1)->item(i+1,j+1)->setBackgroundColor(color);
             }
         }
     }
@@ -182,10 +205,7 @@ TableState::TableState(QWidget * parent,QStringList Action,QStringList valeur)
     for(int j=0;j<sizeAction;j++)
     {
         this->setItem(j+1,0,new QTableWidgetItem(QString(ListAction.at(j))));
-    }
-    /*for(int i=0;i<sizeAction;i++)
-    {
-        switch(i)
+        switch(j)
         {
         case 0:
             color.setRgb (255,153,153);
@@ -206,25 +226,9 @@ TableState::TableState(QWidget * parent,QStringList Action,QStringList valeur)
             color.setRgb (238,203,173);
             break;
         }
+        this->item(j+1,0)->setBackgroundColor(color);
+    }
 
-        int col=sizeValeur/2;
-        QString valeurAction=InitAction::donneInstance()->GetElementAction(i);
-        this->setItem (0,(i*sizeValeur)+col,new QTableWidgetItem(valeurAction));
-        for(int k=0;k<sizeValeur;k++)
-        {
-            this->setItem (1,(i*sizeValeur)+k+1,new QTableWidgetItem(InitValeur::donneInstance()->GetElementValeur((k))));
-            QTableWidgetItem * Item;
-            Item=this->item (1,(i*sizeValeur)+k+1);
-            Item->setBackground (color);
-            Item->setToolTip("(Vpp-Vmm)/tot");
-            Item=this->item (0,(i*sizeValeur)+k+1);
-            if(Item!=0)
-                Item->setBackground (color);
-        }
-
-
-
-    }*/
 
     if(parent->layout() != 0)
         parent->layout()->addWidget(this);

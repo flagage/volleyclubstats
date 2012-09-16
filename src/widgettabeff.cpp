@@ -34,6 +34,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "widgettabeff.h"
 #include "ui_widgettabeff.h"
 #include "ecran.h"
+#include "fenetrejoueurstat.h"
 
 WidgetTabEff::WidgetTabEff(QWidget *parent) :
         QWidget(parent),
@@ -42,6 +43,7 @@ WidgetTabEff::WidgetTabEff(QWidget *parent) :
     ui->setupUi(this);
     if(parent->layout() != 0)
         parent->layout()->addWidget(this);
+
 
     _tabElts=0;
 }
@@ -131,6 +133,7 @@ TableEff::TableEff(QWidget * parent,QList <Joueur*> listJoueur,QStringList Lista
 {
     this->setColumnCount (Listaction.size()*2+2);
     this->setRowCount (listJoueur.size());
+    _list=listJoueur;
 
     this->horizontalHeader ();
     this->verticalHeader ()->hide();
@@ -214,10 +217,27 @@ TableEff::TableEff(QWidget * parent,QList <Joueur*> listJoueur,QStringList Lista
     if(parent->layout() != 0)
         parent->layout()->addWidget(this);
 
-
+    connect(this,SIGNAL(cellDoubleClicked(int,int)),this,SLOT(SlotDDClick(int,int)));
     this->resizeColumnsToContents();
     this->resizeRowsToContents();
 
+}
+
+void TableEff::SlotDDClick(int row,int col)
+{
+
+    for(int i=0;i<_list.size();i++)
+    {
+
+        if (_list.at(i)->get_Prenom()==this->item(row,0)->text())
+        {
+
+            FenetreJoueurStat* fstat=new FenetreJoueurStat(_list.at(i),0,this);
+            fstat->show();
+
+
+        }
+    }
 }
 
 

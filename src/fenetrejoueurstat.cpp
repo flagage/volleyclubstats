@@ -12,6 +12,7 @@ FenetreJoueurStat::FenetreJoueurStat(Joueur* player,Equipe* team,QWidget *parent
 
     _tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
     ui->gridLayout->addWidget(_tabWidget, 0, 0, 1, 1);
+    this->setWindowTitle(player->get_Prenom()+"_"+QString::number(player->get_NumMaillot()));
     this->show();
 }
 

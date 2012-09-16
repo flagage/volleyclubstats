@@ -40,10 +40,14 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 
 class TableEff: public QTableWidget
 {
-
+Q_OBJECT
 public:
 
     TableEff(QWidget * parent,QList <Joueur*> list,QStringList Listaction);
+public slots:
+    void SlotDDClick(int row,int col);
+private:
+    QList <Joueur*> _list;
 };
 
 namespace Ui {
