@@ -35,9 +35,9 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 
 #include <QMainWindow>
 #include <QListWidget>
+#include "revumatch.h"
 #include "QTimer"
 #include "tracelog.h"
-#include "Equipe.h"
 #include "fenetrestat.h"
 #include "fenetrescore.h"
 #include "fenetrechoixmatch.h"
@@ -48,6 +48,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "volleyInit.h"
 #include "listevenement.h"
 #include "framstats.h"
+
 
 namespace Ui {
     class Ecran;
@@ -124,6 +125,7 @@ private:
     int _positionEcran;
     FenetreStat* _FenetreStat;
     FenetreChoixMatch* _FenetreChoix;
+    RevuMatch* _FenetreRevuMatch;
     bool _ischangement;
     void IsService();
     QString ChangeJoueur;

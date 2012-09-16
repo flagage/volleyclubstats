@@ -797,7 +797,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
 
     MatchXml FichierXml(_ParamMatch,_score,_EquipeVisiteur,&this->_ListEvenement,&this->_listPosition);
 
-    FichierXml.LectureParametreMatch();
+    FichierXml.LectureParametreMatch("Current/Match.xml");
     if(_ParamMatch->get_NomEquipeLocal()!="")
     {
         for(int i=0;i<listequipe.size();i++)
@@ -810,7 +810,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
         }
     }
     FichierXml.setEquipe(this->_currentEquipe);
-    FichierXml.LectureXML();
+    FichierXml.LectureXML("Current/Match.xml");
     InitListTerrainfromPosition();
 }
 

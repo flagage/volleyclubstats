@@ -62,11 +62,11 @@ void WidgetTabEff::clean()
     delete _tabElts;
 }
 
-void WidgetTabEff::Init()
+void WidgetTabEff::Init(  QList <Joueur*> listjoueur,QStringList listaction)
 {
 
-    _listJoueur=Match::donneInstance()->GetListJoueur();
-    _listaction=Match::donneInstance()->GetParametreMatch()->get_Action();
+    _listJoueur=listjoueur;
+    _listaction=listaction;
     _tabElts=new TableEff(ui->groupBox,_listJoueur,_listaction);
 }
 

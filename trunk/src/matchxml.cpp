@@ -12,10 +12,15 @@ void MatchXml::setEquipe(Equipe *team)
 {
     this->_EquipeLocal=team;
 }
-
-void MatchXml::LectureXML()
+Equipe * MatchXml::GetEquipe()
 {
-    _fileXmlCurrent.setFileName(QString("Current/Match.xml"));
+   return this->_EquipeLocal;
+}
+
+
+void MatchXml::LectureXML(QString filename)
+{
+    _fileXmlCurrent.setFileName(QString(filename));
 
     if (!_fileXmlCurrent.open(QIODevice::ReadOnly))
         return;
@@ -219,9 +224,9 @@ void MatchXml::InitStatFromXml(QDomNode child,int TemOrPl,bool isSet,int numset,
     }
 }
 
-void MatchXml::LectureParametreMatch()
+void MatchXml::LectureParametreMatch(QString filename)
 {
-    _fileXmlCurrent.setFileName(QString("Current/Match.xml"));
+    _fileXmlCurrent.setFileName(filename);
 
     if (!_fileXmlCurrent.open(QIODevice::ReadOnly))
         return;
