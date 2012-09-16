@@ -77,8 +77,11 @@ void RevuMatch::InitialiseIhmFromFile()
         ui->label_6->setVisible(true);
         ui->label_7->setVisible(true);
         ui->label_12->setVisible(true);
-        ui->label_6->setText(_Score->ListdesScore().at(0));
-        ui->label_12->setText(_Score->ListdesScore().at(1));
+        if(_Score->ListdesScore().size()==2)
+        {
+            ui->label_6->setText(_Score->ListdesScore().at(0));
+            ui->label_12->setText(_Score->ListdesScore().at(1));
+        }
         break;
     case 3:
         ui->label_5->setVisible(true);
@@ -143,7 +146,10 @@ void RevuMatch::Initialisation()
     splitter->setHandleWidth(10);
    ui->gridLayout_12->addWidget(splitter,1,0,1,1);
 
-
+    ui->listWidget->setVisible(false);
+    _ListEvent=new ListEvenement(ui->groupBox_9);
+      ui->gridLayout_11->addWidget(_ListEvent, 0, 0, 1, 1);
+    _ListEvent->setEnabled(true);
 
 
 
@@ -244,5 +250,10 @@ void RevuMatch::InitialisationStats()
             _VectorTabFram.at(ActionSet)->SlotMiseAJour(true,i);
         }
 
+    }
+    /// Liste des evenement
+    for(int i=0;i<_ListEvenement.size();i++)
+    {
+        this->_ListEvent->addItem(_ListEvenement.at(i));
     }
 }

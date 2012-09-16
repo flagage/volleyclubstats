@@ -2,12 +2,13 @@
 #define REVUMATCH_H
 
 #include <QDialog>
-#include "ParametreMatch.h"
+#include "parametrematch.h"
 #include "Score.h"
 #include "Equipe.h"
-#include "MatchXml.h"
+#include "matchxml.h"
 #include "widgettabeff.h"
 #include "framstats.h"
+#include "listevenement.h"
 
 namespace Ui {
     class RevuMatch;
@@ -39,6 +40,7 @@ private:
     QList <QString> _listPosition;
     QVector <WidgetTabEff*> _VectortabEff;
     QVector<FramStats*> _VectorTabFram;
+    ListEvenement* _ListEvent;
 };
 
 #endif // REVUMATCH_H

@@ -526,6 +526,7 @@ void Ecran::InitialisationMatch()
     InitIhmMatch();
 
     Match * MatchEncour=Match::donneInstance();
+    MatchEncour->GetParametreMatch()->set_Date(QDate::currentDate());
     QStringList joueurname;
 
     this->_PlacementJoueur->InitListJoueur(MatchEncour->GetListJoueur());
@@ -593,7 +594,7 @@ void Ecran::slot_score()
     stScore=QString("%1").arg(score->get_SetVisiteur());
     ui->pBSet_2->setText(stScore);
     this->_TimerScore->start(50);
-    int diff=abs(score->get_SetLocal()-score->get_ScVisiteur());
+    int diff=abs(score->get_ScLocal()-score->get_ScVisiteur());
     int scoreMax=Match::donneInstance()->GetParametreMatch()->get_ScoreMax();
     if((_finSet==false))
     {
