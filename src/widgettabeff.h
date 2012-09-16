@@ -57,7 +57,7 @@ class WidgetTabEff : public QWidget
 public:
     explicit WidgetTabEff(QWidget *parent = 0);
     ~WidgetTabEff();
-    void Init();
+    void Init(  QList <Joueur*> listjoueur,QStringList listaction);
     void Ouvrir();
     void clean();
     Joueur* PlayerfromNum(QString num);

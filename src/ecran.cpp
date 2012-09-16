@@ -460,9 +460,7 @@ void Ecran::InitIhmMatch()
 
         layout->addWidget(tabWidget, 0, 0, 1, 1);
 
-        //CreerNouveauOnglet->
 
-        //ui->tabWidget_2
     }
 
 
@@ -495,7 +493,7 @@ void Ecran::InitialisationMatchFromXML()
     for(int i=1;i<Match::donneInstance()->GetParametreMatch()->GetNumSet();i++)
     {
         _VectortabEff.at(i)->clean();
-        _VectortabEff.at(i)->Init();
+        _VectortabEff.at(i)->Init(Match::donneInstance()->GetListJoueur(),Match::donneInstance()->GetParametreMatch()->get_Action());
         _VectortabEff.at(i)->SlotMiseAJour(true,i);
         for(int k=0;k<Match::donneInstance()->GetParametreMatch()->get_Action().size();k++)
         {
@@ -1059,7 +1057,8 @@ void Ecran::AffSession(QAction *action)
             QString file=_FenetreChoix->GetFichierSelectionner ();
             if(file!="")
             {
-                this->_FenetreStat->Initialisation(file);
+                //this->_FenetreStat->Initialisation(file);
+                _FenetreRevuMatch=new RevuMatch(this->_ListeEquipe,file,this);
             }
 
         }
@@ -1983,8 +1982,8 @@ void Ecran::UpdateTabVue(int tab)
     case 1:
         _VectortabEff.at(0)->clean();
         _VectortabEff.at(numSet)->clean();
-        _VectortabEff.at(0)->Init();
-        _VectortabEff.at(numSet)->Init();
+        _VectortabEff.at(0)->Init(Match::donneInstance()->GetListJoueur(),Match::donneInstance()->GetParametreMatch()->get_Action());
+        _VectortabEff.at(numSet)->Init(Match::donneInstance()->GetListJoueur(),Match::donneInstance()->GetParametreMatch()->get_Action());
         break;
     default:
         int num=(tab-2)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);

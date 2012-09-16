@@ -1,60 +1,248 @@
-/**
-Copyright LAGAGE Frédéric ,2011
-flagage@gmail.com
-
-Ce logiciel est un programme informatique servant à capturer en direct des statistiques des joueurs de volley-ball.
-
-Ce logiciel est régi par la licence CeCILLsoumise au droit français et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
-sur le site "http://www.cecill.info".
-
-En contrepartie de l'accessibilité au code source et des droits de copie,
-de modification et de redistribution accordés par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
-seule une responsabilité restreinte pèse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concédants successifs.
-
-A cet égard  l'attention de l'utilisateur est attirée sur les risques
-associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à
-manipuler et qui le réserve donc à des développeurs et des professionnels
-avertis possédant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
-logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement,
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
-
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
-pris connaissance de la licence CeCILL et que vous en avez accepté les
-**/
 #include "revumatch.h"
 #include "ui_revumatch.h"
-#include "QDir"
+#include "matchxml.h"
+#include "QSplitter"
 
 RevuMatch::RevuMatch(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RevuMatch)
 {
-    ui->setupUi(this);
-    Initialisation();
+     ui->setupUi(this);
+
 }
 
-void RevuMatch::Initialisation()
+RevuMatch::RevuMatch(QList <Equipe*>listequipe,QString cheminfichier,QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::RevuMatch)
 {
-     QString nom_repertoire = QString("Sauvegarde");
-     QDir RepertoirSVG_CTX(nom_repertoire);
-    QStringList listFiche=RepertoirSVG_CTX.entryList(QDir::Files|QDir::NoDotAndDotDot);
-    int nbFile=listFiche.size();
-    for(int i=0;i<nbFile;i++)
+    ui->setupUi(this);
+    for(int i=0;i<listequipe.size();i++)
     {
-        ui->listWidget->addItem (listFiche.at (i));
-        }
+        this->_listequipe.append(listequipe.at(i));
+    }
+    this->_fichierSelection=cheminfichier;
+    _EquipeVisiteur=new Equipe();
+
+     Initialisation();
+    LectureFichierXML();
+    InitialiseIhmFromFile();
+    InitialisationTabFromXML();
+
 }
 
 RevuMatch::~RevuMatch()
 {
+    delete _EquipeVisiteur;
     delete ui;
+}
+
+void RevuMatch::LectureFichierXML()
+{
+    _ParamMatch=new ParametreMatch();
+    _Score=new Score();
+    MatchXml FichierXml(_ParamMatch,_Score,_EquipeVisiteur,&this->_ListEvenement,&this->_listPosition);
+    FichierXml.LectureParametreMatch("Sauvegarde/"+_fichierSelection);
+    if(_ParamMatch->get_NomEquipeLocal()!="")
+    {
+        for(int i=0;i<_listequipe.size();i++)
+        {
+            if(_listequipe.at(i)->GetNom()==_ParamMatch->get_NomEquipeLocal())
+            {
+                this->_currentEquipe=_listequipe.at(i);
+                break;
+            }
+        }
+    }
+    FichierXml.setEquipe(this->_currentEquipe);
+    FichierXml.LectureXML("Sauvegarde/"+_fichierSelection);
+    _currentEquipe=FichierXml.GetEquipe();
+}
+
+void RevuMatch::InitialiseIhmFromFile()
+{
+    ui->label_NomLocal->setText(_currentEquipe->GetNom());
+    ui->label_NomVisiteur->setText(_EquipeVisiteur->GetNom());
+    ui->spinBox_Set->setValue(this->_ParamMatch->get_NbSet());
+    ui->spinBox_NbJoueur->setValue(this->_ParamMatch->get_NbJoueur());
+    switch (_ParamMatch->get_NbSet())
+    {
+    case 1:
+        ui->label_5->setVisible(true);
+        ui->label_6->setVisible(true);
+        ui->label_6->setText(_Score->ListdesScore().at(0));
+        break;
+    case 2:
+
+        ui->label_5->setVisible(true);
+        ui->label_6->setVisible(true);
+        ui->label_7->setVisible(true);
+        ui->label_12->setVisible(true);
+        ui->label_6->setText(_Score->ListdesScore().at(0));
+        ui->label_12->setText(_Score->ListdesScore().at(1));
+        break;
+    case 3:
+        ui->label_5->setVisible(true);
+        ui->label_6->setVisible(true);
+        ui->label_7->setVisible(true);
+        ui->label_12->setVisible(true);
+        ui->label_13->setVisible(true);
+        ui->label_9->setVisible(true);
+        ui->label_6->setText(_Score->ListdesScore().at(0));
+        ui->label_12->setText(_Score->ListdesScore().at(1));
+        ui->label_13->setText(_Score->ListdesScore().at(2));
+        break;
+    case 4:
+
+        ui->label_5->setVisible(true);
+        ui->label_6->setVisible(true);
+        ui->label_7->setVisible(true);
+        ui->label_12->setVisible(true);
+        ui->label_13->setVisible(true);
+        ui->label_9->setVisible(true);
+        ui->label_10->setVisible(true);
+        ui->label_14->setVisible(true);
+        ui->label_6->setText(_Score->ListdesScore().at(0));
+        ui->label_12->setText(_Score->ListdesScore().at(1));
+        ui->label_13->setText(_Score->ListdesScore().at(2));
+        ui->label_14->setText(_Score->ListdesScore().at(3));
+        break;
+    case 5:
+        ui->label_5->setVisible(true);
+        ui->label_6->setVisible(true);
+        ui->label_7->setVisible(true);
+        ui->label_12->setVisible(true);
+        ui->label_13->setVisible(true);
+        ui->label_9->setVisible(true);
+        ui->label_10->setVisible(true);
+        ui->label_14->setVisible(true);
+        ui->label_15->setVisible(true);
+        ui->label_11->setVisible(true);
+        ui->label_6->setText(_Score->ListdesScore().at(0));
+        ui->label_12->setText(_Score->ListdesScore().at(1));
+        ui->label_13->setText(_Score->ListdesScore().at(2));
+        ui->label_14->setText(_Score->ListdesScore().at(3));
+        ui->label_15->setText(_Score->ListdesScore().at(4));
+        break;
+
+    }
+
+    this->show();
+}
+
+void RevuMatch::Initialisation()
+{
+
+
+
+    QSplitter *splitter=new QSplitter(this);
+
+
+
+    splitter->addWidget(ui->widget);
+    splitter->addWidget(ui->widget_2);
+    splitter->setHandleWidth(10);
+   ui->gridLayout_12->addWidget(splitter,1,0,1,1);
+
+
+
+
+
+    ui->label_5->setVisible(false);
+    ui->label_6->setVisible(false);
+    ui->label_7->setVisible(false);
+    ui->label_9->setVisible(false);
+    ui->label_10->setVisible(false);
+    ui->label_11->setVisible(false);
+    ui->label_12->setVisible(false);
+    ui->label_13->setVisible(false);
+    ui->label_14->setVisible(false);
+    ui->label_15->setVisible(false);
+
+}
+void RevuMatch::InitialisationTabFromXML()
+{
+    QTabWidget* tabWidget = new QTabWidget(ui->tabWidget->widget(0));
+QString NomOnglet;
+for(int i=0;i<_ParamMatch->get_NbSet()+1;i++)
+{
+    QWidget* tabelement=new QWidget();
+
+    if(i==0)
+    {
+        NomOnglet="Match";
+    }
+    else
+    {
+        NomOnglet="Set n°"+QString::number(i);
+    }
+    tabWidget->addTab(tabelement,NomOnglet);
+    _VectortabEff.append(new WidgetTabEff(tabelement));
+
+}
+ui->gridLayout_9->addWidget(tabWidget, 0, 0, 1, 1);
+
+
+/// initialisation tabAction
+for(int a=0;a<_ParamMatch->get_Action().size();a++)
+{
+    QWidget *CreerNouveauOnglet = new QWidget;
+    QGridLayout *layout = new QGridLayout;
+    layout->setContentsMargins(0,0,0,0);
+
+    CreerNouveauOnglet->setLayout(layout);
+
+    QString strlabel=_ParamMatch->get_Action().at(a);
+    ui->tabWidget->addTab(CreerNouveauOnglet,strlabel);
+
+    QTabWidget* tabWidget = new QTabWidget(ui->tabWidget->widget(a+1));
+    tabWidget->setObjectName(QString::fromUtf8("tabWidget_2"));
+    for(int i=0;i<_ParamMatch->get_NbSet()+1;i++)
+    {
+        QWidget* tabelement=new QWidget();
+        if(i==0)
+        {
+            NomOnglet="Match";
+        }
+        else
+        {
+            NomOnglet="Set n°"+QString::number(i);
+        }
+        tabWidget->addTab(tabelement,NomOnglet);
+        _VectorTabFram.append(new FramStats(a,_currentEquipe->GetListeJoueur(),tabelement));
+    }
+
+    layout->addWidget(tabWidget, 0, 0, 1, 1);
+
+
+}
+InitialisationStats();
+}
+
+
+void RevuMatch::InitialisationStats()
+{
+    _VectortabEff.at(0)->clean();
+    _VectortabEff.at(0)->Init(_currentEquipe->GetListeJoueur(),_ParamMatch->get_Action());
+    _VectortabEff.at(0)->SlotMiseAJour(false,0);
+    for(int k=0;k<_ParamMatch->get_Action().size();k++)
+    {
+        _VectorTabFram.at(k*(_ParamMatch->GetNumSet()))->clean();
+        _VectorTabFram.at(k*(_ParamMatch->GetNumSet()))->Init();
+        _VectorTabFram.at(k*(_ParamMatch->GetNumSet()))->SlotMiseAJour(false,0);
+    }
+
+    for(int i=1;i<_ParamMatch->GetNumSet();i++)
+    {
+        _VectortabEff.at(i)->clean();
+        _VectortabEff.at(i)->Init(_currentEquipe->GetListeJoueur(),_ParamMatch->get_Action());
+        _VectortabEff.at(i)->SlotMiseAJour(true,i);
+        for(int k=0;k<_ParamMatch->get_Action().size();k++)
+        {
+            int ActionSet=i+k*(_ParamMatch->GetNumSet());
+            _VectorTabFram.at(ActionSet)->clean();
+            _VectorTabFram.at(ActionSet)->Init();
+            _VectorTabFram.at(ActionSet)->SlotMiseAJour(true,i);
+        }
+
+    }
 }

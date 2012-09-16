@@ -58,8 +58,6 @@ private:
     QString _poste;
     int _num;
     int _nbSet;
-    statFinal statMatch;
-    statFinal statSet;
     QVector<statFinal*> _listStat;
     QStringList _ListValeur;
     QStringList _ListAction;

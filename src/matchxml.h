@@ -55,10 +55,11 @@ private:
 
 public:
     MatchXml( ParametreMatch *,Score*,Equipe*,QStringList*,QList <QString>*);
-    void LectureXML();
+    void LectureXML(QString);
     void setEquipe(Equipe *team);
+    Equipe * GetEquipe();
     void InitStatFromXml(QDomNode child,int TemOrPl,bool isSet,int numset=0,Joueur* player=0);
-    void LectureParametreMatch();
+    void LectureParametreMatch(QString);
 
 };
 
