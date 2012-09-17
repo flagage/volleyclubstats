@@ -811,6 +811,8 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
     }
     FichierXml.setEquipe(this->_currentEquipe);
     FichierXml.LectureXML("Current/Match.xml");
+    _doc=FichierXml.Getdoc();
+    _fileXmlCurrent.setFileName(QString("Current/Match.xml"));
     InitListTerrainfromPosition();
 }
 
@@ -869,6 +871,7 @@ QString Match::Rechercheposte(int post)
 }
 void Match::MiseajourScore()
 {
+
     QDomElement docElem = _doc.documentElement();
     QDomNode n = docElem.firstChild();
     while(!n.isNull())

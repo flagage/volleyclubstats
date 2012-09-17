@@ -115,6 +115,19 @@ void Ecran::InitialisationIhm()
     _listActionMoins<<tr("Attaque")<<tr("Contre");
     _listActionPlus<<tr("Service")<<tr("Attaque")<<tr("Contre");
 
+    ui->label_6->setVisible(false);
+    ui->label_7->setVisible(false);
+    ui->label_8->setVisible(false);
+    ui->label_9->setVisible(false);
+    ui->label_3->setVisible(false);
+    ui->label_5->setVisible(false);
+    ui->label_11->setVisible(false);
+    ui->label_12->setVisible(false);
+    ui->line_10->setVisible(false);
+    ui->line_8->setVisible(false);
+    ui->line_9->setVisible(false);
+    ui->line_3->setVisible(false);
+
 }
 
 void Ecran::Connexion()
@@ -147,188 +160,6 @@ void Ecran::Connexion()
 }
 
 
-/*
-    _ValeurInitial=InitValeur::donneInstance();
-    _ListActionInit=InitAction::donneInstance();
-    _position=0;
-    _joueurBanc=0;
-    _Istactile=false;
-    _ischangement=false;
-    _finSet=false;
-
-
-
-    //ui->lineEdit_PBP->setVisible(false);
-    LineEdit2 =  new VCSLineEdit(ui->centralWidget);
-    LineEdit2->setObjectName(QString::fromUtf8("lineEdit"));
-
-    ui->gridLayout->addWidget(LineEdit2,0, 0, 1, 1);
-
-    /*QDesktopWidget *desktop=QApplication::desktop ();
-    QRect size=desktop->screenGeometry ();*/
-/*this->resize(1000,500);
-    this->move(0,0);
-
-    _PlacementJoueur=new KeyJoueur(ui->label_4,7,true);
-    QHBoxLayout *layout=new QHBoxLayout();
-    layout->addWidget (_PlacementJoueur);
-
-    connect(this->_PlacementJoueur,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
-    connect(this->_PlacementJoueur,SIGNAL(JoueurStat(QPushButton*)),this,SLOT(slot_AfficheStat(QPushButton*)));
-    // connect(this->_PlacementJoueur,SIGNAL(ModifPoste(QPushButton*)),this,SLOT(slot_modifpost(QPushButton*)));
-    connect(this->_PlacementJoueur,SIGNAL(Tlm_en_place()),this,SLOT(Slot_start()));
-    connect(this,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
-    connect(this->LineEdit2,SIGNAL(ChangeAction()),this,SLOT(SlotCombobox()));
-    connect(this->LineEdit2,SIGNAL(Attaque()),this,SLOT(Slot_posAction()));
-    connect(this->LineEdit2,SIGNAL(Reception()),this,SLOT(Slot_posReception()));
-    connect(this->LineEdit2,SIGNAL(Service()),this,SLOT(Slot_posService()));
-    connect(this->LineEdit2,SIGNAL(Defense()),this,SLOT(Slot_posDefense()));
-    connect(this->LineEdit2,SIGNAL(Contre()),this,SLOT(Slot_posContre()));
-    connect(this->LineEdit2,SIGNAL(Passe()),this,SLOT(Slot_posPasse()));
-    connect(this->LineEdit2,SIGNAL(ComplementAction()),this,SLOT(Slot_ComplAction()));
-
-
-
-
-   _isMatchEnCour=false;
-
-
-    connect(ui->menuFichier, SIGNAL(triggered(QAction *)), this, SLOT(AffSession(QAction *)));
-    connect(ui->menuMatch,SIGNAL(triggered(QAction*)),this,SLOT(AffSession(QAction*)));
-    connect(ui->menuFenetre, SIGNAL(triggered(QAction *)), this, SLOT(Slot_Fenetre(QAction *)));
-    connect(ui->menuEquipe,SIGNAL(triggered(QAction*)),this,SLOT(SlotMenuEquipe(QAction *)));
-    _trace=new TraceLog(this);
-    _TraceListAction= new ListActionXml();
-    connect(this->_trace,SIGNAL(EnvoieTrace(QString)),this,SLOT(AfficherTrace(QString)));
-
-
-    connect(ui->pushButton_TM,SIGNAL(clicked()),this,SLOT(TempsMort()));
-
-
-    connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(ActionService(int)));
-
-    //bouton de rotation
-
-    connect (ui->pBRotationPlus,SIGNAL(clicked()),this,SLOT(slot_rotationP()));
-    connect (ui->pBRotationMoins,SIGNAL(clicked()),this,SLOT(slot_rotationM()));
-
-
-
-
-    _TimerScore=new QTimer (this);
-    connect (_TimerScore,SIGNAL(timeout()),this,SLOT(slot_score()));
-
-
-
-
-
-
-    setAcceptDrops(true);
-    QDate curentDate=QDate::currentDate();
-    Initialisation();
-
-    if(curentDate.year() == 2013)
-    {
-        if(curentDate.month() > 2)
-        {
-            InitialisationError();
-        }
-
-    }
-    else if(curentDate.year() > 2013)
-    {
-        InitialisationError();
-    }
-
-    myWidget=new StatWidget(ui->groupBox_3,this);
-    _WtabEff=new WidgetTabEff(ui->groupBox_6);
-    /// version tactile
-    /*connect(ui->Button_PP,SIGNAL(clicked()),this,SLOT(Slot_ActionPP()));
-    connect(ui->Button_P,SIGNAL(clicked()),this,SLOT(Slot_ActionP()));
-    connect(ui->Button_0,SIGNAL(clicked()),this,SLOT(Slot_Action0()));
-    connect(ui->Button_M,SIGNAL(clicked()),this,SLOT(Slot_ActionM()));
-    connect(ui->Button_MM,SIGNAL(clicked()),this,SLOT(Slot_ActionMM()));
-
-    ui->Button_0->setVisible(false);
-    ui->Button_M->setVisible(false);
-    ui->Button_MM->setVisible(false);
-    ui->Button_P->setVisible(false);
-    ui->Button_PP->setVisible(false);
-    ui->tabWidget->setVisible(false);*/
-/*ui->label_4->setPixmap (QPixmap("Image/new_terrain.png"));
-    this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
-
-
-    ui->label_6->setPixmap((QPixmap("Icone/Yellow_card.png")));
-    ui->label_7->setPixmap((QPixmap("Icone/Yellow_card.png")));
-    ui->label_8->setPixmap((QPixmap("Icone/Yellow_card.png")));
-    ui->label_9->setPixmap((QPixmap("Icone/Yellow_card.png")));
-
-    ui->groupBox_4->setVisible(false);
-    //ui->groupBox_10->setVisible(false);
-
-    /// font d'ecran
-    _positionEcran=0;
-
-    /// modification du tableau de vue
-    connect(ui->tabWidget,SIGNAL(currentChanged(int)),this,SLOT(UpdateTabVue(int)));
-
-
-    //icon.addPixmap(QPixmap::fromImage(image), mode, state)
-    // ui->label_4->setVisible(false);
-}
-
-Ecran::~Ecran()
-{
-
-    _listPosition->clear();
-    delete ui;
-}
-
-void Ecran::Initialisation()
-{
-    _Bchangement=false;
-    _listBanc=new QStringList();
-    _listPosition=new QStringList();
-    RestaurerXML();
-
-
-
-    ui->frame->setVisible(false);
-    ui->frame_2->setVisible(false);
-    ui->frame_3->setVisible(false);
-
-
-    QPalette    palette( ui->centralWidget->palette());
-    QPixmap        bg("Icone/Volleyclubstats_gris.png");
-
-    palette.setBrush(QPalette::Background, bg);
-    ui->centralWidget->setPalette(palette);
-
-
-    _FenetreStat=new FenetreStat();
-    _listActionMoins<<tr("Attaque")<<tr("Contre");
-    _listActionPlus<<tr("Service")<<tr("Attaque")<<tr("Contre");
-
-
-
-    this->_listAction=InitAction::donneInstance()->GetListAction();
-    ui->tabWidget->setVisible(true);
-
-}
-
-
-
-void Ecran::InitialisationError()
-{
-
-    //ui->textEdit->setVisible(false);
-    ui->menuBar->setEnabled(false);
-
-
-    QMessageBox::information(this,tr("Licence invalide"),tr("Votre licence a expirer"));
-}
-*/
 void Ecran::InitIhmMatch()
 {
     QMenu * menupoint=new QMenu(this);
@@ -407,6 +238,7 @@ void Ecran::InitIhmMatch()
     connect(_ListEvent,SIGNAL(add(int)),this,SLOT(slot_addEvent(int)));
     connect(_ListEvent,SIGNAL(modif(int)),this,SLOT(slot_ModifEvent(int)));
     connect(_ListEvent,SIGNAL(sup(int)),this,SLOT(slot_suppEvent(int)));
+    connect(_ListEvent,SIGNAL(supTm(int)),this,SLOT(slot_supTempsMort(int)));
     this->_TimerScore->start(10);
 
     /// Initialisation efficacite
@@ -576,8 +408,43 @@ void Ecran::InitScore()
     ui->pBSet->setText(stScore);
     stScore=QString("%1").arg(score->get_SetVisiteur());
     ui->pBSet_2->setText(stScore);
-    /// TODO Initialiser les temps morts
-    //if(score->get_TmVisiteur())
+    /// Initialisation des temps morts
+    switch(score->get_TmLocal())
+    {
+    case 0:
+        ui->label_6->setVisible(false);
+        ui->label_7->setVisible(false);
+        break;
+    case 1:
+        ui->label_6->setVisible(true);
+        ui->label_7->setVisible(false);
+        break;
+    case 2:
+        ui->label_6->setVisible(true);
+        ui->label_7->setVisible(true);
+        break;
+    default:
+        break;
+    }
+
+    switch(score->get_TmVisiteur())
+    {
+    case 0:
+        ui->label_8->setVisible(false);
+        ui->label_9->setVisible(false);
+        break;
+    case 1:
+        ui->label_8->setVisible(true);
+        ui->label_9->setVisible(false);
+        break;
+    case 2:
+        ui->label_8->setVisible(true);
+        ui->label_9->setVisible(true);
+        break;
+    default:
+        break;
+    }
+
 }
 
 void Ecran::slot_score()
@@ -649,10 +516,7 @@ void Ecran::Slot_start()
     ui->comboBox->setEnabled(true);
     LineEdit2->setEnabled(true);
     //ui->groupBox_5->setVisible (true);
-    ui->label_6->setVisible(false);
-    ui->label_7->setVisible(false);
-    ui->label_8->setVisible(false);
-    ui->label_9->setVisible(false);
+
 
     //ui->pushButton_FM->setVisible(true);
     ui->pushButton_TM->setVisible(true);
@@ -1230,7 +1094,7 @@ void Ecran::Rotation()
 
 void Ecran::AfficherTrace(QString message)
 {
-    //ui->textEdit->append(message);
+
 
 }
 
@@ -1243,6 +1107,7 @@ void Ecran::TempsMort()
     FenetreService * fenetre=new FenetreService(Match::donneInstance()->getTeam()->GetNom(),Match::donneInstance()->getadvs(),true);
     fenetre->exec();
     QString nom;
+    int value=0;
     if(fenetre->isUS()==true)
     {
         if(ui->label_6->isVisible()==true)
@@ -1253,14 +1118,20 @@ void Ecran::TempsMort()
         if(ui->label_7->isVisible ()==true)
         {
             ui->label_6->setVisible (true);
+            value=2;
         }
         else
-            ui->label_7->setVisible (true);
+        {
+          ui->label_7->setVisible (true);
+          value=1;
+        }
 
         nom=Match::donneInstance()->getTeam()->GetNom();
+        Match::donneInstance()->GetScore()->set_TmLocal(value);
     }
     else
     {
+        value=0;
         if(ui->label_9->isVisible()==true)
         {
             QMessageBox::information(this,tr("Information"),tr("Tous les temps morts sont pris"));
@@ -1269,15 +1140,28 @@ void Ecran::TempsMort()
         if(ui->label_8->isVisible ()==true)
         {
             ui->label_9->setVisible (true);
+            value=2;
         }
         else
+        {
             ui->label_8->setVisible (true);
+            value=1;
+        }
         nom=Match::donneInstance()->getadvs();
+        Match::donneInstance()->GetScore()->set_TmVisiteur(value);
     }
+
     LineEdit2->setFocus();
     LineEdit2->setCursorPosition(LineEdit2->text().size());
-    QString msg=tr("Temps mort pour ")+nom;
-    //this->_trace->SetTrace(msg);
+    Match::donneInstance()->MiseajourScore();
+    QDateTime date=QDateTime::currentDateTime();
+    QString identifiant=date.toString("Ihhmmss");
+    QString msg=tr("Temps mort pour :")+nom;
+
+    QString MsgEventtot=identifiant+" "+msg;
+    this->_ListEvent->addItem(MsgEventtot);
+    Match::donneInstance()->AjoutEvenement(identifiant,msg);
+
 }
 
 
@@ -2142,6 +2026,27 @@ void Ecran::slot_ModifEvent(int index)
     }
 
 }
+void Ecran::slot_supTempsMort(int i)
+{
+    QString strElementSupp=_ListEvent->item(i)->text();
+    QStringList listElement=strElementSupp.split(" ");
+    QStringList listEl=listElement[1].split(":");
+    Score * score=Match::donneInstance()->GetScore();
+    if(Match::donneInstance()->getadvs()==listEl[1])
+    {
+
+        score->set_TmVisiteur(score->get_TmVisiteur()-1);
+    }
+    else
+    {
+        score->set_TmLocal(score->get_TmLocal()-1);
+    }
+
+    delete _ListEvent->item(i);
+    Match::donneInstance()->MiseajourScore();
+    this->InitScore();
+}
+
 void Ecran::slot_suppEvent(int i)
 {
 

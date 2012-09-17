@@ -110,5 +110,6 @@ QStringList Score::ListdesScore()
 
 void Score::Set_ListScore(QStringList list)
 {
+    _ListScore.clear();
     _ListScore=list;
 }

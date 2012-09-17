@@ -147,7 +147,7 @@ void RevuMatch::Initialisation()
    ui->gridLayout_12->addWidget(splitter,1,0,1,1);
 
     ui->listWidget->setVisible(false);
-    _ListEvent=new ListEvenement(ui->groupBox_9);
+    _ListEvent=new ListEvenement(false,ui->groupBox_9);
       ui->gridLayout_11->addWidget(_ListEvent, 0, 0, 1, 1);
     _ListEvent->setEnabled(true);
 
