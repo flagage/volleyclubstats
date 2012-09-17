@@ -207,6 +207,7 @@ public slots:
     void slot_addEvent(int );
     void slot_ModifEvent(int);
     void slot_suppEvent(int);
+    void slot_supTempsMort(int);
     void AjouterEvent(int index ,QString text);
     StatValeur GetStatValeur(QString valu);
 

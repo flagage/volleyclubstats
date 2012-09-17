@@ -60,6 +60,8 @@ public:
     Equipe * GetEquipe();
     void InitStatFromXml(QDomNode child,int TemOrPl,bool isSet,int numset=0,Joueur* player=0);
     void LectureParametreMatch(QString);
+    QDomDocument Getdoc();
+
 
 };
 

@@ -266,3 +266,9 @@ void MatchXml::LectureParametreMatch(QString filename)
         noeud=noeud.nextSibling();
     }
 }
+
+QDomDocument MatchXml::Getdoc()
+{
+    return _doc;
+}
+
