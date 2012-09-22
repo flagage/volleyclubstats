@@ -45,6 +45,9 @@ FenetreLancement::FenetreLancement(QList<Equipe*> ListEquipe,QWidget *parent) :
     connect(ui->pushButton_ok,SIGNAL(clicked()),this,SLOT(ok()));
     connect(ui->pushButton_annuler,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->checkBox_10,SIGNAL(clicked(bool)),this,SLOT(Slot_perso(bool)));
+    connect(ui->checkBox_4,SIGNAL(stateChanged(int)),this,SLOT(Slot_Check4(int)));
+    connect(ui->checkBox_5,SIGNAL(stateChanged(int)),this,SLOT(Slot_Check5(int)));
+    connect(ui->checkBox_6,SIGNAL(stateChanged(int)),this,SLOT(Slot_Check6(int)));
     _ListEquipe=ListEquipe;
     Initialisation();
 }
@@ -102,7 +105,7 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
     }
     if(ui->checkBox_2->isChecked())
     {
-          actionSelection<<tr("Récéption");
+          actionSelection<<tr("Reception");
     }
     if(ui->checkBox_3->isChecked())
     {
@@ -111,12 +114,33 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
     if(ui->checkBox_4->isChecked())
         actionSelection <<tr("Contre");
     if(ui->checkBox_5->isChecked())
-        actionSelection <<tr("Défense");
+        actionSelection <<tr("Defense");
     if(ui->checkBox_6->isChecked())
         actionSelection <<tr("Passe");
+    if(ui->checkBox_18->isChecked())
+        actionSelection <<tr("Relance");
 
 
     param->set_Action(actionSelection);
+
+    ///List des action de defilmenent
+    QStringList actionDefilement;
+
+    if(ui->checkBox_16->isChecked())
+        actionDefilement<<tr("Service");
+    if(ui->checkBox_15->isChecked())
+          actionDefilement<<tr("Reception");
+    if(ui->checkBox_12->isChecked())
+           actionDefilement<<tr("Attaque");
+    if(ui->checkBox_14->isChecked())
+        actionDefilement <<tr("Contre");
+    if(ui->checkBox_13->isChecked())
+        actionDefilement <<tr("Defense");
+    if(ui->checkBox_17->isChecked())
+        actionSelection <<tr("Passe");
+
+
+    param->set_ActionDefile(actionDefilement);
 
     QStringList ValeurSelection;
     ValeurSelection<<"PP"<<"P"<<"Z"<<"M"<<"MM"<<"tot";
@@ -187,4 +211,41 @@ void FenetreLancement::Slot_perso(bool checked)
         ui->spinBox_5->setEnabled(false);
     }
 
+}
+
+void FenetreLancement::Slot_Check4(int state)
+{
+    if(state==2)
+    {
+        ui->checkBox_14->setEnabled(true);
+    }
+    else
+    {
+        ui->checkBox_14->setEnabled(false);
+    }
+}
+
+
+void FenetreLancement::Slot_Check5(int state)
+{
+    if(state==2)
+    {
+        ui->checkBox_13->setEnabled(true);
+    }
+    else
+    {
+        ui->checkBox_13->setEnabled(false);
+    }
+}
+
+void FenetreLancement::Slot_Check6(int state)
+{
+    if(state==2)
+    {
+        ui->checkBox_17->setEnabled(true);
+    }
+    else
+    {
+        ui->checkBox_17->setEnabled(false);
+    }
 }

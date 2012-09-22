@@ -93,6 +93,16 @@ QStringList ParametreMatch::get_Action()
 {
     return _Action;
 }
+
+void ParametreMatch::set_ActionDefile(QStringList value)
+{
+    _ActionDefilement = value;
+}
+
+QStringList ParametreMatch::get_ActionDefile()
+{
+    return _ActionDefilement;
+}
 /*
 void ParametreMatch::set_Position(QMap value)
 {
@@ -167,10 +177,12 @@ int ParametreMatch::GetActionFromString(QString strValeur)
 {
     for(int i=0;i<_Action.size();i++)
     {
-        if(_Action.at(i)==strValeur)
+        QString strAction=_Action.at(i);
+        strAction=strAction.replace("é","e");
+        if(strAction==strValeur)
         {
             return i;
         }
     }
-    return 0;
+    return -1;
 }

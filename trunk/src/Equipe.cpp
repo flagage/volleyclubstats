@@ -305,7 +305,10 @@ double Equipe::getStatSet(int action,int pos,int numset)
     //this->_VectorStat[Match::donneInstance()->GetCurentSet()]->init();
 
 }*/
-
+void Equipe::initSet(int numset)
+{
+    this->_VectorStat[numset]->init();
+}
 void Equipe::supStatMatch(int action,int pos)
 {
     this->_VectorStat[0]->SupValeur (action,pos);

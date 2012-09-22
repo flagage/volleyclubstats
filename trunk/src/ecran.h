@@ -92,8 +92,8 @@ public:
     void changement(int numjoueurSortant,int numjoueurEntrant);
     void keyPressEvent(QKeyEvent * event);
     void SetAction(QString numjoueur,QString ValeurAction);
-    void PointPlus(QString numjoueur);
-    void PointMoins(QString numjoueur);
+    bool PointPlus(QString numjoueur);
+    bool PointMoins(QString numjoueur);
     void dropEvent(QDropEvent* event);
     void dragEnterEvent(QDragEnterEvent* event);
     void changement(QString joueur,QPushButton *bouton);
@@ -158,7 +158,7 @@ public slots:
     void Slot_Fenetre(QAction * action);
     void AfficherTrace(QString message);
     void TempsMort();
-    void FinSet();
+    bool FinSet();
     void FinMatch();
     void ActionService(int );
     void SlotDrag(QListWidgetItem* item);
@@ -192,6 +192,7 @@ public slots:
     void Slot_posPasse();
     void Slot_posContre();
     void Slot_posDefense();
+    void Slot_posRelance();
     void Slot_ComplAction();
 
     void bouttonLClicked();
@@ -208,7 +209,7 @@ public slots:
     void slot_ModifEvent(int);
     void slot_suppEvent(int);
     void slot_supTempsMort(int);
-    void AjouterEvent(int index ,QString text);
+    void AjouterEvent(int index ,QString text,bool isModif=false);
     StatValeur GetStatValeur(QString valu);
 
     void MiseAjourtab(int i);

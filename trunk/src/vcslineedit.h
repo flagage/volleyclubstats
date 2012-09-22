@@ -16,6 +16,7 @@ signals:
     void Service();
     void Reception();
     void Defense();
+    void Relance();
     void Contre();
     void Passe();
     void ComplementAction();

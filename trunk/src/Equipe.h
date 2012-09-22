@@ -104,6 +104,7 @@ public: //fonction
     void supStatMatch(int action,int pos);
     void supStatSet(int action,int pos,int numset);
     void setStatMatch(int action,int pos,double valeur);
+    void initSet(int numset);
 
 
 

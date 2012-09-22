@@ -105,7 +105,8 @@ public:
     QString GetType();
 
     void EnregistrerXMl();
-    void FinSet();
+    bool FinSet();
+    bool isFinMatch();
      void Enregistrer();
     //QString Restaurer(QString id);
     QString GetDate();
@@ -158,7 +159,7 @@ public:
 
     Equipe * GetEquipeVisiteur();
    void EcrireStatMatchxml(QDomElement * element);
-   void EcrireStatXml(QDomElement * element);
+   void EcrireStatXml(QDomElement * element,bool isMatch=false);
    Joueur* RechercheJoueur(QString strjoueur);
    void AddJoueurToXml(Joueur * player,bool isset=false);
    void AddSetToXml();

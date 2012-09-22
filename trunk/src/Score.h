@@ -22,7 +22,9 @@ private:
     //determine qui a le premier service
     //si 0 service pour l'equipe local
     //si 1 service pour l'equipe visiteur
-    int _Service;
+
+    int  _ServeurSet;
+    int _ServeurCurrent;
 
     QStringList _ListScore;
 
@@ -30,6 +32,10 @@ public:
     int get_Service();
 
     void set_Service(int value);
+
+    int get_ServiceSet();
+
+    void set_ServiceSet(int value);
 
     int get_TmVisiteur();
 

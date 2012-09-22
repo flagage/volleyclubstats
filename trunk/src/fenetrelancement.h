@@ -61,6 +61,9 @@ private:
 public slots:
     void ok();
     void Slot_perso(bool checked);
+    void Slot_Check4(int );
+    void Slot_Check5(int );
+    void Slot_Check6(int);
 };
 
 #endif // FENETRELANCEMENT_H

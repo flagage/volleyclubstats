@@ -78,6 +78,9 @@ void VCSLineEdit::keyPressEvent ( QKeyEvent * event )
     case Qt::Key_Space:
         emit ComplementAction();
         break;
+    case Qt::Key_L:
+        emit Relance();
+        break;
     default:
         QLineEdit::keyPressEvent (event);
         break;
