@@ -41,7 +41,7 @@ void ListActionXml::Debut()
     return;
 
     QTextStream out(&file);
-    out<<"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
+    out<<"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
     out<<"<!--Fichier contenant l'ensemenble des informations sur les actions-->\n";
     out<<"<ListAction>\n";
     file.close();

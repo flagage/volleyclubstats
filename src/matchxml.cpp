@@ -57,6 +57,13 @@ void MatchXml::LectureXML(QString filename)
                 this->_EquipeLocal->InitialisationStat(_ParamMatch->get_NbSet(),_ParamMatch->get_Action(),_ParamMatch->get_Valeur());
 
             }
+            if(element.tagName()=="ActionDefilement")
+            {
+                QStringList listelement=element.text().split(",");
+                _ParamMatch->set_ActionDefile(listelement);
+
+
+            }
 
 
             if(element.tagName()=="Score")
@@ -68,14 +75,11 @@ void MatchXml::LectureXML(QString filename)
                 _score->set_SetVisiteur(element.attribute("SetVisiteur").toInt());
                 _score->set_TmVisiteur(element.attribute("TmVisiteur").toInt());
                 _score->set_Service(element.attribute("Service").toInt());
+                _score->set_ServiceSet(element.attribute("ServiceSet").toInt());
                 QStringList listScore=element.attribute("ListScore").split("_");
                 _score->Set_ListScore(listScore);
-                if(listScore.at(0)!="")
-                {
-                    _ParamMatch->SetNumSet(listScore.size()+1);
-                }
-                else
-                    _ParamMatch->SetNumSet(1);
+                 _ParamMatch->SetNumSet(_score->get_SetLocal()+_score->get_SetVisiteur()+1);
+
 
             }
 
@@ -148,7 +152,7 @@ void MatchXml::LectureXML(QString filename)
                 while(!child.isNull())
                 {
                     QString identifiant=child.toElement().tagName();
-                    identifiant.right(1);
+                    identifiant=identifiant.remove(0,1);
                     _ListEvenement->append(identifiant+" "+child.toElement().text());
                     child=child.nextSibling();
                 }
@@ -168,6 +172,8 @@ void MatchXml::InitStatFromXml(QDomNode child,int TemOrPl,bool isSet,int numset,
         QString strAction=GchElement.tagName();
 
         int action=_ParamMatch->GetActionFromString(strAction);
+        if (action==-1)
+            return;
         for(int i=0;i<_ParamMatch->get_Valeur().size();i++)
         {
             QString valeur=_ParamMatch->get_Valeur().at(i);
@@ -272,3 +278,7 @@ QDomDocument MatchXml::Getdoc()
     return _doc;
 }
 
+QDomElement MatchXml::GetRoot()
+{
+    return _doc.documentElement();
+}

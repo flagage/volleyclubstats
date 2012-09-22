@@ -139,18 +139,23 @@ void statValeur::SupValeur(int pos)
     switch (pos)
     {
     case 0:
+        if(vpp!=0)
         vpp=vpp-1;
         break;
     case 1:
+        if(vp!=0)
         vp=vp-1;
         break;
     case 2:
+        if(v0!=0)
         v0=v0-1;
         break;
     case 3:
+        if(vm!=0)
         vm=vm-1;
         break;
     case 4:
+        if(vmm!=0)
         vmm=vmm-1;
         break;
     default:

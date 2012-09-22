@@ -8,9 +8,10 @@ Score::Score()
     _ScVisiteur=0;
     _SetLocal=0;
     _SetVisiteur=0;
-    _Service=0;
     _TmLocal=0;
     _TmVisiteur=0;
+    _ServeurSet=0;
+    _ServeurCurrent=0;
 }
 
 Score::~Score()
@@ -20,7 +21,12 @@ Score::~Score()
 
 void Score::set_Service(int value)
 {
-    _Service = value;
+    _ServeurCurrent = value;
+}
+
+void Score::set_ServiceSet(int value)
+{
+    _ServeurSet=value;
 }
 
 void Score::set_TmVisiteur(int value)
@@ -55,7 +61,11 @@ void Score::set_ScLocal(int value)
 
 int Score::get_Service()
 {
-    return _Service;
+    return _ServeurCurrent;
+}
+int Score::get_ServiceSet()
+{
+    return _ServeurCurrent;
 }
 
 int Score::get_TmVisiteur()

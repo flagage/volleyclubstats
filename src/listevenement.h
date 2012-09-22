@@ -16,6 +16,7 @@ public:
 private:
   QMenu* _menu;
   QMenu* _menuTm;
+  QMenu* _menuFirst;
   bool _MenuActif;
   void Connection();
   void Initialisation();

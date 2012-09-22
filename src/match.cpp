@@ -294,22 +294,56 @@ void Match::CreerSet(QString score,QStringList list)
     //_numCurentSet++;
 }
 
-void Match::FinSet()
+bool Match::FinSet()
 {
 
-    if(_ParamMatch->GetNumSet()<_ParamMatch->get_NbSet())
-    {
+
         _score->SauvegardeScore();
-        _ParamMatch->SetNumSet(_ParamMatch->GetNumSet()+1);
-        this->MiseajourScore();
-        this->AddSetToXml();
 
-    }
+        if(isFinMatch()==false)
+        {
 
+            _ParamMatch->SetNumSet(_ParamMatch->GetNumSet()+1);
+            for(int i=0;i<this->_ListJoueur.size();i++)
+            {
+                this->_ListJoueur.at(i)->initSet(_ParamMatch->GetNumSet());
+            }
+            this->_currentEquipe->initSet(_ParamMatch->GetNumSet());
+            this->_EquipeVisiteur->initSet(_ParamMatch->GetNumSet());
+            this->MiseajourScore();
+            //this->InitStat();
+            this->AddSetToXml();
+            return true;
+        }
+
+
+return false;
 
 }
 
+/*void Match::InitStat()
+{
 
+}*/
+
+bool Match::isFinMatch()
+{
+
+    int total=_ParamMatch->get_NbSet();
+    int nbsetCurent=_score->get_SetLocal()+_score->get_SetVisiteur();
+    int moitiertotal=total/2;
+    if(nbsetCurent>total)
+    {
+       return true;
+    }
+    else if(_score->get_ScVisiteur()>moitiertotal || _score->get_ScLocal()>moitiertotal)
+    {
+        return true;
+    }
+
+    return false;
+
+}
 
 int Match::GetCurentSet ()
 {
@@ -450,6 +484,10 @@ QString Match::GetType()
 }
 bool Match::AddAction(QString joueurname,int position, StatValeur valu,int action)
 {
+    if(action==-1)
+    {
+        return false;
+    }
     Joueur* player=NULL;
     int currentjoueur;
     int numjoueur;
@@ -487,8 +525,7 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
         MiseAjourStat(_currentEquipe,player,action);
 
         error=false;
-        //QString nomjoueur=player->get_Nom()+"_"+QString::number(player->get_NumMaillot());
-        //this->_Fichierxml->SauvegardeAction(player,action,2);
+
 
     }
 
@@ -550,7 +587,7 @@ QList <Joueur*> Match::GetListJoueur()
 void Match::EcritureCurrentMatch()
 {
     _fileXmlCurrent.setFileName(QString("Current/Match.xml"));
-    QDomNode noeud=_doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"");
+    QDomNode noeud=_doc.createProcessingInstruction ("xml","version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"");
     _doc.insertBefore (noeud,_doc.firstChild ());
     _root = _doc.createElement("Info");
     _doc.appendChild(_root);
@@ -579,6 +616,11 @@ void Match::EcritureCurrentMatch()
     /// Information sur les actions choisies
     QDomElement Action=_doc.createElement("Action");
     text=_doc.createTextNode(_ParamMatch->get_Action().join(","));
+    Action.appendChild(text);
+    _root.appendChild(Action);
+    /// Information sur les actions de defilement choisies
+     Action=_doc.createElement("ActionDefilement");
+    text=_doc.createTextNode(_ParamMatch->get_ActionDefile().join(","));
     Action.appendChild(text);
     _root.appendChild(Action);
     /// position des joueurs
@@ -698,14 +740,23 @@ void Match::EcrireStatMatchxml(QDomElement * element)
 
 }
 
-void Match::EcrireStatXml(QDomElement * element)
+void Match::EcrireStatXml(QDomElement * element,bool isMatch)
 {
     for(int j=0;j<_currentEquipe->GetListAction().size();j++)
     {
-        QDomElement action=_doc.createElement(_currentEquipe->GetListAction().at(j));
+        QString StrAction=_currentEquipe->GetListAction().at(j);
+        StrAction.replace("é","e");
+        QDomElement action=_doc.createElement(StrAction);
         for(int k=0;k<_currentEquipe->GetListValeur().size();k++)
         {
-            action.setAttribute(_currentEquipe->GetListValeur().at(k),_currentEquipe->getStatMatch(j,k));
+            if(isMatch==true)
+            {
+                action.setAttribute(_currentEquipe->GetListValeur().at(k),_currentEquipe->getStatMatch(j,k));
+            }
+            else
+            {
+                action.setAttribute(_currentEquipe->GetListValeur().at(k),_currentEquipe->getStatSet(j,k,this->_ParamMatch->GetNumSet()));
+            }
         }
         element->appendChild(action);
     }
@@ -812,6 +863,7 @@ void Match::InfoFromXML( QList <Equipe*> listequipe)
     FichierXml.setEquipe(this->_currentEquipe);
     FichierXml.LectureXML("Current/Match.xml");
     _doc=FichierXml.Getdoc();
+    _root=FichierXml.GetRoot();
     _fileXmlCurrent.setFileName(QString("Current/Match.xml"));
     InitListTerrainfromPosition();
 }
@@ -886,6 +938,7 @@ void Match::MiseajourScore()
             e.setAttribute("SetVisiteur",_score->get_SetVisiteur());
             e.setAttribute("TmVisiteur",_score->get_TmVisiteur());
             e.setAttribute ("Service",_score->get_Service());
+            e.setAttribute("ServiceSet",_score->get_ServiceSet());
             e.setAttribute("ListScore",_score->ListdesScore().join("_"));
 
         }
@@ -1082,6 +1135,12 @@ void Match::AddSetToXml()
     QDomElement statSet=_doc.createElement(strSet);
     EcrireStatMatchxml(&statSet);
     _root.appendChild(statSet);
+
+    if (!_fileXmlCurrent.open(QIODevice::WriteOnly))
+        return;
+    QTextStream ts( &_fileXmlCurrent );
+    ts << _doc.toString();
+    _fileXmlCurrent.close();
 }
 
 void Match::AddJoueurToXml(Joueur * player,bool isSet)

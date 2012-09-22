@@ -64,7 +64,8 @@ void RevuMatch::InitialiseIhmFromFile()
     ui->label_NomVisiteur->setText(_EquipeVisiteur->GetNom());
     ui->spinBox_Set->setValue(this->_ParamMatch->get_NbSet());
     ui->spinBox_NbJoueur->setValue(this->_ParamMatch->get_NbJoueur());
-    switch (_ParamMatch->get_NbSet())
+    int sc=_Score->ListdesScore().size();
+    switch (sc)
     {
     case 1:
         ui->label_5->setVisible(true);
@@ -232,19 +233,21 @@ void RevuMatch::InitialisationStats()
     _VectortabEff.at(0)->SlotMiseAJour(false,0);
     for(int k=0;k<_ParamMatch->get_Action().size();k++)
     {
-        _VectorTabFram.at(k*(_ParamMatch->GetNumSet()))->clean();
-        _VectorTabFram.at(k*(_ParamMatch->GetNumSet()))->Init();
-        _VectorTabFram.at(k*(_ParamMatch->GetNumSet()))->SlotMiseAJour(false,0);
+        int valeur=_ParamMatch->get_NbSet()+1;
+        _VectorTabFram.at(k*(valeur))->clean();
+        _VectorTabFram.at(k*(valeur))->Init();
+        _VectorTabFram.at(k*(valeur))->SlotMiseAJour(false,0);
     }
 
-    for(int i=1;i<_ParamMatch->GetNumSet();i++)
+    for(int i=1;i<_ParamMatch->get_NbSet();i++)
     {
         _VectortabEff.at(i)->clean();
         _VectortabEff.at(i)->Init(_currentEquipe->GetListeJoueur(),_ParamMatch->get_Action());
         _VectortabEff.at(i)->SlotMiseAJour(true,i);
         for(int k=0;k<_ParamMatch->get_Action().size();k++)
         {
-            int ActionSet=i+k*(_ParamMatch->GetNumSet());
+            int ActionSet=i+k*(_ParamMatch->get_NbSet()+1);
+           // ActionSet++;
             _VectorTabFram.at(ActionSet)->clean();
             _VectorTabFram.at(ActionSet)->Init();
             _VectorTabFram.at(ActionSet)->SlotMiseAJour(true,i);

@@ -29,6 +29,8 @@ private :
 
        QStringList _Action;
 
+       QStringList _ActionDefilement;
+
        //QMap _Position;
 
        int _Nb_Set;
@@ -74,6 +76,9 @@ public:
    QStringList get_Action();
 
   void set_Action(QStringList value);
+
+  QStringList get_ActionDefile();
+  void set_ActionDefile(QStringList value);
 
   // QMap get_Position();
 

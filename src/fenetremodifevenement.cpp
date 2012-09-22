@@ -1,14 +1,15 @@
 #include "fenetremodifevenement.h"
 #include "ui_fenetremodifevenement.h"
 
-FenetreModifEvenement::FenetreModifEvenement(QStringList list1,QStringList list2,QStringList list3,QWidget *parent) :
+FenetreModifEvenement::FenetreModifEvenement(QStringList listJoueur,QStringList listAction,QStringList listValeur,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FenetreModifEvenement)
 {
     ui->setupUi(this);
-    ui->comboBox->addItems (list1);
-    ui->comboBox_2->addItems (list2);
-    ui->comboBox_3->addItems (list3);
+    listJoueur<<"00";
+    ui->comboBox->addItems (listJoueur);
+    ui->comboBox_2->addItems (listAction);
+    ui->comboBox_3->addItems (listValeur);
     QStringList listPosition;
     listPosition<<"P1"<<"P2"<<"P3"<<"P4"<<"P5"<<"P6";
     ui->comboBox_4->addItems(listPosition);
@@ -32,7 +33,7 @@ void FenetreModifEvenement::Modif(QString message)
     }
     for(int i=0;i<ui->comboBox_2->count();i++)
     {
-        if (list[1]==ui->comboBox_2->itemText (i))
+        if (list[1]==ui->comboBox_2->itemText (i).left(3))
         {
             ui->comboBox_2->setCurrentIndex (i);
             break;

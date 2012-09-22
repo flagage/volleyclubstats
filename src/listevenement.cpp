@@ -15,6 +15,7 @@ ListEvenement::~ListEvenement ()
 {
     delete _menu;
     delete _menuTm;
+    delete _menuFirst;
 }
 
 void ListEvenement::Initialisation()
@@ -23,6 +24,10 @@ void ListEvenement::Initialisation()
     _menu->addAction (tr("Ajouter Avant"));
     _menu->addAction (tr("Modifier"));
     _menu->addAction (tr("Supprimer"));
+
+    _menuFirst=new QMenu(this);
+    _menuFirst->addAction (tr("Modifier"));
+    _menuFirst->addAction (tr("Supprimer"));
 
     _menuTm=new QMenu(this);
     _menuTm->addAction(tr("Supprimer tm"));
@@ -34,6 +39,7 @@ void ListEvenement::Connection()
     connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem*)),this,SLOT(Slot_DClick()));
     connect(_menu,SIGNAL(triggered(QAction*)),this,SLOT(Slot_Action(QAction *)));
     connect(_menuTm,SIGNAL(triggered(QAction*)),this,SLOT(Slot_ActionTm(QAction *)));
+    connect(_menuFirst,SIGNAL(triggered(QAction*)),this,SLOT(Slot_Action(QAction *)));
 }
 
 void ListEvenement::Slot_DClick()
@@ -44,6 +50,10 @@ void ListEvenement::Slot_DClick()
         if(this->currentItem()->text().contains("Temps mort"))
         {
             _menuTm->exec(QCursor::pos());
+        }
+        else if(this->currentRow()==0)
+        {
+            _menuFirst->exec(QCursor::pos());
         }
         else
         {
@@ -85,15 +95,22 @@ void ListEvenement::Slot_ActionTm(QAction * action)
 
 void ListEvenement::addItem( QString label)
 {
-    QStringList Listlabel=label.split(" ");
-    if(Listlabel.size()==5)
+   /* QStringList Listlabel=label.split(" ");
+    if(Listlabel.size()>=5)
     {
-        QListWidget::addItem(Listlabel[1]+" "+Listlabel[2]+" "+Listlabel[3]+" "+Listlabel[4] );
+        QString labelAffiche;
+        for(int i=0;i<Listlabel.size()-1;i++)
+        {
+            labelAffiche=labelAffiche+" "+Listlabel[i+1];
+        }
+
+        QListWidget::addItem(labelAffiche );
     }
     else
     {
-        QListWidget::addItem(Listlabel[1]);
-    }
+        QListWidget::addItem(label);
+    }*/
+    QListWidget::addItem(label);
 
 }
 
