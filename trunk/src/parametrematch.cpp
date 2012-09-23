@@ -145,12 +145,12 @@ void ParametreMatch::set_ScoreMax(int i)
     _Score_Max=i;
 }
 
-int ParametreMatch::AvecLibero()
+bool ParametreMatch::AvecLibero()
 {
     return _AvecLibero;
 }
 
-void ParametreMatch::SetLibero(int valeur)
+void ParametreMatch::SetLibero(bool valeur)
 {
     _AvecLibero=valeur;
 }

@@ -1,13 +1,14 @@
 #include "framstats.h"
 #include "ui_framstats.h"
 
-FramStats::FramStats(int action,QList <Joueur*> joueur,QWidget *parent) :
+FramStats::FramStats(int action,Equipe* team,QWidget *parent) :
     QFrame(parent),
     ui(new Ui::FramStats)
 {
     ui->setupUi(this);
     this->_Action=action;
-    this->_listJoueur=joueur;
+    this->_listJoueur=team->GetListeJoueur();
+    this->_team=team;
     this->_listvaleur=_listJoueur.at(0)->GetListValeur();
     _tabStat=0;
 
@@ -43,6 +44,23 @@ void FramStats::SlotMiseAJour(bool isSet,int numSet)
                item->setText(strValeur);
            }
        }
+
+       /// Equipe
+       for(int i=0;i<_listvaleur.size();i++)
+       {
+           QTableWidgetItem *item=_tabStat->item(_listJoueur.size()+1,i+2);
+           double valeur;
+            if(isSet==false)
+                   valeur=_team->getStatMatch(_Action,i);
+            else
+                 valeur=_team->getStatSet(_Action,i,numSet);
+           QString strValeur;
+           strValeur.setNum(valeur,'g',4);
+           if(item!=0)
+           {
+               item->setText(strValeur);
+           }
+
    }
 
 
@@ -50,7 +68,7 @@ void FramStats::SlotMiseAJour(bool isSet,int numSet)
 
 }
 
-
+}
 Joueur* FramStats::PlayerfromNum(QString num)
 {
     for(int k=0;k<_listJoueur.size();k++)
@@ -71,7 +89,7 @@ void FramStats::clean()
 
 void FramStats::Init()
 {
-    _tabStat=new TableStat(ui->groupBox,_listJoueur,_Action,_listvaleur);
+    _tabStat=new TableStat(ui->groupBox,_team,_Action,_listvaleur);
     this->show();
 }
 
@@ -79,10 +97,11 @@ void FramStats::Init()
 
 
 
-TableStat::TableStat(QWidget * parent,QList <Joueur*> listJoueur,int action,QStringList ListValeur)
+TableStat::TableStat(QWidget * parent,Equipe * team,int action,QStringList ListValeur)
     :  QTableWidget(parent)
 {
 
+    QList <Joueur*>  listJoueur=team->GetListeJoueur();
     QColor ColorAction;
     switch (action)
     {
@@ -112,7 +131,7 @@ TableStat::TableStat(QWidget * parent,QList <Joueur*> listJoueur,int action,QStr
     }
 
     this->setColumnCount (ListValeur.size()+2);
-    this->setRowCount (listJoueur.size());
+    this->setRowCount (listJoueur.size()+1);
 
     this->setSortingEnabled(true);
     this->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -160,6 +179,23 @@ TableStat::TableStat(QWidget * parent,QList <Joueur*> listJoueur,int action,QStr
         }
 
     }
+    /// On remplit le total
+    int iC=listJoueur.size();
+    this->setItem(iC,0,new QTableWidgetItem("Equipe"));
+     this->item(iC,0)->setBackgroundColor(QColor(167,167,167));
+    this->setItem(iC,1,new QTableWidgetItem("99"));
+     this->item(iC,1)->setBackgroundColor(QColor(167,167,167));
+
+    for(int i=0;i<ListValeur.size();i++)
+    {
+        double valeur=team->getStatMatch(action,i);
+        QString strValeur;
+        strValeur.setNum(valeur);
+
+        this->setItem(iC,i+2,new QTableWidgetItem(QString(strValeur)));
+        this->item(iC,i+2)->setBackgroundColor(ColorAction);
+    }
+
 
     if(parent->layout() != 0)
         parent->layout()->addWidget(this);

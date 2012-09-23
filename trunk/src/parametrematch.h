@@ -36,7 +36,7 @@ private :
        int _Nb_Set;
        int _Nb_Joueur;
        int _Score_Max;
-       int _AvecLibero;
+       bool _AvecLibero;
        int _NumSet;
 
 
@@ -93,8 +93,8 @@ public:
   int get_ScoreMax();
   void set_ScoreMax(int);
 
-  int AvecLibero();
-  void SetLibero(int );
+  bool AvecLibero();
+  void SetLibero(bool );
 
   int get_TotJoueur();
 

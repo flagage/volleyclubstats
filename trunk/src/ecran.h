@@ -104,6 +104,7 @@ public:
     void JoueurBanc();
     void AddJoueurBanc(Joueur* joueur);
      void AfficherStat();
+     void InitTempsMort();
 
      void InitialisationFromXml();
 

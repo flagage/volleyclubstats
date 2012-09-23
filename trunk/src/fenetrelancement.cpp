@@ -177,8 +177,10 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
     {
         Equipe* Team=_ListEquipe.at(i);
         if(ui->comboBox->currentText()==Team->GetNom())
+        {
         Match::donneInstance()->setCurrentEquipe(Team);
         break;
+        }
     }
     Match::donneInstance()->setAdvers(ui->lineEdit->text());
     Match::donneInstance()->GetScore()->set_ScLocal(ui->spinBox_9->value());

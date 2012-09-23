@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>714</width>
-    <height>510</height>
+    <height>516</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -127,7 +127,7 @@
       <item row="1" column="3">
        <widget class="QCheckBox" name="checkBox_11">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Oui</string>
@@ -217,18 +217,6 @@
        </layout>
       </item>
      </layout>
-     <zorder>label_11</zorder>
-     <zorder>label_12</zorder>
-     <zorder>label_13</zorder>
-     <zorder>label_14</zorder>
-     <zorder>groupBox_8</zorder>
-     <zorder>spinBox_6</zorder>
-     <zorder>spinBox_7</zorder>
-     <zorder>spinBox_8</zorder>
-     <zorder>checkBox_11</zorder>
-     <zorder>groupBox_5</zorder>
-     <zorder>groupBox_3</zorder>
-     <zorder>groupBox</zorder>
     </widget>
    </item>
    <item row="1" column="0">
@@ -644,8 +632,6 @@
   <zorder>groupBox_2</zorder>
   <zorder>groupBox_4</zorder>
   <zorder></zorder>
-  <zorder>groupBox_7</zorder>
-  <zorder>groupBox_6</zorder>
  </widget>
  <tabstops>
   <tabstop>spinBox_6</tabstop>

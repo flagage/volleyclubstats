@@ -68,6 +68,7 @@ void Rotation(int &joueur);
 void RotationM(int &joueur);
 QString ChercherJoueur(int &currentposition);
 QString ChercherPasseur();
+QString ChercherPasseurPosition();
 QString GetServeur();
 Joueur *RechercheJoueur(int numero);
 bool SetLineEdit(QDropEvent * e);

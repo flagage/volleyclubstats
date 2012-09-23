@@ -215,7 +215,7 @@ for(int a=0;a<_ParamMatch->get_Action().size();a++)
             NomOnglet="Set n°"+QString::number(i);
         }
         tabWidget->addTab(tabelement,NomOnglet);
-        _VectorTabFram.append(new FramStats(a,_currentEquipe->GetListeJoueur(),tabelement));
+        _VectorTabFram.append(new FramStats(a,_currentEquipe,tabelement));
     }
 
     layout->addWidget(tabWidget, 0, 0, 1, 1);

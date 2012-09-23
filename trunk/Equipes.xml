@@ -41,4 +41,14 @@
  <Equipe Nom="test" Division="Regional" Categorie="departemental"/>
  <Equipe Nom="villebon2" Division="Regional" Categorie=""/>
  <Equipe Nom="tst" Division="Regional" Categorie=""/>
+ <Equipe Nom="RF3 2012/13" Division="Regional" Categorie="Regional">
+  <joueur Maillot="10" Adresse="" Tel="0" Prenom="Alix" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
+  <joueur Maillot="1" Adresse="" Tel="0" Prenom="Maryline" Nom="" License="0" Email="" Age="14/09/1981" poste="Complet"/>
+  <joueur Maillot="13" Adresse="" Tel="0" Prenom="Alexandra" Nom="" License="0" Email="" Age="01/01/2000" poste="Passeur"/>
+  <joueur Maillot="3" Adresse="" Tel="0" Prenom="lara" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
+  <joueur Maillot="12" Adresse="" Tel="0" Prenom="josephine" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
+  <joueur Maillot="11" Adresse="" Tel="0" Prenom="odile" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
+  <joueur Maillot="7" Adresse="" Tel="0" Prenom="Solen" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
+  <joueur Maillot="4" Adresse="" Tel="0" Prenom="Veronique" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
+ </Equipe>
 </root>
