@@ -4,7 +4,7 @@
 #include <QFrame>
 #include "QTableWidget"
 #include "QLayout"
-#include "Joueur.h"
+#include "Equipe.h"
 
 namespace Ui {
 class FramStats;
@@ -15,7 +15,7 @@ class TableStat: public QTableWidget
 
 public:
 
-    TableStat(QWidget * parent,QList <Joueur*> list,int Action,QStringList ListValeur);
+    TableStat(QWidget * parent,Equipe* team,int Action,QStringList ListValeur);
 };
 
 
@@ -25,7 +25,7 @@ class FramStats : public QFrame
     Q_OBJECT
     
 public:
-    explicit FramStats(int action,QList <Joueur*> joueur,QWidget *parent = 0);
+    explicit FramStats(int action,Equipe* team,QWidget *parent = 0);
     ~FramStats();
     void Init();
     void clean();
@@ -38,6 +38,7 @@ private:
     QStringList _listvaleur;
     QList <Joueur*>_listJoueur;
     int _Action;
+    Equipe * _team;
 
 public slots:
     void SlotMiseAJour(bool isSet=false,int numSet=0);

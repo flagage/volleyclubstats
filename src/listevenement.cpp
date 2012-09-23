@@ -111,6 +111,7 @@ void ListEvenement::addItem( QString label)
         QListWidget::addItem(label);
     }*/
     QListWidget::addItem(label);
+    this->scrollToItem(this->currentItem());
 
 }
 

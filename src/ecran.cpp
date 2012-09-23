@@ -152,6 +152,7 @@ void Ecran::Connexion()
     //bouton de rotation
     connect (ui->pBRotationPlus,SIGNAL(clicked()),this,SLOT(slot_rotationP()));
     connect (ui->pBRotationMoins,SIGNAL(clicked()),this,SLOT(slot_rotationM()));
+    //connect (ui->tabWidget,SIGNAL(currentChanged(int)),this,SLOT(MiseAjourtab(int)));
 
 
 
@@ -182,7 +183,7 @@ void Ecran::InitIhmMatch()
 
     /// Placement des joueurs
     int nbjoueur= Match::donneInstance()->GetParametreMatch()->get_TotJoueur();
-    _PlacementJoueur=new KeyJoueur(ui->label_4,nbjoueur,true);
+    _PlacementJoueur=new KeyJoueur(ui->label_4,nbjoueur,Match::donneInstance()->GetParametreMatch()->AvecLibero());
     QHBoxLayout *layout=new QHBoxLayout();
     layout->addWidget (_PlacementJoueur);
     connect(this->_PlacementJoueur,SIGNAL(Changement(QPushButton*)),this,SLOT(slot_changement(QPushButton*)));
@@ -288,7 +289,7 @@ void Ecran::InitIhmMatch()
                 NomOnglet="Set n"+QString::number(i);
             }
             tabWidget->addTab(tabelement,NomOnglet);
-            _VectorTabFram.append(new FramStats(a,Match::donneInstance()->getTeam()->GetListeJoueur(),tabelement));
+            _VectorTabFram.append(new FramStats(a,Match::donneInstance()->getTeam(),tabelement));
         }
 
         layout->addWidget(tabWidget, 0, 0, 1, 1);
@@ -555,7 +556,7 @@ void Ecran::Slot_start()
 
     }
     this->_PlacementJoueur->Start();
-    ChercherPasseur();
+
 
     _isMatchEnCour=true;
     Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
@@ -570,7 +571,7 @@ void Ecran::Slot_start()
 }
 QString  Ecran::ChercherPasseur()
 {
-    return this->_PlacementJoueur->ChercherJoueur(this->_currentposition);
+    return this->_PlacementJoueur->ChercherPasseurPosition();
 
 
 }
@@ -1205,13 +1206,22 @@ bool Ecran::FinSet()
     for(int tab=0;tab<Match::donneInstance()->GetParametreMatch()->get_Action().size();tab++)
     {
     int num=(tab)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
-    int numAcSet=num+Match::donneInstance()->GetParametreMatch()->GetNumSet()-1;
+    int numAcSet=num+Match::donneInstance()->GetParametreMatch()->GetNumSet();
     FramStats *currentframSet=_VectorTabFram.at(numAcSet);
     currentframSet->clean();
     currentframSet->Init();
     }
     MiseAjourtab(Match::donneInstance()->GetParametreMatch()->GetNumSet());
+    InitTempsMort();
     return bretour;
+}
+
+void Ecran::InitTempsMort()
+{
+    ui->label_6->setVisible(false);
+    ui->label_7->setVisible(false);
+    ui->label_8->setVisible(false);
+    ui->label_9->setVisible(false);
 }
 
 void Ecran::FinMatch()
@@ -1997,15 +2007,16 @@ void Ecran::UpdateTabVue(int tab)
         _VectortabEff.at(numSet)->Init(Match::donneInstance()->GetListJoueur(),Match::donneInstance()->GetParametreMatch()->get_Action());
         break;
     default:
-        int num=(tab-2)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
-        int numAcSet=num+numSet;
-        FramStats *currentfram=_VectorTabFram.at(num);
-        currentfram->clean();
-        currentfram->Init();
-        FramStats *currentframSet=_VectorTabFram.at(numAcSet);
-        currentframSet->clean();
-        currentframSet->Init();
+        for(int k=0;k<=Match::donneInstance()->GetParametreMatch()->GetNumSet();k++)
+        {
 
+            int num= k+(tab-2)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
+            FramStats *currentfram=_VectorTabFram.at(num);
+            currentfram->clean();
+            currentfram->Init();
+            currentfram->SlotMiseAJour(true,k);
+
+        }
         break;
     }
 }

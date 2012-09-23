@@ -99,7 +99,7 @@ int Score::get_ScLocal()
 }
 void Score::SauvegardeScore()
 {
-    QString score=QString::number(_ScLocal)+":"+QString::number(_ScVisiteur);
+    QString score=QString::number(_ScLocal)+":"+QString::number(_ScVisiteur)+"_";
     _ListScore.append(score);
     if(_ScLocal>_ScVisiteur)
     {

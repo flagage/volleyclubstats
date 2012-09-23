@@ -310,8 +310,9 @@ bool Match::FinSet()
             }
             this->_currentEquipe->initSet(_ParamMatch->GetNumSet());
             this->_EquipeVisiteur->initSet(_ParamMatch->GetNumSet());
+            this->_score->set_TmLocal(0);
+            this->_score->set_TmVisiteur(0);
             this->MiseajourScore();
-            //this->InitStat();
             this->AddSetToXml();
             return true;
         }
@@ -321,10 +322,8 @@ return false;
 
 }
 
-/*void Match::InitStat()
-{
 
-}*/
+
 
 bool Match::isFinMatch()
 {
@@ -872,7 +871,7 @@ void Match::InitListTerrainfromPosition()
 {
     _ListTerrain.clear();
     QList<Joueur *> listjoueur=this->_currentEquipe->GetListeJoueur();
-    for(int i=0;i<this->_listPosition.size();i++)
+    for(int i=0;i<this->GetParametreMatch()->get_NbJoueur();i++)
     {
         QString valeur=_listPosition.at(i);
         QStringList listval=valeur.split("_");
@@ -939,7 +938,12 @@ void Match::MiseajourScore()
             e.setAttribute("TmVisiteur",_score->get_TmVisiteur());
             e.setAttribute ("Service",_score->get_Service());
             e.setAttribute("ServiceSet",_score->get_ServiceSet());
-            e.setAttribute("ListScore",_score->ListdesScore().join("_"));
+            QString list;
+            for(int i=0;i<_score->ListdesScore().size();i++)
+            {
+                list=list+_score->ListdesScore().at(i);
+            }
+            e.setAttribute("ListScore",list);
 
         }
         n = n.nextSibling();
