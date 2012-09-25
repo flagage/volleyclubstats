@@ -874,6 +874,8 @@ void Match::InitListTerrainfromPosition()
     for(int i=0;i<this->GetParametreMatch()->get_NbJoueur();i++)
     {
         QString valeur=_listPosition.at(i);
+        if(valeur!="")
+        {
         QStringList listval=valeur.split("_");
         for(int k=0;k<listjoueur.size();k++)
         {
@@ -885,6 +887,7 @@ void Match::InitListTerrainfromPosition()
             }
 
 
+        }
         }
     }
     this->SetJoueurTerr(_ListTerrain);
@@ -974,8 +977,17 @@ void Match:: MiseaJourposte()
                 QString poste=f.tagName();
                 QString number=poste.at(5);
                 int ipost=number.toInt();
-                f.replaceChild(_doc.createTextNode(this->Rechercheposte(ipost)),f.firstChild());
 
+                QDomNode replace=f.replaceChild(_doc.createTextNode(this->Rechercheposte(ipost)),f.firstChild());
+                if (replace.isNull())
+                {
+                    QString strposte="Poste"+number;
+                    QDomElement poste=_doc.createElement (strposte);
+                    QDomText text=_doc.createTextNode(Rechercheposte(ipost));
+                    poste.appendChild(text);
+                    e.appendChild(poste);
+
+                }
                 child=child.nextSibling();
             }
 

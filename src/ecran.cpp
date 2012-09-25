@@ -580,11 +580,14 @@ void Ecran::slot_changement(QPushButton *boutton)
     changement(boutton->text(),boutton);
     Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
     QString strjoueur=boutton->text();
+    if(strjoueur.contains("Position")==false)
+    {
     strjoueur=strjoueur.split("/n").at(0);
     strjoueur=strjoueur.replace(")","");
     QStringList lisstr=strjoueur.split("(");
     strjoueur=lisstr.at(1)+"_"+lisstr.at(0);
     Match::donneInstance()->AddJoueurToXml(Match::donneInstance()->RechercheJoueur(strjoueur));
+    }
 }
 
 void Ecran::SlotAddJoueur()
@@ -603,20 +606,26 @@ void Ecran::SlotAddJoueur()
 void Ecran::SlotSupJoueur()
 {
     QPushButton *boutton=(QPushButton*) sender();
-
-
-    QStringList strlist=boutton->text().split("(");
-    strlist=strlist[1].split(")");
-    QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
-    for(int i=0;i<listJoueur.size();i++)
+    QString text=boutton->text();
+    if(text.contains("Position")==true)
     {
-
-        if (listJoueur.at(i)->get_Prenom()==strlist[0])
+        boutton->deleteLater();
+    }
+    else
+    {
+        QStringList strlist=boutton->text().split("(");
+        strlist=strlist[1].split(")");
+        QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
+        for(int i=0;i<listJoueur.size();i++)
         {
-            Match::donneInstance()->getTeam()->supJoueur(listJoueur.at(i));
-            this->EnregistrerXML();
-            boutton->deleteLater();
-            slot_initChangement();
+
+            if (listJoueur.at(i)->get_Prenom()==strlist[0])
+            {
+                Match::donneInstance()->getTeam()->supJoueur(listJoueur.at(i));
+                this->EnregistrerXML();
+                boutton->deleteLater();
+                slot_initChangement();
+            }
         }
     }
 
