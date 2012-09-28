@@ -50,6 +50,7 @@ public:
     ~FenetreChoixMatch();
     bool Ouvrir();
     QString GetFichierSelectionner();
+    void Actualiser();
 
 private:
     Ui::FenetreChoixMatch *ui;
@@ -60,6 +61,8 @@ private:
 public slots:
     void Slot_ok();
     void Slot_sup();
+    void Slot_importer();
+    void Slot_exporter();
 };
 
 #endif // FENETRECHOIXMATCH_H

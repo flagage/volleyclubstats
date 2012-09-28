@@ -2,6 +2,7 @@
 #include "ui_revumatch.h"
 #include "matchxml.h"
 #include "QSplitter"
+#include "QMessageBox"
 
 RevuMatch::RevuMatch(QWidget *parent) :
     QDialog(parent),
@@ -60,6 +61,8 @@ void RevuMatch::LectureFichierXML()
 
 void RevuMatch::InitialiseIhmFromFile()
 {
+    if(this->_ParamMatch!=0)
+    {
     ui->label_NomLocal->setText(_currentEquipe->GetNom());
     ui->label_NomVisiteur->setText(_EquipeVisiteur->GetNom());
     ui->spinBox_Set->setValue(this->_ParamMatch->get_NbSet());
@@ -131,6 +134,12 @@ void RevuMatch::InitialiseIhmFromFile()
     }
 
     this->show();
+    }
+    else
+    {
+        QMessageBox::information(this,tr("Ouverture Impossible"),tr("La fiche selectionner ne peut etre ouverte"));
+        this->close();
+    }
 }
 
 void RevuMatch::Initialisation()

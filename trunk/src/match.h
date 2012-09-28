@@ -61,7 +61,7 @@ private:
      bool _lancementok;
     QTime _TempsSet;
     QList <Joueur*> _ListJoueur;
-    QList <Joueur*> _ListTerrain;
+    QList <Joueur*>  _ListTerrain;
     Joueur * _JouerAdvers;
     MatchXml *_Fichierxml;
     int _point;
@@ -169,6 +169,8 @@ public:
 
    void AjoutEvenement(QString,QString);
    void SuppElement(QString identifiant);
+
+   void addJoueurTerrain(Joueur* joueur);
 
 };
 

@@ -36,6 +36,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "QDir"
 #include "lecturematch.h"
 #include "QListWidgetItem"
+#include "QFileDialog"
 
 FenetreChoixMatch::FenetreChoixMatch(QWidget *parent) :
     QDialog(parent),
@@ -46,6 +47,8 @@ FenetreChoixMatch::FenetreChoixMatch(QWidget *parent) :
 
        connect(ui->pushButton_ouv,SIGNAL(clicked()),this,SLOT(Slot_ok()));
        connect(ui->pushButton_sup,SIGNAL(clicked()),this,SLOT(Slot_sup()));
+       connect(ui->pB_Importer,SIGNAL(clicked()),this,SLOT(Slot_importer()));
+       connect(ui->pB_exporter,SIGNAL(clicked()),this,SLOT(Slot_exporter()));
        this->setWindowIcon((QIcon("Icone/logo_vcs_transparent.png")));
     //this->Widget=new WidgRevMatch(ui->frame);
     //Widget->Ouvrir ();
@@ -53,36 +56,41 @@ FenetreChoixMatch::FenetreChoixMatch(QWidget *parent) :
 
 bool FenetreChoixMatch::Ouvrir()
 {
-     //Recupertation du nombre de fiche present dans le repertoire de sauvegarde
-    QString nom_repertoire = QString("Sauvegarde");
-    QDir Repertoir(nom_repertoire);
-    QStringList filtre;
-    filtre<<"*.xml";
-    Repertoir.setNameFilters (filtre);
-    QStringList listFiche=Repertoir.entryList(QDir::Files|QDir::NoDotAndDotDot);
-    int nbFile=listFiche.size();
 
-    _table->setRowCount(nbFile);
-
-    for(int i=0;i<listFiche.size ();i++)
-    {
-        ///lecture du fichier xml
-        LectureMatch* fichier=new LectureMatch(listFiche.at (i));
-        QStringList Info;
-        Info.append(listFiche.at(i));
-        for(int k=0;k< fichier->GetInfoGeneral().size();k++)
-        {
-             Info.append(fichier->GetInfoGeneral().at(k));
-        }
-        ///ecriture des info dans le tableau
-        _table->ActualiserLigne (i,Info);
-
-    }
-
+    Actualiser();
     return this->exec ();
 
 }
 
+void FenetreChoixMatch::Actualiser()
+{
+    _table->clearContents();
+    //Recupertation du nombre de fiche present dans le repertoire de sauvegarde
+   QString nom_repertoire = QString("Sauvegarde");
+   QDir Repertoir(nom_repertoire);
+   QStringList filtre;
+   filtre<<"*.xml";
+   Repertoir.setNameFilters (filtre);
+   QStringList listFiche=Repertoir.entryList(QDir::Files|QDir::NoDotAndDotDot);
+   int nbFile=listFiche.size();
+
+   _table->setRowCount(nbFile);
+
+   for(int i=0;i<listFiche.size ();i++)
+   {
+       ///lecture du fichier xml
+       LectureMatch* fichier=new LectureMatch(listFiche.at (i));
+       QStringList Info;
+       Info.append(listFiche.at(i));
+       for(int k=0;k< fichier->GetInfoGeneral().size();k++)
+       {
+            Info.append(fichier->GetInfoGeneral().at(k));
+       }
+       ///ecriture des info dans le tableau
+       _table->ActualiserLigne (i,Info);
+
+   }
+}
 
 FenetreChoixMatch::~FenetreChoixMatch()
 {
@@ -128,4 +136,28 @@ void FenetreChoixMatch::Slot_sup()
 QString FenetreChoixMatch::GetFichierSelectionner()
 {
     return _FichierSelectionner;
+}
+
+void FenetreChoixMatch::Slot_importer()
+{
+ QString fichier = QFileDialog::getOpenFileName(this, "Importer un fichier", QString(), "file (*.xml)");
+ QStringList listnom=fichier.split("/");
+ QString nom=listnom.at(listnom.size()-1);
+ QFile::copy(fichier,"Sauvegarde/"+nom);
+ Actualiser();
+}
+
+void FenetreChoixMatch::Slot_exporter()
+{
+QString dossier = QFileDialog::getExistingDirectory(this);
+QList<QTableWidgetItem *> ql = _table->selectedItems();
+
+
+if ( ! ql.empty())
+{
+
+    QTableWidgetItem* item= _table->item(ql[0]->row (),0);
+    QString Fichier="Sauvegarde/"+item->text();
+     QFile::copy(Fichier,dossier+"/"+item->text());
+}
 }

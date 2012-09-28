@@ -57,6 +57,7 @@ Match::Match()
 
 
 
+
 }
 
 Match::~Match()
@@ -64,6 +65,7 @@ Match::~Match()
     delete _score;
     delete _ParamMatch;
     delete _EquipeVisiteur;
+    _ListTerrain.clear();
 
 }
 
@@ -764,10 +766,19 @@ void Match::EcrireStatXml(QDomElement * element,bool isMatch)
 
 void Match::SetJoueurTerr(QList<Joueur *> list)
 {
-    _ListTerrain.clear();
-    _ListTerrain=list;
 
-    MiseaJourposte();
+    if(list.size()!=0)
+    {
+
+        _ListTerrain.clear();
+        for(int i=0;i<list.size();i++)
+        {
+            _ListTerrain.append(list.at(i));
+        }
+        //_ListTerrain=list;
+
+        MiseaJourposte();
+    }
 
 }
 
@@ -890,12 +901,13 @@ void Match::InitListTerrainfromPosition()
         }
         }
     }
-    this->SetJoueurTerr(_ListTerrain);
+    //this->SetJoueurTerr(_ListTerrain);
 }
 
 
 QList<Joueur *>  Match::GetListJoueurTerr()
 {
+
 
     return _ListTerrain;
 }
@@ -912,7 +924,7 @@ ParametreMatch* Match::GetParametreMatch()
 
 QString Match::Rechercheposte(int post)
 {
-    QString label="";
+    QString label=" ";
     for(int i=0;i<this->_ListTerrain.size();i++)
     {
         if(_ListTerrain.at(i)->GetPosition()==post)
@@ -979,7 +991,7 @@ void Match:: MiseaJourposte()
                 int ipost=number.toInt();
 
                 QDomNode replace=f.replaceChild(_doc.createTextNode(this->Rechercheposte(ipost)),f.firstChild());
-                if (replace.isNull())
+              /*  if (replace.isNull())
                 {
                     QString strposte="Poste"+number;
                     QDomElement poste=_doc.createElement (strposte);
@@ -987,7 +999,7 @@ void Match:: MiseaJourposte()
                     poste.appendChild(text);
                     e.appendChild(poste);
 
-                }
+                }*/
                 child=child.nextSibling();
             }
 
@@ -1300,6 +1312,16 @@ void Match::SuppElement(QString identifiant)
     QTextStream ts( &_fileXmlCurrent );
     ts << _doc.toString();
     _fileXmlCurrent.close();
+}
+
+void Match::addJoueurTerrain(Joueur* joueur)
+{
+    for (int i=0;i<_ListTerrain.size();i++)
+    {
+        if(joueur->get_NumMaillot()==_ListTerrain.at(i)->get_NumMaillot())
+            return;
+    }
+    _ListTerrain.append(joueur);
 }
 
 /*void Match::AjouterSetXml()

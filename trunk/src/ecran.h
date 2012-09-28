@@ -120,6 +120,7 @@ private:
     bool _flagsup;
     bool _PointForUs;
     bool _flagService;
+    bool _isEnPlace;
     TraceLog* _trace;
     ListActionXml * _TraceListAction;
     int _position;

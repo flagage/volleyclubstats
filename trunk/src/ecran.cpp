@@ -59,6 +59,7 @@ Ecran::Ecran(QWidget *parent) :
     /// lecture du fichier contenant le nom des equipes
     this->RestaurerXML();
     this->_PlacementJoueur=0;
+    _isEnPlace=false;
 }
 
 Ecran::~Ecran()
@@ -527,8 +528,8 @@ void Ecran::slot_initChangement()
 void Ecran::Slot_start()
 {
 
-
-    Match::donneInstance()->SetJoueurTerr(_PlacementJoueur->GetJoueurTerrain());
+    _isEnPlace=true;
+    //Match::donneInstance()->SetJoueurTerr(_PlacementJoueur->GetJoueurTerrain());
     Match::donneInstance()->setStart(true);
     this->JoueurBanc();
     ui->label_4-> setPixmap (QPixmap("Image/new_terrain.png"));
@@ -558,8 +559,8 @@ void Ecran::Slot_start()
     this->_PlacementJoueur->Start();
 
 
-    _isMatchEnCour=true;
-    Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
+
+   // Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
     QFile file("Current/Match.xml");
     if(!file.exists())
     {
@@ -577,16 +578,21 @@ QString  Ecran::ChercherPasseur()
 }
 void Ecran::slot_changement(QPushButton *boutton)
 {
-    changement(boutton->text(),boutton);
-    Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
+   changement(boutton->text(),boutton);
+   //if(_isEnPlace==true)
+    //Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
     QString strjoueur=boutton->text();
     if(strjoueur.contains("Position")==false)
     {
     strjoueur=strjoueur.split("/n").at(0);
     strjoueur=strjoueur.replace(")","");
     QStringList lisstr=strjoueur.split("(");
-    strjoueur=lisstr.at(1)+"_"+lisstr.at(0);
-    Match::donneInstance()->AddJoueurToXml(Match::donneInstance()->RechercheJoueur(strjoueur));
+    if(lisstr.size()>=1)
+    {
+        strjoueur=lisstr.at(1)+"_"+lisstr.at(0);
+        Match::donneInstance()->AddJoueurToXml(Match::donneInstance()->RechercheJoueur(strjoueur));
+        Match::donneInstance()->addJoueurTerrain(Match::donneInstance()->RechercheJoueur(strjoueur));
+    }
     }
 }
 
@@ -1108,6 +1114,7 @@ void Ecran::scoreadv()
 void Ecran::Rotation()
 {
     this->_PlacementJoueur->Rotation(this->_currentposition);
+    Match::donneInstance()->MiseaJourposte();
     ActionService(0);
 
 
@@ -1246,6 +1253,7 @@ void Ecran::FinMatch()
     {
         FenetreFermeture* Fenetre=new FenetreFermeture(this);
         Fenetre->exec();
+        _isEnPlace=false;
     }
 
 
