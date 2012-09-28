@@ -40,6 +40,8 @@ void ListEvenement::Connection()
     connect(_menu,SIGNAL(triggered(QAction*)),this,SLOT(Slot_Action(QAction *)));
     connect(_menuTm,SIGNAL(triggered(QAction*)),this,SLOT(Slot_ActionTm(QAction *)));
     connect(_menuFirst,SIGNAL(triggered(QAction*)),this,SLOT(Slot_Action(QAction *)));
+
+
 }
 
 void ListEvenement::Slot_DClick()
@@ -95,23 +97,9 @@ void ListEvenement::Slot_ActionTm(QAction * action)
 
 void ListEvenement::addItem( QString label)
 {
-   /* QStringList Listlabel=label.split(" ");
-    if(Listlabel.size()>=5)
-    {
-        QString labelAffiche;
-        for(int i=0;i<Listlabel.size()-1;i++)
-        {
-            labelAffiche=labelAffiche+" "+Listlabel[i+1];
-        }
 
-        QListWidget::addItem(labelAffiche );
-    }
-    else
-    {
-        QListWidget::addItem(label);
-    }*/
     QListWidget::addItem(label);
-    this->scrollToItem(this->currentItem());
+ this->scrollToBottom();
 
 }
 

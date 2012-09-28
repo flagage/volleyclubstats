@@ -19,36 +19,42 @@
      <property name="title">
       <string>Paramétre du Match</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_16">
+     <layout class="QGridLayout" name="gridLayout_18">
       <item row="0" column="0">
-       <widget class="QLabel" name="label_11">
-        <property name="text">
-         <string>Nombre de set</string>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
+         <string>Gestion Equipe</string>
         </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QComboBox" name="comboBox">
+             <property name="minimumSize">
+              <size>
+               <width>111</width>
+               <height>20</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLineEdit" name="lineEdit"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>VS</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+        <zorder></zorder>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_12">
-        <property name="text">
-         <string>Score à atteindre</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="label_13">
-        <property name="text">
-         <string>Nombre de joueur</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLabel" name="label_14">
-        <property name="text">
-         <string>Libéro</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4" rowspan="3">
+      <item row="0" column="1" colspan="2">
        <widget class="QGroupBox" name="groupBox_8">
         <property name="title">
          <string>Gestion du Match </string>
@@ -91,55 +97,87 @@
         </layout>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QSpinBox" name="spinBox_6">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="value">
-         <number>5</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="spinBox_7">
-        <property name="value">
-         <number>25</number>
-        </property>
-       </widget>
+      <item row="1" column="0" colspan="2">
+       <layout class="QGridLayout" name="gridLayout_16">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Nombre de set</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Score à atteindre</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Nombre de joueur</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Libéro</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QSpinBox" name="spinBox_6">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>5</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSpinBox" name="spinBox_7">
+          <property name="value">
+           <number>25</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QSpinBox" name="spinBox_8">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="minimum">
+           <number>2</number>
+          </property>
+          <property name="maximum">
+           <number>6</number>
+          </property>
+          <property name="value">
+           <number>6</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QCheckBox" name="checkBox_11">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Oui</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item row="1" column="2">
-       <widget class="QSpinBox" name="spinBox_8">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="minimum">
-         <number>2</number>
-        </property>
-        <property name="maximum">
-         <number>6</number>
-        </property>
-        <property name="value">
-         <number>6</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QCheckBox" name="checkBox_11">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Oui</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="3">
        <layout class="QGridLayout" name="gridLayout_14">
-        <item row="0" column="0">
+        <item row="0" column="1">
          <widget class="QGroupBox" name="groupBox_5">
           <property name="title">
            <string>Score Initial</string>
@@ -178,40 +216,6 @@
             </layout>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="groupBox_3">
-          <property name="title">
-           <string>Gestion Equipe</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_5">
-           <item row="0" column="0">
-            <layout class="QGridLayout" name="gridLayout_2">
-             <item row="0" column="0">
-              <widget class="QComboBox" name="comboBox">
-               <property name="minimumSize">
-                <size>
-                 <width>111</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLineEdit" name="lineEdit"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_3">
-               <property name="text">
-                <string>VS</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-          <zorder></zorder>
          </widget>
         </item>
        </layout>
