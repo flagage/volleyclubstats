@@ -501,6 +501,10 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
         MiseAjourStat(_EquipeVisiteur,0,action);
         error=false;
     }
+    else if(joueurname.toInt()==99)
+    {
+        error=false;
+    }
     else
     {
         for(int i=0;i<listJoueur.count();i++)

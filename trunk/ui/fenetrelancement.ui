@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>714</width>
-    <height>516</height>
+    <height>569</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -297,7 +297,7 @@
         <item row="3" column="1">
          <widget class="QCheckBox" name="checkBox_18">
           <property name="text">
-           <string>Relance</string>
+           <string>Def/Relance</string>
           </property>
          </widget>
         </item>
