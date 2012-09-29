@@ -85,7 +85,7 @@ void FenetreLancement::ok()
 {
 
 ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
-    if(ui->comboBox->currentText()!="")
+if(ui->comboBox->currentText()!="" && ui->lineEdit->text()!="")
     {
         param->set_NomEquipeLocal(ui->comboBox->currentText());
 
@@ -185,6 +185,11 @@ ParametreMatch * param=Match::donneInstance()->GetParametreMatch();
     Match::donneInstance()->setAdvers(ui->lineEdit->text());
     Match::donneInstance()->GetScore()->set_ScLocal(ui->spinBox_9->value());
     Match::donneInstance()->GetScore()->set_ScVisiteur(ui->spinBox_10->value());
+    if(Match::donneInstance()->getTeam()->GetListeJoueur().size()<Match::donneInstance()->GetParametreMatch()->get_NbJoueur())
+    {
+        QMessageBox::warning (this,tr("Erreur pas assez de joueur"),tr("Verrifier l'equipe selectionner contient assez de joueur"));
+        return;
+    }
     accept();
     }
     else

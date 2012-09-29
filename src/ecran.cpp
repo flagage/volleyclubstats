@@ -113,7 +113,7 @@ void Ecran::InitialisationIhm()
 
 
     /// List des action marquan des points
-    _listActionMoins<<tr("Attaque")<<tr("Contre");
+  //  _listActionMoins<<tr("Attaque")<<tr("Contre");
     _listActionPlus<<tr("Service")<<tr("Attaque")<<tr("Contre");
 
     ui->label_6->setVisible(false);
@@ -1365,7 +1365,7 @@ void Ecran::keyPressEvent(QKeyEvent * event)
             }
             LineEdit2->clear();
             QString strNumPlayer=strValue.left(2);
-            if(strNumPlayer.toInt()!=0)
+            if(strNumPlayer.toInt()!=0 && strNumPlayer.toInt()!=99 )
             {
                 for(int i=0;i<Match::donneInstance ()->GetListJoueur ().size ();i++)
                 {
