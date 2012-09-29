@@ -1,0 +1,14 @@
+window_sizes 1584 822 375 1125 600 82
+diagrams
+  active  classdiagram_ref 128005 // diagram_classe
+    971 544 100 4 27 0
+end
+show_stereotypes
+selected 
+  package_ref 129 // Bouml
+open
+  deploymentview_ref 128005 // deployvu
+  classview_ref 134661 // Essai
+end
+end
+verbose
