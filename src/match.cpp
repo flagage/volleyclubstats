@@ -333,11 +333,11 @@ bool Match::isFinMatch()
     int total=_ParamMatch->get_NbSet();
     int nbsetCurent=_score->get_SetLocal()+_score->get_SetVisiteur();
     int moitiertotal=total/2;
-    if(nbsetCurent>total)
+    if(nbsetCurent>=total)
     {
        return true;
     }
-    else if(_score->get_ScVisiteur()>moitiertotal || _score->get_ScLocal()>moitiertotal)
+    else if(_score->get_ScVisiteur()>=moitiertotal || _score->get_ScLocal()>=moitiertotal)
     {
         return true;
     }
