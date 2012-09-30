@@ -135,7 +135,7 @@ void Fenetreequipe::Ajouter()
     }
     else
     {
-        QMessageBox::warning (this,tr("erreur"),tr("Verifier que l'équipe est bien selectionné"));
+        QMessageBox::warning (this,tr("erreur"),tr("Verifiez que l'équipe est bien selectionnée"));
     }
 
 }
@@ -163,7 +163,7 @@ void Fenetreequipe::Modifier()
     }
     else
     {
-        QMessageBox::warning (this,tr("erreur"),tr("Verifier que le joueur est bien selectionné"));
+        QMessageBox::warning (this,tr("erreur"),tr("Verifiez que le joueur est bien selectionné"));
     }
 }
 
@@ -189,7 +189,7 @@ void Fenetreequipe::Supprimer()
     }
     else
     {
-        QMessageBox::warning (this,tr("erreur"),tr("Verifier que le joueur est bien selectionné"));
+        QMessageBox::warning (this,tr("erreur"),tr("Verifiez que le joueur est bien selectionné"));
     }
 }
 
