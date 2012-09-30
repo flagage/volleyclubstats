@@ -49,6 +49,8 @@
   <joueur Maillot="12" Adresse="" Tel="0" Prenom="josephine" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
   <joueur Maillot="11" Adresse="" Tel="0" Prenom="odile" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
   <joueur Maillot="7" Adresse="" Tel="0" Prenom="Solen" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
-  <joueur Maillot="4" Adresse="" Tel="0" Prenom="Veronique" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
+  <joueur Maillot="8" Adresse="" Tel="0" Prenom="Veronique" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
+  <joueur Maillot="6" Adresse="" Tel="0" Prenom="Verginia" Nom="" License="0" Email="" Age="01/01/2000" poste="Passeur"/>
+  <joueur Maillot="17" Adresse="" Tel="0" Prenom="Virginie" Nom="" License="0" Email="" Age="01/01/2000" poste="Complet"/>
  </Equipe>
 </root>
