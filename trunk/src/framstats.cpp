@@ -1,4 +1,5 @@
 #include "framstats.h"
+#include "QDebug"
 #include "ui_framstats.h"
 
 FramStats::FramStats(int action,Equipe* team,QWidget *parent) :
@@ -27,6 +28,7 @@ void FramStats::SlotMiseAJour(bool isSet,int numSet)
    {
 
        QTableWidgetItem *item=_tabStat->item(k,1);
+       QString debug=item->text();
        Joueur * player=PlayerfromNum(item->text());
 
        for(int i=0;i<_listvaleur.size();i++)
@@ -43,12 +45,17 @@ void FramStats::SlotMiseAJour(bool isSet,int numSet)
            {
                item->setText(strValeur);
            }
+           else
+           {
+               qDebug()<<k<<i+2;
+
+           }
        }
 
        /// Equipe
        for(int i=0;i<_listvaleur.size();i++)
        {
-           QTableWidgetItem *item=_tabStat->item(_listJoueur.size()+1,i+2);
+           QTableWidgetItem *item=_tabStat->item(_listJoueur.size(),i+2);
            double valeur;
             if(isSet==false)
                    valeur=_team->getStatMatch(_Action,i);
@@ -64,7 +71,7 @@ void FramStats::SlotMiseAJour(bool isSet,int numSet)
    }
 
 
-   _tabStat->setSortingEnabled(true);
+  // _tabStat->setSortingEnabled(true);
 
 }
 
@@ -133,7 +140,7 @@ TableStat::TableStat(QWidget * parent,Equipe * team,int action,QStringList ListV
     this->setColumnCount (ListValeur.size()+2);
     this->setRowCount (listJoueur.size()+1);
 
-    this->setSortingEnabled(true);
+    this->setSortingEnabled(false);
     this->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     this->setEditTriggers(QAbstractItemView::NoEditTriggers);

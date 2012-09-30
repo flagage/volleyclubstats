@@ -306,9 +306,9 @@ bool Match::FinSet()
         {
 
             _ParamMatch->SetNumSet(_ParamMatch->GetNumSet()+1);
-            for(int i=0;i<this->_ListJoueur.size();i++)
+            for(int i=0;i<this->_currentEquipe->GetListeJoueur().size();i++)
             {
-                this->_ListJoueur.at(i)->initSet(_ParamMatch->GetNumSet());
+                this->_currentEquipe->GetListeJoueur().at(i)->initSet(_ParamMatch->GetNumSet());
             }
             this->_currentEquipe->initSet(_ParamMatch->GetNumSet());
             this->_EquipeVisiteur->initSet(_ParamMatch->GetNumSet());

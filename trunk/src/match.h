@@ -60,7 +60,6 @@ private:
     int _numCurentSet;
      bool _lancementok;
     QTime _TempsSet;
-    QList <Joueur*> _ListJoueur;
     QList <Joueur*>  _ListTerrain;
     Joueur * _JouerAdvers;
     MatchXml *_Fichierxml;

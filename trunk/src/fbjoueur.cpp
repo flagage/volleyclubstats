@@ -61,7 +61,7 @@ void fbjoueur::Init()
         }
         else
         {
-            QMessageBox::warning (this,tr("erreur"),tr("Verifier que l'équipe est bien selectionné"));
+            QMessageBox::warning (this,tr("erreur"),tr("Verifiez que l'équipe est bien selectionnée"));
             this->reject ();
             this->close ();
         }
