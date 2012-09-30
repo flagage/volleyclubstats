@@ -55,7 +55,8 @@ SOURCES += src/tracelog.cpp \
     src/fenetremodifevenement.cpp \
     src/parametrematch.cpp \
     src/framstats.cpp \
-    src/fenetrefermeture.cpp
+    src/fenetrefermeture.cpp \
+    src/analyseevenement.cpp
 
 
 HEADERS  += src/tracelog.h \
@@ -97,7 +98,8 @@ HEADERS  += src/tracelog.h \
     src/fenetremodifevenement.h \
     src/parametrematch.h \
     src/framstats.h \
-    src/fenetrefermeture.h
+    src/fenetrefermeture.h \
+    src/analyseevenement.h
 
 
 FORMS    +=  \
@@ -122,7 +124,8 @@ FORMS    +=  \
     ui/fenetrejoueurstat.ui \
     ui/fenetremodifevenement.ui \
     ui/framstats.ui \
-    ui/fenetrefermeture.ui
+    ui/fenetrefermeture.ui \
+    ui/analyseevenement.ui
 
 
 

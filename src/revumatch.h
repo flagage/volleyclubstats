@@ -27,6 +27,8 @@ public:
     void InitialisationTabFromXML();
     void Initialisation();
     void InitialisationStats();
+public slots:
+    void OpenAnalyse();
 
 private:
     Ui::RevuMatch *ui;

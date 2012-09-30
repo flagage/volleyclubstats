@@ -3,6 +3,7 @@
 #include "matchxml.h"
 #include "QSplitter"
 #include "QMessageBox"
+#include "analyseevenement.h"
 
 RevuMatch::RevuMatch(QWidget *parent) :
     QDialog(parent),
@@ -28,7 +29,24 @@ RevuMatch::RevuMatch(QList <Equipe*>listequipe,QString cheminfichier,QWidget *pa
     LectureFichierXML();
     InitialiseIhmFromFile();
     InitialisationTabFromXML();
+    this->setWindowTitle(this->_EquipeVisiteur->GetNom()+"_"+this->_ParamMatch->get_Date().toString("ddMMyyy"));
+    connect(ui->pBAnalyse,SIGNAL(clicked()),this,SLOT(OpenAnalyse()));
+}
 
+void RevuMatch::OpenAnalyse()
+{
+    QStringList listjoueur;
+    for(int i=0;i<this->_currentEquipe->GetListeJoueur().size();i++)
+    {
+        QString strnum=QString::number(this->_currentEquipe->GetListeJoueur().at(i)->get_NumMaillot());
+        if(strnum.size()==1)
+        {
+            strnum="0"+strnum;
+        }
+        listjoueur.append(strnum);
+    }
+    AnalyseEvenement * fenetreAnalyse=new AnalyseEvenement(listjoueur,this->_ListEvenement);
+    fenetreAnalyse->show();
 }
 
 RevuMatch::~RevuMatch()
@@ -173,6 +191,7 @@ void RevuMatch::Initialisation()
     ui->label_13->setVisible(false);
     ui->label_14->setVisible(false);
     ui->label_15->setVisible(false);
+
 
 }
 void RevuMatch::InitialisationTabFromXML()
