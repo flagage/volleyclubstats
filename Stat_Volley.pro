@@ -12,7 +12,7 @@ TRANSLATIONS = VolleyClub_en.ts VolleyClub_es.ts
   #-lfontconfig
 
 QT+= xml webkit
-QT+= phonon
+#QT+= phonon
 
 RC_FILE = VolleyClubStat.rc
 SOURCES += src/tracelog.cpp \
@@ -44,7 +44,6 @@ SOURCES += src/tracelog.cpp \
     src/vcslineedit.cpp \
     src/club.cpp \
     src/listactionxml.cpp \
-    src/lecteurvideo.cpp \
     src/statwriter.cpp \
     src/volleyInit.cpp \
     src/tracematch.cpp \
@@ -87,7 +86,6 @@ HEADERS  += src/tracelog.h \
     src/vcslineedit.h \
     src/club.h \
     src/listactionxml.h \
-    src/lecteurvideo.h \
     src/statwriter.h \
     src/volleyInit.h \
     src/tracematch.h \
@@ -119,7 +117,6 @@ FORMS    +=  \
     ui/fenetrechoixmatch.ui \
     ui/widgettabeff.ui \
     ui/fenetreinternet.ui \
-    ui/lecteurvideo.ui \
     ui/twstatjoueur.ui \
     ui/fenetrejoueurstat.ui \
     ui/fenetremodifevenement.ui \
