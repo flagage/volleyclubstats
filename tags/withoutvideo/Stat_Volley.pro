@@ -12,7 +12,7 @@ TRANSLATIONS = VolleyClub_en.ts VolleyClub_es.ts
   #-lfontconfig
 
 QT+= xml webkit
-QT+= phonon
+#QT+= phonon
 
 RC_FILE = VolleyClubStat.rc
 SOURCES += src/tracelog.cpp \
