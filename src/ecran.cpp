@@ -1,34 +1,21 @@
 /**
-Copyright LAGAGE Frdric ,2011
-flagage@gmail.com
+Copyright Frederic volleyclubstats ,2011
+fred@volleyclubstats.com
 
-Ce logiciel est un programme informatique servant  capturer en direct des statistiques des joueurs de volley-ball.
+This file is part of volleyclubstats.
 
-Ce logiciel est rgi par la licence CeCILLsoumise au droit franais et
-respectant les principes de diffusion des logiciels libres. Vous pouvez
-utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffuse par le CEA, le CNRS et l'INRIA
-sur le site "http://www.cecill.info".
+volleyclubstats is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-En contrepartie de l'accessibilit au code source et des droits de copie,
-de modification et de redistribution accords par cette licence, il n'est
-offert aux utilisateurs qu'une garantie limite.  Pour les mmes raisons,
-seule une responsabilit restreinte pse sur l'auteur du programme,  le
-titulaire des droits patrimoniaux et les concdants successifs.
+Foobar is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-A cet gard  l'attention de l'utilisateur est attire sur les risques
-associs au chargement,   l'utilisation,   la modification et/ou au
-dveloppement et  la reproduction du logiciel par l'utilisateur tant
-donn sa spcificit de logiciel libre, qui peut le rendre complexe 
-manipuler et qui le rserve donc  des dveloppeurs et des professionnels
-avertis possdant  des  connaissances  informatiques approfondies.  Les
-utilisateurs sont donc invits  charger  et  tester  l'adquation  du
-logiciel  leurs besoins dans des conditions permettant d'assurer la
-scurit de leurs systmes et ou de leurs donnes et, plus gnralement,
- l'utiliser et l'exploiter dans les mmes conditions de scurit.
-
-Le fait que vous puissiez accder  cet en-tte signifie que vous avez
-pris connaissance de la licence CeCILL et que vous en avez accept les
+You should have received a copy of the GNU General Public License
+along with Volleyclubstats.  If not, see <http://www.gnu.org/licenses/>.
 **/
 #include "ecran.h"
 #include "ui_ecran.h"
@@ -42,7 +29,7 @@ pris connaissance de la licence CeCILL et que vous en avez accept les
 #include <QKeyEvent>
 #include "QRadioButton"
 #include "fenetreinternet.h"
-#include "lecteurvideo.h"
+//#include "lecteurvideo.h"
 #include "fenetrejoueurstat.h"
 #include "fenetremodifevenement.h"
 #include "fenetrefermeture.h"
@@ -916,8 +903,8 @@ void Ecran::Slot_Fenetre(QAction *action)
     }
     else if(action->text()=="Lecteur")
     {
-        lecteurVideo * fenetrelect=new lecteurVideo(this);
-        fenetrelect->show();
+        //lecteurVideo * fenetrelect=new lecteurVideo(this);
+        //fenetrelect->show();
     }
 }
 
