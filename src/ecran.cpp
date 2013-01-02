@@ -850,7 +850,7 @@ void Ecran::RetirerPoint(bool qui)
 
 void Ecran::SlotMenuEquipe(QAction *action)
 {
-    if(action->text()=="Gestion Equipes")
+    if(action->text()==tr("Gestion Equipes"))
     {
 
         QDialog* equipe=new Fenetreequipe(this);
@@ -858,11 +858,11 @@ void Ecran::SlotMenuEquipe(QAction *action)
         equipe->exec();
         this->EnregistrerXML();
     }
-    if(action->text()=="Gestion Club")
+    if(action->text()==tr("Gestion Club"))
     {
 
     }
-    else if(action->text()=="Exporter Equipe")
+    else if(action->text()==tr("Exporter Equipe"))
     {
         // QString file=QInputDialog::getText(this)
         FenetreVisualisation * choixEquipe=new FenetreVisualisation(this->GetListeEquipe(),1,this);
@@ -873,7 +873,7 @@ void Ecran::SlotMenuEquipe(QAction *action)
             team->ExportCVS(fichier);
         }
     }
-    else if(action->text()=="Importer Equipe")
+    else if(action->text()==tr("Importer Equipe"))
     {
         FenetreVisualisation * choixEquipe=new FenetreVisualisation(this->GetListeEquipe(),2,this);
         if(choixEquipe->exec())
@@ -890,18 +890,18 @@ void Ecran::SlotMenuEquipe(QAction *action)
 
 void Ecran::Slot_Fenetre(QAction *action)
 {
-    if(action->text()=="Score")
+    if(action->text()==tr("Score"))
     {
         FenetreScore* Fenetre=new FenetreScore();
         Fenetre->InitialiseIHMFromData();
         Fenetre->show();
     }
-    else if(action->text()=="Resultat(ffvb)")
+    else if(action->text()==tr("Resultat(ffvb)"))
     {
         FenetreInternet* Fenetre=new FenetreInternet(this);
         Fenetre->show();
     }
-    else if(action->text()=="Lecteur")
+    else if(action->text()==tr("Lecteur"))
     {
         //lecteurVideo * fenetrelect=new lecteurVideo(this);
         //fenetrelect->show();
@@ -911,7 +911,7 @@ void Ecran::Slot_Fenetre(QAction *action)
 void Ecran::AffSession(QAction *action)
 {
 
-    if(action->text() == "Lancer le Match")
+    if(action->text() == tr("Lancer le Match"))
     {
         Match* play=Match::donneInstance();
         QFile file("Current/Match.xml");
@@ -933,7 +933,7 @@ void Ecran::AffSession(QAction *action)
 
         }
     }
-    else if(action->text ().toUpper ()=="REVOIR UN MATCH")
+    else if(action->text ()==tr("Revoir un match"))
     {
         _FenetreChoix=new FenetreChoixMatch(this);
         if(_FenetreChoix->Ouvrir ())
@@ -950,7 +950,7 @@ void Ecran::AffSession(QAction *action)
 
 
     }
-    else if(action->text()=="Supprimer le match en cours")
+    else if(action->text()==tr("Supprimer le match en cours"))
     {
 
         if(QMessageBox::question(this,tr("Attention"),tr("Toutes les donnees vont etre suprrimer continuer?")))
@@ -987,7 +987,7 @@ void Ecran::AffSession(QAction *action)
         }
 
     }
-    else if(action->text()=="Quitter")
+    else if(action->text()==tr("Quitter"))
     {
 
         this->close();
