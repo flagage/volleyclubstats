@@ -85,7 +85,7 @@
     <message>
         <location filename="ui/ecran.ui" line="50"/>
         <source>Terrain</source>
-        <translation type="unfinished"></translation>
+        <translation>Court</translation>
     </message>
     <message>
         <location filename="ui/ecran.ui" line="80"/>
@@ -133,17 +133,17 @@
     <message>
         <location filename="ui/ecran.ui" line="97"/>
         <source>Remplacant</source>
-        <translation type="unfinished"></translation>
+        <translation>Substitution players</translation>
     </message>
     <message utf8="true">
         <location filename="ui/ecran.ui" line="112"/>
         <source>Efficacité</source>
-        <translation type="unfinished"></translation>
+        <translation>Efficiency</translation>
     </message>
     <message utf8="true">
         <location filename="ui/ecran.ui" line="121"/>
         <source>Joueurs à placer</source>
-        <translation type="unfinished"></translation>
+        <translation>Place Players on the court (starting player)</translation>
     </message>
     <message>
         <location filename="ui/ecran.ui" line="127"/>
@@ -166,7 +166,7 @@
     <message>
         <location filename="ui/ecran.ui" line="218"/>
         <source>Joueur Valeur</source>
-        <translation type="unfinished"></translation>
+        <translation>Player Values</translation>
     </message>
     <message>
         <location filename="ui/ecran.ui" line="295"/>
@@ -275,12 +275,12 @@
     <message utf8="true">
         <location filename="ui/ecran.ui" line="526"/>
         <source>Résultat ffvb</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultat (only french )</translation>
     </message>
     <message>
         <location filename="ui/ecran.ui" line="531"/>
         <source>Manuel Utilisateur</source>
-        <translation type="unfinished"></translation>
+        <translation>User guide</translation>
     </message>
     <message>
         <location filename="ui/ecran.ui" line="536"/>
@@ -360,7 +360,7 @@
     <message>
         <location filename="src/ecran.cpp" line="691"/>
         <source>Changement Joueur %1 par</source>
-        <translation type="unfinished"></translation>
+        <translation>switch player %1 to</translation>
     </message>
     <message>
         <location filename="src/ecran.cpp" line="885"/>
@@ -414,26 +414,26 @@
         <location filename="src/ecran.cpp" line="1534"/>
         <location filename="src/ecran.cpp" line="1884"/>
         <source>Defense</source>
-        <translation type="unfinished"></translation>
+        <translation>Defence</translation>
     </message>
     <message>
         <location filename="src/ecran.cpp" line="1544"/>
         <location filename="src/ecran.cpp" line="1556"/>
         <location filename="src/ecran.cpp" line="1888"/>
         <source>Relance</source>
-        <translation type="unfinished"></translation>
+        <translation>Dig</translation>
     </message>
     <message>
         <location filename="src/ecran.cpp" line="1561"/>
         <location filename="src/ecran.cpp" line="1573"/>
         <location filename="src/ecran.cpp" line="1870"/>
         <source>Reception</source>
-        <translation type="unfinished"></translation>
+        <translation>Receiving</translation>
     </message>
     <message>
         <location filename="src/ecran.cpp" line="852"/>
         <source>Annulation du point</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel point</translation>
     </message>
     <message>
         <location filename="src/ecran.cpp" line="859"/>
@@ -447,7 +447,7 @@
         <location filename="src/ecran.cpp" line="1351"/>
         <location filename="src/ecran.cpp" line="1392"/>
         <source>erreur de saisi</source>
-        <translation type="unfinished"></translation>
+        <translation>Error of seized</translation>
     </message>
     <message>
         <location filename="src/ecran.cpp" line="1303"/>
@@ -480,7 +480,7 @@
         <location filename="src/ecran.cpp" line="1712"/>
         <location filename="src/ecran.cpp" line="1879"/>
         <source>Passe</source>
-        <translation>Pass</translation>
+        <translation>Setter</translation>
     </message>
 </context>
 <context>
@@ -678,12 +678,12 @@
     <message>
         <location filename="ui/dialog.ui" line="93"/>
         <source>Maillot *</source>
-        <translation type="unfinished"></translation>
+        <translation>jersey</translation>
     </message>
     <message>
         <location filename="ui/dialog.ui" line="100"/>
         <source>Poste *</source>
-        <translation type="unfinished"></translation>
+        <translation>Position</translation>
     </message>
 </context>
 <context>
@@ -723,7 +723,7 @@
         <location filename="ui/fenetrelancement.ui" line="299"/>
         <location filename="ui/fenetrelancement.ui" line="384"/>
         <source>Réception </source>
-        <translation type="unfinished"></translation>
+        <translation>Receiving</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="322"/>
@@ -745,7 +745,7 @@
         <location filename="ui/fenetrelancement.ui" line="312"/>
         <location filename="ui/fenetrelancement.ui" line="410"/>
         <source>Défense</source>
-        <translation type="unfinished"></translation>
+        <translation>Defence</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="289"/>
@@ -758,7 +758,7 @@
     <message>
         <location filename="ui/fenetrelancement.ui" line="64"/>
         <source>Formule Statistique</source>
-        <translation type="unfinished"></translation>
+        <translation>Statistical formula</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="80"/>
@@ -773,7 +773,7 @@
     <message>
         <location filename="ui/fenetrelancement.ui" line="73"/>
         <source>Perso</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="121"/>
@@ -813,17 +813,17 @@
     <message utf8="true">
         <location filename="ui/fenetrelancement.ui" line="267"/>
         <source>Actions à defiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Used Actions</translation>
     </message>
     <message utf8="true">
         <location filename="ui/fenetrelancement.ui" line="348"/>
         <source>Actions Analysées</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyzed actions</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="417"/>
         <source>Def/Relance</source>
-        <translation type="unfinished"></translation>
+        <translation>Def/Dig</translation>
     </message>
     <message utf8="true">
         <location filename="ui/fenetrelancement.ui" line="429"/>
@@ -833,7 +833,7 @@
     <message>
         <location filename="ui/fenetrelancement.ui" line="435"/>
         <source>Gestion Equipe</source>
-        <translation type="unfinished"></translation>
+        <translation>Team Selection</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="456"/>
@@ -843,42 +843,42 @@
     <message>
         <location filename="ui/fenetrelancement.ui" line="469"/>
         <source>Gestion du Match </source>
-        <translation type="unfinished"></translation>
+        <translation>Game Parameters</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="477"/>
         <source>1er Arbitre</source>
-        <translation type="unfinished"></translation>
+        <translation>Deputy chief referee</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="487"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
     <message utf8="true">
         <location filename="ui/fenetrelancement.ui" line="497"/>
         <source>2ème Arbitre</source>
-        <translation type="unfinished"></translation>
+        <translation>Umpire (referee)</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="514"/>
         <source>Nombre de sets</source>
-        <translation type="unfinished"></translation>
+        <translation>Nomber of Sets</translation>
     </message>
     <message utf8="true">
         <location filename="ui/fenetrelancement.ui" line="521"/>
         <source>Score à atteindre</source>
-        <translation type="unfinished"></translation>
+        <translation>Max Score</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="528"/>
         <source>Nombre de joueurs</source>
-        <translation type="unfinished"></translation>
+        <translation>Nomber of players</translation>
     </message>
     <message utf8="true">
         <location filename="ui/fenetrelancement.ui" line="535"/>
         <source>Libéro</source>
-        <translation type="unfinished"></translation>
+        <translation>libero</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="578"/>
@@ -888,12 +888,12 @@
     <message>
         <location filename="ui/fenetrelancement.ui" line="592"/>
         <source>Score Initial</source>
-        <translation type="unfinished"></translation>
+        <translation>Initial Sore</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="600"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>local</translation>
     </message>
     <message>
         <location filename="ui/fenetrelancement.ui" line="607"/>
@@ -913,39 +913,39 @@
     <message>
         <location filename="src/fenetrelancement.cpp" line="80"/>
         <source>Championnat</source>
-        <translation type="unfinished"></translation>
+        <translation>Championship</translation>
     </message>
     <message>
         <location filename="src/fenetrelancement.cpp" line="80"/>
         <source>Coupe</source>
-        <translation type="unfinished"></translation>
+        <translation>Cup</translation>
     </message>
     <message>
         <location filename="src/fenetrelancement.cpp" line="80"/>
         <source>Amical</source>
-        <translation type="unfinished"></translation>
+        <translation>Friendly</translation>
     </message>
     <message>
         <location filename="src/fenetrelancement.cpp" line="80"/>
         <source>Entrainement</source>
-        <translation type="unfinished"></translation>
+        <translation>Training</translation>
     </message>
     <message>
         <location filename="src/fenetrelancement.cpp" line="108"/>
         <location filename="src/fenetrelancement.cpp" line="132"/>
         <source>Reception</source>
-        <translation type="unfinished"></translation>
+        <translation>Receiving</translation>
     </message>
     <message>
         <location filename="src/fenetrelancement.cpp" line="117"/>
         <location filename="src/fenetrelancement.cpp" line="138"/>
         <source>Defense</source>
-        <translation type="unfinished"></translation>
+        <translation>Defence</translation>
     </message>
     <message>
         <location filename="src/fenetrelancement.cpp" line="121"/>
         <source>Relance</source>
-        <translation type="unfinished"></translation>
+        <translation>Dig</translation>
     </message>
     <message>
         <location filename="src/fenetrelancement.cpp" line="148"/>
@@ -975,17 +975,17 @@
     <message>
         <location filename="src/fenetrelancement.cpp" line="190"/>
         <source>Verrifier l&apos;equipe selectionner contient assez de joueur</source>
-        <translation type="unfinished"></translation>
+        <translation>The selected team not contains enough player</translation>
     </message>
     <message>
         <location filename="src/fenetrelancement.cpp" line="197"/>
         <source>Erreur de saisi</source>
-        <translation type="unfinished"></translation>
+        <translation>Error of seized</translation>
     </message>
     <message>
         <location filename="src/fenetrelancement.cpp" line="197"/>
         <source>Verrifier que le nom de l&apos;equipe est bien renseigné</source>
-        <translation type="unfinished"></translation>
+        <translation>Team name is not Informed </translation>
     </message>
 </context>
 <context>
@@ -1021,7 +1021,7 @@
     <message>
         <location filename="ui/fenetremodifevenement.ui" line="43"/>
         <source>Position passe</source>
-        <translation type="unfinished"></translation>
+        <translation>setter position</translation>
     </message>
 </context>
 <context>
@@ -1052,7 +1052,7 @@
     <message>
         <location filename="ui/fenetrescore.ui" line="103"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>local</translation>
     </message>
     <message>
         <location filename="ui/fenetrescore.ui" line="121"/>
@@ -1128,7 +1128,7 @@
         <location filename="ui/fenetrevisualisation.ui" line="35"/>
         <location filename="ui/fenetrevisualisation.ui" line="73"/>
         <source>Division </source>
-        <translation type="unfinished"></translation>
+        <translation>Division</translation>
     </message>
     <message>
         <location filename="ui/fenetrevisualisation.ui" line="42"/>
@@ -1140,12 +1140,12 @@
         <location filename="ui/fenetrevisualisation.ui" line="49"/>
         <location filename="ui/fenetrevisualisation.ui" line="87"/>
         <source>Categorie</source>
-        <translation type="unfinished"></translation>
+        <translation>Category</translation>
     </message>
     <message>
         <location filename="ui/fenetrevisualisation.ui" line="65"/>
         <source>Modifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Modify</translation>
     </message>
     <message>
         <location filename="ui/fenetrevisualisation.ui" line="106"/>
@@ -1155,7 +1155,7 @@
     <message>
         <location filename="ui/fenetrevisualisation.ui" line="121"/>
         <source>Valider</source>
-        <translation type="unfinished"></translation>
+        <translation>Valid</translation>
     </message>
     <message>
         <location filename="ui/fenetrevisualisation.ui" line="128"/>
@@ -1193,12 +1193,12 @@
     <message>
         <location filename="ui/fenetreequipe.ui" line="45"/>
         <source>Categorie</source>
-        <translation type="unfinished"></translation>
+        <translation>Category</translation>
     </message>
     <message>
         <location filename="ui/fenetreequipe.ui" line="59"/>
         <source>Division</source>
-        <translation type="unfinished"></translation>
+        <translation>Division</translation>
     </message>
     <message>
         <location filename="ui/fenetreequipe.ui" line="75"/>
@@ -1218,12 +1218,12 @@
     <message>
         <location filename="ui/fenetreequipe.ui" line="110"/>
         <source>Modifier Joueur</source>
-        <translation type="unfinished"></translation>
+        <translation>Modify Player</translation>
     </message>
     <message>
         <location filename="ui/fenetreequipe.ui" line="122"/>
         <source>Valider Equipe</source>
-        <translation type="unfinished"></translation>
+        <translation>Valid team  </translation>
     </message>
     <message>
         <location filename="src/fenetreequipe.cpp" line="46"/>
@@ -1243,12 +1243,12 @@
     <message>
         <location filename="src/fenetreequipe.cpp" line="46"/>
         <source>Poste</source>
-        <translation type="unfinished"></translation>
+        <translation>Position</translation>
     </message>
     <message>
         <location filename="src/fenetreequipe.cpp" line="46"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence (player officiel identification  )</translation>
     </message>
     <message>
         <location filename="src/fenetreequipe.cpp" line="138"/>
@@ -1260,13 +1260,13 @@
     <message>
         <location filename="src/fenetreequipe.cpp" line="138"/>
         <source>Verifiez que l&apos;équipe est bien selectionnée</source>
-        <translation type="unfinished"></translation>
+        <translation>Team is selcted?</translation>
     </message>
     <message>
         <location filename="src/fenetreequipe.cpp" line="166"/>
         <location filename="src/fenetreequipe.cpp" line="192"/>
         <source>Verifiez que le joueur est bien selectionné</source>
-        <translation type="unfinished"></translation>
+        <translation>player is selected?</translation>
     </message>
 </context>
 <context>
@@ -1287,12 +1287,12 @@
     <message>
         <location filename="src/keyjoueur.cpp" line="598"/>
         <source>Passeur</source>
-        <translation type="unfinished"></translation>
+        <translation>setter</translation>
     </message>
     <message>
         <location filename="src/keyjoueur.cpp" line="603"/>
         <source>Libero</source>
-        <translation type="unfinished"></translation>
+        <translation>libero</translation>
     </message>
 </context>
 <context>
@@ -1308,7 +1308,7 @@
         <location filename="src/listevenement.cpp" line="29"/>
         <location filename="src/listevenement.cpp" line="77"/>
         <source>Modifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Modify</translation>
     </message>
     <message>
         <location filename="src/listevenement.cpp" line="26"/>
@@ -1321,7 +1321,7 @@
         <location filename="src/listevenement.cpp" line="33"/>
         <location filename="src/listevenement.cpp" line="92"/>
         <source>Supprimer tm</source>
-        <translation type="unfinished">Delete</translation>
+        <translation>Delete Injury time</translation>
     </message>
 </context>
 <context>
@@ -1339,7 +1339,7 @@
     <message>
         <location filename="ui/revumatch.ui" line="49"/>
         <source>Local </source>
-        <translation type="unfinished"></translation>
+        <translation>Local</translation>
     </message>
     <message>
         <location filename="ui/revumatch.ui" line="56"/>
@@ -1349,7 +1349,7 @@
     <message>
         <location filename="ui/revumatch.ui" line="63"/>
         <source>Visiteur</source>
-        <translation type="unfinished"></translation>
+        <translation>Visitor</translation>
     </message>
     <message>
         <location filename="ui/revumatch.ui" line="74"/>
@@ -1409,27 +1409,27 @@
     <message>
         <location filename="ui/revumatch.ui" line="236"/>
         <source>Efficacite</source>
-        <translation type="unfinished"></translation>
+        <translation>Efficiency</translation>
     </message>
     <message>
         <location filename="ui/revumatch.ui" line="255"/>
         <source>Liste Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Actions List</translation>
     </message>
     <message>
         <location filename="ui/revumatch.ui" line="276"/>
         <source>Analyse Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>show detail Actions</translation>
     </message>
     <message>
         <location filename="src/revumatch.cpp" line="158"/>
         <source>Ouverture Impossible</source>
-        <translation type="unfinished"></translation>
+        <translation>Open is impossible</translation>
     </message>
     <message>
         <location filename="src/revumatch.cpp" line="158"/>
         <source>La fiche selectionner ne peut etre ouverte</source>
-        <translation type="unfinished"></translation>
+        <translation>The game cannot be open</translation>
     </message>
 </context>
 <context>
@@ -1452,7 +1452,7 @@
     <message>
         <location filename="src/tablematch.cpp" line="41"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="src/tablematch.cpp" line="41"/>
@@ -1467,7 +1467,7 @@
     <message>
         <location filename="src/tablematch.cpp" line="41"/>
         <source>arbitre</source>
-        <translation type="unfinished"></translation>
+        <translation>referee</translation>
     </message>
     <message>
         <location filename="src/tablematch.cpp" line="41"/>
@@ -1506,32 +1506,32 @@
     <message>
         <location filename="src/fbjoueur.cpp" line="53"/>
         <source>Passeur</source>
-        <translation type="unfinished"></translation>
+        <translation>Setter</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="53"/>
         <source>Libero</source>
-        <translation type="unfinished"></translation>
+        <translation>libero</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="53"/>
         <source>Complet</source>
-        <translation type="unfinished"></translation>
+        <translation>Universal</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="53"/>
         <source>Pointu</source>
-        <translation type="unfinished"></translation>
+        <translation>Opposite hitter</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="53"/>
         <source>Recep/Attaque</source>
-        <translation type="unfinished"></translation>
+        <translation>Outside hitter</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="53"/>
         <source>Central</source>
-        <translation type="unfinished"></translation>
+        <translation>Middel hitter</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="64"/>
@@ -1541,35 +1541,35 @@
     <message>
         <location filename="src/fbjoueur.cpp" line="64"/>
         <source>Verifiez que l&apos;équipe est bien selectionnée</source>
-        <translation type="unfinished"></translation>
+        <translation>Team is selected?</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="161"/>
         <source>le numero 0 est reserve</source>
-        <translation type="unfinished"></translation>
+        <translation>0 Is not authorizes</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="177"/>
         <location filename="src/fbjoueur.cpp" line="194"/>
         <source>Ajout Impossible</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible add</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="177"/>
         <location filename="src/fbjoueur.cpp" line="194"/>
         <source>Numero de maillot deja present</source>
-        <translation type="unfinished"></translation>
+        <translation>The jersey number already exist</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="157"/>
         <location filename="src/fbjoueur.cpp" line="161"/>
         <source>Erreur Formulaire</source>
-        <translation type="unfinished"></translation>
+        <translation>Error Form</translation>
     </message>
     <message>
         <location filename="src/fbjoueur.cpp" line="157"/>
         <source>toute les * doivent etre reseigner</source>
-        <translation type="unfinished"></translation>
+        <translation>All * have to be inform</translation>
     </message>
 </context>
 <context>
