@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 
     /// Traduction
     QTranslator translator;
-    translator.load("VolleyClub_en.qm");
+    translator.load("Traduction/VolleyClub_en.qm");
     a.installTranslator(&translator);
    /* QString locale = QLocale::system().name().section('_', 0, 0);
        QTranslator translator;

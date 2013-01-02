@@ -1,0 +1,608 @@
+epreuves    events
+tournoi de volley-ball de plage femmes     beach-volley women's tournament
+tournoi de volley-ball de plage hommes     beach-volley men's tournament
+tournoi de volley-ball féminin     women's volleyball tournament
+tournoi de volley-ball masculin     men's volleyball tournament
+
+installations / matériel    facilities / equipment
+aire de jeu     competition court
+antenne     antenna
+bâche     tarp
+ballon de volley-ball     volleyball
+ballons homologués FIVB     FIVB approved balls
+banc de touche     place for coaches
+bande de côté du filet     side band of the net
+bande horizontale du filet     horizontal net band
+bande horizontale du filet     tape
+bande latérale     side band
+bande supérieure     top band ; upper band
+bord supérieur du filet     upper edge of the net
+câble     rope
+câble du filet     net cable ; net cord
+camp     court side
+chaise d'arbitrage     referee's chair
+chariot à roues en caoutchouc     rubber-wheeled trolley
+égaliseur de sol     sand leveller
+espace de passage     crossing space
+espace extérieur     exterior space ; external space
+espace inférieur     space below the net
+espace inférieur     lower space
+essuyeur     floor mopper
+fiche de position     line-up sheet
+ligne arrière     back line ; back row
+ligne avant     front row
+ligne centrale ; ligne médiane ; ligne de filet     centre line
+ligne centrale ; ligne médiane ; ligne de filet     net line
+ligne de côté     sideline
+ligne de fond     end line
+ligne de trois mètres     three-meter line
+ligne de zone     zone line
+ligne des trois mètres ; ligne arrière ; ligne d'attaque     attack line
+lignes de délimitation ; lignes du terrain     lines
+maille du filet     net mesh
+manivelle ; treuil de filet     net winch
+marquage du terrain     court marking
+marque verticale du côté du filet     side net marker
+piquet d'ancrage     anchor
+plan vertical du filet     vertical plane of the net
+poteau téléscopique     telescopic post
+protection des poteaux     post padding
+ramasseur (de balles)     retriever
+ramasseur de ballons     ball keeper
+surface de jeu ; terrain de jeu ; camp ; terrain     court
+table Berger     Berger table
+table du marqueur ; tableau du secrétaire-marqueur     scorer's table
+tableau du championnat     championship tabulation
+terrain central     central court
+terrain de volley-ball     volleyball court
+terrain en sable     sand court
+toise     measuring stick ; measuring rod
+zone arrière     back zone
+zone arrière ; zone de défense     back court area
+zone avant     front court ; front zone
+zone de remplacement     substitution zone
+zone de service ; carré     service area ; service zone
+zone d'échauffement     place for substitutes
+zone libre     free space ; free zone
+
+règlement / arbitrage    rules / refereeing
+action de rupture     scoring skills
+alignement des équipes     lining-up of teams
+annoncer une faute     call a fault (to)
+arrêt de jeu     time between games
+arrêt de jeu     suspension whistle
+arrêt entre les manches     interval between sets
+arrêt entre les sets     interval between each set
+as ; ace (service gagnant)     ace
+autorisation de servir     authorization to serve
+autoriser le service     authorize the service (to)
+avertissement individuel     personal warning
+avertissement pour conduite incorrecte     misconduct warning
+avertissement pour retard de jeu     time losing warning
+avertissement pour retard de jeu     delay warning
+balle dans le filet     ball in the net
+balle de match     match point
+balle de set     set point
+balle dedans ; balle bonne     ball in ; ball in the court
+balle dehors     ball out ; ball out of court
+balle portée ; balle accompagnée ; ballon tenu     held ball
+ballon non lancé pendant le service     ball not tossed at the service hit
+ballon touché     touched ball
+bonne !     in !
+camp adverse     opponent's court
+carte numérotée     numbered card
+carton     penalty card
+champ de compétence     range of jurisdiction
+changement de camp     court switch
+changement de camp au milieu du set décisif     change of sides in the middle of the tie break
+coin ; angle opposé     opposite corner
+collège des arbitres     match officials
+comité de contrôle     control committee
+commission des arbitres     panel of judges
+commission spéciale d'arbitrage     special referees commission
+contact avec le filet     contact with the net
+contacts consécutifs     consecutive contacts
+contre irrégulier     illegal block
+coup d'envoi du match, du set     starting of the match, of the set
+début du set     start of set
+dehors !      out !
+demande de remplacement de joueur     request for substitution
+demande de remplacement de joueur     replacement request
+demande de temps mort     request for time-out
+demande de temps mort     time-out request
+demande d'interruption     request for interruption
+demande d'interruption non fondée     improper request for interruption
+deuxième arbitre     umpire
+deuxième arbitre     deputy chief referee
+doublé     double contact
+double contact ; double touche ; doublé     double hit
+double faute     double fault
+double faute et balle à remettre     double fault and replay
+double touche !     double !
+droit au service     right to serve
+droit de servir     right of service
+écart     lead
+échange rejoué     replay
+égalité 16/16     16/16 tie
+éliminatoire     knockout competition
+enfreindre l'ordre du service     violate the service order (to)
+entraîneur en chef ; 1er entraîneur     head coach
+équipe en possession du service     formation at own service
+équipe forfait     team in default
+équipe incomplète     incomplete team
+erreur ; faute de service ; service faute     service error ; service fault
+erreur dans la rotation     error in the rotational order
+erreur dans la rotation     rotation fault
+erreur dans l'ordre de service     error in the service order
+erreur de service     service mistake
+espace adverse     opponent's space
+faire appel     lodge an appeal (to)
+faire une faute de service     fail in the service (to)
+faute au service     serving fault
+faute de contre ; faute de bloc     block fault ; blocking fault
+faute de filet     net contacted ; net fault ; net touch
+faute de frappe d'attaque     attack-hit fault
+faute de ligne     line fault
+faute de pénétration     penetration fault
+faute de position     position fault
+faute de position au service     error in the service
+faute de réception de service     service reception fault
+faute de remplacement     substitution fault
+faute de rotation     error in the rotation order
+faute d'interruption     interruption fault
+faute d'ordre du service     service order fault
+Fédération Internationale de Volley-Ball (FIVB)     International Volleyball Federation (FIVB)
+filet !     let !
+filet bien tendu     tight net
+filet détendu     sagging net
+filet touché ; faute de filet     contact of the net
+fin de temps mort     expiration of time-out
+formation correcte     correct formation
+formation de départ     line-up positions
+formation de départ     game line-up
+formation incorrecte     incorrect formation
+formule     format
+formule de match     match format
+formule en poule     round system of competitions
+geste officiel     official signal
+hauteur du filet     height of the net
+interruption pour remplacement     interruption for substitution
+interruption réglementaire     regular interruption
+interruption réglementaire     legal interruption
+joueur (joueuse) en faute     player at fault
+joueur entrant sur le terrain en début de match     starting player
+juge de ligne     line judge
+jugement impossible     impossible judgment
+ligne !     line !
+manche décisive ; set décisif ; tie break     tie break
+manche gagnée     set won
+manche gagnée ; match gagné     game won
+manche perdue     set lost
+manche perdue ; match perdu     game lost
+match décisif     deciding game
+milieu du set décisif     half-way in the deciding set
+ne pas être dans l'ordre du service     be out of service order (to)
+opérateur     operator
+ordre de service     order of service
+pas encore sifflé     without whistle
+passe ratée     missed pass
+passer les mains par-dessus le filet     reach over (to)
+pause     pause
+pause entre les sets     time between sets
+pénétration dans le camp adverse     penetration into the opponent's space
+perdre l'échange     lose the rally (to)
+permutation     cross
+perte du service     loss of service
+point de contre     block point
+point décisif     end point
+porter le ballon     carry the ball (to)
+position !     position !
+position de départ     starting line-up
+position des joueurs ; ordre de rotation     starting position
+poule     group competition
+propre camp     own court
+propre espace     own space
+quatre touches (de balle) !     fourth touch !
+ramasseur de ballons     ball retriever
+récupération difficile     difficult dig
+récupérer le service     win a side out (to)
+récupérer le service     earn a side out (to)
+règle des cinq secondes     five-second rule
+règle des huit secondes     eight-second rule
+règles de formation     formation rules
+rejouer la balle     replay the ball (to)
+remplacement exceptionnel     exceptional substitution
+remplacement imposé     compulsory substitution
+remplacement irrégulier     illegal substitution
+remplacement régulier     legal substitution
+report de match     postponement of the match
+repos     rest period
+reprise du jeu     restart of the game
+retard     delay
+retard dans le service     delay in service
+revenir au jeu     return of the game (to)
+rotation correcte     correct rotation
+rotation dans le sens des aiguilles d'une montre     clockwise rotation
+rotation incorrecte     incorrect rotation
+sable tamisé     sifted sand
+sanction de temps mort     time-out sanction
+sanction pour retard de jeu     delay penalty
+sanction pour retard de jeu     time losing penalty
+sanction pour retard de temps     sanction for delay
+serpentin     serpentine system
+serpillères     floor moppers
+service adverse     opponent's service
+service correct     legal service ; legal serve
+service gagnant ; ace     service point
+service incorrect     illegal serve
+service manqué     missed service
+service perdu     service lost
+set décisif     final set ; deciding set
+siffler la mise en jeu ; siffler pour le service     whistle for service (to)
+signal de juge de ligne     flag signal
+sortir des limites du jeu     go out (to)
+système de la marque continue     rally-point system
+système de marque     scoring system
+temps de récupération     recovery time
+temps mort de récupération     time-out for recovery
+tendu     taut
+tenir le ballon     hold the ball (to)
+tenu ! porté !     catch !
+touche ; touche de balle     ball contact
+touche assistée ; balle portée     assisted hit
+touche de ballon     contact
+touche illégale     illegal contact ; illegal hit
+volley-ball de plage     beach volleyball
+zone libre     clear space
+
+technique / tactique    technique / tactics
+accompagner le ballon     follow the ball (to)
+ailier ; attaquant de bout de filet ; attaquant d'aile     outside hitter
+ailier gauche ; attaquant gauche     left attacker
+aligner     line up (to)
+allonge de l'attaquant     spiker's reach
+amorti     drop
+amortissement     amortization
+analyse en temps réel     scouting
+annoncer une combinaison     call a play (to)
+arrière droit ; joueur en zone 1     right back
+arrière gauche ; joueur en zone 5     left back
+attaquant     spiker ; hitter
+attaquant central     player of zone 3
+attaquant d'aile     outside attacker
+attaquant droit ; joueur en zone 2     right attacker
+attaquant principal     main attacker
+attaque ; smash     spike
+attaque au-dessus du contre     smash over the block
+attaque combinée     combination attack
+attaque contrée     blocked spike
+attaque dans le contre ; attaque dans le bloc     spike in the block
+attaque de la zone avant     front zone attack
+attaque directe     direct spike
+attaque en force ; attaque puissante     power attack
+attaque en première main     direct attack
+attaque multiple     multiple offence
+attaque rapide     quick offence
+attaque smashée     hit attack
+attaque sur passe accélérée     spike from quick pass
+attaque sur passe en suspension     spike from a jump pass
+attaque sur passe haute     spike from high pass
+attaquer dans le bloc     spike on to the block (to)
+au contre     at blocking
+avant droit ; joueur en zone 2     right front
+avant gauche     left front
+avant-centre     middle front
+balancier     swing
+balle au-dessus du filet     ball over the net
+balle bonne     inside ball
+balle libre ; balle cadeau ; balle facile     free ball
+balle touchant le filet     ball touching the net
+ballon à terre     grounded
+ballon placé     HP
+ballon roulant sur le filet     ball running along the net
+ballon touché     ball touched
+bloqueur ; contreur ; joueur de contre     blocker
+boulé arrière ; chute arrière     back roll
+brosser la balle ; imprimer une rotation à la balle     put spin on the ball (to)
+capitaine en jeu     game captain
+carton     penalty card
+central     middle attacker
+changement de service     sideout
+choix du côté     choice of sides
+choix du service     choice of service
+chute ; roulade     roll
+chute arrière ; boulé arrière     backward fall
+chute latérale ; boulé latéral     side roll
+circulation tactique     tactical movement
+combinaison tactique     tactical combination
+complet     universal
+construction d'attaque     team offense
+contact     touche
+contact avec le terrain adverse     touching the opponent's court
+contact du contre ; touche du bloc     blocking contact
+contre à deux     double block
+contre à deux ; bloc à deux     two-man block
+contre à trois ; bloc à trois     three-man block
+contre à un ; contre individuel     one-man block
+contre collectif     collective block
+contre collectif     group block
+contre défensif     defensive block
+contre individuel ; contre à un     individual block
+contre offensif ; bloc offensif     offensive block
+contreur ailier     end blocker ; side-blocker
+contreur central     middle blocker
+contreur principal     main blocker
+corse     pancake
+coup     move
+couverture d'attaque     spike coverage
+couverture de feinte     tip cover
+couverture du bloc ; couverture du contre     block coverage ; block cover
+couverture du terrain     court coverage
+croix ; permutation     cross
+défense (beach volley)     beach dig
+défense acrobatique     front dive with roll
+défense arrière     back court defence
+défense basse     low defence
+défense haute     high defence
+défense mobile     moving defence
+défense statique     stationary defence
+demi     middle
+demi-boulé     half-roll
+déplacement     moving
+déplacement arrière     back movement
+déplacement en arrière     moving backward
+déplacement en avant     moving forward
+déplacement en position d'attaque     cutting to attacking position
+déplacement latéral     moving sideways
+déplacement sous le ballon     moving under the ball
+déplacement vers le ballon     moving to the ball
+directeur technique     technical advisor
+dispositif     combination
+double contact ; double touche     double contact
+écart de deux points ; deux points d'avance     two-pont lead
+échange de jeu     rally
+écran collectif     group screen
+écran collectif     collective screen
+écran de service     screen at service
+effet     spin
+effet lifté     topspin
+effet lifté     overspin
+engagement     committment
+entrer en jeu     enter the game (to)
+envoyer la balle dans le trou     place the ball in a weak area (to)
+équipe au service     serving side ; serving team
+équipe au service     service team
+équipe au service     team to serve
+équipe en réception     receiving team
+éviter le contre     evade the block (to)
+faire écran     make a screen (to)
+faire tomber le ballon     ground the ball (to)
+faire un amorti     make a drop (to)
+faire une manchette     pass (to)
+faute d'attaque     attack-hit fault
+faute de pied     foot fault
+feinte d'attaque     feint attack ; feint spike
+feinte d'attaque     spike imitation
+feinte de passe     passing feint
+fermer un angle     close an angle (to)
+formation     line-up
+formation d'attaque     offensive formation
+formation de défense     defensive formation
+formation de jeu     game line-up
+formation de réception     receiving formation
+formation de réception de service     serve reception formation
+formation en jeu     team formation
+formation en U     U formation
+formation en W     W- formation
+formation initiale     starting line-up
+former le bloc ; former le contre     form a block (to)
+franchir la ligne centrale     cross the centre line (to)
+franchir la ligne d'attaque     cross the attack line (to)
+franchissement du contre     penetration of the block
+frappe d'attaque     attack hit
+frappe de service     service hit
+frappe en puissance     power hit
+frapper ; smasher ; toucher ; attaquer     hit (to)
+gagner l'échange     win the rally (to)
+gain du point     winning of a point
+gain du service     winning of a service
+impulsion à deux pieds ; prise d'élan     take-off from both feet
+impulsion pour un service smashé     take-off a jump service
+jeu à deux touches     two pass play
+jeu à trois touches     three-pass play
+jeu au filet     play off the net
+jeu en deuxième main     one-pass attack
+jouer au volley-ball     play volleyball (to)
+joueur au filet     player at the net
+joueur au service ; joueuse au service     serving player
+joueur avant     front row player
+joueur avant     front court player
+joueur avant     front-line player
+joueur centre     centre player
+joueur de ligne arrière ; arrière ; joueur de fond     back row player
+joueur de ligne arrière ; arrière ; joueur de fond     back court player ; back line player
+joueur de soutien     covering player
+joueur droit     right player
+joueur en zone (1, 2, 3, 4, 5, 6)     player in position ; player of zone 1, 2, 3, 4, 5, 6
+joueur en zone 1 ; joueur en 1     player of zone 1
+joueur entrant sur le terrain au début du match     starting player
+joueur gauche     left player
+joueur sortant     outgoing player
+lâcher le ballon     release the ball (to)
+laisser tomber     drop (to)
+laisser tomber au sol     drop on the ground (to)
+le filet est tendu     the net is hung taut
+libéro     libero
+ligne     line
+ligne d'attaque     rear spiker's line
+lire et réagir     read and react (to)
+lober la balle     lob the ball (to)
+main ouverte pour une feinte     open-handed tip
+manche décisive     final set
+manchette     bump
+manchette     pass
+manchette à deux mains     two-hand bump
+manchette à une main     one-hand bump
+manchette arrière     pass backward
+manchette de défense     dig
+match d'entraînement     practice match
+mettre en jeu     put into play (to)
+mettre le ballon en jeu     put the ball in play (to)
+occasions totales     total opportunities
+offensive ; système offensif     offence
+organisation de réception     system for reception
+ouverture ; trou     opening
+par-dessus le filet     over the net
+pas croisé     cross-over step
+passage de la ligne centrale     crossing the centre middle line
+passage de la main au-dessus du filet     passing one's hand over the net
+passage du plan du filet     crossing the net line
+passe     set
+passe à deux mains     two-hand set
+passe à une main     one-hand set
+passe accélérée     fire pass
+passe accélérée     accelerated pass
+passe arrière ; passe en arrière     backward set
+passe avant     forward set
+passe courte ; passe tendue     short set
+passe dans un secteur libre de filet     cutting pass
+passe d'attaque     setting set
+passe en manchette     bump set
+passe en suspension     jump set
+passe en touche haute     overhand set
+passe en touche haute     overhand pass
+passe haute     high set
+passe haute     overhead set
+passe latérale     lateral set
+passe par-dessus ; passe en haut     overarm pass
+passer     set (to)
+passer les mains par dessus le filet     reach over (to)
+passeur pénétrant     back row setter
+passeur pénétrant     penetrating setter
+pénétration     penetration
+pénétration dans l'espace adverse     penetration into the opponent's space
+pénétration du passeur     penetration of the setter
+pénétration sous le filet     penetration under the net
+permutation     switch
+phase de réception de service     sideout phase
+pipe     pipe
+placement ; ballon placé     tip
+placer (se)     position oneself (to)
+placer la balle     place the ball (to)
+placer le ballon     dump the ball (to)
+placer le ballon     tip the ball (to)
+placer le ballon dans un espace libre ; placer le ballon dans le trou     tip the ball in the weak area (to)
+placer le ballon derrière le bloc     drop the ball behind the block (to)
+placer le ballon derrière le contre     tip the ball behind the block (to)
+plongeon     dive
+plongeon à deux mains     two-hand dive
+plongeon à une main     one-hand dive
+plongeon en avant     front dive
+plongeon latéral     side-roll dive
+plongeon latéral     side dive
+position basse     low position ; low standing
+position de défense     defence position
+position des joueurs ; ordre de rotation     rotation order
+position en jeu     game position
+position fondamentale     ready position
+position haute     high position ; high standing
+position moyenne     middle position
+pousser le ballon     push the ball (to)
+premier service     first service
+première touche     first contact
+prendre l'avantage     break a tie (to)
+prendre l'avantage     resolve a tie (to)
+rapport de force     dual
+rebond du filet     bounce off the net
+réception à deux mains     two-hand reception
+réception de service     service reception
+réception de service     reception of a service
+réception du service     serve reception
+réception en manchette     bump reception
+réceptionner ; recevoir     receive (to) ; catch (to)
+réceptionneur     receiver
+réceptionneur-attaquant     wing-tritter
+récupération à deux mains     two-hand dig
+récupération à une main     one-hand dig
+récupération de la balle     attack reception ; digging
+renvoyer la balle ; renvoyer le ballon     return the ball (to)
+repousser le ballon     strike the ball away (to)
+reprendre le jeu     resume the game (to)
+rotation au service ; ordre au service     service order
+schéma tactique     tactical plan
+serveur     server
+service     serve ; service
+service au-dessus de l'épaule     overhand serve
+service avec rotation ; service sans effet     service with rotation
+service balancier     windmill serve ; roundhouse serve ; sidearm serve
+service court     short serve
+service dans la zone d'attaque     service in the attack zone
+service enroulé ; lifté     sky ball serve
+service flottant     float (floating) serve
+service haut     spin serve
+service lifté     topspin serve
+service par en dessous ; service bas ; service à la cuiller     underhand serve
+service placé     directed service
+service puissant     power serve
+service sans rotation du ballon ; service sans effet du ballon     service without spinning the ball
+service slicé     slice serve
+service smashé     jump serve
+service soleil     sky serve
+service tennis     tennis serve ; tennis service ; overhead service
+service tennis flottant ; service smashé fottant ; service balancier flottant     floating tennis serve
+servir     serve (to)
+servir au-delà du temps réglementaire     delay the service (to)
+set décisif     tie-break
+set-average     set average
+smash latéral     lateral spike
+smasher ; attaquer ; frapper     spike (to)
+smasher à côté du contre     spike past the block (to)
+smasher au-dessus du contre     spike over the block (to)
+smasher dans le contre pour faire sortir le ballon     spike off the block (to)
+smasheur     ace spiker
+sortir du terrain     leave the court (to)
+soulever le ballon     lift the ball (to)
+soutien     support ; cover
+soutien d'attaque     attack support ; attack covering
+soutien de réception     covering the receiver ; reception coverage
+spécialiste de la défense     defence specialist ; digger
+spécialiste de la passe ; passeur     setter
+spécialiste de l'attaque     attack specialist
+spécialiste de réception     reception specialist
+spécialiste du contre     block specialist
+spécialiste du service     service specialist
+statisticien-préparateur de match     scoutman
+système 3-1-2     3-1-2 system
+système 3-2-1     3-2-1 system
+système 4-1-1     4-1-1 system
+système 4-2     double setter ; 4-2 system
+système 5-1     5-1 system
+système d'attaque     offence system ; attack formation
+système d'attaque avec passeur pénétrant     offence system through front row player
+système de couverture de l'attaque     attack coverage system
+tactique collective     group tactics
+tactique de contre     blocking tactics
+tactique de service     serving tactics
+temps mort technique     technical time-out
+tentative de contre ; tentative de bloc     attempt to block ; block attempt
+tentative de service     service attempt
+titulaire     first team player
+touche     touch ; hit
+touche de balle     touching the ball ; ball hit
+touche de balle ; contact     contact
+touche de bloc ; touche effective     completed block
+touche de filet par un joueur     touching the net by a player
+touche d'équipe     team hit
+touche du bloc     blocking hit
+touche haute     high hit
+toucher     touch (to)
+toucher ; contacter     contact (to)
+touches simultanées     simultaneous contacts ; simultaneous hits
+trajectoire     flight
+trajet du ballon     path of the ball
+transpercer le contre ; transpercer le bloc     split the block (to)
+transpercer le contre ; transpercer le bloc     pierce the block (to)
+trou     weak area
+un seul point d'écart     one-point lead
+volée     volley
+volleyeur ( volleyeuse) ; joueur (joueuse) de volley     volleyball playere
