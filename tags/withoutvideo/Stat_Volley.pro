@@ -14,7 +14,7 @@ TRANSLATIONS = VolleyClub_en.ts VolleyClub_es.ts
 QT+= xml webkit
 #QT+= phonon
 
-RC_FILE = VolleyClubStat.rc
+#RC_FILE = VolleyClubStat.rc
 SOURCES += src/tracelog.cpp \
     src/stat.cpp \
     src/Score.cpp \
@@ -127,5 +127,5 @@ FORMS    +=  \
 
 
 
-OTHER_FILES += \
-    VolleyClubStat.rc \
+#OTHER_FILES += \
+  #  VolleyClubStat.rc \
