@@ -1,0 +1,43 @@
+Pour la sauvegarde en cours de match plusieurs solution :
+
+Tous sauvegarder dans le fichier xml de match:
+Cree au fur et a mesure le fichier de match tel que definie precedement.
+Avantage:
+	Pas de modificiaition de format a la fin du match
+Inconveient : comment gerer le placement des joueur
+Comment le relir apres impossible
+
+<position>
+	<P1>nom ou numero</P1>
+	<P2>
+	<P3>
+	<P4>
+	<P5>
+	<P6>
+	<P7>
+</position>
+<score>
+	<S1>4:25</S1>
+</score>
+<stat>
+	<Joueur>nom
+		<S1>
+			<attaque> "++"=1 "+"
+</stat>
+faire des fichiers different: un pour les joueurs et un pour le match;
+
+
+
+Le choix 1 a ete selectionner.
+
+le fichier match xml est inclu dans le match et s'occupe de la sauvegarde en temps reel des scores et des position.
+
+il me faut une nouvelle list de joueur present sur le terrain seul ce si seron afficher .
+
+
+
+IDEE 2:
+
+Gestion de la fin de set: Reinitialiser la liste des joueur sur le terrain et refaire apparaitre le positionnement comme au debut
+une fois tous les joueurs sur le terrain on ecrit dans le xml les joueurs sur le banc se mette automatiquement et on supprime 
+l'affichage de positionnement.

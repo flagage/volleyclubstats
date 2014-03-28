@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Ecran</class>
+ <widget class="QMainWindow" name="Ecran">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>847</width>
+    <height>478</height>
+   </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::NoContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>VolleyClub Stats</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../Icone/logo_vcs_transparent.png</normaloff>../Icone/logo_vcs_transparent.png</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="contextMenuPolicy">
+    <enum>Qt::NoContextMenu</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_11">
+    <item row="1" column="0">
+     <widget class="QFrame" name="frame_2">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_8">
+       <item row="1" column="0">
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="tab">
+          <attribute name="title">
+           <string>Terrain</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_23">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="autoFillBackground">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <layout class="QGridLayout" name="gridLayout_17">
+             <item row="0" column="0">
+              <widget class="QGroupBox" name="groupBox">
+               <property name="autoFillBackground">
+                <bool>true</bool>
+               </property>
+               <property name="title">
+                <string>Rotation</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_12">
+                <item row="0" column="0">
+                 <widget class="QPushButton" name="pBRotationPlus">
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QPushButton" name="pBRotationMoins">
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QGroupBox" name="groupBox_10">
+               <property name="title">
+                <string>Remplacant</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_19">
+                <item row="0" column="1">
+                 <layout class="QGridLayout" name="gridLayout_22"/>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>Efficacité</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_21"/>
+         </widget>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Joueurs à placer</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_18">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="pushButton_7">
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QComboBox" name="comboBox">
+           <property name="toolTip">
+            <string>Action</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="Line" name="line_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="Line" name="line_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="1">
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="Line" name="line_9">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="toolTip">
+            <string>Joueur Valeur</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="Line" name="line_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="Line" name="line_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1" rowspan="2">
+     <widget class="QFrame" name="frame_3">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_9">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
+         <property name="title">
+          <string>Score</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="2" column="2">
+             <layout class="QGridLayout" name="gridLayout_16">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="pBScore">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Vs</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QPushButton" name="pBScore_2">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="pBSet">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_6">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="1">
+             <widget class="QPushButton" name="pBSet_2">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="pushButton_TM">
+            <property name="text">
+             <string>Temps Mort</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="groupBox_9">
+         <property name="title">
+          <string>Liste Actions</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="0">
+           <widget class="QListWidget" name="listWidget"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>847</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFenetre">
+    <property name="title">
+     <string>Fenetre</string>
+    </property>
+    <addaction name="actionScore"/>
+    <addaction name="actionResultat_ffvb"/>
+    <addaction name="actionLecteur"/>
+   </widget>
+   <widget class="QMenu" name="menuMatch">
+    <property name="title">
+     <string>Match</string>
+    </property>
+    <addaction name="actionLancer_le_match"/>
+    <addaction name="actionRevoir_un_match_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionSupprimer_le_match_en_cours"/>
+    <addaction name="actionQuitter_2"/>
+   </widget>
+   <widget class="QMenu" name="menuAide">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="actionR_sultat_ffvb"/>
+    <addaction name="actionManuel"/>
+   </widget>
+   <widget class="QMenu" name="menuEquipe">
+    <property name="title">
+     <string>Equipes</string>
+    </property>
+    <addaction name="actionGestion_Equipe"/>
+    <addaction name="actionGestion_Club_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionExporter_Equipe"/>
+    <addaction name="actionImporter_Equipe"/>
+   </widget>
+   <addaction name="menuEquipe"/>
+   <addaction name="menuMatch"/>
+   <addaction name="menuFenetre"/>
+   <addaction name="menuAide"/>
+  </widget>
+  <action name="actionAjouterEquipe">
+   <property name="text">
+    <string>Ajouter Equipe</string>
+   </property>
+  </action>
+  <action name="actionSupprimer_Equipe">
+   <property name="text">
+    <string>Supprimer Equipe</string>
+   </property>
+  </action>
+  <action name="actionAjouter_Joueur">
+   <property name="text">
+    <string>Ajouter Joueur</string>
+   </property>
+  </action>
+  <action name="actionSupprimer_Joueur">
+   <property name="text">
+    <string>Supprimer Joueur</string>
+   </property>
+  </action>
+  <action name="actionQuitter">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionImprimer">
+   <property name="text">
+    <string>Imprimer</string>
+   </property>
+  </action>
+  <action name="actionVisualiser_Equipe">
+   <property name="text">
+    <string>Visualiser Equipe</string>
+   </property>
+  </action>
+  <action name="actionVisualiser_Joueur">
+   <property name="text">
+    <string>Visualiser Joueur</string>
+   </property>
+  </action>
+  <action name="actionLancer_Match">
+   <property name="text">
+    <string>Lancer Match</string>
+   </property>
+  </action>
+  <action name="actionGestion_Equipes">
+   <property name="text">
+    <string>Gestion Equipes</string>
+   </property>
+  </action>
+  <action name="actionLancer_le_Match">
+   <property name="text">
+    <string>Lancer le Match</string>
+   </property>
+  </action>
+  <action name="actionScore">
+   <property name="text">
+    <string>Score</string>
+   </property>
+  </action>
+  <action name="actionRevoir_un_match">
+   <property name="text">
+    <string>Revoir un match</string>
+   </property>
+  </action>
+  <action name="actionResultat_ffvb">
+   <property name="text">
+    <string>Resultat(ffvb)</string>
+   </property>
+  </action>
+  <action name="actionLecteur">
+   <property name="text">
+    <string>Lecteur</string>
+   </property>
+  </action>
+  <action name="actionLancer_le_match">
+   <property name="text">
+    <string>Lancer le Match</string>
+   </property>
+  </action>
+  <action name="actionRevoir_un_match_2">
+   <property name="text">
+    <string>Revoir un match</string>
+   </property>
+  </action>
+  <action name="actionR_sultat_ffvb">
+   <property name="text">
+    <string>Résultat ffvb</string>
+   </property>
+  </action>
+  <action name="actionManuel">
+   <property name="text">
+    <string>Manuel Utilisateur</string>
+   </property>
+  </action>
+  <action name="actionGestion_Club">
+   <property name="text">
+    <string>Gestion Club</string>
+   </property>
+  </action>
+  <action name="actionGestion_Equipe">
+   <property name="text">
+    <string>Gestion Equipes</string>
+   </property>
+  </action>
+  <action name="actionExporter_Equipe">
+   <property name="text">
+    <string>Exporter Equipe</string>
+   </property>
+  </action>
+  <action name="actionImporter_Equipe">
+   <property name="text">
+    <string>Importer Equipe</string>
+   </property>
+  </action>
+  <action name="actionGestion_Club_2">
+   <property name="text">
+    <string>Gestion Club</string>
+   </property>
+  </action>
+  <action name="actionSupprimer_le_match_en_cours">
+   <property name="text">
+    <string>Supprimer le match en cours</string>
+   </property>
+  </action>
+  <action name="actionQuitter_2">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
