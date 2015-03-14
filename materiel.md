@@ -1,0 +1,20 @@
+# Matériel #
+
+Cette page détail les caractéristiques matériels dont vous aurez besoin pour évaluer le logiciel.
+
+
+# Details #
+
+**performence**
+Il n'y a pas de pérennisation sur les performances de la machine le programme doit normalement tourner sur toutes les machines même les plus anciennes.
+
+**OS**
+Pour le moment une seul version est disponible. Cette version à besoin de Windows pour fonctionner (XP ou plus ).
+Si pour vous utilisez un système linux faite nous part de la version que vous utilisez (ubuntu,fedora,....) nous pouvant vous fournir une version rapidement.
+
+Une version Mac est en préparation faite nous signe aussi si vous voulez utiliser le logiciel sur votre mac.
+
+
+
+**Autre**
+Il est indispensable pour une utilisation optimal du logiciel d'utiliser un pad numérique. Si vous possédez un ordinateur portable il est recommandé de brancher un pad numérique USB ou un clavier intégrant ce pad sinon vous serrez très vite limité lors de la prise de statistique.

@@ -1,0 +1,1 @@
+![http://volleyclubstats.googlecode.com/svn/wiki/Image/Clavier.png](http://volleyclubstats.googlecode.com/svn/wiki/Image/Clavier.png)
