@@ -584,7 +584,7 @@ void Ecran::slot_changement(QPushButton *boutton)
     QString strjoueur=boutton->text();
     if(strjoueur.contains("Position")==false)
     {
-    strjoueur=strjoueur.split("/n").at(0);
+    /*strjoueur=strjoueur.split("/n").at(0);
     strjoueur=strjoueur.replace(")","");
     QStringList lisstr=strjoueur.split("(");
     if(lisstr.size()>=1)
@@ -592,7 +592,7 @@ void Ecran::slot_changement(QPushButton *boutton)
         strjoueur=lisstr.at(1)+"_"+lisstr.at(0);
         Match::donneInstance()->AddJoueurToXml(Match::donneInstance()->RechercheJoueur(strjoueur));
         Match::donneInstance()->addJoueurTerrain(Match::donneInstance()->RechercheJoueur(strjoueur));
-    }
+    }*/
     }
 }
 

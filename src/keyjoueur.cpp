@@ -112,35 +112,30 @@ void KeyJoueur::bouttonRClicked()
 void KeyJoueur::bouttonLClicked()
 {
     QPushButton *button=(QPushButton*) sender();
-    emit Changement (button);
-    _nbjoueurEnPlace++;
-    bool isenplace=false;
-    int nbjoueuraplacer=Match::donneInstance()->GetParametreMatch()->get_NbJoueur();
-    if(Match::donneInstance()->GetParametreMatch()->AvecLibero()==true)
+    if(button!=NULL)
     {
-        nbjoueuraplacer++;
-    }
+        emit Changement (button);
+        //
 
-    if(_nbjoueurEnPlace>=nbjoueuraplacer && Match::donneInstance()->isStart()==false)
-    {
-        QList<Joueur *> list_terrain=this->GetJoueurTerrain();
-        for(int i=0;i<this->_listjoueur.size();i++)
+        int nbjoueuraplacer=Match::donneInstance()->GetParametreMatch()->get_NbJoueur();
+        if(Match::donneInstance()->GetParametreMatch()->AvecLibero()==true)
         {
-            QString text=_listjoueur.at(i)->get_Prenom()+"_"+QString::number(_listjoueur.at(i)->get_NumMaillot());
-            isenplace=false;
-            for(int k=0;k<list_terrain.size();k++)
-            {
-                QString text2=list_terrain.at(k)->get_Prenom()+"_"+QString::number(list_terrain.at(k)->get_NumMaillot());
-                if(text==text2)
-                {
-                    isenplace=true;
-                    break;
-                }
-            }
-
+            nbjoueuraplacer++;
         }
-        emit Tlm_en_place();
+
+
+        ///check if all player ready
+
+        QList<Joueur *> list_terrain=this->GetJoueurTerrain();
+
+        if(list_terrain.size()==nbjoueuraplacer)
+        {
+            qDebug()<<"emit";
+            emit Tlm_en_place();
+        }
+
     }
+
 }
 
 
@@ -167,7 +162,7 @@ void KeyJoueur::createLayout(int pos)
 
     gridLayout_4->addItem(verticalSpacer_8, 0, 0, 1, 1);
     if(_Islibero==true)
-     {
+    {
 
         buttons[6]->setObjectName(QString::fromUtf8("pushButton_7"));
 
@@ -673,28 +668,31 @@ QList<Joueur *> KeyJoueur::GetJoueurTerrain()
         QStringList listStr=strtext.split("(");
         int numero=listStr.at(0).toInt();
 
-        Joueur* player=RechercheJoueur(numero);
-        if(player!=0)
+        if(numero!=0)
         {
+            Joueur* player=RechercheJoueur(numero);
+            if(player!=0)
+            {
 
-            if(i==3)
-            {
-                player->SetPosition(1);
-            }
+                if(i==3)
+                {
+                    player->SetPosition(1);
+                }
 
-            else if(i==5)
-            {
-                player->SetPosition(5);
+                else if(i==5)
+                {
+                    player->SetPosition(5);
+                }
+                else if(i==6)
+                {
+                    player->SetPosition(7);
+                }
+                else
+                {
+                    player->SetPosition(i+2);
+                }
+                list.append(player);
             }
-            else if(i==6)
-            {
-                player->SetPosition(7);
-            }
-            else
-            {
-                player->SetPosition(i+2);
-            }
-            list.append(player);
         }
     }
     return list;
