@@ -111,6 +111,7 @@ void KeyJoueur::bouttonRClicked()
 
 void KeyJoueur::bouttonLClicked()
 {
+
     QPushButton *button=(QPushButton*) sender();
     if(button!=NULL)
     {
@@ -128,9 +129,9 @@ void KeyJoueur::bouttonLClicked()
 
         QList<Joueur *> list_terrain=this->GetJoueurTerrain();
 
-        if(list_terrain.size()==nbjoueuraplacer)
+        if(list_terrain.size()==nbjoueuraplacer && !Match::GetInstance()->isStart())
         {
-            qDebug()<<"emit";
+
             emit Tlm_en_place();
         }
 
@@ -368,6 +369,7 @@ QString KeyJoueur::ChercherPasseurPosition()
 
 QString KeyJoueur::ChercherJoueur(int &currentposition)
 {
+
 
     currentposition=0;
     /// Initialisation

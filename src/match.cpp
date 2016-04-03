@@ -34,7 +34,7 @@ pris connaissance de la licence CeCILL et que vous en avez accepté les
 #include "fenetrelancement.h"
 #include "fenetreposition.h"
 #include <QTextStream>
-
+#include <QDebug>
 
 Match* Match::instanceMatch = NULL;
 
@@ -485,6 +485,7 @@ QString Match::GetType()
 }
 bool Match::AddAction(QString joueurname,int position, StatValeur valu,int action)
 {
+
     if(action==-1)
     {
         return false;
@@ -522,10 +523,14 @@ bool Match::AddAction(QString joueurname,int position, StatValeur valu,int actio
     if(player!=NULL)
     {
 
+
         player->addStatMatch(action,valu);
+
         player->addStatSet(action,valu,_ParamMatch->GetNumSet());
 
+
         _currentEquipe->addStatMatch (action,valu);
+
         _currentEquipe->addStatSet (action,valu,_ParamMatch->GetNumSet());
         MiseAjourStat(_currentEquipe,player,action);
 
@@ -1046,6 +1051,7 @@ Equipe* Match::GetEquipeVisiteur()
 
 void Match::MiseAjourStat(Equipe* team,Joueur *player,int Action,bool isSet)
 {
+
     QDomElement docElem = _doc.documentElement();
     QDomNode n = docElem.firstChild();
     QString strjoueur="";

@@ -113,7 +113,7 @@ void Ecran::InitialisationIhm()
 
 
     /// List des action marquan des points
-  //  _listActionMoins<<tr("Attaque")<<tr("Contre");
+    //  _listActionMoins<<tr("Attaque")<<tr("Contre");
     _listActionPlus<<tr("Service")<<tr("Attaque")<<tr("Contre");
 
     ui->label_6->setVisible(false);
@@ -332,7 +332,7 @@ void Ecran::InitialisationMatchFromXML()
         _VectortabEff.at(i)->SlotMiseAJour(true,i);
         for(int k=0;k<Match::donneInstance()->GetParametreMatch()->get_Action().size();k++)
         {
-           int ActionSet=i+k*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
+            int ActionSet=i+k*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
             _VectorTabFram.at(ActionSet)->clean();
             _VectorTabFram.at(ActionSet)->Init();
             _VectorTabFram.at(ActionSet)->SlotMiseAJour(true,i);
@@ -466,6 +466,7 @@ void Ecran::InitScore()
 
 void Ecran::slot_score()
 {
+
     Score* score= Match::donneInstance()->GetScore();
     QString stScore;
     stScore=QString("%1").arg(score->get_ScLocal());
@@ -495,7 +496,7 @@ void Ecran::slot_score()
                 //_finSet=true;
                 if(this->FinSet()==false)
                 {
-                      this->_TimerScore->stop();
+                    this->_TimerScore->stop();
                     this->FinMatch();
                 }
                 else
@@ -527,6 +528,7 @@ void Ecran::slot_initChangement()
 
 void Ecran::Slot_start()
 {
+
 
     _isEnPlace=true;
     //Match::donneInstance()->SetJoueurTerr(_PlacementJoueur->GetJoueurTerrain());
@@ -560,7 +562,7 @@ void Ecran::Slot_start()
 
 
 
-   // Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
+    // Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
     QFile file("Current/Match.xml");
     if(!file.exists())
     {
@@ -578,22 +580,27 @@ QString  Ecran::ChercherPasseur()
 }
 void Ecran::slot_changement(QPushButton *boutton)
 {
-   changement(boutton->text(),boutton);
-   //if(_isEnPlace==true)
+
+    changement(boutton->text(),boutton);
+    //if(_isEnPlace==true)
     //Match::donneInstance()->SetJoueurTerr(this->_PlacementJoueur->GetJoueurTerrain());
     QString strjoueur=boutton->text();
     if(strjoueur.contains("Position")==false)
     {
-    /*strjoueur=strjoueur.split("/n").at(0);
-    strjoueur=strjoueur.replace(")","");
-    QStringList lisstr=strjoueur.split("(");
-    if(lisstr.size()>=1)
-    {
-        strjoueur=lisstr.at(1)+"_"+lisstr.at(0);
-        Match::donneInstance()->AddJoueurToXml(Match::donneInstance()->RechercheJoueur(strjoueur));
-        Match::donneInstance()->addJoueurTerrain(Match::donneInstance()->RechercheJoueur(strjoueur));
-    }*/
+
+        strjoueur=strjoueur.split("/n").at(0);
+        strjoueur=strjoueur.replace(")","");
+        QStringList lisstr=strjoueur.split("(");
+        if(lisstr.size()>=1)
+        {
+            strjoueur=lisstr.at(1)+"_"+lisstr.at(0);
+
+            Match::donneInstance()->AddJoueurToXml(Match::donneInstance()->RechercheJoueur(strjoueur));
+
+            Match::donneInstance()->addJoueurTerrain(Match::donneInstance()->RechercheJoueur(strjoueur));
+        }
     }
+
 }
 
 void Ecran::SlotAddJoueur()
@@ -601,10 +608,15 @@ void Ecran::SlotAddJoueur()
     if(Match::donneInstance()->getTeam()!=0)
     {
         fbjoueur* Diajoueur=new fbjoueur(Match::donneInstance()->getTeam(),0,this);
+        Diajoueur->Enregistrer();
+        Match::donneInstance()->getTeam()->AddJoueur(Diajoueur->GetCurrentJoueur());
         if(Diajoueur)
         {
             this->AddJoueurBanc(Diajoueur->GetCurrentJoueur());
             this->EnregistrerXML();
+            this->_PlacementJoueur->InitListJoueur(Match::donneInstance()->GetListJoueur());
+            ParametreMatch* param=Match::donneInstance()->GetParametreMatch();
+            Diajoueur->GetCurrentJoueur()->InitialisationStat(param->get_NbSet(),param->get_Action(),param->get_Valeur());
         }
 
     }
@@ -676,6 +688,7 @@ void Ecran::SlotModifJoueur()
 
 void Ecran::changement(QString joueur,QPushButton *bouton)
 {
+
     QStringList listjou;
     listjou=joueur.split("\n");
     joueur=listjou.at(0);
@@ -697,9 +710,11 @@ void Ecran::changement(QString joueur,QPushButton *bouton)
         bouton->setText(ChangeJoueur);
         ChangeJoueur="";
 
+
         this->ChercherPasseur();
         if(ui->comboBox->currentText()==tr("Service"))
         {
+
             ActionService(0);
         }
         //this->_PlacementJoueur->Stat();
@@ -1221,11 +1236,11 @@ bool Ecran::FinSet()
     Match::donneInstance()->MiseajourScore();
     for(int tab=0;tab<Match::donneInstance()->GetParametreMatch()->get_Action().size();tab++)
     {
-    int num=(tab)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
-    int numAcSet=num+Match::donneInstance()->GetParametreMatch()->GetNumSet();
-    FramStats *currentframSet=_VectorTabFram.at(numAcSet);
-    currentframSet->clean();
-    currentframSet->Init();
+        int num=(tab)*(Match::donneInstance()->GetParametreMatch()->get_NbSet()+1);
+        int numAcSet=num+Match::donneInstance()->GetParametreMatch()->GetNumSet();
+        FramStats *currentframSet=_VectorTabFram.at(numAcSet);
+        currentframSet->clean();
+        currentframSet->Init();
     }
     MiseAjourtab(Match::donneInstance()->GetParametreMatch()->GetNumSet());
     InitTempsMort();
@@ -1246,8 +1261,8 @@ void Ecran::FinMatch()
     if(reponse==QMessageBox::No)
     {
         Match::donneInstance()->GetParametreMatch()->SetNumSet(Match::donneInstance()->GetParametreMatch()->GetNumSet()+1);
-         Match::donneInstance()->MiseajourScore();
-         Match::donneInstance()->AddSetToXml();
+        Match::donneInstance()->MiseajourScore();
+        Match::donneInstance()->AddSetToXml();
     }
     else
     {
@@ -1944,6 +1959,7 @@ void Ecran::JoueurBanc()
 
     QList <Joueur*> listJoueur=Match::donneInstance()->GetListJoueur();
     QList <Joueur*> listJoueurTerrain=Match::donneInstance()->GetListJoueurTerr();
+    // QList <Joueur*> listJoueurBanc=Match::donneInstance()->GetL
     for(int i=0;i<listJoueur.size();i++)
     {
         if(listJoueurTerrain.contains(listJoueur.at(i)))
@@ -2012,6 +2028,7 @@ void Ecran::AddJoueurBanc(Joueur* joueur)
 
 void Ecran::UpdateTabVue(int tab)
 {
+
     int numSet=Match::donneInstance()->GetParametreMatch()->GetNumSet();
     switch(tab)
     {
@@ -2040,6 +2057,7 @@ void Ecran::UpdateTabVue(int tab)
 
 void Ecran::slot_Stat()
 {
+
     QPushButton* boutton=(QPushButton*) sender();
     this->slot_AfficheStat(boutton);
 }
